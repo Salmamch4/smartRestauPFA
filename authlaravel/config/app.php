@@ -155,20 +155,21 @@ return [
     |
     */
 
-    'providers' => ServiceProvider::defaultProviders()->merge([
-        /*
-         * Package Service Providers...
-         */
+  'providers' => ServiceProvider::defaultProviders()->merge([
+    /*
+     * Package Service Providers...
+     */
+    Tymon\JWTAuth\Providers\LaravelServiceProvider::class, // Add this line
 
-        /*
-         * Application Service Providers...
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-    ])->toArray(),
+    /*
+     * Application Service Providers...
+     */
+    App\Providers\AppServiceProvider::class,
+    App\Providers\AuthServiceProvider::class,
+    // App\Providers\BroadcastServiceProvider::class,
+    App\Providers\EventServiceProvider::class,
+    App\Providers\RouteServiceProvider::class,
+])->toArray(),
 
     /*
     |--------------------------------------------------------------------------
@@ -182,7 +183,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
-    ])->toArray(),
+    // 
+'Jwt' => Tymon\JWTAuth\Providers\LaravelServiceProvider:: class,
+'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory:: class,
+'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth :: class,
+])->toArray(),
+
 
 ];
