@@ -7,7 +7,8 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('telephone', 10)->unique(); // Maroc: 10 chiffres
+            $table->string('telephone', 10)->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->foreignId('role_id')->constrained('roles');
             $table->boolean('is_active')->default(true);

@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;        // Add this
+use Illuminate\Support\Facades\Hash;       
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;                         // Add this
+use Tymon\JWTAuth\Exceptions\JWTException;                         
 
 
 class AuthController extends Controller
@@ -27,7 +27,7 @@ class AuthController extends Controller
         }
          try {
             $token = JWTAuth::fromUser($user);
-            
+
             return response()->json([
                 'success' => true,
                 'access_token' => $token,
@@ -47,21 +47,7 @@ class AuthController extends Controller
 
       }
 
-      public function refresh()
-    {
-        try {
-            $token = auth()->refresh();
-            return response()->json([
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'expires_in' => auth()->factory()->getTTL() * 60
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Token invalide'
-            ], 401);
-        }
-    }
+
 
       public function me()
     {
@@ -76,5 +62,32 @@ class AuthController extends Controller
                 'error' => 'Non authentifié'
             ], 401);
         }
+    }
+
+
+    public function logout()
+    {
+        try {
+            auth()->logout();
+            return response()->json([
+                'status' => true,
+                'message' => 'User successfully logged out'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Logout failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public  function refresh()
+    {
+        $newToken = auth()->refresh();
+        return response()->json([
+            'statut' => true,
+            "token" =>  $newToken
+        ]);
     }
 }

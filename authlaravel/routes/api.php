@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
+use Illuminate\Support\Facades\Hash;
 
 Route::get('/test', function() {
     return response()->json(['message' => 'API is working']);
@@ -23,14 +25,23 @@ Route::get('/test', function() {
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::get('/create-test-user', function() {
     $user = \App\Models\User::create([
-        'telephone' => '0606060606',
-        'password' => Hash::make('123456'),
+        'telephone' => '0909090911',
+        'email' => 'newuser4@example.com',
+        'password' => Hash::make('mypassword'),
         'name' => 'Test User',
-        'role_id' => 1 // ou l'ID de rôle qui existe
+        'role_id' => 1
     ]);
-    
+
     return response()->json([
         'message' => 'User created',
         'user' => $user
     ]);
 });
+
+Route::post('/password/forgot', [ForgotPasswordController::class, 'forgot'])->name('password.forgot');
+Route::post('/password/reset/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
+
+Route::middleware('auth:api')
+    ->group(function (){
+        Route::post('/auth/logout',[\App\Http\Controllers\AuthController::class,'logout'])->name('logout');
+    });
