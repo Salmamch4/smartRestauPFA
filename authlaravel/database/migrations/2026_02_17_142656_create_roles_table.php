@@ -14,7 +14,7 @@ return new class extends Migration {
         // Seed initial roles
         DB::table('roles')->insert([
             ['nom' => 'CLIENT'],
-            ['nom' => 'ADMIN'],
+            ['nom' => 'ADMIN'], 
             ['nom' => 'SERVEUR'],
             ['nom' => 'CHEF_CUISINE'],
         ]);

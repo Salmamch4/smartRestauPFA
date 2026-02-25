@@ -29,7 +29,7 @@ class AuthController extends Controller
             $token = JWTAuth::fromUser($user);
             
             return response()->json([
-                'success' => true,
+                'success' => true, 
                 'access_token' => $token,
                 'token_type' => 'bearer',
                 'expires_in' => auth()->factory()->getTTL() * 60,
