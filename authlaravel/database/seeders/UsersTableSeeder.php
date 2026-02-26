@@ -33,5 +33,13 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'is_active' => false // مستخدم غير نشط
         ]);
+
+        User::create([
+            'telephone' => '0612345602',
+            'email' => 'zineb.taibe@outlook.com',
+            'password' => Hash::make('zineb123'),
+            'role_id' => 1,
+            'is_active' => true
+        ]);
     }
 }

@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;       
+use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;                         
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 
 class AuthController extends Controller
@@ -67,19 +67,11 @@ class AuthController extends Controller
 
     public function logout()
     {
-        try {
-            auth()->logout();
-            return response()->json([
-                'status' => true,
-                'message' => 'User successfully logged out'
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Logout failed',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        auth()->logout();
+        return response()->json([
+            'statut' => true,
+            "message" =>  "user logout !"
+        ]);
     }
 
     public  function refresh()

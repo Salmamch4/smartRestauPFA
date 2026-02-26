@@ -22,7 +22,7 @@ class ForgotPasswordController extends Controller
 
         // Vérifier si l'email existe dans la table 'users'
         if (User::where('email', $email)->doesntExist()) {
-            return response(['message' => 'Email does not exist.'], 404);  
+            return response(['message' => 'Email does not exist.'], 400);
         }
 
         // Générer un token aléatoire pour la réinitialisation
