@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse,HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { ResetResponse } from '../models/auth-response.model';
 
 export interface LoginRequest {
   telephone: string;
@@ -63,11 +64,6 @@ export class AuthServiceService {
     return throwError(() => new Error(errorMessage));
   }
 
-  logout(): void {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('user');
-  }
-
   getToken(): string | null {
     return localStorage.getItem('access_token');
   }
@@ -80,4 +76,29 @@ export class AuthServiceService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+
+   logout(): Observable<any>
+  {
+        const token = localStorage.getItem('access_token');
+        console.log('Token being sent:', token);
+        const headers=new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+        });
+
+        return this.http.post<any>(`${this.apiUrl}/auth/logout`,{},{headers});
+
+  }
+
+    forgot(email: string): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/password/forgot`, { email });
+  }
+
+   reset(token: string, password: string, password_confirmation: string): Observable<any> {
+  return this.http.post(`${this.apiUrl}/password/reset/${token}`, {
+    password,
+    password_confirmation
+  });
+}
+
+
 }

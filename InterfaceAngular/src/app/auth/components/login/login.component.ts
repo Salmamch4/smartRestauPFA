@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../core/services/auth-service.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -46,7 +47,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         this.loading = false;
-        console.log('Login successful!', response);
+        //console.log('Login successful!', response);
+        this.router.navigate(['/home'])
 
 
         alert('Login successful!');

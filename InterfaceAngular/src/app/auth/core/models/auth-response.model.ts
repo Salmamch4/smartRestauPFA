@@ -49,4 +49,8 @@ export class RoleModel {
     this.id = id;
     this.name = name;
   }
+  
+}
+export interface ResetResponse {
+  message: string;
 }
