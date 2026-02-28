@@ -65,13 +65,12 @@ class AuthController extends Controller
     }
 
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->logout();
         return response()->json([
             'statut' => true,
-            "message" =>  "user logout !"
-        ]);
+            'message' => 'user logout !'
+        ])->cookie('token', '', -1);
     }
 
     public  function refresh()
