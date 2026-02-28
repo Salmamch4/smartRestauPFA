@@ -1,0 +1,87 @@
+<section class="section" style="min-height: 100vh; display: flex; align-items: center;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+
+            <div class="text-center mb-4">
+              <h2 class="text-uppercase small text-muted">Clients</h2>
+              <p class="h1" style="font-family: 'Amatic SC', cursive;">
+                Manage <span style="color:#ce1212;">Clients</span>
+              </p>
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Telephone</th>
+                    <th class="text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let client of clients">
+                    <td>{{ client.nom }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.telephone }}</td>
+                    <td class="text-center">
+                      <button class="btn btn-sm btn-warning me-2"
+                              (click)="selectClient(client)">
+                        Modifier
+                      </button>
+
+                      <button class="btn btn-sm btn-danger"
+                              (click)="deleteClient(client.user_id)">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- EDIT FORM -->
+            <div *ngIf="selectedClient" class="mt-5">
+              <h4 class="mb-3 text-center">Modifier Client</h4>
+
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <input class="form-control"
+                         [(ngModel)]="selectedClient.nom"
+                         placeholder="Nom">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <input class="form-control"
+                         [(ngModel)]="selectedClient.email"
+                         placeholder="Email">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <input class="form-control"
+                         [(ngModel)]="selectedClient.telephone"
+                         placeholder="Telephone">
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button class="btn px-4"
+                        style="background:#ce1212; color:white; border-radius:50px;"
+                        (click)="updateClient()">
+                  Save
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

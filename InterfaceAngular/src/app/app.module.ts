@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
+import { RolesComponent } from './roles/roles.component';
+import { ProfileComponent } from './profile/profile.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,8 @@ import { ResetPasswordComponent } from './auth/components/reset-password/reset-p
     ForgotPasswordComponent,
     HomeComponent,
     ResetPasswordComponent,
+    RolesComponent,
+    ProfileComponent
    // HomeComponent  // HomeComponent doit être ici
   ],
   imports: [
