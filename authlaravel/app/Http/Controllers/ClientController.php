@@ -2,47 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // 🔹 GET all clients
     public function index()
     {
-        //
+        return Client::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // 🔹 UPDATE client
+    public function update(Request $request, $id)
     {
-        //
+        $client = Client::findOrFail($id);
+
+        DB::transaction(function () use ($request, $client) {
+
+            // Update client table
+            $client->update([
+                'nom' => $request->nom,
+                'email' => $request->email,
+                'telephone' => $request->telephone
+            ]);
+
+            // Update user table
+            $user = User::find($client->user_id);
+            if ($user) {
+                $user->telephone = $request->telephone;
+                $user->save();
+            }
+        });
+
+        return response()->json(['message' => 'Updated successfully']);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // 🔹 DELETE client
+    public function destroy($id)
     {
-        //
-    }
+        $client = Client::findOrFail($id);
+        $client->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json(['message' => 'Deleted successfully']);
     }
 }
