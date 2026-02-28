@@ -45,3 +45,11 @@ Route::middleware('auth:api')
     ->group(function (){
         Route::post('/auth/logout',[\App\Http\Controllers\AuthController::class,'logout'])->name('logout');
     });
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ProfileController;
+
+Route::apiResource('roles', RoleController::class);
+
+use App\Http\Controllers\ClientController;
+Route::apiResource('clients', ClientController::class);
+Route::put('/clients/{id}/full-update', [ClientController::class, 'fullUpdate']);
