@@ -30,7 +30,7 @@ class ForgotPasswordController extends Controller
 
         // Vérifier si l'email existe dans la table 'users'
         if (!$this->forgotPasswordRepo->emailExists($dto->email)) {
-            return response(['message' => 'Email does not exist.'], 400);
+            return response(['message' => 'Email does not exist.'], 404);
         }
 
         $this->forgotPasswordRepo->deleteExistingTokens($dto->email);

@@ -38,6 +38,7 @@ Route::get('/create-test-user', function() {
     ]);
 });
 
+Route::post('/auth/test-logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 Route::post('/password/forgot', [ForgotPasswordController::class, 'forgot'])->name('password.forgot');
 Route::post('/password/reset/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
 
