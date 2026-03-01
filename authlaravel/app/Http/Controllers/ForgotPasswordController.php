@@ -114,7 +114,7 @@ class ForgotPasswordController extends Controller
 
         DB::table('password_resets')->where('email', $email)->delete();//RepoForgot
 
-        // Générer un token aléatoire pour la réinitialisation //RepoForgot
+        // Générer un token aléatoire pour la réinitialisation //service
         $token = Str::random(50);
 
         // Insérer le token dans la table 'password_resets' //RepoForgot

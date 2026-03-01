@@ -5,9 +5,12 @@ use Illuminate\Http\Request;
 
 class ForgotPasswordDTO
 {
-    public function __construct(
-        public readonly string $email
-    ) {}
+    public string $email;
+
+    public function __construct(string $email)
+    {
+        $this->email = $email;
+    }
 
     public static function fromRequest(Request $request): self
     {

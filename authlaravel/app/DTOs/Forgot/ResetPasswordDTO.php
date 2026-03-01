@@ -4,10 +4,14 @@ namespace App\DTOs\Forgot;
 use Illuminate\Http\Request;
 class ResetPasswordDTO
 {
-    public function __construct(
-        public readonly string $password,
-        public readonly string $token
-    ) {}
+    public string $password;
+    public string $token;
+
+    public function __construct(string $password, string $token)
+    {
+        $this->password = $password;
+        $this->token = $token;
+    }
 
     public static function fromRequest(Request $request, string $token): self
     {
