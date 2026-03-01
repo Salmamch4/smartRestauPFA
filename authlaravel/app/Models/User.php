@@ -11,18 +11,16 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
 
     protected $fillable = [
+        'name',
         'telephone',
         'email',
         'password',
         'role_id',
-        'is_active'
+        'is_active',
     ];
 
-    protected $hidden = [
-        'password',
-    ];
+    protected $hidden = ['password'];
 
-    // 🔐 JWT Methods
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -33,9 +31,13 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    // Relation Role
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function client()
+    {
+        return $this->hasOne(Client::class);
     }
 }

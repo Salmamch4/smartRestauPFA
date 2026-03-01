@@ -7,16 +7,19 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onDelete('cascade')
+                ->unique(); // user واحد = client واحد
+
+            $table->string('nom');
             $table->string('telephone', 20)->unique();
             $table->string('email')->unique();
-            $table->string('password');
-
-            $table->foreignId('role_id')->constrained('roles');
-            $table->boolean('is_active')->default(true);
+            $table->string('password'); // hashed
+            $table->integer('points_fidelite')->default(0);
 
             $table->timestamps();
         });
@@ -24,6 +27,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('clients');
     }
 };

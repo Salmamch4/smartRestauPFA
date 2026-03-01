@@ -2,84 +2,87 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Services\ClientAuthService;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-
 
 class AuthController extends Controller
 {
-      public function login(Request $request){
-        $request->validate([
-            'telephone'=>'required|string',
-            'password'=>'required|string'
-        ]);
-        $user=User::where('telephone',$request->telephone)->first();
+    public function __construct(private ClientAuthService $service) {}
 
-        if(!$user || !Hash::check($request->password , $user->password)){
-            return response()->json([
-                'error'=>'les identifiants sont incorrectes.'
-            ],401);
-        }
-         try {
-            $token = JWTAuth::fromUser($user);
+    public function registerClient(Request $request)
+    {
+        $request->validate([
+            'nom' => 'required|string|max:255',
+
+            // باش نضمنو unique فـ users و clients بجوج
+            'telephone' => 'required|string|max:20|unique:users,telephone|unique:clients,telephone',
+            'email' => 'required|email|unique:users,email|unique:clients,email',
+
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $res = $this->service->register($request->all());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Client inscrit avec succès',
+            'access_token' => $res['token'],
+            'token_type' => 'bearer',
+            'user' => [
+                'id' => $res['user']->id,
+                'name' => $res['user']->name,
+                'telephone' => $res['user']->telephone,
+                'email' => $res['user']->email,
+                'role' => $res['user']->role?->nom ?? 'CLIENT',
+                'is_active' => $res['user']->is_active,
+            ],
+            'client' => [
+                'id' => $res['client']->id,
+                'nom' => $res['client']->nom,
+                'telephone' => $res['client']->telephone,
+                'email' => $res['client']->email,
+                'points_fidelite' => $res['client']->points_fidelite,
+            ],
+        ], 201);
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'telephone' => 'required|string',
+            'password'  => 'required|string',
+        ]);
+
+        try {
+            $res = $this->service->login($request->telephone, $request->password);
 
             return response()->json([
                 'success' => true,
-                'access_token' => $token,
+                'access_token' => $res['token'],
                 'token_type' => 'bearer',
                 'expires_in' => auth()->factory()->getTTL() * 60,
                 'user' => [
-                    'id' => $user->id,
-                    'telephone' => $user->telephone,
-                    'role' => $user->role ? $user->role->nom : 'CLIENT'
-                ]
+                    'id' => $res['user']->id,
+                    'name' => $res['user']->name,
+                    'telephone' => $res['user']->telephone,
+                    'email' => $res['user']->email,
+                    'role' => $res['user']->role?->nom ?? 'CLIENT',
+                    'is_active' => $res['user']->is_active,
+                ],
+                'client' => $res['client'] ? [
+                    'id' => $res['client']->id,
+                    'nom' => $res['client']->nom,
+                    'telephone' => $res['client']->telephone,
+                    'email' => $res['client']->email,
+                    'points_fidelite' => $res['client']->points_fidelite,
+                ] : null,
             ]);
-            } catch (JWTException $e) {
-            return response()->json([
-                'error' => 'Impossible de créer le token'
-            ], 500);
+
+        } catch (\RuntimeException $e) {
+            return response()->json(['error' => $e->getMessage()], 401);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Impossible de créer le token'], 500);
         }
-
-      }
-
-
-
-      public function me()
-    {
-          try {
-            $user = auth()->user();
-            return response()->json([
-                'success' => true,
-                'user' => $user
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Non authentifié'
-            ], 401);
-        }
-    }
-
-
-    public function logout()
-    {
-        auth()->logout();
-        return response()->json([
-            'statut' => true,
-            "message" =>  "user logout !"
-        ]);
-    }
-
-    public  function refresh()
-    {
-        $newToken = auth()->refresh();
-        return response()->json([
-            'statut' => true,
-            "token" =>  $newToken
-        ]);
     }
 }
