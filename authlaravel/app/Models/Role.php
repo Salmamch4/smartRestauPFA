@@ -12,6 +12,7 @@ class Role extends Model
 
     protected $table = 'roles';
 
+<<<<<<< HEAD
     protected $fillable = ['nom'];
 
     public function users()
@@ -23,5 +24,12 @@ class Role extends Model
     public function getNameAttribute()
     {
         return $this->nom;
+=======
+    protected $fillable = ['name'];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+>>>>>>> 7f1063d2793e74d51ca39ea9f24cdd6c8ac096e4
     }
 }

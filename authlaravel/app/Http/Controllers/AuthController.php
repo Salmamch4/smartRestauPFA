@@ -85,4 +85,22 @@ class AuthController extends Controller
             return response()->json(['error' => 'Impossible de créer le token'], 500);
         }
     }
+
+
+    public function logout(Request $request)
+    {
+        return response()->json([
+            'statut' => true,
+            'message' => 'user logout !'
+        ])->cookie('token', '', -1);
+    }
+
+    public  function refresh()
+    {
+        $newToken = auth()->refresh();
+        return response()->json([
+            'statut' => true,
+            "token" =>  $newToken
+        ]);
+    }
 }

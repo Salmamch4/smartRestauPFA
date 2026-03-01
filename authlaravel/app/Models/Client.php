@@ -11,14 +11,15 @@ class Client extends Model
         'nom',
         'telephone',
         'email',
-        'password',
-        'points_fidelite',
+        'points_fidelite'
     ];
 
-    protected $hidden = ['password'];
-
+    // Client belongs to User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+    protected $primaryKey = 'user_id'; 
+public $incrementing = true;
+protected $keyType = 'int';
 }
