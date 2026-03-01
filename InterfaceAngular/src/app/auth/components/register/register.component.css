@@ -1,0 +1,18 @@
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.form-control:focus {
+  border-color: #ce1212;
+  box-shadow: 0 0 0 0.2rem rgba(206, 18, 18, 0.25);
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+  border-right: none;
+}
+
+.form-control {
+  border-left: none;
+}

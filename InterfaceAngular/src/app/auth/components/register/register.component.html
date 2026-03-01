@@ -1,13 +1,125 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body text-center p-5">
-          <h2>Sign Up</h2>
-          <p class="text-muted">Registration page coming soon!</p>
-          <a routerLink="/login" class="btn btn-primary">Back to Login</a>
+<section class="section" style="min-height: 100vh; display: flex; align-items: center;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+
+            <div class="section-header text-center mb-4">
+              <h2 class="text-uppercase small text-muted">Create Account</h2>
+              <p class="h1" style="font-family: 'Amatic SC', cursive;">
+                Join our <span style="color: #ce1212;">Platform</span>
+              </p>
+            </div>
+
+            <form (ngSubmit)="onSubmit()" #f="ngForm">
+
+              <!-- Full Name -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">Full Name</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-person" style="color: #ce1212;"></i>
+                  </span>
+                  <input type="text"
+                         class="form-control"
+                         name="nom"
+                         [(ngModel)]="form.nom"
+                         placeholder="Enter your full name"
+                         required>
+                </div>
+              </div>
+
+              <!-- Phone -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">Phone Number</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-phone" style="color: #ce1212;"></i>
+                  </span>
+                  <input type="tel"
+                         class="form-control"
+                         name="telephone"
+                         [(ngModel)]="form.telephone"
+                         placeholder="Enter your phone number"
+                         required>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">Email</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-envelope" style="color: #ce1212;"></i>
+                  </span>
+                  <input type="email"
+                         class="form-control"
+                         name="email"
+                         [(ngModel)]="form.email"
+                         placeholder="Enter your email"
+                         required>
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">Password</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-lock" style="color: #ce1212;"></i>
+                  </span>
+                  <input type="password"
+                         class="form-control"
+                         name="password"
+                         [(ngModel)]="form.password"
+                         placeholder="Enter your password"
+                         required>
+                </div>
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">Confirm Password</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-shield-lock" style="color: #ce1212;"></i>
+                  </span>
+                  <input type="password"
+                         class="form-control"
+                         name="password_confirmation"
+                         [(ngModel)]="form.password_confirmation"
+                         placeholder="Confirm your password"
+                         required>
+                </div>
+              </div>
+
+              <!-- Button -->
+              <button type="submit"
+                      class="btn w-100 py-3"
+                      style="background: #ce1212; color: white; border-radius: 50px; font-weight: 600;"
+                      [disabled]="loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                {{ loading ? 'Creating...' : 'Create Account' }}
+              </button>
+
+              <!-- Login link -->
+              <div class="text-center mt-4">
+                <p class="mb-0">
+                  Already have an account?
+                  <a routerLink="/login"
+                     class="text-decoration-none fw-bold"
+                     style="color: #ce1212;">
+                    Sign in <i class="bi bi-arrow-right"></i>
+                  </a>
+                </p>
+              </div>
+
+            </form>
+
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
