@@ -130,5 +130,68 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.ArticleController",
+    "Method": "GetAll",
+    "RelativePath": "api/articles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.ArticleController",
+    "Method": "Create",
+    "RelativePath": "api/articles",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "MenuDotNetMS.DTOs.article.ArticleCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.ArticleController",
+    "Method": "Update",
+    "RelativePath": "api/articles/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "MenuDotNetMS.DTOs.article.ArticleCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.ArticleController",
+    "Method": "Delete",
+    "RelativePath": "api/articles/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

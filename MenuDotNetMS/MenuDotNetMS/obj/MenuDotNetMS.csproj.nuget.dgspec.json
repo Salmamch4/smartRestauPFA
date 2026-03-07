@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.csproj": {}
+    "C:\\Users\\HHHPPP\\menu-project\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.csproj": {
+    "C:\\Users\\HHHPPP\\menu-project\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.csproj",
+        "projectUniqueName": "C:\\Users\\HHHPPP\\menu-project\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.csproj",
         "projectName": "MenuDotNetMS",
-        "projectPath": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\obj\\",
+        "projectPath": "C:\\Users\\HHHPPP\\menu-project\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.csproj",
+        "packagesPath": "C:\\Users\\HHHPPP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HHHPPP\\menu-project\\MenuDotNetMS\\MenuDotNetMS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HHHPPP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -61,6 +62,10 @@
             "Scalar.AspNetCore": {
               "target": "Package",
               "version": "[2.13.1, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.9.1, )"
             }
           },
           "imports": [
@@ -82,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
