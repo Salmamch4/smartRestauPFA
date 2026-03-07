@@ -2,84 +2,159 @@
 
 namespace App\Http\Controllers;
 
-
+use App\DTOs\Auth\LoginRequestDTO;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
-
 
 class AuthController extends Controller
 {
-      public function login(Request $request){
-        $request->validate([
-            'telephone'=>'required|string',
-            'password'=>'required|string'
-        ]);
-        $user=User::where('telephone',$request->telephone)->first();
+    protected AuthService $authService;
 
-        if(!$user || !Hash::check($request->password , $user->password)){
-            return response()->json([
-                'error'=>'les identifiants sont incorrectes.'
-            ],401);
-        }
-         try {
-            $token = JWTAuth::fromUser($user);
-
-            return response()->json([
-                'success' => true,
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'expires_in' => auth()->factory()->getTTL() * 60,
-                'user' => [
-                    'id' => $user->id,
-                    'telephone' => $user->telephone,
-                    'role' => $user->role ? $user->role->nom : 'CLIENT'
-                ]
-            ]);
-            } catch (JWTException $e) {
-            return response()->json([
-                'error' => 'Impossible de créer le token'
-            ], 500);
-        }
-
-      }
-
-
-
-      public function me()
+    public function __construct(AuthService $authService)
     {
-          try {
-            $user = auth()->user();
+        $this->authService = $authService;
+    }
+
+    public function login(Request $request): JsonResponse
+    {
+        
+        $validator = validator($request->all(), [
+            'telephone' => 'required|string',
+            'password' => 'required|string|min:6'
+        ]);
+
+        if ($validator->fails()) {
             return response()->json([
-                'success' => true,
-                'user' => $user
-            ]);
-        } catch (\Exception $e) {
+                'success' => false,
+                'message' => 'Erreur de validation',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+     
+        $loginDTO = LoginRequestDTO::fromRequest($request);
+
+       
+        $authResponse = $this->authService->authenticate($loginDTO);
+
+        if (!$authResponse) {
             return response()->json([
-                'error' => 'Non authentifié'
+                'success' => false,
+                'message' => 'Téléphone ou mot de passe incorrect'
             ], 401);
         }
+
+        // Création du cookie
+        $cookie = cookie(
+            'jwt_token',
+            $authResponse->token,
+            $authResponse->expiresIn / 60,
+            '/',
+            null,
+            true,
+            true,
+            false,
+            'Strict'
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Connexion réussie',
+            'data' => [
+                'user' => $authResponse->user,
+                'expires_in' => $authResponse->expiresIn
+            ]
+        ], 200)->withCookie($cookie);
+    }
+
+    public function decryptToken(Request $request): JsonResponse
+    {
+        $token = $request->cookie('jwt_token');
+
+        if (!$token) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Token non trouvé dans le cookie'
+            ], 401);
+        }
+
+        $decoded = $this->authService->validateToken($token);
+
+        if (!$decoded) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Token invalide ou expiré'
+            ], 401);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $decoded
+        ], 200);
+    }
+
+    public function me(Request $request): JsonResponse
+    {
+        $user = auth()->user();
+        
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Non authentifié'
+            ], 401);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'id' => $user->id,
+                'telephone' => $user->telephone,
+                'email' => $user->email,
+                'role_id' => $user->role_id,
+                'is_active' => $user->is_active
+            ]
+        ], 200);
     }
 
 
-    public function logout()
+    public function refresh(Request $request): JsonResponse
     {
-        auth()->logout();
-        return response()->json([
-            'statut' => true,
-            "message" =>  "user logout !"
-        ]);
-    }
+        $token = $request->cookie('jwt_token');
 
-    public  function refresh()
-    {
-        $newToken = auth()->refresh();
-        return response()->json([
-            'statut' => true,
-            "token" =>  $newToken
-        ]);
+        if (!$token) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Token non trouvé'
+            ], 401);
+        }
+
+        try {
+            $newToken = JWTAuth::setToken($token)->refresh();
+            
+            $cookie = cookie(
+                'jwt_token',
+                $newToken,
+                config('jwt.ttl'),
+                '/',
+                null,
+                true,
+                true,
+                false,
+                'Strict'
+            );
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Token rafraîchi avec succès'
+            ], 200)->withCookie($cookie);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Impossible de rafraîchir le token'
+            ], 401);
+        }
     }
 }

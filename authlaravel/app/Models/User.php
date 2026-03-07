@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
-
+    use HasFactory,Notifiable;
+    protected $table = "users";
     protected $fillable = [
         'telephone',
         'email',
@@ -20,9 +21,17 @@ class User extends Authenticatable implements JWTSubject
 
     protected $hidden = [
         'password',
+        'remember_token',
     ];
 
-    // 🔐 JWT Methods
+protected $casts = [
+    'password'=> 'hashed',
+    'is_active'=> 'boolean',
+    'created_at'=>'datetime',
+    'updated_at'=> 'datetime'
+];
+
+// Get the identifier that will be stored in the subject claim of the JWT.
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -30,7 +39,13 @@ class User extends Authenticatable implements JWTSubject
 
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'user_id' => $this->id,
+            'telephone' => $this->telephone,
+            'email' => $this->email,
+            'role_id' => $this->role_id,
+            'is_active' => $this->is_active
+        ];
     }
 
     // Relation Role
@@ -38,4 +53,23 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(Role::class);
     }
+
+    /**
+     * Scopes
+     */
+    public function scopeFindByTelephone($query, $telephone)
+    {
+        return $query->where('telephone', $telephone);
+    }
+
+    public function scopeFindByEmail($query, $email)
+    {
+        return $query->where('email', $email);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
 }

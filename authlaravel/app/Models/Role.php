@@ -11,7 +11,7 @@ class Role extends Model
 
     protected $table = 'roles';
    protected $fillable = [
-        'nom',        // C'est 'nom' pas 'name' dans ta table!
+        'nom',      
         'created_at',
         'updated_at'
     ];
