@@ -51,7 +51,7 @@ namespace MenuDotNetMS.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult GetAll()
         {
             var achats = _repo.GetAll();
             if (achats == null || !achats.Any())
@@ -139,36 +139,7 @@ namespace MenuDotNetMS.Controllers
             return NoContent();
         }
 
-        [HttpPatch("{id}/utiliser-quantite")]
-        public IActionResult UtiliserQuantite(Guid id, [FromBody] int quantiteUtilisee)
-        {
-            var achat = _repo.GetById(id);
-            if (achat == null)
-            {
-                return NotFound($"Aucun achat trouvé avec l'ID: {id}");
-            }
-
-            // Validation métier
-            if (quantiteUtilisee <= 0)
-            {
-                return BadRequest("La quantité utilisée doit être positive");
-            }
-
-            if (quantiteUtilisee > achat.QuantiteRestante)
-            {
-                return BadRequest($"Quantité insuffisante. Restant: {achat.QuantiteRestante}, Demandé: {quantiteUtilisee}");
-            }
-
-            int nouvelleQuantiteRestante = achat.QuantiteRestante - quantiteUtilisee;
-            bool updated = _repo.UpdateQuantiteRestante(id, nouvelleQuantiteRestante);
-
-            if (!updated)
-            {
-                return StatusCode(500, "Erreur lors de la mise à jour de la quantité restante");
-            }
-
-            return NoContent();
-        }
+       
 
         [HttpGet("article/{idArticle}")]
         public IActionResult GetByArticle(Guid idArticle)

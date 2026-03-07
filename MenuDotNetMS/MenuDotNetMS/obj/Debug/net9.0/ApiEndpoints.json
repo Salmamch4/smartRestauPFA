@@ -1,0 +1,134 @@
+[
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.AchatsController",
+    "Method": "Add",
+    "RelativePath": "api/Achats",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "MenuDotNetMS.DTOs.achat.AchatAddDTORequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.AchatsController",
+    "Method": "GetAll",
+    "RelativePath": "api/Achats",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.AchatsController",
+    "Method": "GetById",
+    "RelativePath": "api/Achats/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.AchatsController",
+    "Method": "Delete",
+    "RelativePath": "api/Achats/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.AchatsController",
+    "Method": "Update",
+    "RelativePath": "api/Achats/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "MenuDotNetMS.DTOs.achat.AchatUpdateDTORequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.AchatsController",
+    "Method": "UpdateQuantiteRestante",
+    "RelativePath": "api/Achats/{id}/quantite-restante",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "nouvelleQuantiteRestante",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.AchatsController",
+    "Method": "GetByArticle",
+    "RelativePath": "api/Achats/article/{idArticle}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idArticle",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.AchatsController",
+    "Method": "GetByFournisseur",
+    "RelativePath": "api/Achats/fournisseur/{idFournisseur}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idFournisseur",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
