@@ -12,13 +12,15 @@ class User extends Authenticatable implements JWTSubject
     use HasFactory,Notifiable;
     protected $table = "users";
     protected $fillable = [
+        'name',
         'telephone',
         'email',
         'password',
         'role_id',
-        'is_active'
+        'is_active',
     ];
 
+<<<<<<< HEAD
     protected $hidden = [
         'password',
         'remember_token',
@@ -32,6 +34,10 @@ protected $casts = [
 ];
 
 // Get the identifier that will be stored in the subject claim of the JWT.
+=======
+    protected $hidden = ['password'];
+
+>>>>>>> feature/auth
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -48,12 +54,12 @@ protected $casts = [
         ];
     }
 
-    // Relation Role
     public function role()
     {
         return $this->belongsTo(Role::class);
     }
 
+<<<<<<< HEAD
     /**
      * Scopes
      */
@@ -73,3 +79,10 @@ protected $casts = [
     }
 
 }
+=======
+    public function client()
+    {
+        return $this->hasOne(Client::class);
+    }
+}
+>>>>>>> feature/auth
