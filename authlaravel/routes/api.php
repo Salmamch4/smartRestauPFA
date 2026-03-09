@@ -34,7 +34,7 @@ Route::prefix('auth')->group(function () {
 
 
 // --- Mot de passe oublié ---
-=======
+
 Route::delete('/auth/test-logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 
 Route::post('/password/forgot', [ForgotPasswordController::class, 'forgot'])->name('password.forgot');
