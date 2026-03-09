@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+         Schema::table('users', function (Blueprint $table) {
+        $table->string('role')->default('client'); // Ajoute la colonne role
+    });
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 
@@ -27,3 +30,7 @@ return new class extends Migration {
         Schema::dropIfExists('users');
     }
 };
+
+
+
+

@@ -10,14 +10,19 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
-    protected $fillable = [
-        'name',
-        'telephone',
-        'email',
-        'password',
-        'role_id',
-        'is_active',
-    ];
+   protected $fillable = [
+    'name',
+    'email',
+    'password',
+    'telephone',
+    'role_id', // Doit correspondre à ta migration
+    'is_active',
+];
+
+// Relation pour récupérer le nom du rôle si besoin
+public function role() {
+    return $this->belongsTo(Role::class);
+}
 
     protected $hidden = ['password'];
 
@@ -31,10 +36,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
+   
 
     public function client()
     {

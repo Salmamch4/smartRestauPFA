@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InactiveClient;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -41,11 +42,23 @@ class ClientController extends Controller
     }
 
     // 🔹 DELETE client
-    public function destroy($id)
-    {
-        $client = Client::findOrFail($id);
-        $client->delete();
+  public function destroy($user_id)
+{
+    // 1. Trouver le client par son user_id (clé primaire définie dans ton modèle)
+    $client = Client::where('user_id', $user_id)->firstOrFail();
 
-        return response()->json(['message' => 'Deleted successfully']);
-    }
+    // 2. Créer l'archive dans la table que tu as créée
+    InactiveClient::create([
+        'nom'            => $client->nom,
+        'telephone'      => $client->telephone,
+        'email'          => $client->email,
+        'reason'         => 'Suppression définitive du compte',
+        'inactivated_at' => now(),
+    ]);
+
+    // 3. Supprimer le client (cela supprimera aussi l'User grâce au onDelete cascade)
+    $client->delete();
+
+    return response()->json(['message' => 'Client archivé et supprimé avec succès !']);
+}
 }
