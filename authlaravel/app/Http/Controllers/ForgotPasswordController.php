@@ -81,7 +81,7 @@ class ForgotPasswordController extends Controller
         // Supprimer le token de la table password_resets
         $this->resetPasswordRepo->deleteToken($dto->token);
 
-        return response(['message' => 'Password successfully reset.'], 200);
+        return response(['message' => 'Password successfully reset.'], 204);
     }
 
 

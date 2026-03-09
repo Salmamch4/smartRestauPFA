@@ -32,9 +32,13 @@ Route::prefix('auth')->group(function () {
     });
 });
 
+
 // --- Mot de passe oublié ---
+=======
+Route::delete('/auth/test-logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+
 Route::post('/password/forgot', [ForgotPasswordController::class, 'forgot'])->name('password.forgot');
-Route::post('/password/reset/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
+Route::patch('/password/reset/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
 
 // --- Espace Administrateur (Gestion & Stats) ---
 Route::prefix('admin')->group(function () {
@@ -55,6 +59,11 @@ Route::prefix('admin')->group(function () {
     
 });
 
+
+Route::middleware('auth:api')
+    ->group(function (){
+        Route::delete('/auth/logout',[\App\Http\Controllers\AuthController::class,'logout'])->name('logout');
+    });
 
 
 // --- Ressources CRUD standards (Hors Admin) ---
