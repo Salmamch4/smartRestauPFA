@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // ✅ عدّلي هاد السطر حسب المسار عندك
-import { environment } from '../environnements/environnement';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,3 +24,7 @@ export class AuthService {
     return this.http.post(`${this.API}/auth/login`, data);
   }
 }
+
+
+
+
