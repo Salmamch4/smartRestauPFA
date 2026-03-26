@@ -1,0 +1,6 @@
+@MenuDotNetMS_HostAddress = http://localhost:5160
+
+GET {{MenuDotNetMS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
