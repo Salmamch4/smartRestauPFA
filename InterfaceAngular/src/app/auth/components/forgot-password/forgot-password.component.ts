@@ -24,6 +24,7 @@ constructor(private router: Router, private authService: AuthServiceService){}
   onSubmit(form: NgForm) {
   this.wait = true;
   this.error.email = null;
+  this.message = ''; // Reset message
   
   this.authService.forgot(form.value.email).subscribe(
     (res: any) => {
@@ -31,9 +32,26 @@ constructor(private router: Router, private authService: AuthServiceService){}
       this.wait = false;
     },
     (err: any) => {
-      this.error = err.status === 400 
-        ? { email: 'Cette adresse email n\'existe pas.' }
-        : err.error?.errors || { email: 'Une erreur est survenue.' };
+      console.log('Erreur complète:', err); // Pour debug
+      
+      // Gestion des différents types d'erreurs
+      if (err.status === 400) {
+        // Email n'existe pas
+        this.error = { email: err.error?.message || 'Cette adresse email n\'existe pas.' };
+      } 
+      else if (err.status === 422) {
+        // Erreur de validation (format email invalide)
+        this.error = err.error?.errors || { email: 'Format email invalide.' };
+      }
+      else if (err.status === 404) {
+        // Route non trouvée
+        this.error = { email: 'Service indisponible.' };
+      }
+      else {
+        // Autres erreurs
+        this.error = { email: 'Une erreur est survenue. Réessayez plus tard.' };
+      }
+      
       this.wait = false;
     }
   );

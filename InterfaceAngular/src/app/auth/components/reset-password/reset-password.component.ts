@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../../core/services/auth-service.service';
 import { NgForm } from '@angular/forms';
 
@@ -13,7 +13,7 @@ export class ResetPasswordComponent {
 
   token:any;
 
-  constructor(private route:ActivatedRoute, private authService: AuthServiceService) { }
+  constructor(private route:ActivatedRoute,private router: Router, private authService: AuthServiceService) { }
 
   error={
     password:null
@@ -33,12 +33,17 @@ export class ResetPasswordComponent {
 
   this.authService.reset(this.token, password, password_confirmation).subscribe({
     next: (res: any) => {
-      this.message = res.message;
-      console.log("Reset successful:", res.message); 
+      console.log("Reset successful:");
+
+       this.router.navigate(['/login']);
+      
     },
     error: (err) => {
-      this.error = err.error.errors;
-      console.log("Error:", err.error.errors); 
+      console.log('Erreur:', err);
+      
+      this.error = { 
+        password: err.error?.message || 'Une erreur est survenue.' 
+      };
     }
   });
 }

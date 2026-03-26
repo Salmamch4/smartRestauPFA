@@ -12,7 +12,7 @@ export class HomeComponent {
 
   constructor(private router: Router, private authService: AuthServiceService){}
 
-logout() {
+/*logout() {
   this.authService.logout().subscribe(
     (response:any) => {  
       console.log(response); 
@@ -25,4 +25,4 @@ logout() {
       }
     }
   );
-}}
+}*/}
