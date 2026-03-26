@@ -20,6 +20,7 @@ export interface LoginResponse {
   };
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -87,5 +88,6 @@ reset(token: string, password: string, password_confirmation: string): Observabl
     password_confirmation
   });
 }
+
 
 }

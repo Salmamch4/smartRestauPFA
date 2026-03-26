@@ -4,7 +4,7 @@ import { AuthServiceService } from '../../core/services/auth-service.service';
 import { NgForm } from '@angular/forms';
 
 
-@Component({
+@Component({//new
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css']

@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+//import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../core/services/auth-service.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  loading = false;
-  errorMessage = '';
-  fieldErrors: { telephone?: string; password?: string } = {};
+export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
@@ -20,7 +17,7 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     this.loginForm = this.fb.group({
       telephone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       password: ['', Validators.required]
@@ -91,5 +88,6 @@ export class LoginComponent implements OnInit {
   }
 
   get telephone() { return this.loginForm.get('telephone'); }
-  get password() { return this.loginForm.get('password'); }
+  get password() { return this.loginForm.get('password'); }*/
+
 }

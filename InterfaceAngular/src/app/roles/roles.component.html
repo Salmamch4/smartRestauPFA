@@ -1,0 +1,62 @@
+<section class="section" style="min-height: 100vh; display: flex; align-items: center;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+
+            <!-- Header -->
+            <div class="text-center mb-4">
+              <h2 class="text-uppercase small text-muted">Roles</h2>
+              <p class="h1" style="font-family: 'Amatic SC', cursive;">
+                Manage <span style="color:#ce1212;">Roles</span>
+              </p>
+            </div>
+
+            <!-- Add / Update Role -->
+            <div class="input-group mb-4">
+              <input
+                [(ngModel)]="newRole"
+                class="form-control"
+                placeholder="Role name">
+
+              <button
+                class="btn"
+                style="background:#ce1212; color:white;"
+                (click)="saveRole()">
+                {{ editId ? 'Update' : 'Save' }}
+              </button>
+            </div>
+
+            <!-- Roles List -->
+            <ul class="list-group">
+              <li *ngFor="let role of roles"
+                  class="list-group-item d-flex justify-content-between align-items-center">
+
+                {{ role.name }}
+
+                <div>
+                  <button
+                    class="btn btn-sm btn-warning me-2"
+                    (click)="edit(role)">
+                    Edit
+                  </button>
+
+                  <button
+                    class="btn btn-sm btn-danger"
+                    (click)="delete(role.id)">
+                    Delete
+                  </button>
+                </div>
+
+              </li>
+            </ul>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
