@@ -18,7 +18,7 @@ namespace MenuDotNetMS.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AchatAddDTORequest dto) //2024-12-25T15:30:00//
+        public IActionResult Add(AchatAddDTORequest dto) //2024-12-25T15:30:00
         {
             if (!ModelState.IsValid)
             {

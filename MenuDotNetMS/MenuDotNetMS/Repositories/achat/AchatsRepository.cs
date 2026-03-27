@@ -14,7 +14,7 @@ namespace MenuDotNetMS.Repositories.achat
 
         public bool Add(Achat achat) 
         { 
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))//
+            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
             {
                 
                 cn.Open();
@@ -252,7 +252,7 @@ namespace MenuDotNetMS.Repositories.achat
                 string query = @"UPDATE Achats 
                         SET Quantite_Restante = @QuantiteRestante
                         WHERE id = @Id";
-
+//
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
                     cmd.Parameters.AddWithValue("@Id", achat.Id);
