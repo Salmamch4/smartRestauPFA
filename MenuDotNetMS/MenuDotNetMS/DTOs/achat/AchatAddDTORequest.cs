@@ -6,6 +6,6 @@
         public Guid IdArticle { get; set; }
         public Guid IdFournisseur { get; set; }
         public int QuantiteAchat { get; set; }
-        public decimal? PrixAchatUnitaire { get; set; }
+        public decimal? PrixAchatUnitaire { get; set; }//
     }
 }

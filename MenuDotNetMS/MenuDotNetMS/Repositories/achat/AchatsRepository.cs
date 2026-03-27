@@ -14,7 +14,7 @@ namespace MenuDotNetMS.Repositories.achat
 
         public bool Add(Achat achat) 
         { 
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))//
             {
                 
                 cn.Open();

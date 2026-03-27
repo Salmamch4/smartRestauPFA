@@ -3,6 +3,6 @@
     public class QuantiteRestanteUpdateDTORequest
     {
         public Guid Id { get; set; }
-        public int NouvelleQuantiteRestante { get; set; }
+        public int NouvelleQuantiteRestante { get; set; }//
     }
 }

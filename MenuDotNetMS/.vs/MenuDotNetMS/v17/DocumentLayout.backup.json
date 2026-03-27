@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\achats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\achats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\achat\\achatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\achat\\achatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\achats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\achats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\achat\\iachatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -78,21 +78,19 @@
               "RelativeToolTip": "MenuDotNetMS\\Mappers\\AchatsMapper.cs",
               "ViewState": "AgIAADIAAAAAAAAAAAAgwEkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-06T21:56:19.278Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-06T21:56:19.278Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Achats.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\Achats.cs",
               "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\Achats.cs",
               "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\Achats.cs",
               "RelativeToolTip": "MenuDotNetMS\\Controllers\\Achats.cs",
-              "ViewState": "AgIAAJcAAAAAAAAAAAAwwBQAAABOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-06T21:56:14.205Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-06T21:56:14.205Z"
             },
             {
               "$type": "Document",
@@ -104,8 +102,7 @@
               "RelativeToolTip": "MenuDotNetMS\\Repositories\\achat\\IAchatsRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-06T22:34:07.5Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-06T22:34:07.5Z"
             },
             {
               "$type": "Document",
@@ -117,18 +114,17 @@
               "RelativeToolTip": "MenuDotNetMS\\DTOs\\achat\\QuantiteRestanteUpdateDTORequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-07T21:49:35.218Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-07T21:49:35.218Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AchatsRepository.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
               "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
               "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
               "RelativeToolTip": "MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
-              "ViewState": "AgIAAOgAAAAAAAAAAAAhwAgBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ0AAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-06T21:54:25.792Z",
               "EditorCaption": ""
@@ -143,8 +139,7 @@
               "RelativeToolTip": "MenuDotNetMS\\DTOs\\achat\\AchatUpdateDTORequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-07T22:36:04.666Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-07T22:36:04.666Z"
             },
             {
               "$type": "Document",
@@ -156,8 +151,7 @@
               "RelativeToolTip": "MenuDotNetMS\\DTOs\\achat\\AchatAddDTORequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-06T22:05:32.41Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-06T22:05:32.41Z"
             },
             {
               "$type": "Document",
@@ -169,8 +163,7 @@
               "RelativeToolTip": "MenuDotNetMS\\Models\\Achat.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-06T21:54:11.974Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-06T21:54:11.974Z"
             },
             {
               "$type": "Document",
@@ -182,8 +175,7 @@
               "RelativeToolTip": "MenuDotNetMS\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-06T21:55:42.45Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-06T21:55:42.45Z"
             },
             {
               "$type": "Document",
@@ -195,8 +187,7 @@
               "RelativeToolTip": "MenuDotNetMS\\DTOs\\achat\\AchatAddDTOResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-07T21:50:34.882Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-07T21:50:34.882Z"
             },
             {
               "$type": "Document",

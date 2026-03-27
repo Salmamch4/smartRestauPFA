@@ -8,6 +8,6 @@
         public Guid IdFournisseur { get; set; }
         public int QuantiteAchat { get; set; }
         public int QuantiteRestante { get; set; }
-        public decimal? PrixAchatUnitaire { get; set; }
+        public decimal? PrixAchatUnitaire { get; set; }//
     }
 }
