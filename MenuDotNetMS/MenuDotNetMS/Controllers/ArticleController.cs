@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MenuDotNetMS.Repositories.article;
-using MenuDotNetMS.models;
 using MenuDotNetMS.DTOs.article;
 using MenuDotNetMS.Mappers;
 
@@ -17,6 +16,7 @@ namespace MenuDotNetMS.Controllers
             _repository = repository;
         }
 
+        // 🔹 GET ALL
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -24,9 +24,13 @@ namespace MenuDotNetMS.Controllers
             return Ok(articles);
         }
 
+        // 🔹 CREATE
         [HttpPost]
-        public IActionResult Create(ArticleCreateDTO dto)
+        public IActionResult Create([FromBody] ArticleCreateDTO dto)
         {
+            if (dto == null)
+                return BadRequest("DTO is null");
+
             var article = ArticleMapper.ToArticle(dto);
 
             _repository.Add(article);
@@ -34,20 +38,39 @@ namespace MenuDotNetMS.Controllers
             return Ok(article);
         }
 
+        // 🔹 UPDATE (🔥 الحل الحقيقي ديالك)
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, ArticleCreateDTO dto)
+        public IActionResult Update(Guid id, [FromBody] ArticleCreateDTO dto)
         {
-            var article = ArticleMapper.ToArticle(dto);
+            if (dto == null)
+                return BadRequest("DTO is null");
 
-            _repository.Update(id, article);
+            var existing = _repository.GetById(id);
 
-            return Ok(article);
+            if (existing == null)
+                return NotFound();
+
+            // تحديث القيم فقط
+            existing.Libelle = dto.Libelle;
+            existing.QuantiteEnStock = dto.QuantiteEnStock;
+            existing.SeuilAlerte = dto.SeuilAlerte;
+
+            _repository.Update(existing);
+
+            return Ok(existing);
         }
 
+        // 🔹 DELETE
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
+            var existing = _repository.GetById(id);
+
+            if (existing == null)
+                return NotFound();
+
             _repository.Delete(id);
+
             return Ok();
         }
     }

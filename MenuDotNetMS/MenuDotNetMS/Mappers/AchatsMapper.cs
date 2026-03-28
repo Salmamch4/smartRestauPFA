@@ -23,7 +23,7 @@ namespace MenuDotNetMS.Mappers
         {
             return new Achat
             {
-                Id = Guid.NewGuid(),
+                Id = dto.Id,
                 DateAchat = dto.DateAchat,
                 IdArticle = dto.IdArticle,
                 IdFournisseur = dto.IdFournisseur,
@@ -62,6 +62,15 @@ namespace MenuDotNetMS.Mappers
 
             };
         
+        }
+
+        public static Achat ToModel(QuantiteRestanteUpdateDTORequest dto)
+        {
+            return new Achat
+            {
+                Id = dto.Id,
+                QuantiteRestante = dto.NouvelleQuantiteRestante
+            };//
         }
 
     }

@@ -18,7 +18,7 @@ namespace MenuDotNetMS.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AchatAddDTORequest dto)
+        public IActionResult Add(AchatAddDTORequest dto) //2024-12-25T15:30:00
         {
             if (!ModelState.IsValid)
             {
@@ -37,7 +37,7 @@ namespace MenuDotNetMS.Controllers
             return StatusCode(500, "Une erreur s'est produite lors de l'ajout de l'achat");
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] //11111111-1111-1111-1111-111111111111
         public IActionResult GetById(Guid id)
         {
             var achat = _repo.GetById(id);
@@ -76,23 +76,26 @@ namespace MenuDotNetMS.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(Guid id, AchatUpdateDTORequest dto)
+        [HttpPut("{id}")] 
+        public IActionResult Update(Guid id,AchatUpdateDTORequest dto)
         {
             if (id != dto.Id)
             {
-                return BadRequest("L'ID dans l'URL ne correspond pas à l'ID dans le corps de la requête");
+                return BadRequest();
             }
 
             if (!ModelState.IsValid)
+            { return UnprocessableEntity(); }
+
+            if (dto.DateAchat < new DateTime(1753, 1, 1))
             {
-                return UnprocessableEntity(ModelState);
+                return BadRequest();
             }
 
             var existingAchat = _repo.GetById(id);
             if (existingAchat == null)
             {
-                return NotFound($"Aucun achat trouvé avec l'ID: {id}");
+                return NotFound();
             }
 
             var achatToUpdate = AchatsMapper.ToModel(dto);
@@ -105,43 +108,48 @@ namespace MenuDotNetMS.Controllers
                 return NoContent();
             }
 
-            return StatusCode(500, "Une erreur s'est produite lors de la mise à jour de l'achat");
+            return StatusCode(500);
         }
 
         [HttpPatch("{id}/quantite-restante")]
-        public IActionResult UpdateQuantiteRestante(Guid id, [FromBody] int nouvelleQuantiteRestante)
+        public IActionResult UpdateQuantiteRestante(Guid id,QuantiteRestanteUpdateDTORequest dto)
         {
+            if (id != dto.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            { return UnprocessableEntity(); }
+
             var achat = _repo.GetById(id);
+
             if (achat == null)
             {
-                return NotFound($"Aucun achat trouvé avec l'ID: {id}");
+                return NotFound();
             }
 
-            // Vérification que la quantité restante ne dépasse pas la quantité d'achat initiale
-            if (nouvelleQuantiteRestante > achat.QuantiteAchat)
+            if (dto.NouvelleQuantiteRestante > achat.QuantiteAchat || dto.NouvelleQuantiteRestante < 0)
             {
-                return BadRequest($"La quantité restante ({nouvelleQuantiteRestante}) ne peut pas dépasser la quantité d'achat initiale ({achat.QuantiteAchat})");
+                return BadRequest();
             }
 
-            // Vérification que la quantité restante n'est pas négative
-            if (nouvelleQuantiteRestante < 0)
+
+            var QuantiteToUpdate = AchatsMapper.ToModel(dto);
+
+            bool response = _repo.UpdateQuantiteRestante(QuantiteToUpdate);
+
+            if (response)
             {
-                return BadRequest("La quantité restante ne peut pas être négative");
+                return NoContent();
             }
 
-            bool updated = _repo.UpdateQuantiteRestante(id, nouvelleQuantiteRestante);
-
-            if (!updated)
-            {
-                return StatusCode(500, "Erreur lors de la mise à jour de la quantité restante");
-            }
-
-            return NoContent();
+            return StatusCode(500);
         }
 
-       
 
-        [HttpGet("article/{idArticle}")]
+
+            [HttpGet("article/{idArticle}")]
         public IActionResult GetByArticle(Guid idArticle)
         {
             var achats = _repo.GetAchatsByArticle(idArticle);

@@ -10,7 +10,7 @@ namespace MenuDotNetMS.Repositories.achat
         bool Update(Achat achat);
         bool Delete(Guid id);
         List<Achat> GetAchatsByArticle(Guid idArticle);
-        List<Achat> GetAchatsByFournisseur(Guid idFournisseur);
-        bool UpdateQuantiteRestante(Guid id, int nouvelleQuantiteRestante);
+        List<Achat> GetAchatsByFournisseur(Guid idFournisseur);//
+        bool UpdateQuantiteRestante(Achat achat);//
     }
 }

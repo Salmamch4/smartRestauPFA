@@ -46,17 +46,16 @@ namespace MenuDotNetMS.Repositories.achat
         }
         public List<Achat> GetAll()
         {
-            var achats = new List<Achat>();
+            List<Achat> achats = new List<Achat>();
 
             using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
             {
                 cn.Open();
 
-                // Spécifier les colonnes plutôt que d'utiliser *
                 string query = @"SELECT id, date_achat, id_article, id_fournisseur, 
                                 Quantite_Achat, Quantite_Restante, prix_achatUnitaire 
                          FROM Achats 
-                         ORDER BY date_achat DESC"; // Optionnel: trier par date
+                         ORDER BY date_achat DESC"; 
 
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
@@ -167,28 +166,102 @@ namespace MenuDotNetMS.Repositories.achat
                 }
             }
         }
-        public List<Achat> GetAchatsByArticle(Guid idArticle) { throw new NotImplementedException();
-            /*using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+        public List<Achat> GetAchatsByArticle(Guid idArticle)
+        {
+            List<Achat> achats = new List<Achat>();
+
+            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
             {
                 cn.Open();
-            }*/
 
+                string query = @"SELECT id, date_achat, id_article, id_fournisseur, 
+                                Quantite_Achat, Quantite_Restante, prix_achatUnitaire 
+                         FROM Achats WHERE id_article = @Id
+                         ORDER BY date_achat DESC";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", idArticle);
+                    using (SqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        while (rd.Read())
+                        {
+                            Achat achat = new Achat
+                            {
+                                Id = rd.GetGuid(rd.GetOrdinal("id")),
+                                DateAchat = DateTime.Parse(rd["date_achat"].ToString()),
+                                IdArticle = Guid.Parse(rd["id_article"].ToString()),
+                                IdFournisseur = Guid.Parse(rd["id_fournisseur"].ToString()),
+                                QuantiteAchat = int.Parse(rd["Quantite_Achat"].ToString()),
+                                QuantiteRestante = int.Parse(rd["Quantite_Restante"].ToString()),
+                                PrixAchatUnitaire = rd["prix_achatUnitaire"] == DBNull.Value ? null : decimal.Parse(rd["prix_achatUnitaire"].ToString())
+                            };
+                            achats.Add(achat);
+                        }
+                    }
+                }
+            }
+
+            return achats;
 
         }
-        public List<Achat> GetAchatsByFournisseur(Guid idFournisseur) { throw new NotImplementedException();
-            /*using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+        public List<Achat> GetAchatsByFournisseur(Guid idFournisseur) {
+            List<Achat> achats = new List<Achat>();
+
+            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
             {
                 cn.Open();
-            }*/
 
+                string query = @"SELECT id, date_achat, id_article, id_fournisseur, 
+                                Quantite_Achat, Quantite_Restante, prix_achatUnitaire 
+                         FROM Achats WHERE id_fournisseur = @Id
+                         ORDER BY date_achat DESC";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", idFournisseur);
+                    using (SqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        while (rd.Read())
+                        {
+                            Achat achat = new Achat
+                            {
+                                Id = rd.GetGuid(rd.GetOrdinal("id")),
+                                DateAchat = DateTime.Parse(rd["date_achat"].ToString()),
+                                IdArticle = Guid.Parse(rd["id_article"].ToString()),
+                                IdFournisseur = Guid.Parse(rd["id_fournisseur"].ToString()),
+                                QuantiteAchat = int.Parse(rd["Quantite_Achat"].ToString()),
+                                QuantiteRestante = int.Parse(rd["Quantite_Restante"].ToString()),
+                                PrixAchatUnitaire = rd["prix_achatUnitaire"] == DBNull.Value ? null : decimal.Parse(rd["prix_achatUnitaire"].ToString())
+                            };
+                            achats.Add(achat);
+                        }
+                    }
+                }
+            }
+
+            return achats;
 
         }
-        public bool UpdateQuantiteRestante(Guid id, int nouvelleQuantiteRestante) { throw new NotImplementedException();
-            /*using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+        public bool UpdateQuantiteRestante(Achat achat)
+        {
+            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
             {
                 cn.Open();
-            }*/
 
+                string query = @"UPDATE Achats 
+                        SET Quantite_Restante = @QuantiteRestante
+                        WHERE id = @Id";
+//
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", achat.Id);
+                    cmd.Parameters.AddWithValue("@QuantiteRestante", achat.QuantiteRestante);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
         }
     }
 }
