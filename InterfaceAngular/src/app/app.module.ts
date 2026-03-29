@@ -13,10 +13,14 @@ import { ResetPasswordComponent } from './auth/components/reset-password/reset-p
 import { HomeComponent } from './auth/components/home/home.component';
 import { AdminDashboardComponent } from './auth/components/admin-dashboard/admin-dashboard.component';
 
-// Autres Composants
-import { RolesComponent } from './roles/roles.component';
-import { ProfileComponent } from './profile/profile.component';
+import { CreateArticleComponent } from './menu/components/create-article/create-article.component';
+import { ArticleListComponent } from './menu/components/article-list/article-list.component';
+import { UpdateArticleComponent } from './menu/components/update-article/update-article.component';
 
+// AUTH (صلح حتى هادو)
+import { ProfileComponent } from './auth/components/profile/profile.component';
+import { RolesComponent } from './auth/components/roles/roles.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,9 @@ import { ProfileComponent } from './profile/profile.component';
     RegisterComponent,
     ForgotPasswordComponent,
     HomeComponent,
-
+CreateArticleComponent,
+ArticleListComponent,
+UpdateArticleComponent,
     ResetPasswordComponent,
 
     RolesComponent,
@@ -36,6 +42,7 @@ import { ProfileComponent } from './profile/profile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
 
     HttpClientModule,
     FormsModule,         

@@ -1,0 +1,14 @@
+<h2>Modifier un article</h2>
+
+<form (ngSubmit)="updateArticle()">
+  <label>Libelle:</label>
+  <input type="text" [(ngModel)]="article.libelle" name="libelle" required>
+
+  <label>Stock:</label>
+  <input type="number" [(ngModel)]="article.quantiteEnStock" name="quantiteEnStock" required>
+
+  <label>Seuil:</label>
+  <input type="number" [(ngModel)]="article.seuilAlerte" name="seuilAlerte" required>
+
+  <button type="submit">Update</button>
+</form>
