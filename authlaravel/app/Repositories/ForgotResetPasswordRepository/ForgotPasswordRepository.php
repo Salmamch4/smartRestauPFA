@@ -22,7 +22,7 @@ class ForgotPasswordRepository implements ForgotPasswordRepositoryInterface
         DB::table('password_resets')->insert([
             'email' => $email,
             'token' => $token,
-            'created_at' => now()->addHours(1)
+            'created_at' => now()
         ]);
     }
 

@@ -6,7 +6,7 @@ class RandomTokenService implements TokenGeneratorInterface
 {
     public function generate(): string
     {
-        return Str::random(60);
+        return Str::random(32);
     }
 
 }

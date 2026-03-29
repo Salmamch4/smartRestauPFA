@@ -2,63 +2,110 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InactiveClient;
 use App\Models\Client;
-use App\Models\User;
+use App\Models\InactiveClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
-    // 🔹 GET all clients
-    public function index()
+    // =========================
+    // CLIENT : afficher son propre profil
+    // =========================
+    public function myProfile(Request $request)
     {
-        return Client::all();
+        $user = $request->get('auth_user');
+
+        $client = Client::where('user_id', $user->id)->first();
+        if (!$client) {
+            return response()->json([
+                'message' => 'Client introuvable'
+            ], 404);
+        }
+
+        return response()->json($client, 200);
     }
 
-    // 🔹 UPDATE client
-    public function update(Request $request, $id)
+    // =========================
+    // CLIENT : update son propre profil
+    // =========================
+    public function updateMyProfile(Request $request)
     {
-        $client = Client::findOrFail($id);
+        $user = $request->get('auth_user');
 
-        DB::transaction(function () use ($request, $client) {
+        $client = Client::where('user_id', $user->id)->first();
 
-            // Update client table
+        if (!$client) {
+            return response()->json([
+                'message' => 'Client introuvable'
+            ], 404);
+        }
+
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:clients,email,' . $client->id,
+            'telephone' => 'required|string|max:20|unique:clients,telephone,' . $client->id . '|unique:users,telephone,' . $user->id,
+        ]);
+
+        DB::transaction(function () use ($request, $client, $user) {
             $client->update([
                 'nom' => $request->nom,
                 'email' => $request->email,
                 'telephone' => $request->telephone
             ]);
 
-            // Update user table
-            $user = User::find($client->user_id);
-            if ($user) {
-                $user->telephone = $request->telephone;
-                $user->save();
-            }
+            $user->telephone = $request->telephone;
+            $user->save();
         });
 
-        return response()->json(['message' => 'Updated successfully']);
+        return response()->json([
+            'message' => 'Profil mis à jour avec succès'
+        ], 200);
     }
 
-    // 🔹 DELETE client
-  public function destroy($user_id)
+    // =========================
+    // CLIENT : désactiver son propre compte
+    // =========================
+   public function deactivateMyAccount(Request $request)
 {
-    // 1. Trouver le client par son user_id (clé primaire définie dans ton modèle)
-    $client = Client::where('user_id', $user_id)->firstOrFail();
+    $user = $request->get('auth_user');
 
-    // 2. Créer l'archive dans la table que tu as créée
-    InactiveClient::create([
-        'nom'            => $client->nom,
-        'telephone'      => $client->telephone,
-        'email'          => $client->email,
-        'reason'         => 'Suppression définitive du compte',
-        'inactivated_at' => now(),
-    ]);
+    $client = Client::where('user_id', $user->id)->first();
 
-    // 3. Supprimer le client (cela supprimera aussi l'User grâce au onDelete cascade)
-    $client->delete();
+    if (!$client) {
+        return response()->json([
+            'message' => 'Client introuvable'
+        ], 404);
+    }
 
-    return response()->json(['message' => 'Client archivé et supprimé avec succès !']);
+    DB::transaction(function () use ($user, $client) {
+        // Désactiver le client
+        $client->is_active = 0;
+        $client->save();
+
+        // Désactiver l'utilisateur lié
+        $user->is_active = 0;
+        $user->save();
+    });
+
+    return response()->json([
+        'message' => 'Votre compte a été désactivé avec succès'
+    ], 200);
 }
+
+    // =========================
+    // CLIENT : full update = updateMyProfile
+    // =========================
+    public function fullUpdate(Request $request)
+    {
+        return $this->updateMyProfile($request);
+    }
+
+    // =========================
+    // ADMIN : afficher tous les clients
+    // =========================
+    public function index()
+    {
+        return response()->json(Client::all(), 200);
+    }
 }

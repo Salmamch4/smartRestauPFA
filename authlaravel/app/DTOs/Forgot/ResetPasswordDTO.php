@@ -2,7 +2,6 @@
 
 namespace App\DTOs\Forgot;
 use Illuminate\Http\Request;
-
 class ResetPasswordDTO
 {
     public function __construct(
@@ -19,4 +18,3 @@ class ResetPasswordDTO
     }
 
 }
- 

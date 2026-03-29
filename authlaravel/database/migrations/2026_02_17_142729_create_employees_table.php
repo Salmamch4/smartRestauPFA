@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->string('telephone', 10); // obligatoire et marocain
             $table->string('adresse');
             $table->string('email')->nullable();
-            $table->string('poste');
+            $table->foreignId('role_id')->constrained('roles');
             $table->decimal('salaire', 10, 2);
             $table->date('date_embauche');
             $table->timestamps();

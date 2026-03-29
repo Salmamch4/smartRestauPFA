@@ -30,7 +30,7 @@ class ForgotPasswordController extends Controller
 
         // Vérifier si l'email existe dans la table 'users'
         if (!$this->forgotPasswordRepo->emailExists($dto->email)) {
-            return response(['message' => 'Email does not exist.'], 404);
+            return response(['message' => 'Email does not exist.'], 400);
         }
 
         $this->forgotPasswordRepo->deleteExistingTokens($dto->email);
@@ -114,7 +114,7 @@ class ForgotPasswordController extends Controller
 
         DB::table('password_resets')->where('email', $email)->delete();//RepoForgot
 
-        // Générer un token aléatoire pour la réinitialisation //service
+        // Générer un token aléatoire pour la réinitialisation //RepoForgot
         $token = Str::random(50);
 
         // Insérer le token dans la table 'password_resets' //RepoForgot

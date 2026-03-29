@@ -7,68 +7,85 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AdminController;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 */
-// api.php - Tout en haut après les 'use'
-Route::delete('admin/destroy-client/{id}', [App\Http\Controllers\AdminController::class, 'deleteClient']);
-// --- Test de l'API ---
+
+// --- Test API ---
 Route::get('/test', function () {
     return response()->json(['message' => 'API is working properly']);
 });
 
-// --- Authentification & Inscription ---
+
+// =========================
+// AUTH
+// =========================
 Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register-client', [AuthController::class, 'registerClient']);
-    
-    Route::middleware('auth:api')->group(function () {
-        Route::post('/logout', [AuthController::class, 'logout']);
-        Route::post('/refresh', [AuthController::class, 'refresh']);
-        Route::get('/me', [AuthController::class, 'me']);
-    });
+    Route::post('/refresh', [AuthController::class, 'refreshToken']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+Route::patch('/password/reset-test/{token}', function($token){
+    return response()->json([
+        'message' => 'Route works!',
+        'token' => $token
+    ]);
 });
 
 
-// --- Mot de passe oublié ---
-
-Route::delete('/auth/test-logout', [\App\Http\Controllers\AuthController::class, 'logout']);
-
+// =========================
+// PASSWORD RESET
+// =========================
 Route::post('/password/forgot', [ForgotPasswordController::class, 'forgot'])->name('password.forgot');
 Route::patch('/password/reset/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
 
-// --- Espace Administrateur (Gestion & Stats) ---
-Route::prefix('admin')->group(function () {
-    Route::delete('clients/{id}', [AdminController::class, 'deleteClient']);
-    // 1. Statistiques du tableau de bord
-    Route::get('/stats', [AdminController::class, 'getStats']);
-    
-    // 2. Gestion des Clients
-    
-    Route::get('/clients', [AdminController::class, 'getClients']); // Liste globale pour Farah
-    Route::post('/clients/{id}/toggle', [AdminController::class, 'toggleClientStatus']); // Activer/Désactiver
-    // 3. Gestion des employés
-    Route::get('/employees', [AdminController::class, 'getEmployees']); 
-    Route::post('/employees', [AdminController::class, 'storeEmployee']); 
-    Route::put('/employees/{id}', [AdminController::class, 'updateEmployee']); 
-    Route::delete('/employees/{id}', [AdminController::class, 'deleteEmployee']); 
-    
-    
-});
 
+// =========================
+// ADMIN ROUTES
+// =========================
+Route::prefix('admin')
+    ->middleware('role:ADMIN')
+    ->group(function () {
+        Route::get('/stats', [AdminController::class, 'getStats']);
 
-Route::middleware('auth:api')
-    ->group(function (){
-        Route::delete('/auth/logout',[\App\Http\Controllers\AuthController::class,'logout'])->name('logout');
+        // Gestion clients
+        Route::get('/clients', [AdminController::class, 'getClients']);
+        Route::post('/clients/{id}/toggle', [AdminController::class, 'toggleClientStatus']);
+
+        // Gestion employés
+        Route::get('/employees', [AdminController::class, 'getEmployees']);
+        Route::post('/employees', [AdminController::class, 'storeEmployee']);
+        Route::put('/employees/{id}', [AdminController::class, 'updateEmployee']);
+        Route::delete('/employees/{id}', [AdminController::class, 'deleteEmployee']);
+
     });
 
 
-// --- Ressources CRUD standards (Hors Admin) ---
-Route::apiResource('roles', RoleController::class);
-Route::apiResource('clients', ClientController::class);
+// =========================
+// CLIENT ROUTES
+// =========================
+Route::prefix('client')
+    ->middleware('role:CLIENT')
+    ->group(function () {
+        Route::get('/profile', [ClientController::class, 'myProfile']);
+        Route::put('/profile', [ClientController::class, 'updateMyProfile']);
+        Route::put('/profile/full-update', [ClientController::class, 'fullUpdate']);
+        Route::post('/deactivate-account', [ClientController::class, 'deactivateMyAccount']);
+    });
 
-// Mise à jour complète d'un client
-Route::put('/clients/{id}/full-update', [ClientController::class, 'fullUpdate']);
+
+// =========================
+// ROLES (Admin only)
+// =========================
+Route::prefix('roles')
+    ->middleware('role:ADMIN')
+    ->group(function () {
+        Route::get('/', [RoleController::class, 'index']);
+        Route::post('/', [RoleController::class, 'store']);
+        Route::get('/{id}', [RoleController::class, 'show']);
+        Route::put('/{id}', [RoleController::class, 'update']);
+        Route::delete('/{id}', [RoleController::class, 'destroy']);
+    });

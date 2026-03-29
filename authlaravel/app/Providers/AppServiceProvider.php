@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+
 use App\Repositories\ForgotResetPasswordRepository\ForgotPasswordRepositoryInterface;
 use App\Repositories\ForgotResetPasswordRepository\ForgotPasswordRepository;
 use App\Repositories\ForgotResetPasswordRepository\ResetPasswordRepositoryInterface;
@@ -11,11 +12,14 @@ use App\Services\ForgotResetPasswordService\SendMailInterface;
 use App\Services\ForgotResetPasswordService\SendEmailService;
 use App\Services\ForgotResetPasswordService\TokenGeneratorInterface;
 use App\Services\ForgotResetPasswordService\RandomTokenService;
+use App\Services\Login\Contracts\IJwtService;
+use App\Services\Login\JwtService;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
+        $this->app->bind(IJwtService::class, JwtService::class);
         $this->app->bind(
             ForgotPasswordRepositoryInterface::class,
             ForgotPasswordRepository::class

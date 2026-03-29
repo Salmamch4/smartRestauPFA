@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\AccountRequest;
 use App\Models\Employee;
+use App\Models\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,45 +24,36 @@ class AdminController extends Controller
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
+ // --- GESTION DES CLIENTS ---
+    public function getClients()
+    {
+        return response()->json(
+            Client::with('user')->get()
+        );
+    }
 
-    // --- GESTION DES CLIENTS ---
-  // App/Http/Controllers/AdminController.php
+    public function toggleClientStatus($id)
+    {
+        $client = Client::findOrFail($id);
 
-public function getClients() {
-    return response()->json(\App\Models\Client::all()); // Récupère tout le monde
-}
+        $user = User::find($client->user_id);
 
-public function toggleClientStatus($id) {
-    $client = \App\Models\Client::findOrFail($id);
-    $client->is_active = !$client->is_active; // Alterne entre activé et désactivé
-    $client->save();
-    
-    // Optionnel : Envoyer email de désactivation ici
-    return response()->json(['message' => 'Statut mis à jour']);
-}
-
-public function deleteClient($id) {
-    try {
-        $client = \App\Models\Client::find($id);
-        if (!$client) {
-            return response()->json(['error' => 'Client introuvable'], 404);
+        if (!$user) {
+            return response()->json([
+                'message' => 'Utilisateur lié au client introuvable'
+            ], 404);
         }
 
-        $emailCible = $client->email;
-        $client->delete();
+        $user->is_active = !$user->is_active;
+        $user->save();
 
-        // Tentative d'envoi d'email (ne pas bloquer si erreur SMTP)
-        try {
-            \Mail::raw("Votre compte a été supprimé.", function ($message) use ($emailCible) {
-                $message->to($emailCible)->subject("Notification");
-            });
-        } catch (\Exception $e) {}
-
-        return response()->json(['message' => 'Client supprimé']);
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
+        return response()->json([
+            'message' => $user->is_active
+                ? 'Compte client réactivé avec succès'
+                : 'Compte client désactivé avec succès',
+            'is_active' => $user->is_active
+        ]);
     }
-}
     // --- GESTION DES EMPLOYÉS ---
     public function getEmployees() {
         return response()->json(Employee::all());
@@ -69,12 +61,14 @@ public function deleteClient($id) {
 
     public function storeEmployee(Request $request) {
         return DB::transaction(function () use ($request) {
+            $role_id = $request->role_id;
+
             $user = User::create([
                 'name' => $request->nom . ' ' . $request->prenom,
                 'email' => $request->email,
                 'telephone' => $request->telephone,
                 'password' => bcrypt('password123'),
-                'role_id' => 2,
+                'role_id' => $role_id,
                 'is_active' => true
             ]);
 
@@ -85,7 +79,7 @@ public function deleteClient($id) {
                 'telephone' => $request->telephone,
                 'adresse' => $request->adresse,
                 'email' => $request->email,
-                'poste' => $request->poste,
+                'role_id' => $role_id,
                 'salaire' => $request->salaire,
                 'date_embauche' => now(),
                 'created_at' => now(),

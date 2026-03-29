@@ -7,16 +7,16 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('nom')->unique();
             $table->timestamps();
         });
 
         // Seed initial roles
         DB::table('roles')->insert([
-            ['name' => 'CLIENT'],
-            ['name' => 'ADMIN'],
-            ['name' => 'SERVEUR'],
-            ['name' => 'CHEF_CUISINE'],
+            ['nom' => 'CLIENT'],
+            ['nom' => 'ADMIN'],
+            ['nom' => 'SERVEUR'],
+            ['nom' => 'CHEF_CUISINE'],
         ]);
     }
 

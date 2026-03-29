@@ -2,24 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
+    use HasFactory;
     protected $fillable = [
-        'user_id',
-        'nom',
-        'telephone',
-        'email',
-        'points_fidelite'
-    ];
-
-    // Client belongs to User
+    'user_id',
+    'nom',
+    'telephone',
+    'email',
+    'password',
+    'points_fidelite'
+];
     public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-    protected $primaryKey = 'user_id'; 
-public $incrementing = true;
-protected $keyType = 'int';
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
 }

@@ -9,33 +9,62 @@ class RoleController extends Controller
 {
     public function index()
     {
-        return Role::all();
+        return response()->json(Role::all(), 200);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'nom' => 'required|string|max:255'
         ]);
 
-        return Role::create($request->all());
+        $role = Role::create([
+            'nom' => $request->nom
+        ]);
+
+        return response()->json($role, 201);
     }
 
     public function show($id)
     {
-        return Role::findOrFail($id);
+        $role = Role::find($id);
+
+        if (!$role) {
+            return response()->json(['message' => 'Role not found'], 404);
+        }
+
+        return response()->json($role, 200);
     }
 
     public function update(Request $request, $id)
     {
-        $role = Role::findOrFail($id);
-        $role->update($request->all());
-        return $role;
+        $role = Role::find($id);
+
+        if (!$role) {
+            return response()->json(['message' => 'Role not found'], 404);
+        }
+
+        $request->validate([
+            'nom' => 'required|string|max:255'
+        ]);
+
+        $role->update([
+            'nom' => $request->nom
+        ]);
+
+        return response()->json($role, 200);
     }
 
     public function destroy($id)
     {
-        Role::destroy($id);
-        return response()->json(['message' => 'Deleted']);
+        $role = Role::find($id);
+
+        if (!$role) {
+            return response()->json(['message' => 'Role not found'], 404);
+        }
+
+        $role->delete();
+
+        return response()->json(['message' => 'Deleted successfully'], 200);
     }
 }
