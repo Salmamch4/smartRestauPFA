@@ -9,7 +9,7 @@ namespace MenuDotNetMS.Repositories.article
 
         public ArticleRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connectionString = configuration.GetConnectionString("menu");
         }
 
         // 🔹 GET ALL

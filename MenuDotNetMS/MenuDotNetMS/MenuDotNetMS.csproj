@@ -8,12 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.11" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.13.1" />
-<<<<<<< HEAD
-=======
-    <PackageReference Include="System.Data.SqlClient" Version="4.9.1" />
->>>>>>> 875a32e7ad14dea0aa538ac745878d8df51bbaea
   </ItemGroup>
 
   <ItemGroup>

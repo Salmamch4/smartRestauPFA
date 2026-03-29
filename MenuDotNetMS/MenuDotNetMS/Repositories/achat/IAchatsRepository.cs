@@ -5,6 +5,7 @@ namespace MenuDotNetMS.Repositories.achat
     public interface IAchatsRepository
     {
         bool Add(Achat achat);
+        bool AddMultiple(List<Achat> achats);
         List<Achat> GetAll();
         Achat GetById(Guid id);
         bool Update(Achat achat);

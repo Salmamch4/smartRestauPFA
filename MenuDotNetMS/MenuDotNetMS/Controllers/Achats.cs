@@ -2,6 +2,8 @@
 using MenuDotNetMS.Mappers;
 using MenuDotNetMS.Models;
 using MenuDotNetMS.Repositories.achat;
+using MenuDotNetMS.Repositories.article;      
+using MenuDotNetMS.Repositories.fournisseur;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MenuDotNetMS.Controllers
@@ -11,31 +13,51 @@ namespace MenuDotNetMS.Controllers
     public class AchatsController : ControllerBase
     {
         private readonly IAchatsRepository _repo;
+        private readonly IArticleRepository _articleRepo;      
+        private readonly IFournisseurRepository _fournisseurRepo;
 
-        public AchatsController(IAchatsRepository repo)
+        public AchatsController( IAchatsRepository repo, IArticleRepository articleRepo, IFournisseurRepository fournisseurRepo)  
         {
             _repo = repo;
+            _articleRepo = articleRepo;                
+            _fournisseurRepo = fournisseurRepo;        
         }
 
         [HttpPost]
-        public IActionResult Add(AchatAddDTORequest dto) //2024-12-25T15:30:00
+        public IActionResult Add(AchatAddDTORequest dto)
         {
             if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
+            if (dto.Articles == null || !dto.Articles.Any())
+                return BadRequest("Vous devez ajouter au moins un article");
+
+            foreach (var article in dto.Articles)
             {
-                return UnprocessableEntity();
+                var existingArticle = _articleRepo.GetById(article.IdArticle);
+                if (existingArticle == null)
+                    return BadRequest($"Article avec ID {article.IdArticle} non trouvé");
+
+                var existingFournisseur = _fournisseurRepo.GetById(article.IdFournisseur.ToString());
+                if (existingFournisseur == null)
+                    return BadRequest($"Fournisseur avec ID {article.IdFournisseur} non trouvé");
             }
 
-            Achat achat = AchatsMapper.ToModel(dto);
-            bool response = _repo.Add(achat);
+            var achats = AchatsMapper.ToModelList(dto);
+            bool response = _repo.AddMultiple(achats);
 
             if (response)
             {
-                var achatResponse = AchatsMapper.ToAddDTO(achat);
-                return CreatedAtAction(nameof(GetById), new { id = achat.Id }, achatResponse);
+                return Ok(new
+                {
+                    message = "Achat enregistré avec succès",
+                    nombreArticles = achats.Count
+                });
             }
 
-            return StatusCode(500, "Une erreur s'est produite lors de l'ajout de l'achat");
+            return StatusCode(500, "Erreur lors de l'ajout de l'achat");
         }
+
 
         [HttpGet("{id}")] //11111111-1111-1111-1111-111111111111
         public IActionResult GetById(Guid id)

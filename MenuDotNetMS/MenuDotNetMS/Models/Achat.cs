@@ -9,6 +9,8 @@
         public int QuantiteAchat { get; set; }
         public int QuantiteRestante { get; set; }//
         public decimal? PrixAchatUnitaire { get; set; }//
+        public string ArticleLibelle { get; set; }
+        public string FournisseurRaisonSocial { get; set; }
 
     }
 }

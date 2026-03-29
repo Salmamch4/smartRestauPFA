@@ -3,22 +3,31 @@ using MenuDotNetMS.Models;
 
 namespace MenuDotNetMS.Mappers
 {
-    public class AchatsMapper
+    public static class AchatsMapper
     {
-        public static Achat ToModel(AchatAddDTORequest dto)
+        //  TO MODEL ADD - Multiple articles
+        public static List<Achat> ToModelList(AchatAddDTORequest dto)
         {
-            return new Achat
+            var achats = new List<Achat>();
+
+            foreach (var article in dto.Articles)
             {
-                DateAchat = DateTime.Now,
-                IdArticle = dto.IdArticle,
-                IdFournisseur = dto.IdFournisseur,
-                QuantiteAchat =dto.QuantiteAchat,
-                QuantiteRestante = dto.QuantiteAchat,
-                PrixAchatUnitaire =dto.PrixAchatUnitaire,
-            };
-         }
+                achats.Add(new Achat
+                {
+                    Id = Guid.NewGuid(),
+                    DateAchat = dto.DateAchat,
+                    IdArticle = article.IdArticle,
+                    IdFournisseur = article.IdFournisseur,
+                    QuantiteAchat = article.QuantiteAchat,
+                    QuantiteRestante = article.QuantiteAchat,
+                    PrixAchatUnitaire = article.PrixAchatUnitaire
+                });
+            }
 
+            return achats;
+        }
 
+        // TO MODEL (UPDATE) 
         public static Achat ToModel(AchatUpdateDTORequest dto)
         {
             return new Achat
@@ -33,6 +42,7 @@ namespace MenuDotNetMS.Mappers
             };
         }
 
+        //  TO DTO (RESPONSE) 
         public static AchatAddDTOResponse ToAddDTO(Achat model)
         {
             return new AchatAddDTOResponse
@@ -44,11 +54,10 @@ namespace MenuDotNetMS.Mappers
                 QuantiteAchat = model.QuantiteAchat,
                 QuantiteRestante = model.QuantiteRestante,
                 PrixAchatUnitaire = model.PrixAchatUnitaire
-
             };
         }
 
-        public static AchatIndexDTOResponse ToIndexDTO(Achat model) 
+        public static AchatIndexDTOResponse ToIndexDTO(Achat model)
         {
             return new AchatIndexDTOResponse
             {
@@ -59,19 +68,17 @@ namespace MenuDotNetMS.Mappers
                 QuantiteAchat = model.QuantiteAchat,
                 QuantiteRestante = model.QuantiteRestante,
                 PrixAchatUnitaire = model.PrixAchatUnitaire
-
             };
-        
         }
 
+        // TO MODEL (Quantite Restante) 
         public static Achat ToModel(QuantiteRestanteUpdateDTORequest dto)
         {
             return new Achat
             {
                 Id = dto.Id,
                 QuantiteRestante = dto.NouvelleQuantiteRestante
-            };//
+            };
         }
-
     }
 }

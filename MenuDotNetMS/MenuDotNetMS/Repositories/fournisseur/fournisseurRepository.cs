@@ -1,5 +1,5 @@
 ﻿using MenuDotNetMS.Models;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 namespace MenuDotNetMS.Repositories.fournisseur
 {
     public class fournisseurRepository : IFournisseurRepository
@@ -9,7 +9,7 @@ namespace MenuDotNetMS.Repositories.fournisseur
         public fournisseurRepository(IConfiguration config)
         {
             this.config = config;
-            ConnString = config.GetConnectionString("DefaultConnection");
+            ConnString = config.GetConnectionString("menu");
         }
         public bool Add(fournisseurModel fr)
         {

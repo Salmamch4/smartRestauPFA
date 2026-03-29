@@ -5,26 +5,29 @@ namespace MenuDotNetMS.Repositories.achat
 {
     public class AchatsRepository : IAchatsRepository
     {
-        IConfiguration config;
+        private readonly IConfiguration _config;
+
         public AchatsRepository(IConfiguration config)
         {
-            this.config = config;
+            _config = config;
         }
 
-
-        public bool Add(Achat achat) 
-        { 
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+        // ADD SINGLE ARTICLE
+        public bool Add(Achat achat)
+        {
+            using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
             {
-                
                 cn.Open();
                 if (achat.Id == Guid.Empty)
                 {
                     achat.Id = Guid.NewGuid();
                 }
 
-                string query = @"INSERT INTO Achats (id, date_achat, id_article, id_fournisseur, Quantite_Achat, Quantite_Restante, prix_achatUnitaire) 
-                 VALUES (@Id, @DateAchat, @IdArticle, @IdFournisseur, @QuantiteAchat, @QuantiteRestante, @PrixAchatUnitaire)";
+                string query = @"INSERT INTO Achats 
+                    (id, date_achat, id_article, id_fournisseur, 
+                     Quantite_Achat, Quantite_Restante, prix_achatUnitaire) 
+                    VALUES (@Id, @DateAchat, @IdArticle, @IdFournisseur, 
+                            @QuantiteAchat, @QuantiteRestante, @PrixAchatUnitaire)";
 
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
@@ -34,28 +37,80 @@ namespace MenuDotNetMS.Repositories.achat
                     cmd.Parameters.AddWithValue("@IdFournisseur", achat.IdFournisseur);
                     cmd.Parameters.AddWithValue("@QuantiteAchat", achat.QuantiteAchat);
                     cmd.Parameters.AddWithValue("@QuantiteRestante", achat.QuantiteRestante);
-                    cmd.Parameters.AddWithValue("@PrixAchatUnitaire", achat.PrixAchatUnitaire ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@PrixAchatUnitaire",
+                        achat.PrixAchatUnitaire ?? (object)DBNull.Value);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }
-
-
-
             }
         }
+
+        // ADD MULTIPLE 
+        public bool AddMultiple(List<Achat> achats)
+        {
+            using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
+            {
+                cn.Open();
+                using (SqlTransaction transaction = cn.BeginTransaction())
+                {
+                    try
+                    {
+                        foreach (var achat in achats)
+                        {
+                            if (achat.Id == Guid.Empty)
+                            {
+                                achat.Id = Guid.NewGuid();
+                            }
+
+                            string query = @"INSERT INTO Achats 
+                                (id, date_achat, id_article, id_fournisseur, 
+                                 Quantite_Achat, Quantite_Restante, prix_achatUnitaire) 
+                                VALUES (@Id, @DateAchat, @IdArticle, @IdFournisseur, 
+                                        @QuantiteAchat, @QuantiteRestante, @PrixAchatUnitaire)";
+
+                            using (SqlCommand cmd = new SqlCommand(query, cn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@Id", achat.Id);
+                                cmd.Parameters.AddWithValue("@DateAchat", achat.DateAchat);
+                                cmd.Parameters.AddWithValue("@IdArticle", achat.IdArticle);
+                                cmd.Parameters.AddWithValue("@IdFournisseur", achat.IdFournisseur);
+                                cmd.Parameters.AddWithValue("@QuantiteAchat", achat.QuantiteAchat);
+                                cmd.Parameters.AddWithValue("@QuantiteRestante", achat.QuantiteRestante);
+                                cmd.Parameters.AddWithValue("@PrixAchatUnitaire",
+                                    achat.PrixAchatUnitaire ?? (object)DBNull.Value);
+
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // Mise à jour du stock
+                            UpdateStockArticle(cn, transaction, achat.IdArticle, achat.QuantiteAchat);
+                        }
+
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+
         public List<Achat> GetAll()
         {
             List<Achat> achats = new List<Achat>();
 
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+            using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
             {
                 cn.Open();
 
                 string query = @"SELECT id, date_achat, id_article, id_fournisseur, 
                                 Quantite_Achat, Quantite_Restante, prix_achatUnitaire 
                          FROM Achats 
-                         ORDER BY date_achat DESC"; 
+                         ORDER BY date_achat DESC";
 
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
@@ -63,17 +118,7 @@ namespace MenuDotNetMS.Repositories.achat
                     {
                         while (rd.Read())
                         {
-                            Achat achat = new Achat
-                            {
-                                Id = rd.GetGuid(rd.GetOrdinal("id")),
-                                DateAchat = DateTime.Parse(rd["date_achat"].ToString()),
-                                IdArticle = Guid.Parse(rd["id_article"].ToString()),
-                                IdFournisseur = Guid.Parse(rd["id_fournisseur"].ToString()),
-                                QuantiteAchat = int.Parse(rd["Quantite_Achat"].ToString()),
-                                QuantiteRestante = int.Parse(rd["Quantite_Restante"].ToString()),
-                                PrixAchatUnitaire = rd["prix_achatUnitaire"] == DBNull.Value ? null : decimal.Parse(rd["prix_achatUnitaire"].ToString())
-                            };
-                            achats.Add(achat);
+                            achats.Add(MapToAchat(rd));
                         }
                     }
                 }
@@ -81,9 +126,10 @@ namespace MenuDotNetMS.Repositories.achat
 
             return achats;
         }
+
         public Achat GetById(Guid id)
         {
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+            using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
             {
                 cn.Open();
 
@@ -100,18 +146,7 @@ namespace MenuDotNetMS.Repositories.achat
                     {
                         if (rd.Read())
                         {
-                            return new Achat
-                            {
-                                Id = rd.GetGuid(rd.GetOrdinal("id")),
-                                DateAchat = DateTime.Parse(rd["date_achat"].ToString()),
-                                IdArticle = Guid.Parse(rd["id_article"].ToString()),
-                                IdFournisseur = Guid.Parse(rd["id_fournisseur"].ToString()),
-                                QuantiteAchat = int.Parse(rd["Quantite_Achat"].ToString()),
-                                QuantiteRestante = int.Parse(rd["Quantite_Restante"].ToString()),
-                                PrixAchatUnitaire = rd["prix_achatUnitaire"] == DBNull.Value
-                                    ? null
-                                    : decimal.Parse(rd["prix_achatUnitaire"].ToString())
-                            };
+                            return MapToAchat(rd);
                         }
                     }
                 }
@@ -119,9 +154,10 @@ namespace MenuDotNetMS.Repositories.achat
 
             return null;
         }
+
         public bool Update(Achat achat)
         {
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+            using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
             {
                 cn.Open();
 
@@ -142,16 +178,18 @@ namespace MenuDotNetMS.Repositories.achat
                     cmd.Parameters.AddWithValue("@IdFournisseur", achat.IdFournisseur);
                     cmd.Parameters.AddWithValue("@QuantiteAchat", achat.QuantiteAchat);
                     cmd.Parameters.AddWithValue("@QuantiteRestante", achat.QuantiteRestante);
-                    cmd.Parameters.AddWithValue("@PrixAchatUnitaire", achat.PrixAchatUnitaire ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@PrixAchatUnitaire",
+                        achat.PrixAchatUnitaire ?? (object)DBNull.Value);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }
             }
         }
+
         public bool Delete(Guid id)
         {
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+            using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
             {
                 cn.Open();
 
@@ -166,11 +204,12 @@ namespace MenuDotNetMS.Repositories.achat
                 }
             }
         }
+
         public List<Achat> GetAchatsByArticle(Guid idArticle)
         {
             List<Achat> achats = new List<Achat>();
 
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+            using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
             {
                 cn.Open();
 
@@ -186,29 +225,20 @@ namespace MenuDotNetMS.Repositories.achat
                     {
                         while (rd.Read())
                         {
-                            Achat achat = new Achat
-                            {
-                                Id = rd.GetGuid(rd.GetOrdinal("id")),
-                                DateAchat = DateTime.Parse(rd["date_achat"].ToString()),
-                                IdArticle = Guid.Parse(rd["id_article"].ToString()),
-                                IdFournisseur = Guid.Parse(rd["id_fournisseur"].ToString()),
-                                QuantiteAchat = int.Parse(rd["Quantite_Achat"].ToString()),
-                                QuantiteRestante = int.Parse(rd["Quantite_Restante"].ToString()),
-                                PrixAchatUnitaire = rd["prix_achatUnitaire"] == DBNull.Value ? null : decimal.Parse(rd["prix_achatUnitaire"].ToString())
-                            };
-                            achats.Add(achat);
+                            achats.Add(MapToAchat(rd));
                         }
                     }
                 }
             }
 
             return achats;
-
         }
-        public List<Achat> GetAchatsByFournisseur(Guid idFournisseur) {
+
+        public List<Achat> GetAchatsByFournisseur(Guid idFournisseur)
+        {
             List<Achat> achats = new List<Achat>();
 
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+            using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
             {
                 cn.Open();
 
@@ -224,35 +254,26 @@ namespace MenuDotNetMS.Repositories.achat
                     {
                         while (rd.Read())
                         {
-                            Achat achat = new Achat
-                            {
-                                Id = rd.GetGuid(rd.GetOrdinal("id")),
-                                DateAchat = DateTime.Parse(rd["date_achat"].ToString()),
-                                IdArticle = Guid.Parse(rd["id_article"].ToString()),
-                                IdFournisseur = Guid.Parse(rd["id_fournisseur"].ToString()),
-                                QuantiteAchat = int.Parse(rd["Quantite_Achat"].ToString()),
-                                QuantiteRestante = int.Parse(rd["Quantite_Restante"].ToString()),
-                                PrixAchatUnitaire = rd["prix_achatUnitaire"] == DBNull.Value ? null : decimal.Parse(rd["prix_achatUnitaire"].ToString())
-                            };
-                            achats.Add(achat);
+                            achats.Add(MapToAchat(rd));
                         }
                     }
                 }
             }
 
             return achats;
-
         }
+
+        // ==================== UPDATE QUANTITE RESTANTE ====================
         public bool UpdateQuantiteRestante(Achat achat)
         {
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("menu")))
+            using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
             {
                 cn.Open();
 
                 string query = @"UPDATE Achats 
                         SET Quantite_Restante = @QuantiteRestante
                         WHERE id = @Id";
-//
+
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
                     cmd.Parameters.AddWithValue("@Id", achat.Id);
@@ -261,6 +282,36 @@ namespace MenuDotNetMS.Repositories.achat
                     int rowsAffected = cmd.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }
+            }
+        }
+
+        private Achat MapToAchat(SqlDataReader rd)
+        {
+            return new Achat
+            {
+                Id = rd.GetGuid(rd.GetOrdinal("id")),
+                DateAchat = rd.GetDateTime(rd.GetOrdinal("date_achat")),
+                IdArticle = rd.GetGuid(rd.GetOrdinal("id_article")),
+                IdFournisseur = rd.GetGuid(rd.GetOrdinal("id_fournisseur")),
+                QuantiteAchat = rd.GetInt32(rd.GetOrdinal("Quantite_Achat")),
+                QuantiteRestante = rd.GetInt32(rd.GetOrdinal("Quantite_Restante")),
+                PrixAchatUnitaire = rd.IsDBNull(rd.GetOrdinal("prix_achatUnitaire"))
+                    ? null
+                    : rd.GetDecimal(rd.GetOrdinal("prix_achatUnitaire"))
+            };
+        }
+
+        private void UpdateStockArticle(SqlConnection cn, SqlTransaction transaction, Guid articleId, int quantite)
+        {
+            string query = @"UPDATE Articles 
+                    SET Quantite_EnStock = Quantite_EnStock + @Quantite 
+                    WHERE id = @IdArticle";
+
+            using (SqlCommand cmd = new SqlCommand(query, cn, transaction))
+            {
+                cmd.Parameters.AddWithValue("@Quantite", quantite);
+                cmd.Parameters.AddWithValue("@IdArticle", articleId);
+                cmd.ExecuteNonQuery();
             }
         }
     }

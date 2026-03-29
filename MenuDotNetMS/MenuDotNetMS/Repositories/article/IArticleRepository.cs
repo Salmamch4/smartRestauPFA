@@ -8,8 +8,10 @@ namespace MenuDotNetMS.Repositories.article
 
         void Add(Article article);
 
-        void Update(Guid id, Article article);
+        void Update(Article article);
 
         void Delete(Guid id);
+
+        Article GetById(Guid id);
     }
 }
