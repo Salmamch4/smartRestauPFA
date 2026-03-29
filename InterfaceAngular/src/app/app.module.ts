@@ -14,8 +14,12 @@ import { HomeComponent } from './auth/components/home/home.component';
 import { AdminDashboardComponent } from './auth/components/admin-dashboard/admin-dashboard.component';
 
 // Autres Composants
-import { RolesComponent } from './roles/roles.component';
-import { ProfileComponent } from './profile/profile.component';
+import { RolesComponent } from './auth/components/roles/roles.component';
+import { ProfileComponent } from './auth/components/profile/profile.component';
+import { AddAchatsComponent } from './menu/components/achats/add-achats/add-achats.component';
+import { ListAchatsComponent } from './menu/components/achats/list-achats/list-achats.component';
+import { UpdateAchatsComponent } from './menu/components/achats/update-achats/update-achats.component';
+import { NavbarComponent } from './navbar/navbar/navbar.component';
 
 
 @NgModule({
@@ -30,8 +34,11 @@ import { ProfileComponent } from './profile/profile.component';
 
     RolesComponent,
     ProfileComponent,
-    AdminDashboardComponent
-    // J'ai supprimé le deuxième "RegisterComponent" qui créait une erreur
+    AdminDashboardComponent,
+    AddAchatsComponent,
+    ListAchatsComponent,
+    UpdateAchatsComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
