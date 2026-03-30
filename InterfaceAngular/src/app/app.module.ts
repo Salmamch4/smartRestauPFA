@@ -13,14 +13,18 @@ import { ResetPasswordComponent } from './auth/components/reset-password/reset-p
 import { HomeComponent } from './auth/components/home/home.component';
 import { AdminDashboardComponent } from './auth/components/admin-dashboard/admin-dashboard.component';
 
-import { CreateArticleComponent } from './menu/components/create-article/create-article.component';
-import { ArticleListComponent } from './menu/components/article-list/article-list.component';
-import { UpdateArticleComponent } from './menu/components/update-article/update-article.component';
+import { CreateArticleComponent } from './menu/components/articles/create-article/create-article.component';
+import { ArticleListComponent } from './menu/components/articles/article-list/article-list.component';
+import { UpdateArticleComponent } from './menu/components/articles/update-article/update-article.component';
 
-// AUTH (صلح حتى هادو)
-import { ProfileComponent } from './auth/components/profile/profile.component';
+// Autres Composants
 import { RolesComponent } from './auth/components/roles/roles.component';
-import { RouterModule } from '@angular/router';
+import { ProfileComponent } from './auth/components/profile/profile.component';
+import { AddAchatsComponent } from './menu/components/achats/add-achats/add-achats.component';
+import { ListAchatsComponent } from './menu/components/achats/list-achats/list-achats.component';
+import { UpdateAchatsComponent } from './menu/components/achats/update-achats/update-achats.component';
+import { NavbarComponent } from './navbar/navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -36,13 +40,15 @@ UpdateArticleComponent,
 
     RolesComponent,
     ProfileComponent,
-    AdminDashboardComponent
-    // J'ai supprimé le deuxième "RegisterComponent" qui créait une erreur
+    AdminDashboardComponent,
+    AddAchatsComponent,
+    ListAchatsComponent,
+    UpdateAchatsComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule,
 
     HttpClientModule,
     FormsModule,         
@@ -54,4 +60,3 @@ UpdateArticleComponent,
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-

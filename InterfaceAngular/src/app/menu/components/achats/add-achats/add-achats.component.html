@@ -1,0 +1,177 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">
+        <i class="bi bi-cart-plus"></i> Nouvel Achat
+      </h3>
+    </div>
+    
+    <div class="card-body">
+      <!-- Messages -->
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle"></i> {{ successMessage }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-triangle"></i> {{ errorMessage }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+
+      <!-- Date d'achat -->
+      <div class="mb-4">
+        <label class="form-label fw-bold">
+          <i class="bi bi-calendar"></i> Date d'achat
+        </label>
+        <input 
+          type="date" 
+          class="form-control w-25" 
+          [(ngModel)]="dateAchat"
+          name="dateAchat">
+      </div>
+
+      <hr>
+
+      <!-- Formulaire pour ajouter un article -->
+      <h4 class="mb-3">
+        <i class="bi bi-plus-circle"></i> Ajouter un article
+      </h4>
+      
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <label class="form-label">Article</label>
+          <select class="form-select" [(ngModel)]="selectedArticleId" name="selectedArticle">
+            <option value="">-- Sélectionner un article --</option>
+            <option *ngFor="let art of articles" [value]="art.id">
+              {{ art.libelle }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Fournisseur</label>
+          <select class="form-select" [(ngModel)]="selectedFournisseurId" name="selectedFournisseur">
+            <option value="">-- Sélectionner un fournisseur --</option>
+            <option *ngFor="let four of fournisseurs" [value]="four.id">
+              {{ four.raison_social }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label">Quantité</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            [(ngModel)]="quantite"
+            min="1">
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label">Prix unitaire (DH)</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            [(ngModel)]="prixUnitaire"
+            step="0.01"
+            placeholder="Facultatif">
+        </div>
+
+        <div class="col-md-1 d-flex align-items-end">
+          <button 
+            class="btn btn-primary w-100"
+            (click)="addArticleToList()">
+            <i class="bi bi-plus"></i> Ajouter
+          </button>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Liste des articles ajoutés -->
+      <h4 class="mb-3">
+        <i class="bi bi-list-check"></i> Articles à acheter
+        <span class="badge bg-secondary ms-2">{{ articlesList.length }} article(s)</span>
+      </h4>
+
+      <div *ngIf="articlesList.length === 0" class="alert alert-info text-center">
+        <i class="bi bi-info-circle"></i> Aucun article ajouté. Utilisez le formulaire ci-dessus.
+      </div>
+
+      <div *ngIf="articlesList.length > 0" class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Article</th>
+              <th>Fournisseur</th>
+              <th>Quantité</th>
+              <th>Prix unitaire</th>
+              <th>Total</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let article of articlesList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <strong>{{ getArticleLibelle(article.idArticle) }}</strong>
+              </td>
+              <td>{{ getFournisseurRaisonSocial(article.idFournisseur) }}</td>
+              <td style="width: 120px;">
+                <input 
+                  type="number" 
+                  class="form-control form-control-sm" 
+                  [(ngModel)]="article.quantiteAchat"
+                  (change)="updateQuantite(i, article.quantiteAchat)"
+                  min="1">
+              </td>
+              <td>{{ article.prixAchatUnitaire | currency:'DH' }}</td>
+              <td>
+                <strong>{{ (article.quantiteAchat * (article.prixAchatUnitaire || 0)) | currency:'DH' }}</strong>
+              </td>
+              <td>
+                <button 
+                  class="btn btn-sm btn-danger"
+                  (click)="removeArticle(i)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot class="table-secondary">
+            <tr>
+              <td colspan="5" class="text-end fw-bold">Total général:</td>
+              <td class="fw-bold">{{ getTotal() | currency:'DH' }}</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <hr>
+
+      <!-- Boutons d'action -->
+      <div class="d-flex gap-2 mt-3">
+        <button 
+          class="btn btn-success" 
+          [disabled]="loading || articlesList.length === 0"
+          (click)="onSubmit()">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          <i class="bi bi-check-lg"></i> Valider l'achat
+        </button>
+        
+        <button 
+          class="btn btn-secondary" 
+          (click)="resetForm()">
+          <i class="bi bi-arrow-repeat"></i> Réinitialiser
+        </button>
+        
+        <a 
+          routerLink="/achats/list" 
+          class="btn btn-link">
+          <i class="bi bi-list"></i> Voir tous les achats
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
-export interface CreateArticle {
+export interface Article {
+  id?: string;
   libelle: string;
   quantiteEnStock: number;
   seuilAlerte: number;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleService } from '../../core/services/article.service';
-import { Article } from '../../core/models/article.model';
+import { ArticleService } from '../../../services/article/article.service';
+import { Article } from '../../../models/article.model';
 
 @Component({
   selector: 'app-article-list',
@@ -16,16 +16,16 @@ export class ArticleListComponent implements OnInit {
     this.loadArticles();
   }
 
-  loadArticles(): void {
-    this.articleService.getArticles().subscribe({
-      next: data => this.articles = data,
-      error: err => console.error(err)
-    });
-  }
+ loadArticles(): void {
+  this.articleService.getAll().subscribe({
+    next: (data: Article[]) => this.articles = data,
+    error: (err: any) => console.error(err)
+  });
+}
 
   deleteArticle(id: string): void {
     if(confirm('Are you sure?')) {
-      this.articleService.deleteArticle(id).subscribe(() => {
+      this.articleService.delete(id).subscribe(() => {
         this.loadArticles();
       });
     }

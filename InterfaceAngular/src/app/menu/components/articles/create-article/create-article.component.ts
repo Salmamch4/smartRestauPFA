@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ArticleService } from '../../core/services/article.service';
-import { CreateArticle } from '../../core/models/create-article.model';
+import { ArticleService } from '../../../services/article/article.service';
+import { Article } from '../../../models/article.model';
 
 @Component({
   selector: 'app-create-article',
@@ -10,7 +10,7 @@ import { CreateArticle } from '../../core/models/create-article.model';
 })
 export class CreateArticleComponent {
 
-  article: CreateArticle = {
+  article: Article = {
     libelle: '',
     quantiteEnStock: 0,
     seuilAlerte: 0
@@ -24,7 +24,7 @@ export class CreateArticleComponent {
   createArticle(): void {
     console.log(this.article);
 
-    this.articleService.createArticle(this.article).subscribe({
+    this.articleService.create(this.article).subscribe({
       next: () => {
         alert('Article created!');
         this.router.navigate(['/articles']);
