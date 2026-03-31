@@ -13,6 +13,10 @@ import { ResetPasswordComponent } from './auth/components/reset-password/reset-p
 import { HomeComponent } from './auth/components/home/home.component';
 import { AdminDashboardComponent } from './auth/components/admin-dashboard/admin-dashboard.component';
 
+import { CreateArticleComponent } from './menu/components/articles/create-article/create-article.component';
+import { ArticleListComponent } from './menu/components/articles/article-list/article-list.component';
+import { UpdateArticleComponent } from './menu/components/articles/update-article/update-article.component';
+
 // Autres Composants
 import { RolesComponent } from './auth/components/roles/roles.component';
 import { ProfileComponent } from './auth/components/profile/profile.component';
@@ -29,7 +33,9 @@ import { NavbarComponent } from './navbar/navbar/navbar.component';
     RegisterComponent,
     ForgotPasswordComponent,
     HomeComponent,
-
+CreateArticleComponent,
+ArticleListComponent,
+UpdateArticleComponent,
     ResetPasswordComponent,
 
     RolesComponent,
@@ -54,4 +60,3 @@ import { NavbarComponent } from './navbar/navbar/navbar.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-

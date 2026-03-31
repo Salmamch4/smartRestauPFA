@@ -13,7 +13,9 @@ import { ListAchatsComponent } from './menu/components/achats/list-achats/list-a
 import { UpdateAchatsComponent } from './menu/components/achats/update-achats/update-achats.component';
 import { RolesComponent } from './auth/components/roles/roles.component';
 
-
+import { CreateArticleComponent } from './menu/components/articles/create-article/create-article.component';
+import { ArticleListComponent } from './menu/components/articles/article-list/article-list.component';
+import { UpdateArticleComponent } from './menu/components/articles/update-article/update-article.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -33,7 +35,11 @@ const routes: Routes = [
 // achats routes
   {path: 'add-achats', component: AddAchatsComponent},
   {path: 'list-achats', component: ListAchatsComponent},
-   { path: 'achats/update-achats/:id', component: UpdateAchatsComponent }  
+   { path: 'achats/update-achats/:id', component: UpdateAchatsComponent },  
+    { path: 'articles', component: ArticleListComponent },
+  { path: 'articles/create', component: CreateArticleComponent },
+  { path: 'articles/update/:id', component: UpdateArticleComponent },
+
  
 ];
 

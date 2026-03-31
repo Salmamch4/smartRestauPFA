@@ -42,11 +42,10 @@ export interface AchatUpdateRequest {
 }
 
 export interface Article {
-  id: string;
+  id?: string;
   libelle: string;
   quantiteEnStock: number;
   seuilAlerte: number;
-  dateCreation: string;
 }
 
 export interface Fournisseur {
@@ -57,5 +56,3 @@ export interface Fournisseur {
   adresse: string;
   date_creation: string;      
 }
-
-

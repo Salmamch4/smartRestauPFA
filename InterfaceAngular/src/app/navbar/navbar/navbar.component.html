@@ -50,12 +50,15 @@
           <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'articles'">
-          <a routerLink="/add-article" routerLinkActive="active">
-            <i class="fas fa-plus-circle"></i> Ajouter un article
-          </a>
-          <a routerLink="/list-articles" routerLinkActive="active">
-            <i class="fas fa-list"></i> Voir la liste
-          </a>
+         <!-- Ajouter un article -->
+<a routerLink="/articles/create">
+  <i class="bi bi-plus-circle"></i> Ajouter un article
+</a>
+
+<!-- Voir la liste -->
+<a routerLink="/articles">
+  <i class="bi bi-list"></i> Voir la liste
+</a>
         </div>
       </div>
 
