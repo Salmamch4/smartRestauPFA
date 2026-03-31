@@ -1,32 +1,42 @@
-.btn-group {
-  display: flex;
-  gap: 5px;
+/* Section */
+.section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  padding: 20px 0;
 }
 
-.btn-group .btn {
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 4px;
+/* Card */
+.card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
+.card-body {
+  padding: 20px;
+}
+
+/* Boutons */
 .btn-primary {
-  background-color: #0d6efd;
+  background-color: #ce1212;
   border: none;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0b5ed7;
+  background-color: #a00e0e;
+  transform: translateY(-1px);
 }
 
 .btn-warning {
   background-color: #ffc107;
   border: none;
-  color: #000;
+  color: #2c3e50;
 }
 
 .btn-warning:hover {
   background-color: #e0a800;
+  transform: translateY(-1px);
 }
 
 .btn-danger {
@@ -36,15 +46,130 @@
 }
 
 .btn-danger:hover {
-  background-color: #bb2d3b;
+  background-color: #c82333;
+  transform: translateY(-1px);
 }
 
-.table td {
+.btn-outline-secondary {
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Boutons d'action dans le tableau */
+.btn-group-sm {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.btn-group-sm .btn {
+  padding: 5px 10px;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+/* Badges */
+.badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.badge.bg-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.badge.bg-warning {
+  background-color: #ffc107;
+  color: #2c3e50;
+}
+
+.badge.bg-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Tableau */
+.table {
+  margin-bottom: 0;
+  font-size: 0.8rem;
+}
+
+.table thead th {
+  background-color: #2c3e50;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 10px 8px;
+  border: none;
+}
+
+.table tbody td {
+  padding: 8px;
   vertical-align: middle;
 }
 
-.badge {
+.table tbody tr:hover {
+  background-color: rgba(206, 18, 18, 0.05);
+}
+
+.table tfoot td {
+  background-color: #f8f9fa;
+  padding: 8px;
+  font-size: 0.75rem;
+}
+
+/* Alertes */
+.alert {
+  border-radius: 10px;
   font-size: 0.8rem;
-  padding: 5px 10px;
-  border-radius: 20px;
+  padding: 8px 12px;
+}
+
+/* Spinner */
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+  color: #ce1212;
+}
+
+/* Icônes */
+.bi {
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 12px;
+  }
+  
+  .table {
+    font-size: 0.7rem;
+  }
+  
+  .table thead th,
+  .table tbody td {
+    padding: 6px;
+  }
+  
+  .btn-group-sm .btn {
+    padding: 3px 6px;
+    font-size: 0.6rem;
+  }
+  
+  .badge {
+    font-size: 0.6rem;
+    padding: 3px 6px;
+  }
+  
+  .bi {
+    font-size: 0.7rem;
+  }
 }

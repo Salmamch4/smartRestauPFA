@@ -12,28 +12,25 @@ export interface AchatRequest {
 }
 
 // Pour la réponse (liste et détails)
-// Pour la réponse (liste et détails)
 export interface AchatResponse {
   id: string;
   dateAchat: string;
   idArticle: string;
-  articleLibelle: string;              // ✅ Ajouté
+  articleLibelle: string;              
   idFournisseur: string;
-  fournisseurRaisonSocial: string;     // ✅ Ajouté
-  fournisseurICE?: string;             // Optionnel
-  fournisseurTelephone?: string;       // Optionnel
+  fournisseurRaisonSocial: string;     
+  fournisseurICE?: string;             
+  fournisseurTelephone?: string;       
   quantiteAchat: number;
   quantiteRestante: number;
   prixAchatUnitaire: number | null;
 }
 
-// Pour la mise à jour de la quantité restante
 export interface QuantiteRestanteUpdate {
   id: string;
   nouvelleQuantiteRestante: number;
 }
 
-// Pour la mise à jour complète d'un achat
 export interface AchatUpdateRequest {
   id: string;
   dateAchat: string;

@@ -22,6 +22,9 @@ export class UpdateAchatsComponent implements OnInit {
   articles: Article[] = [];
   fournisseurs: Fournisseur[] = [];
   achatOriginal: AchatResponse | null = null;
+  
+  // Field errors (comme dans Login)
+  fieldErrors: { dateAchat?: string; article?: string; fournisseur?: string; quantiteAchat?: string; quantiteRestante?: string } = {};
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +35,7 @@ export class UpdateAchatsComponent implements OnInit {
     private router: Router
   ) {}
 
-ngOnInit(): void {
+  ngOnInit(): void {
     this.achatId = this.route.snapshot.paramMap.get('id') || '';
     console.log('ID de l\'achat à modifier:', this.achatId);
     
@@ -53,6 +56,12 @@ ngOnInit(): void {
       quantiteAchat: [0, [Validators.required, Validators.min(1)]],
       quantiteRestante: [0, [Validators.required, Validators.min(0)]],
       prixAchatUnitaire: [null]
+    });
+    
+    // Clear field errors when user types
+    this.updateForm.valueChanges.subscribe(() => {
+      this.fieldErrors = {};
+      this.errorMessage = '';
     });
   }
 
@@ -110,24 +119,51 @@ ngOnInit(): void {
     return date.toISOString().split('T')[0];
   }
 
-  getArticleLibelle(articleId: string): string {
-    const article = this.articles.find(a => a.id === articleId);
-    return article?.libelle || 'Article inconnu';
-  }
-
-  getFournisseurRaisonSocial(fournisseurId: string): string {
-    const fournisseur = this.fournisseurs.find(f => f.id === fournisseurId);
-    return fournisseur?.raison_social || 'Fournisseur inconnu';
+  // Validation en temps réel
+  validateQuantiteRestante(): void {
+    const quantiteAchat = this.updateForm.get('quantiteAchat')?.value;
+    const quantiteRestante = this.updateForm.get('quantiteRestante')?.value;
+    
+    if (quantiteRestante > quantiteAchat) {
+      this.fieldErrors.quantiteRestante = 'La quantité restante ne peut pas dépasser la quantité achetée';
+    } else if (quantiteRestante < 0) {
+      this.fieldErrors.quantiteRestante = 'La quantité restante ne peut pas être négative';
+    } else {
+      this.fieldErrors.quantiteRestante = '';
+    }
   }
 
   onSubmit(): void {
+    // Reset errors
+    this.fieldErrors = {};
+    this.errorMessage = '';
+    
+    // Validate form
     if (this.updateForm.invalid) {
+      if (this.updateForm.get('dateAchat')?.invalid) {
+        this.fieldErrors.dateAchat = 'La date d\'achat est requise';
+      }
+      if (this.updateForm.get('idArticle')?.invalid) {
+        this.fieldErrors.article = 'Veuillez sélectionner un article';
+      }
+      if (this.updateForm.get('idFournisseur')?.invalid) {
+        this.fieldErrors.fournisseur = 'Veuillez sélectionner un fournisseur';
+      }
+      if (this.updateForm.get('quantiteAchat')?.invalid) {
+        this.fieldErrors.quantiteAchat = 'La quantité doit être positive';
+      }
       this.errorMessage = 'Veuillez remplir tous les champs obligatoires';
+      return;
+    }
+    
+    // Validate quantity logic
+    this.validateQuantiteRestante();
+    if (this.fieldErrors.quantiteRestante) {
+      this.errorMessage = this.fieldErrors.quantiteRestante;
       return;
     }
 
     this.loading = true;
-    this.errorMessage = '';
     this.successMessage = '';
 
     const formValue = this.updateForm.value;
@@ -147,20 +183,46 @@ ngOnInit(): void {
       next: () => {
         this.loading = false;
         this.successMessage = '✅ Achat modifié avec succès!';
+        // ✅ Redirection vers la liste après 2 secondes
         setTimeout(() => {
-          this.router.navigate(['/achats/list']);
+          this.router.navigate(['/list-achats']);
         }, 2000);
       },
       error: (err) => {
         this.loading = false;
         console.error('Erreur:', err);
-        this.errorMessage = err.error?.message || '❌ Erreur lors de la modification';
+        
+        // Gestion des erreurs comme dans Login
+        if (err.status === 400) {
+          if (err.error?.message) {
+            this.errorMessage = err.error.message;
+          } else if (err.error?.errors) {
+            if (err.error.errors.idArticle) {
+              this.fieldErrors.article = err.error.errors.idArticle[0];
+            }
+            if (err.error.errors.idFournisseur) {
+              this.fieldErrors.fournisseur = err.error.errors.idFournisseur[0];
+            }
+            if (err.error.errors.quantiteAchat) {
+              this.fieldErrors.quantiteAchat = err.error.errors.quantiteAchat[0];
+            }
+            this.errorMessage = 'Erreur de validation';
+          } else {
+            this.errorMessage = 'Données invalides';
+          }
+        } else if (err.status === 404) {
+          this.errorMessage = 'Achat non trouvé';
+        } else if (err.status === 500) {
+          this.errorMessage = 'Erreur serveur. Réessayez plus tard.';
+        } else {
+          this.errorMessage = err.error?.message || '❌ Erreur lors de la modification';
+        }
       }
     });
   }
 
   canUpdateQuantiteRestante(): boolean {
-    if (!this.achatOriginal) return false;
+    if (!this.achatOriginal) return true;
     const newQuantiteRestante = this.updateForm.get('quantiteRestante')?.value;
     const quantiteAchat = this.updateForm.get('quantiteAchat')?.value;
     
@@ -173,7 +235,8 @@ ngOnInit(): void {
     return true;
   }
 
+  // Méthode pour revenir à la liste sans sauvegarder
   goBack(): void {
-    this.router.navigate(['/achats/list']);
+    this.router.navigate(['/list-achats']);
   }
 }

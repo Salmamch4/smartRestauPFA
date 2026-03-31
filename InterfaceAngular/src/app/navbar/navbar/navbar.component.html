@@ -17,7 +17,7 @@
         </a>
       </div>
 
-      <!-- ✅ NOUVEAU: Roles -->
+      <!--  NOUVEAU: Roles -->
       <div class="menu-item">
         <a routerLink="/role" routerLinkActive="active">
           <i class="fas fa-user-tag"></i>
@@ -151,13 +151,13 @@
       <div class="user-info">
         <i class="fas fa-user-circle"></i>
         <div>
-          <strong>Admin</strong>
-          <small>admin@menums.com</small>
+          <strong>{{ user?.name || 'Admin' }}</strong>
+        <small>{{ user?.email || 'admin@menums.com' }}</small>
         </div>
       </div>
-      <a href="#" class="logout-btn">
-        <i class="fas fa-sign-out-alt"></i> Déconnexion
-      </a>
+      <button (click)="logout()" class="logout-btn">
+      <i class="fas fa-sign-out-alt"></i> Déconnexion
+    </button>
     </div>
   </div>
 

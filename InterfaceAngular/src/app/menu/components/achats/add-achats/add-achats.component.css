@@ -1,45 +1,233 @@
-.card {
-  border-radius: 10px;
-  overflow: hidden;
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  padding: 40px 0;
 }
 
-.card-header {
-  padding: 15px 20px;
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .card-body {
-  padding: 25px;
+  padding: 35px;
+  background: white;
 }
 
+.section-header h2 {
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #ce1212;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.section-header .h1 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* Labels */
 .form-label {
-  font-weight: 500;
+  font-weight: 600;
+  color: #2c3e50;
   margin-bottom: 5px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.form-control:focus,
-.form-select:focus {
-  border-color: #0d6efd;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+/* Input groups petits */
+.input-group-sm .input-group-text {
+  padding: 5px 10px;
+  font-size: 0.75rem;
 }
 
-.btn {
-  padding: 8px 20px;
-  border-radius: 5px;
+.input-group-sm .form-control,
+.input-group-sm .form-select {
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  height: auto;
 }
 
-.table th, .table td {
+/* Bouton Ajouter petit */
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  border-radius: 50px;
+}
+
+.btn-primary {
+  background: #ce1212;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #a00e0e;
+  transform: translateY(-1px);
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #1e7e34;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  border-radius: 30px;
+}
+
+.btn-danger:hover {
+  background: #c82333;
+}
+
+.btn-link {
+  color: #ce1212;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-link:hover {
+  color: #a00e0e;
+  text-decoration: underline;
+}
+
+/* Tableau */
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 0.8rem;
+}
+
+.table thead th {
+  background: #2c3e50;
+  color: white;
+  font-weight: 600;
+  padding: 10px 12px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.table tbody td {
+  padding: 8px 12px;
   vertical-align: middle;
 }
 
 .table input {
+  width: 70px;
   text-align: center;
+  border-radius: 30px;
+  border: 1px solid #e0e0e0;
+  padding: 4px 8px;
+  font-size: 0.75rem;
 }
 
-.badge {
-  font-size: 0.9rem;
-  padding: 5px 10px;
+.table input:focus {
+  border-color: #ce1212;
+  outline: none;
 }
 
+.table-hover tbody tr:hover {
+  background-color: rgba(206, 18, 18, 0.05);
+}
+
+/* Alertes */
 .alert {
-  border-radius: 8px;
+  border-radius: 12px;
+  padding: 10px 15px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-left: 3px solid #28a745;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-left: 3px solid #dc3545;
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-left: 3px solid #17a2b8;
+}
+
+/* Badge */
+.badge {
+  padding: 4px 8px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* Séparateur */
+hr {
+  margin: 20px 0;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 20px;
+  }
+  
+  .row.g-2 > [class*="col-"] {
+    margin-bottom: 10px;
+  }
+  
+  .btn-sm {
+    width: 100%;
+  }
+}
+
+.spinner-border {
+  width: 1rem;
+  height: 1rem;
 }

@@ -1,3 +1,5 @@
+// src/app/admin-dashboard/admin-dashboard.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  
+
   // Onglet par défaut : Gestion des Clients
   public viewTab: string = 'manage_clients'; 
   public allEmployees: any[] = [];

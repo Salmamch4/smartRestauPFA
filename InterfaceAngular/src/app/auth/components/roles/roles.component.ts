@@ -17,34 +17,36 @@ export class RolesComponent implements OnInit {
     this.loadRoles();
   }
 
- loadRoles() {
+loadRoles() {
   this.roleService.getAll().subscribe((data: any) => {
-  this.roles = data.data ?? data;
-});
+    console.log('Data from API:', data); 
+    this.roles = data.data ?? data; 
+  }, (error) => {
+    console.error('Error loading roles:', error); 
+  });
 }
 
-  saveRole(): void {
-    if (!this.newRole.trim()) return;
+saveRole() {
+  if (!this.newRole.trim()) return;
+  const payload = { nom: this.newRole };
 
-    const payload = { name: this.newRole };
-
-    if (this.editId !== null) {
-      this.roleService.update(this.editId, payload).subscribe(() => {
-        this.resetForm();
-        this.loadRoles();
-      });
-    } else {
-      this.roleService.create(payload).subscribe(() => {
-        this.resetForm();
-        this.loadRoles();
-      });
-    }
+  if (this.editId !== null) {
+    this.roleService.update(this.editId, payload).subscribe(() => {
+      this.loadRoles();
+      this.resetForm();
+    });
+  } else {
+    this.roleService.create(payload).subscribe(() => {
+      this.loadRoles();
+      this.resetForm();
+    });
   }
+}
 
-  edit(role: any): void {
-    this.newRole = role.name;
-    this.editId = role.id;
-  }
+  edit(role: any) {
+  this.newRole = role.nom;
+  this.editId = role.id;
+}
 
   delete(id: number): void {
     this.roleService.delete(id).subscribe(() => {

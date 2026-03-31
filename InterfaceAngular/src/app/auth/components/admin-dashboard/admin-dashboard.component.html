@@ -1,4 +1,4 @@
-
+<!-- src/app/admin-dashboard/admin-dashboard.component.html -->
 
 <div class="container-fluid py-5" style="background-color: #f4f7f6; min-height: 100vh;">
   <div class="container">
@@ -10,6 +10,7 @@
       <p class="text-muted text-uppercase fw-bold" style="letter-spacing: 2px;">Tableau de Bord & Gestion</p>
     </div>
 
+    <!-- Buttons to navigate between tabs -->
     <div class="row g-4 mb-5 text-center">
       <div class="col-md-3">
         <div class="card shadow-sm border-0 p-4 h-100 btn-action" 
@@ -50,6 +51,7 @@
 
     <hr class="my-5" style="border-top: 2px dashed #ccc;">
 
+    <!-- Clients Management -->
     <div *ngIf="viewTab === 'manage_clients'" class="card shadow border-0 rounded-4 overflow-hidden">
       <div class="card-header bg-dark text-white py-3 font-monospace text-uppercase">Liste des Clients Enregistrés</div>
       <div class="table-responsive">
@@ -92,6 +94,7 @@
       </div>
     </div>
 
+    <!-- Add Employee -->
     <div *ngIf="viewTab === 'employee'" class="card shadow border-0 mx-auto rounded-4" style="max-width: 750px;">
       <div class="card-body p-5">
         <h3 class="text-center mb-4 fw-bold">Enregistrer un nouvel employé</h3>
@@ -115,6 +118,7 @@
       </div>
     </div>
 
+    <!-- Manage Employees -->
     <div *ngIf="viewTab === 'manage_employees'" class="card shadow border-0 rounded-4 overflow-hidden">
       <div class="card-header bg-dark text-white py-3 font-monospace text-uppercase">Liste des Employés</div>
       <div class="table-responsive">
@@ -145,9 +149,10 @@
               <td>
                   <button *ngIf="!emp.isEditing" class="btn btn-sm btn-outline-warning me-2" (click)="emp.isEditing = true">Modifier</button>
                   <button *ngIf="emp.isEditing" class="btn btn-sm btn-success me-2" (click)="updateEmployee(emp)">Sauvegarder</button>
-<button class="btn btn-sm btn-outline-danger" (click)="deleteEmployee(emp.user_id)">
-    Supprimer
-</button>              </td>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deleteEmployee(emp.user_id)">
+                    Supprimer
+                  </button>
+              </td>
             </tr>
             <tr *ngIf="allEmployees.length === 0"><td colspan="4" class="py-5 text-muted">Aucun employé enregistré.</td></tr>
           </tbody>
@@ -155,6 +160,7 @@
       </div>
     </div>
 
+    <!-- Stats -->
     <div *ngIf="viewTab === 'stats'" class="row g-4 justify-content-center">
       <div class="col-md-3">
         <div class="card border-0 shadow-sm p-4 text-center bg-white rounded-4 h-100">
@@ -174,11 +180,3 @@
 
   </div>
 </div>
-
-
-<style>
-  .btn-action { cursor: pointer; transition: 0.3s; border: 2px solid transparent; }
-  .btn-action:hover { transform: translateY(-5px); background: #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.05)!important; }
-  .active-card { border-color: #ce1212 !important; background: #fff !important; box-shadow: 0 5px 15px rgba(206, 18, 18, 0.1) !important; }
-  .form-control:focus, .form-select:focus { border-color: #ce1212; box-shadow: none; }
-</style>

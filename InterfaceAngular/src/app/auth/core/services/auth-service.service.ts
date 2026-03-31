@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-
+import { HttpHeaders } from '@angular/common/http';  // Ajoute cette ligne en haut de ton fichier
 export interface LoginRequest {
   telephone: string;
   password: string;
@@ -88,6 +88,30 @@ reset(token: string, password: string, password_confirmation: string): Observabl
     password_confirmation
   });
 }
+ getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');  // Récupère le token depuis le localStorage
+    return new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : ''
+    });
+  }
 
+  logout(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true })
+      .pipe(
+        tap(() => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+        }),
+        catchError(this.handleError)
+      );
+  }
 
+    isLoggedIn(): boolean {
+    return localStorage.getItem('token') !== null;
+  }
+
+   getCurrentUser(): any {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
 }

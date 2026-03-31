@@ -1,176 +1,192 @@
-<div class="container mt-4">
-  <div class="card shadow">
-    <div class="card-header bg-warning text-dark">
-      <h3 class="mb-0">
-        <i class="bi bi-pencil-square"></i> Modifier l'Achat
-      </h3>
-    </div>
-    
-    <div class="card-body">
-      <!-- Messages -->
-      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
-        <i class="bi bi-check-circle"></i> {{ successMessage }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      </div>
-      
-      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
-        <i class="bi bi-exclamation-triangle"></i> {{ errorMessage }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      </div>
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+            
+            <!-- Header -->
+            <div class="section-header text-center mb-4">
+              <h2 class="text-uppercase small text-muted">Modification</h2>
+              <p class="h1" style="font-family: 'Amatic SC', cursive;">
+                <i class="bi bi-pencil-square me-2" style="color: #ce1212;"></i> Modifier <span style="color: #ce1212;">l'Achat</span>
+              </p>
+            </div>
 
-      <!-- Loading -->
-      <div *ngIf="loading" class="text-center py-5">
-        <div class="spinner-border text-warning" role="status">
-          <span class="visually-hidden">Chargement...</span>
-        </div>
-        <p class="mt-2 text-muted">Chargement de l'achat...</p>
-      </div>
+            <!-- Messages -->
+            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+              <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+              <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+              <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+              <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+            </div>
 
-      <!-- Formulaire -->
-      <form *ngIf="!loading && updateForm" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
-        
-        <!-- ID (caché) -->
-        <input type="hidden" formControlName="id">
-
-        <!-- Date d'achat -->
-        <div class="mb-3">
-          <label for="dateAchat" class="form-label fw-bold">
-            <i class="bi bi-calendar"></i> Date d'achat
-          </label>
-          <input 
-            type="date" 
-            class="form-control" 
-            id="dateAchat" 
-            formControlName="dateAchat"
-            [class.is-invalid]="updateForm.get('dateAchat')?.invalid && updateForm.get('dateAchat')?.touched">
-          <div class="invalid-feedback">
-            La date d'achat est requise
-          </div>
-        </div>
-
-        <!-- Article -->
-        <div class="mb-3">
-          <label for="idArticle" class="form-label fw-bold">
-            <i class="bi bi-box"></i> Article
-          </label>
-          <select 
-            class="form-select" 
-            id="idArticle" 
-            formControlName="idArticle"
-            [class.is-invalid]="updateForm.get('idArticle')?.invalid && updateForm.get('idArticle')?.touched">
-            <option value="">-- Sélectionner un article --</option>
-            <option *ngFor="let art of articles" [value]="art.id">
-              {{ art.libelle }}
-            </option>
-          </select>
-          <div class="invalid-feedback">
-            L'article est requis
-          </div>
-        </div>
-
-        <!-- Fournisseur -->
-        <div class="mb-3">
-          <label for="idFournisseur" class="form-label fw-bold">
-            <i class="bi bi-building"></i> Fournisseur
-          </label>
-          <select 
-            class="form-select" 
-            id="idFournisseur" 
-            formControlName="idFournisseur"
-            [class.is-invalid]="updateForm.get('idFournisseur')?.invalid && updateForm.get('idFournisseur')?.touched">
-            <option value="">-- Sélectionner un fournisseur --</option>
-            <option *ngFor="let four of fournisseurs" [value]="four.id">
-              {{ four.raison_social }}
-            </option>
-          </select>
-          <div class="invalid-feedback">
-            Le fournisseur est requis
-          </div>
-        </div>
-
-        <!-- Quantités -->
-        <div class="row">
-          <div class="col-md-6">
-            <div class="mb-3">
-              <label for="quantiteAchat" class="form-label fw-bold">
-                <i class="bi bi-plus-circle"></i> Quantité achetée
-              </label>
-              <input 
-                type="number" 
-                class="form-control" 
-                id="quantiteAchat" 
-                formControlName="quantiteAchat"
-                [class.is-invalid]="updateForm.get('quantiteAchat')?.invalid && updateForm.get('quantiteAchat')?.touched">
-              <div class="invalid-feedback">
-                La quantité doit être positive
+            <!-- Loading -->
+            <div *ngIf="loading" class="text-center py-5">
+              <div class="spinner-border text-danger" role="status">
+                <span class="visually-hidden">Chargement...</span>
               </div>
+              <p class="mt-2 text-muted">Chargement de l'achat...</p>
             </div>
-          </div>
-          
-          <div class="col-md-6">
-            <div class="mb-3">
-              <label for="quantiteRestante" class="form-label fw-bold">
-                <i class="bi bi-arrow-repeat"></i> Quantité restante
-              </label>
-              <input 
-                type="number" 
-                class="form-control" 
-                id="quantiteRestante" 
-                formControlName="quantiteRestante"
-                [class.is-invalid]="!canUpdateQuantiteRestante()">
-              <div class="invalid-feedback" *ngIf="!canUpdateQuantiteRestante()">
-                La quantité restante ne peut pas dépasser la quantité achetée et doit être positive
+
+            <!-- Formulaire -->
+            <form *ngIf="!loading && updateForm" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+              
+              <input type="hidden" formControlName="id">
+
+              <!-- Date d'achat -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-calendar me-2" style="color: #ce1212;"></i> Date d'achat
+                </label>
+                <div class="input-group" [class.is-invalid]="fieldErrors.dateAchat">
+                  <span class="input-group-text bg-light"><i class="bi bi-calendar" style="color: #ce1212;"></i></span>
+                  <input 
+                    type="date" 
+                    class="form-control" 
+                    formControlName="dateAchat"
+                    [class.is-invalid]="fieldErrors.dateAchat">
+                </div>
+                <div *ngIf="fieldErrors.dateAchat" class="text-danger small mt-1">
+                  <i class="bi bi-exclamation-circle me-1"></i> {{ fieldErrors.dateAchat }}
+                </div>
               </div>
-            </div>
+
+              <!-- Article -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-box me-2" style="color: #ce1212;"></i> Article
+                </label>
+                <div class="input-group" [class.is-invalid]="fieldErrors.article">
+                  <span class="input-group-text bg-light"><i class="bi bi-box" style="color: #ce1212;"></i></span>
+                  <select 
+                    class="form-select" 
+                    formControlName="idArticle"
+                    [class.is-invalid]="fieldErrors.article">
+                    <option value="">-- Sélectionner un article --</option>
+                    <option *ngFor="let art of articles" [value]="art.id">{{ art.libelle }}</option>
+                  </select>
+                </div>
+                <div *ngIf="fieldErrors.article" class="text-danger small mt-1">
+                  <i class="bi bi-exclamation-circle me-1"></i> {{ fieldErrors.article }}
+                </div>
+              </div>
+
+              <!-- Fournisseur -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-truck me-2" style="color: #ce1212;"></i> Fournisseur
+                </label>
+                <div class="input-group" [class.is-invalid]="fieldErrors.fournisseur">
+                  <span class="input-group-text bg-light"><i class="bi bi-truck" style="color: #ce1212;"></i></span>
+                  <select 
+                    class="form-select" 
+                    formControlName="idFournisseur"
+                    [class.is-invalid]="fieldErrors.fournisseur">
+                    <option value="">-- Sélectionner un fournisseur --</option>
+                    <option *ngFor="let four of fournisseurs" [value]="four.id">{{ four.raison_social }}</option>
+                  </select>
+                </div>
+                <div *ngIf="fieldErrors.fournisseur" class="text-danger small mt-1">
+                  <i class="bi bi-exclamation-circle me-1"></i> {{ fieldErrors.fournisseur }}
+                </div>
+              </div>
+
+              <!-- Quantités -->
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-4">
+                    <label class="form-label fw-bold">
+                      <i class="bi bi-plus-circle me-2" style="color: #ce1212;"></i> Quantité achetée
+                    </label>
+                    <div class="input-group" [class.is-invalid]="fieldErrors.quantiteAchat">
+                      <span class="input-group-text bg-light"><i class="bi bi-hash" style="color: #ce1212;"></i></span>
+                      <input 
+                        type="number" 
+                        class="form-control" 
+                        formControlName="quantiteAchat"
+                        [class.is-invalid]="fieldErrors.quantiteAchat"
+                        (input)="validateQuantiteRestante()">
+                    </div>
+                    <div *ngIf="fieldErrors.quantiteAchat" class="text-danger small mt-1">
+                      <i class="bi bi-exclamation-circle me-1"></i> {{ fieldErrors.quantiteAchat }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-4">
+                    <label class="form-label fw-bold">
+                      <i class="bi bi-arrow-repeat me-2" style="color: #ce1212;"></i> Quantité restante
+                    </label>
+                    <div class="input-group" [class.is-invalid]="fieldErrors.quantiteRestante">
+                      <span class="input-group-text bg-light"><i class="bi bi-hash" style="color: #ce1212;"></i></span>
+                      <input 
+                        type="number" 
+                        class="form-control" 
+                        formControlName="quantiteRestante"
+                        [class.is-invalid]="fieldErrors.quantiteRestante"
+                        (input)="validateQuantiteRestante()">
+                    </div>
+                    <div *ngIf="fieldErrors.quantiteRestante" class="text-danger small mt-1">
+                      <i class="bi bi-exclamation-circle me-1"></i> {{ fieldErrors.quantiteRestante }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Prix unitaire -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-currency-dollar me-2" style="color: #ce1212;"></i> Prix unitaire (DH)
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light"><i class="bi bi-currency-dollar" style="color: #ce1212;"></i></span>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    formControlName="prixAchatUnitaire"
+                    step="0.01"
+                    placeholder="Facultatif">
+                </div>
+              </div>
+
+              <!-- Informations supplémentaires -->
+              <div class="alert alert-info mt-3" *ngIf="achatOriginal">
+                <div class="row">
+                  <div class="col-md-6">
+                    <strong><i class="bi bi-graph-up me-2"></i>Quantité utilisée:</strong> 
+                    {{ achatOriginal.quantiteAchat - achatOriginal.quantiteRestante }}
+                  </div>
+                  <div class="col-md-6">
+                    <strong><i class="bi bi-calculator me-2"></i>Total:</strong> 
+                    {{ (achatOriginal.quantiteAchat * (achatOriginal.prixAchatUnitaire || 0)) | currency:'DH' }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Boutons d'action -->
+              <div class="d-flex gap-3 justify-content-center mt-4">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary px-4" 
+                  [disabled]="loading || !updateForm.valid || !canUpdateQuantiteRestante()">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                  <i class="bi bi-save me-2"></i> Mettre à jour
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-secondary px-4" 
+                  (click)="goBack()">
+                  <i class="bi bi-arrow-left me-2"></i> Annuler
+                </button>
+              </div>
+
+            </form>
           </div>
         </div>
-
-        <!-- Prix unitaire -->
-        <div class="mb-3">
-          <label for="prixAchatUnitaire" class="form-label fw-bold">
-            <i class="bi bi-currency-dollar"></i> Prix unitaire (DH)
-          </label>
-          <input 
-            type="number" 
-            class="form-control" 
-            id="prixAchatUnitaire" 
-            formControlName="prixAchatUnitaire"
-            step="0.01"
-            placeholder="Facultatif">
-        </div>
-
-        <!-- Informations supplémentaires (affichage) -->
-        <div class="alert alert-info mt-3" *ngIf="achatOriginal">
-          <div class="row">
-            <div class="col-md-6">
-              <strong>Quantité utilisée:</strong> 
-              {{ achatOriginal.quantiteAchat - achatOriginal.quantiteRestante }}
-            </div>
-            <div class="col-md-6">
-              <strong>Total:</strong> 
-              {{ (achatOriginal.quantiteAchat * (achatOriginal.prixAchatUnitaire || 0)) | currency:'DH' }}
-            </div>
-          </div>
-        </div>
-
-        <!-- Boutons d'action -->
-        <div class="d-flex gap-2 mt-4">
-          <button 
-            type="submit" 
-            class="btn btn-warning" 
-            [disabled]="loading || !updateForm.valid || !canUpdateQuantiteRestante()">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
-            <i class="bi bi-save"></i> Mettre à jour
-          </button>
-          
-          <button 
-            type="button" 
-            class="btn btn-secondary" 
-            (click)="goBack()">
-            <i class="bi bi-arrow-left"></i> Annuler
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
-</div>
+</section>

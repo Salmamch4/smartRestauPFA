@@ -21,6 +21,11 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Redirect if already logged in
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/admin-dashboard']);
+    }
+
     this.loginForm = this.fb.group({
       telephone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       password: ['', Validators.required]
@@ -47,10 +52,12 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         this.loading = false;
         console.log('Login successful!', response);
-
-
-        alert('Login successful!');
-        // this.router.navigate(['/home']);
+        
+        // Show success message
+        this.showMessage('Connexion réussie!', 'success');
+        
+        // Redirect to dashboard
+        this.router.navigate(['/admin-dashboard']);
       },
       error: (error) => {
         this.loading = false;
@@ -58,9 +65,7 @@ export class LoginComponent implements OnInit {
 
         // Handle different error types
         if (error.status === 401) {
-          // Check if it's a field-specific error
           if (error.error?.errors) {
-            // Laravel validation errors
             if (error.error.errors.telephone) {
               this.fieldErrors.telephone = error.error.errors.telephone[0];
             }
@@ -68,13 +73,11 @@ export class LoginComponent implements OnInit {
               this.fieldErrors.password = error.error.errors.password[0];
             }
           } else {
-            // General error message
-            this.errorMessage = error.error?.error || 'Invalid phone number or password';
+            this.errorMessage = error.error?.error || 'Numéro de téléphone ou mot de passe incorrect';
           }
         } else if (error.status === 0) {
-          this.errorMessage = 'Server unavailable. Make sure Laravel is running (php artisan serve)';
+          this.errorMessage = 'Serveur indisponible. Vérifiez que Laravel est démarré (php artisan serve)';
         } else if (error.status === 422) {
-          // Validation errors
           if (error.error?.errors) {
             if (error.error.errors.telephone) {
               this.fieldErrors.telephone = error.error.errors.telephone[0];
@@ -84,10 +87,15 @@ export class LoginComponent implements OnInit {
             }
           }
         } else {
-          this.errorMessage = 'An error occurred. Please try again';
+          this.errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
         }
       }
     });
+  }
+
+  showMessage(message: string, type: string): void {
+    // You can implement a toast/notification service here
+    alert(message);
   }
 
   get telephone() { return this.loginForm.get('telephone'); }
