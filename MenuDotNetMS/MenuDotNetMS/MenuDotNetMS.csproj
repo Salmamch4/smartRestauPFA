@@ -13,9 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="DTOs\achat\" />
-    <Folder Include="Mappers\" />
     <Folder Include="Repositories\achat\" />
     <Folder Include="Services\achat\" />
   </ItemGroup>

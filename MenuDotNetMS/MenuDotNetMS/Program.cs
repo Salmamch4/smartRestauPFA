@@ -1,5 +1,6 @@
 using MenuDotNetMS.Repositories.achat;//
 using MenuDotNetMS.Repositories.article;
+using MenuDotNetMS.Repositories.categorie;
 using MenuDotNetMS.Repositories.fournisseur;
 using Scalar.AspNetCore;
 
@@ -14,7 +15,7 @@ builder.Services.AddScoped<IFournisseurRepository, fournisseurRepository>();
 builder.Services.AddOpenApi();//
 builder.Services.AddScoped<IAchatsRepository, AchatsRepository>();//
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
-
+builder.Services.AddScoped<ICategorieRepository, CategorieRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
