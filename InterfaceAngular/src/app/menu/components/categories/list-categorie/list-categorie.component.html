@@ -1,0 +1,73 @@
+<section class="section">
+  <div class="container">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-body p-5">
+
+        <!-- Header -->
+        <div class="section-header text-center mb-4">
+          <h2 class="text-uppercase small text-muted">Gestion des Catégories</h2>
+          <p class="h1" style="font-family: 'Amatic SC', cursive;">
+            Liste des <span style="color: #ce1212;">Catégories</span>
+          </p>
+        </div>
+
+        <!-- Messages -->
+        <div *ngIf="successMessage" class="alert alert-success">
+          <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+        </div>
+
+        <!-- Bouton Ajouter -->
+        <div class="d-flex justify-content-end mb-3">
+          <a routerLink="/add-categorie" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-2"></i> Ajouter une catégorie
+          </a>
+        </div>
+
+        <!-- Loading -->
+        <div *ngIf="loading" class="text-center py-4">
+          <div class="spinner-border" style="color: #ce1212;"></div>
+        </div>
+
+        <!-- Tableau -->
+        <div *ngIf="!loading" class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Libellé</th>
+                <th>Description</th>
+                <th class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="categories.length === 0">
+                <td colspan="4" class="text-center">
+                  <div class="alert alert-info mb-0">
+                    <i class="bi bi-info-circle me-2"></i> Aucune catégorie trouvée.
+                  </div>
+                </td>
+              </tr>
+              <tr *ngFor="let cat of categories; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td><strong>{{ cat.libelle }}</strong></td>
+                <td>{{ cat.description || '-' }}</td>
+                <td class="text-center">
+                  <a [routerLink]="['/add-categorie']" class="btn btn-sm btn-warning me-2">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <button class="btn btn-sm btn-danger" (click)="delete(cat.id)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

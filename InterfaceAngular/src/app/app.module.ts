@@ -24,6 +24,8 @@ import { AddAchatsComponent } from './menu/components/achats/add-achats/add-acha
 import { ListAchatsComponent } from './menu/components/achats/list-achats/list-achats.component';
 import { UpdateAchatsComponent } from './menu/components/achats/update-achats/update-achats.component';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
+import { AddCategorieComponent } from './menu/components/categories/add-categorie/add-categorie.component';
+import { ListCategorieComponent } from './menu/components/categories/list-categorie/list-categorie.component';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ UpdateArticleComponent,
     ListAchatsComponent,
     UpdateAchatsComponent,
     NavbarComponent,
+    AddCategorieComponent,
+    ListCategorieComponent,
   ],
   imports: [
     BrowserModule,
