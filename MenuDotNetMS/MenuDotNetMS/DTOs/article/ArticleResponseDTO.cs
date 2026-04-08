@@ -9,5 +9,7 @@
         public int QuantiteEnStock { get; set; }
 
         public int SeuilAlerte { get; set; }
+        public string Unite { get; set; }
+
     }
 }

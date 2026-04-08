@@ -19,7 +19,8 @@ namespace MenuDotNetMS.Repositories.article
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT Id, Libelle, Quantite_EnStock, SeuilAlerte, DateCreation FROM Articles";
+                string query = @"SELECT Id, Libelle, Quantite_EnStock, SeuilAlerte, Unite, DateCreation 
+                                 FROM Articles";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
@@ -34,6 +35,7 @@ namespace MenuDotNetMS.Repositories.article
                         Libelle = reader["Libelle"].ToString(),
                         QuantiteEnStock = Convert.ToInt32(reader["Quantite_EnStock"]),
                         SeuilAlerte = Convert.ToInt32(reader["SeuilAlerte"]),
+                        Unite = reader["Unite"].ToString(), 
                         DateCreation = Convert.ToDateTime(reader["DateCreation"])
                     });
                 }
@@ -51,7 +53,9 @@ namespace MenuDotNetMS.Repositories.article
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT Id, Libelle, Quantite_EnStock, SeuilAlerte, DateCreation FROM Articles WHERE Id=@Id";
+                string query = @"SELECT Id, Libelle, Quantite_EnStock, SeuilAlerte, Unite, DateCreation 
+                                 FROM Articles 
+                                 WHERE Id=@Id";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", id);
@@ -68,6 +72,7 @@ namespace MenuDotNetMS.Repositories.article
                         Libelle = reader["Libelle"].ToString(),
                         QuantiteEnStock = Convert.ToInt32(reader["Quantite_EnStock"]),
                         SeuilAlerte = Convert.ToInt32(reader["SeuilAlerte"]),
+                        Unite = reader["Unite"].ToString(), 
                         DateCreation = Convert.ToDateTime(reader["DateCreation"])
                     };
                 }
@@ -84,9 +89,9 @@ namespace MenuDotNetMS.Repositories.article
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 string query = @"INSERT INTO Articles 
-                                 (Id, Libelle, Quantite_EnStock, SeuilAlerte, DateCreation) 
+                                 (Id, Libelle, Quantite_EnStock, SeuilAlerte, Unite, DateCreation) 
                                  VALUES 
-                                 (@Id, @Libelle, @QuantiteEnStock, @SeuilAlerte, GETDATE())";
+                                 (@Id, @Libelle, @QuantiteEnStock, @SeuilAlerte, @Unite, GETDATE())";
 
                 SqlCommand command = new SqlCommand(query, connection);
 
@@ -94,13 +99,14 @@ namespace MenuDotNetMS.Repositories.article
                 command.Parameters.AddWithValue("@Libelle", article.Libelle);
                 command.Parameters.AddWithValue("@QuantiteEnStock", article.QuantiteEnStock);
                 command.Parameters.AddWithValue("@SeuilAlerte", article.SeuilAlerte);
+                command.Parameters.AddWithValue("@Unite", article.Unite); 
 
                 connection.Open();
                 command.ExecuteNonQuery();
             }
         }
 
-        // 🔹 UPDATE (مهم بزاف 🔥)
+        // 🔹 UPDATE
         public void Update(Article article)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -109,7 +115,8 @@ namespace MenuDotNetMS.Repositories.article
                                  SET 
                                  Libelle = @Libelle,
                                  Quantite_EnStock = @QuantiteEnStock,
-                                 SeuilAlerte = @SeuilAlerte
+                                 SeuilAlerte = @SeuilAlerte,
+                                 Unite = @Unite
                                  WHERE Id = @Id";
 
                 SqlCommand command = new SqlCommand(query, connection);
@@ -118,7 +125,7 @@ namespace MenuDotNetMS.Repositories.article
                 command.Parameters.AddWithValue("@Libelle", article.Libelle);
                 command.Parameters.AddWithValue("@QuantiteEnStock", article.QuantiteEnStock);
                 command.Parameters.AddWithValue("@SeuilAlerte", article.SeuilAlerte);
-
+                command.Parameters.AddWithValue("@Unite", article.Unite); 
                 connection.Open();
                 command.ExecuteNonQuery();
             }

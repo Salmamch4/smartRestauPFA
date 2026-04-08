@@ -11,6 +11,7 @@ public static class ArticleMapper
             Libelle = dto.Libelle,
             QuantiteEnStock = dto.QuantiteEnStock,
             SeuilAlerte = dto.SeuilAlerte,
+            Unite = dto.Unite,
             DateCreation = DateTime.Now
         };
     }

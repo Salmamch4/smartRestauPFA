@@ -24,6 +24,18 @@ namespace MenuDotNetMS.Controllers
             return Ok(articles);
         }
 
+        // ✅ 🔥 GET BY ID (هذا كان ناقص وهو سبب المشكل)
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            var article = _repository.GetById(id);
+
+            if (article == null)
+                return NotFound();
+
+            return Ok(article);
+        }
+
         // 🔹 CREATE
         [HttpPost]
         public IActionResult Create([FromBody] ArticleCreateDTO dto)
@@ -38,7 +50,7 @@ namespace MenuDotNetMS.Controllers
             return Ok(article);
         }
 
-        // 🔹 UPDATE (🔥 الحل الحقيقي ديالك)
+        // 🔹 UPDATE
         [HttpPut("{id}")]
         public IActionResult Update(Guid id, [FromBody] ArticleCreateDTO dto)
         {
@@ -50,10 +62,10 @@ namespace MenuDotNetMS.Controllers
             if (existing == null)
                 return NotFound();
 
-            // تحديث القيم فقط
             existing.Libelle = dto.Libelle;
             existing.QuantiteEnStock = dto.QuantiteEnStock;
             existing.SeuilAlerte = dto.SeuilAlerte;
+            existing.Unite = dto.Unite;
 
             _repository.Update(existing);
 

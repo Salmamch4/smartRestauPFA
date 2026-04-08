@@ -13,6 +13,8 @@ namespace MenuDotNetMS.models
         public int QuantiteEnStock { get; set; }
 
         public int SeuilAlerte { get; set; }
+        public string Unite { get; set; }
+
 
         public DateTime DateCreation { get; set; }
     }
