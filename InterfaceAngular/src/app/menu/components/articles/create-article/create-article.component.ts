@@ -10,10 +10,14 @@ import { Article } from '../../../models/article.model';
 })
 export class CreateArticleComponent {
 
+  successMessage = '';
+  errorMessage = '';
+
   article: Article = {
     libelle: '',
     quantiteEnStock: 0,
-    seuilAlerte: 0
+    seuilAlerte: 0,
+    unite: ''
   };
 
   constructor(
@@ -22,16 +26,38 @@ export class CreateArticleComponent {
   ) {}
 
   createArticle(): void {
-    console.log(this.article);
+
+    console.log("DATA SENT 👉", this.article); // مهم debug
 
     this.articleService.create(this.article).subscribe({
-      next: () => {
-        alert('Article created!');
-        this.router.navigate(['/articles']);
+      next: (res) => {
+        console.log("SUCCESS ✅", res);
+
+        this.successMessage = 'Article créé avec succès ✅';
+        this.errorMessage = '';
+
+        this.resetForm();
+
+        setTimeout(() => {
+          this.router.navigate(['/articles']);
+        }, 1000);
       },
+
       error: (err) => {
-        console.error('ERROR:', err);
+        console.error("ERROR ❌", err);
+
+        this.errorMessage = 'Erreur création ❌';
+        this.successMessage = '';
       }
     });
+  }
+
+  resetForm(): void {
+    this.article = {
+      libelle: '',
+      quantiteEnStock: 0,
+      seuilAlerte: 0,
+      unite: ''
+    };
   }
 }

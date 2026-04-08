@@ -1,48 +1,149 @@
-<div class="container mt-4">
+<section class="section">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-3 p-md-4">
 
-  <h2 class="mb-3">Liste des articles</h2>
+            <!-- Header -->
+            <div class="text-center mb-3">
+              <h2 class="text-uppercase small text-muted mb-1">Gestion des Articles</h2>
+              <h3 class="mb-0" style="font-family: 'Amatic SC', cursive; color: #2c3e50;">
+                <i class="bi bi-box-seam me-2" style="color: #ce1212;"></i> 
+                Liste des <span style="color: #ce1212;">Articles</span>
+              </h3>
+            </div>
 
-  <a routerLink="/articles/create" class="btn btn-success mb-3">
-    + Ajouter Article
-  </a>
+            <!-- Messages -->
+            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show py-2 mb-3">
+              {{ successMessage }}
+              <button type="button" class="btn-close btn-sm" (click)="successMessage=''"></button>
+            </div>
 
-  <table class="table table-bordered table-hover text-center">
-    
-    <thead class="table-dark">
-      <tr>
-        <th>Libelle</th>
-        <th>Stock</th>
-        <th>Seuil</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show py-2 mb-3">
+              {{ errorMessage }}
+              <button type="button" class="btn-close btn-sm" (click)="errorMessage=''"></button>
+            </div>
 
-    <tbody>
-      <tr *ngFor="let article of articles">
-        <td>{{ article.libelle }}</td>
-        <td>{{ article.quantiteEnStock }}</td>
-        <td>{{ article.seuilAlerte }}</td>
+            <!-- Actions -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
 
-        <td>
-          <!-- ❌ كان غلط -->
-          <!-- /update-article -->
+              <!-- Search -->
+              <div class="input-group" style="max-width: 300px;">
+                <span class="input-group-text bg-light">
+                  <i class="bi bi-search" style="color: #ce1212;"></i>
+                </span>
+                <input 
+                  type="text" 
+                  class="form-control form-control-sm" 
+                  placeholder="Filtrer..." 
+                  [(ngModel)]="filterText">
+              </div>
 
-          <!-- ✅ الصحيح -->
-          <a 
-            [routerLink]="['/articles/update', article.id]" 
-            class="btn btn-sm btn-primary me-2">
-            Edit
-          </a>
+              <!-- Buttons -->
+              <div>
+                <button class="btn btn-outline-secondary btn-sm me-2" (click)="loadArticles()">
+                  <i class="bi bi-arrow-repeat"></i> Rafraîchir
+                </button>
 
-          <button 
-            (click)="deleteArticle(article.id!)" 
-            class="btn btn-sm btn-danger">
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
+                <a routerLink="/articles/create" class="btn btn-primary btn-sm rounded-pill px-3">
+                  <i class="bi bi-plus-circle me-1"></i> Nouvel Article
+                </a>
+              </div>
 
-  </table>
+            </div>
 
-</div>
+            <!-- Loading -->
+            <div *ngIf="loading" class="text-center py-4">
+              <div class="spinner-border text-danger"></div>
+              <p class="mt-2 text-muted small">Chargement...</p>
+            </div>
+
+            <!-- Empty -->
+            <div *ngIf="!loading && filteredArticles.length === 0" class="alert alert-info text-center">
+              Aucun article trouvé
+            </div>
+
+            <!-- Table -->
+            <div *ngIf="!loading && filteredArticles.length > 0" class="table-responsive">
+              <table class="table table-sm table-bordered table-hover align-middle">
+
+                <thead class="table-dark">
+                  <tr class="text-center">
+                    <th>Libelle</th>
+                    <th>Stock</th>
+                    <th>Seuil</th>
+                    <th>Unité</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let article of filteredArticles">
+
+                    <td><strong>{{ article.libelle }}</strong></td>
+
+                    <td class="text-end">{{ article.quantiteEnStock }}</td>
+
+                    <td class="text-end">{{ article.seuilAlerte }}</td>
+
+                    <td class="text-center">{{ article.unite }}</td>
+
+                    <!-- Statut -->
+                    <td class="text-center">
+                      <span class="badge"
+                        [ngClass]="{
+                          'bg-success': article.quantiteEnStock > article.seuilAlerte,
+                          'bg-warning': article.quantiteEnStock <= article.seuilAlerte && article.quantiteEnStock > 0,
+                          'bg-danger': article.quantiteEnStock === 0
+                        }">
+
+                        {{
+                          article.quantiteEnStock === 0
+                            ? 'Rupture'
+                            : article.quantiteEnStock <= article.seuilAlerte
+                            ? 'Stock faible'
+                            : 'Disponible'
+                        }}
+                      </span>
+                    </td>
+
+                    <!-- Actions -->
+                    <td class="text-center">
+
+                      <a 
+                        [routerLink]="['/articles/update', article.id]" 
+                        class="btn btn-primary btn-sm me-1">
+                        <i class="bi bi-pencil"></i>
+                      </a>
+
+                      <button 
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteArticle(article.id!)">
+                        <i class="bi bi-trash"></i>
+                      </button>
+
+                    </td>
+
+                  </tr>
+                </tbody>
+
+                <!-- Footer -->
+                <tfoot class="table-secondary">
+                  <tr>
+                    <td colspan="6" class="fw-bold">
+                      Total: {{ filteredArticles.length }} article(s)
+                    </td>
+                  </tr>
+                </tfoot>
+
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

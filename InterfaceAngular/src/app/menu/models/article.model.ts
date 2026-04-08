@@ -3,4 +3,5 @@ export interface Article {
   libelle: string;
   quantiteEnStock: number;
   seuilAlerte: number;
+  unite:string;
 }

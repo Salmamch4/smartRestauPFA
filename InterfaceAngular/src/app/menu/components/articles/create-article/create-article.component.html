@@ -1,62 +1,102 @@
-<div class="container mt-4">
-  <div class="card shadow">
-    
-    <div class="card-header bg-success text-white">
-      <h3 class="mb-0">
-        <i class="bi bi-plus-circle"></i> Créer un article
-      </h3>
-    </div>
+<section class="section">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      
+      <!-- 🔥 خليها كبيرة -->
+      <div class="col-lg-10"> 
 
-    <div class="card-body">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-4">
 
-      <form (ngSubmit)="createArticle()">
+            <!-- HEADER -->
+            <div class="text-center mb-4">
+              <h2 class="text-uppercase small text-muted mb-1">Gestion des Articles</h2>
+              <h3 style="font-family: 'Amatic SC', cursive; color: #2c3e50;">
+                <i class="bi bi-box-seam me-2" style="color: #ce1212;"></i>
+                Nouvel <span style="color: #ce1212;">Article</span>
+              </h3>
+            </div>
 
-        <!-- Libelle -->
-        <div class="mb-3">
-          <label class="form-label fw-bold">Libelle</label>
-          <input 
-            type="text" 
-            class="form-control"
-            [(ngModel)]="article.libelle" 
-            name="libelle" 
-            required>
+            <!-- FORM -->
+            <form (ngSubmit)="createArticle()">
+
+              <div class="row g-3">
+
+                <!-- Libelle -->
+                <div class="col-md-12">
+                  <label class="form-label">Libelle</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="article.libelle" 
+                    name="libelle" 
+                    required>
+                </div>
+
+                <!-- Stock -->
+                <div class="col-md-4">
+                  <label class="form-label">Stock</label>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    [(ngModel)]="article.quantiteEnStock" 
+                    name="stock">
+                </div>
+
+                <!-- Seuil -->
+                <div class="col-md-4">
+                  <label class="form-label">Seuil</label>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    [(ngModel)]="article.seuilAlerte" 
+                    name="seuil">
+                </div>
+
+                <!-- Unite -->
+                <div class="col-md-4">
+                  <label class="form-label">Unité</label>
+                  <select 
+                    class="form-select" 
+                    [(ngModel)]="article.unite" 
+                    name="unite">
+
+                    <option value="">-- Choisir --</option>
+                    <option value="kg">Kg</option>
+                    <option value="g">Grammes</option>
+                    <option value="L">Litre</option>
+                    <option value="ml">ml</option>
+                    <option value="piece">Pièce</option>
+
+                  </select>
+                </div>
+
+              </div>
+
+              <!-- BUTTONS -->
+              <div class="text-center mt-4">
+
+                <button type="submit" class="btn btn-success px-4 me-2">
+                  <i class="bi bi-check-circle"></i> Créer
+                </button>
+
+                <button type="button" class="btn btn-secondary px-4 me-2">
+                  <i class="bi bi-arrow-repeat"></i> Réinitialiser
+                </button>
+
+                <a routerLink="/articles" class="btn btn-outline-primary px-4">
+                  <i class="bi bi-list"></i> Voir tous
+                </a>
+
+              </div>
+
+            </form>
+
+          </div>
         </div>
 
-        <!-- Stock -->
-        <div class="mb-3">
-          <label class="form-label fw-bold">Stock</label>
-          <input 
-            type="number" 
-            class="form-control"
-            [(ngModel)]="article.quantiteEnStock" 
-            name="quantiteEnStock" 
-            required>
-        </div>
-
-        <!-- Seuil -->
-        <div class="mb-3">
-          <label class="form-label fw-bold">Seuil</label>
-          <input 
-            type="number" 
-            class="form-control"
-            [(ngModel)]="article.seuilAlerte" 
-            name="seuilAlerte" 
-            required>
-        </div>
-
-        <!-- Buttons -->
-        <div class="d-flex gap-2 mt-3">
-          <button type="submit" class="btn btn-success">
-            <i class="bi bi-check-lg"></i> Créer
-          </button>
-
-          <a routerLink="/articles" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> Retour
-          </a>
-        </div>
-
-      </form>
+      </div>
 
     </div>
   </div>
-</div>
+</section>

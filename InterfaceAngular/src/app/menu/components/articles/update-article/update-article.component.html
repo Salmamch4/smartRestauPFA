@@ -1,62 +1,78 @@
 <div class="container mt-4">
-  <div class="card shadow">
-    
-    <div class="card-header bg-warning text-dark">
-      <h3 class="mb-0">
-        <i class="bi bi-pencil-square"></i> Modifier un article
-      </h3>
-    </div>
 
-    <div class="card-body">
+  <h3 class="mb-3">Modifier Article</h3>
 
-      <form (ngSubmit)="updateArticle()">
-
-        <!-- Libelle -->
-        <div class="mb-3">
-          <label class="form-label fw-bold">Libelle</label>
-          <input 
-            type="text" 
-            class="form-control"
-            [(ngModel)]="article.libelle" 
-            name="libelle" 
-            required>
-        </div>
-
-        <!-- Stock -->
-        <div class="mb-3">
-          <label class="form-label fw-bold">Stock</label>
-          <input 
-            type="number" 
-            class="form-control"
-            [(ngModel)]="article.quantiteEnStock" 
-            name="quantiteEnStock" 
-            required>
-        </div>
-
-        <!-- Seuil -->
-        <div class="mb-3">
-          <label class="form-label fw-bold">Seuil</label>
-          <input 
-            type="number" 
-            class="form-control"
-            [(ngModel)]="article.seuilAlerte" 
-            name="seuilAlerte" 
-            required>
-        </div>
-
-        <!-- Buttons -->
-        <div class="d-flex gap-2 mt-3">
-          <button type="submit" class="btn btn-warning">
-            <i class="bi bi-save"></i> Update
-          </button>
-
-          <a routerLink="/articles" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> Retour
-          </a>
-        </div>
-
-      </form>
-
-    </div>
+  <!-- SUCCESS -->
+  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+    {{ successMessage }}
+    <button type="button" class="btn-close" (click)="successMessage = ''"></button>
   </div>
+
+  <!-- ERROR -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="loading">
+    Chargement...
+  </div>
+
+  <!-- FORM -->
+  <form *ngIf="!loading" #form="ngForm" (ngSubmit)="updateArticle()">
+
+    <div class="mb-3">
+      <label>Libelle</label>
+      <input type="text" class="form-control"
+        [(ngModel)]="article.libelle"
+        name="libelle"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label>Quantité</label>
+      <input type="number" class="form-control"
+        [(ngModel)]="article.quantiteEnStock"
+        name="quantiteEnStock"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label>Seuil</label>
+      <input type="number" class="form-control"
+        [(ngModel)]="article.seuilAlerte"
+        name="seuilAlerte"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Unité</label>
+                  <select 
+                    class="form-select" 
+                    [(ngModel)]="article.unite" 
+                    name="unite">
+
+                    <option value="">-- Choisir --</option>
+                    <option value="kg">Kg</option>
+                    <option value="g">Grammes</option>
+                    <option value="L">Litre</option>
+                    <option value="ml">ml</option>
+                    <option value="piece">Pièce</option>
+
+                  </select>
+                </div>
+
+    <button type="submit" class="btn btn-primary me-2" [disabled]="form.invalid">
+      Modifier
+    </button>
+
+    <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">
+      Reset
+    </button>
+
+    <button type="button" class="btn btn-outline-danger" (click)="goBack()">
+      Annuler
+    </button>
+
+  </form>
 </div>
