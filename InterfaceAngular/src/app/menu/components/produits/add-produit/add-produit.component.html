@@ -1,0 +1,109 @@
+<div class="container-fluid py-4" style="background-color: #f4f7f6; min-height: 90vh;">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4 p-md-5">
+          
+          <div class="text-center mb-5">
+            <h6 class="text-uppercase text-muted fw-bold small">Gestion des Produits</h6>
+            <h2 class="fw-bold">Nouveau <span class="text-danger">Produit</span></h2>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger border-0 mb-4 shadow-sm">{{ errorMessage }}</div>
+
+          <div class="row g-4">
+            <div class="col-md-6">
+              <label class="form-label fw-bold small text-uppercase text-secondary">Nom du Produit</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 text-danger"><i class="bi bi-tag"></i></span>
+                <input type="text" class="form-control border-start-0 ps-0 bg-light" [(ngModel)]="nom" placeholder="Ex: Pizza Royale">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-bold small text-uppercase text-secondary">Catégorie</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 text-danger"><i class="bi bi-grid"></i></span>
+                <select class="form-select border-start-0 ps-0 bg-light" [(ngModel)]="selectedCategorieId" name="categorie">
+  <option value="">-- Choisir la catégorie --</option>
+  <option *ngFor="let cat of categories" [ngValue]="cat.id">{{ cat.libelle }}</option>
+</select>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-bold small text-uppercase text-secondary">Prix (DH)</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 text-danger"><i class="bi bi-currency-dollar"></i></span>
+                <input type="number" class="form-control border-start-0 ps-0 bg-light" [(ngModel)]="prixProduit" placeholder="0.00">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-bold small text-uppercase text-secondary">Image du produit</label>
+              <input type="file" class="form-control bg-light" (change)="onFileSelected($event)" accept="image/*">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-bold small text-uppercase text-secondary">Description</label>
+              <textarea class="form-control bg-light" [(ngModel)]="description" rows="2" placeholder="Informations complémentaires..."></textarea>
+            </div>
+          </div>
+
+          <hr class="my-5 opacity-25">
+
+          <h5 class="fw-bold mb-4"><i class="bi bi-egg-fried text-danger me-2"></i>Composition (Ingrédients)</h5>
+          
+          <div class="row g-3 p-3 rounded-4 bg-light border mb-4">
+            <div class="col-md-6">
+              <label class="small fw-bold text-muted">Ingrédient (Article)</label>
+              <select class="form-select border-0 shadow-sm" [(ngModel)]="selectedArticleId">
+                <option value="">-- Sélectionner l'article --</option>
+                <option *ngFor="let art of articles" [value]="art.id">{{ art.libelle }} ({{art.unite}})</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="small fw-bold text-muted">Quantité</label>
+              <input type="number" class="form-control border-0 shadow-sm" [(ngModel)]="quantiteComposant">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+              <button class="btn btn-dark w-100 py-2 shadow-sm" (click)="addComposantToList()">
+                <i class="bi bi-plus-lg"></i> Ajouter
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive rounded-3 mb-4" *ngIf="composantsList.length > 0">
+            <table class="table table-hover align-middle border">
+              <thead class="bg-white">
+                <tr class="text-muted small">
+                  <th class="ps-3">INGRÉDIENT</th>
+                  <th>QUANTITÉ</th>
+                  <th class="text-end pe-3">ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of composantsList; let i = index">
+                  <td class="ps-3 fw-semibold">{{ item.libelle }}</td>
+                  <td><span class="badge bg-white text-dark border px-3">{{ item.quantite }}</span></td>
+                  <td class="text-end pe-3">
+                    <button class="btn btn-link text-danger p-0" (click)="removeComposant(i)"><i class="bi bi-trash3-fill"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="d-flex gap-3 pt-4">
+            <button class="btn btn-danger btn-lg flex-grow-1 shadow-sm rounded-pill" [disabled]="loading || composantsList.length === 0" (click)="onSubmit()">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              Enregistrer le Produit complet
+            </button>
+            <button class="btn btn-outline-secondary btn-lg px-4 rounded-pill" (click)="router.navigate(['/menu/produits/list'])">Annuler</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

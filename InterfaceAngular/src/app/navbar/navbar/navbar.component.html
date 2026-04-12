@@ -1,5 +1,4 @@
 <div class="container-fluid p-0" style="display: flex; min-height: 100vh;">
-  <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-header">
       <h3 class="text-center mb-0">
@@ -9,7 +8,6 @@
     </div>
 
     <div class="sidebar-menu">
-      <!-- Dashboard -->
       <div class="menu-item">
         <a routerLink="/admin-dashboard" routerLinkActive="active">
           <i class="fas fa-tachometer-alt"></i>
@@ -17,7 +15,7 @@
         </a>
       </div>
 
-      <!--  NOUVEAU: Roles -->
+
       <div class="menu-item">
         <a routerLink="/role" routerLinkActive="active">
           <i class="fas fa-user-tag"></i>
@@ -25,7 +23,6 @@
         </a>
       </div>
 
-      <!-- Achats (avec sous-menu) -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('achats')" class="dropdown-toggle">
           <i class="fas fa-shopping-cart"></i>
@@ -42,7 +39,6 @@
         </div>
       </div>
 
-      <!-- Articles (avec sous-menu) -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('articles')" class="dropdown-toggle">
           <i class="fas fa-box"></i>
@@ -50,19 +46,15 @@
           <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'articles'">
-         <!-- Ajouter un article -->
-<a routerLink="/articles/create">
-  <i class="bi bi-plus-circle"></i> Ajouter un article
-</a>
-
-<!-- Voir la liste -->
-<a routerLink="/articles">
-  <i class="bi bi-list"></i> Voir la liste
-</a>
+          <a routerLink="/articles/create">
+            <i class="bi bi-plus-circle"></i> Ajouter un article
+          </a>
+          <a routerLink="/articles">
+            <i class="bi bi-list"></i> Voir la liste
+          </a>
         </div>
       </div>
 
-      <!-- Fournisseurs (avec sous-menu) -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('fournisseurs')" class="dropdown-toggle">
           <i class="fas fa-truck"></i>
@@ -71,15 +63,14 @@
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'fournisseurs'">
           <a routerLink="/add-fournisseur" routerLinkActive="active">
-            <i class="fas fa-plus-circle"></i> Ajouter un fournisseur
+            <i class="fas fa-plus-circle"></i> Ajouter
           </a>
           <a routerLink="/list-fournisseurs" routerLinkActive="active">
-            <i class="fas fa-list"></i> Voir la liste
+            <i class="fas fa-list"></i> Liste
           </a>
         </div>
       </div>
 
-      <!-- Produits (avec sous-menu) -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('produits')" class="dropdown-toggle">
           <i class="fas fa-hamburger"></i>
@@ -96,7 +87,6 @@
         </div>
       </div>
 
-      <!-- Catégories (avec sous-menu) -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('categories')" class="dropdown-toggle">
           <i class="fas fa-tags"></i>
@@ -105,15 +95,14 @@
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'categories'">
           <a routerLink="/add-categorie" routerLinkActive="active">
-            <i class="fas fa-plus-circle"></i> Ajouter une catégorie
+            <i class="fas fa-plus-circle"></i> Ajouter
           </a>
           <a routerLink="/list-categories" routerLinkActive="active">
-            <i class="fas fa-list"></i> Voir la liste
+            <i class="fas fa-list"></i> Liste
           </a>
         </div>
       </div>
 
-      <!-- Rapports -->
       <div class="menu-item">
         <a routerLink="/rapports" routerLinkActive="active">
           <i class="fas fa-chart-line"></i>
@@ -121,7 +110,6 @@
         </a>
       </div>
 
-      <!-- Profil (avec sous-menu) -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('profil')" class="dropdown-toggle">
           <i class="fas fa-user-circle"></i>
@@ -132,21 +120,10 @@
           <a routerLink="/profile" routerLinkActive="active">
             <i class="fas fa-id-card"></i> Mon profil
           </a>
-          <a routerLink="/change-password" routerLinkActive="active">
-            <i class="fas fa-key"></i> Changer mot de passe
-          </a>
           <a routerLink="/notifications" routerLinkActive="active">
             <i class="fas fa-bell"></i> Notifications
           </a>
         </div>
-      </div>
-
-      <!-- Paramètres -->
-      <div class="menu-item">
-        <a routerLink="/parametres" routerLinkActive="active">
-          <i class="fas fa-cog"></i>
-          <span>Paramètres</span>
-        </a>
       </div>
     </div>
 
@@ -164,8 +141,26 @@
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <router-outlet></router-outlet>
+  <div class="main-content w-100">
+    <nav class="navbar navbar-expand navbar-light bg-white shadow-sm mb-4 px-4 py-2 d-flex justify-content-between">
+      <span class="navbar-brand mb-0 h1 text-muted" style="font-size: 1.1rem;">Système de Gestion</span>
+      
+      <div class="d-flex align-items-center gap-3">
+        <div class="position-relative" style="cursor: pointer;" routerLink="/notifications">
+          <i class="fas fa-bell fs-5 text-secondary"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+            3
+          </span>
+        </div>
+        
+        <div class="border-start ps-3">
+          <span class="fw-bold small">Bienvenue, Admin</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid px-4">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
