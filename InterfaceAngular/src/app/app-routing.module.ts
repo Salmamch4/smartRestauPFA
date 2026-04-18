@@ -19,6 +19,9 @@ import { UpdateArticleComponent } from './menu/components/articles/update-articl
 import { AddCategorieComponent } from './menu/components/categories/add-categorie/add-categorie.component';
 import { ListCategorieComponent } from './menu/components/categories/list-categorie/list-categorie.component';
 
+import { AddFournisseurComponent } from './menu/components/fournisseurs/add-fournisseur/add-fournisseur.component';
+import { ListFournisseursComponent } from './menu/components/fournisseurs/list-fournisseurs/list-fournisseurs.component';
+import { EditFournisseurComponent } from './menu/components/fournisseurs/edit-fournisseur/edit-fournisseur.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -43,6 +46,11 @@ const routes: Routes = [
   // ✅ Catégories routes
   { path: 'add-categorie', component: AddCategorieComponent },
   { path: 'list-categories', component: ListCategorieComponent },
+
+
+  { path: 'add-fournisseur', component: AddFournisseurComponent },
+  { path: 'list-fournisseurs', component: ListFournisseursComponent },
+  { path: 'edit-fournisseur/:id', component: EditFournisseurComponent },
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthServiceService  } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,7 @@ export class RegisterComponent {
     password_confirmation: ''
   };
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthServiceService , private router: Router) {}
 
   onSubmit() {
     this.errorMessage = '';

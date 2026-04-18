@@ -1,4 +1,5 @@
-<div class="container-fluid p-0" style="display: flex; min-height: 100vh;">
+<!-- navbar.component.html -->
+<div class="container-fluid p-0" style="display: flex; min-height: 100vh;" *ngIf="isAdmin">
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-header">
@@ -17,7 +18,7 @@
         </a>
       </div>
 
-      <!--  NOUVEAU: Roles -->
+      <!-- Roles (Admin only) -->
       <div class="menu-item">
         <a routerLink="/role" routerLinkActive="active">
           <i class="fas fa-user-tag"></i>
@@ -25,7 +26,7 @@
         </a>
       </div>
 
-      <!-- Achats (avec sous-menu) -->
+      <!-- Achats -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('achats')" class="dropdown-toggle">
           <i class="fas fa-shopping-cart"></i>
@@ -42,7 +43,7 @@
         </div>
       </div>
 
-      <!-- Articles (avec sous-menu) -->
+      <!-- Articles -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('articles')" class="dropdown-toggle">
           <i class="fas fa-box"></i>
@@ -50,19 +51,16 @@
           <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'articles'">
-         <!-- Ajouter un article -->
-<a routerLink="/articles/create">
-  <i class="bi bi-plus-circle"></i> Ajouter un article
-</a>
-
-<!-- Voir la liste -->
-<a routerLink="/articles">
-  <i class="bi bi-list"></i> Voir la liste
-</a>
+          <a routerLink="/articles/create">
+            <i class="bi bi-plus-circle"></i> Ajouter un article
+          </a>
+          <a routerLink="/articles">
+            <i class="bi bi-list"></i> Voir la liste
+          </a>
         </div>
       </div>
 
-      <!-- Fournisseurs (avec sous-menu) -->
+      <!-- Fournisseurs -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('fournisseurs')" class="dropdown-toggle">
           <i class="fas fa-truck"></i>
@@ -79,7 +77,7 @@
         </div>
       </div>
 
-      <!-- Produits (avec sous-menu) -->
+      <!-- Produits -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('produits')" class="dropdown-toggle">
           <i class="fas fa-hamburger"></i>
@@ -96,7 +94,7 @@
         </div>
       </div>
 
-      <!-- Catégories (avec sous-menu) -->
+      <!-- Catégories -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('categories')" class="dropdown-toggle">
           <i class="fas fa-tags"></i>
@@ -121,7 +119,7 @@
         </a>
       </div>
 
-      <!-- Profil (avec sous-menu) -->
+      <!-- Profil -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('profil')" class="dropdown-toggle">
           <i class="fas fa-user-circle"></i>
@@ -154,18 +152,28 @@
       <div class="user-info">
         <i class="fas fa-user-circle"></i>
         <div>
-          <strong>{{ user?.name || 'Admin' }}</strong>
-        <small>{{ user?.email || 'admin@menums.com' }}</small>
+          <strong>{{ user?.telephone || user?.email }}</strong>
+          <small class="user-email">{{ user?.email }}</small>
         </div>
       </div>
       <button (click)="logout()" class="logout-btn">
-      <i class="fas fa-sign-out-alt"></i> Déconnexion
-    </button>
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </button>
     </div>
   </div>
 
   <!-- Main Content -->
   <div class="main-content">
     <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- Message si non admin -->
+<div *ngIf="!isAdmin" class="unauthorized-message">
+  <div class="container text-center mt-5">
+    <i class="fas fa-lock fa-4x text-danger mb-3"></i>
+    <h2>Accès non autorisé</h2>
+    <p>Cette interface est réservée aux administrateurs.</p>
+    <button class="btn btn-primary" (click)="logout()">Se déconnecter</button>
   </div>
 </div>

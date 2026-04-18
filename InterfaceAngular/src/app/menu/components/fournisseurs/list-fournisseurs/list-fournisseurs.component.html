@@ -1,0 +1,130 @@
+<section class="section">
+  <div class="container">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-body p-5">
+
+        <!-- Header -->
+        <div class="section-header text-center mb-4">
+          <h2 class="text-uppercase small text-muted">Gestion des Fournisseurs</h2>
+          <p class="h1" style="font-family: 'Amatic SC', cursive;">
+            Liste des <span style="color: #ce1212;">Fournisseurs</span>
+          </p>
+        </div>
+
+        <!-- Messages -->
+        <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+          <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+          <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+          <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+          <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+        </div>
+
+        <!-- Barre de recherche -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text bg-light">
+                <i class="bi bi-search" style="color: #ce1212;"></i>
+              </span>
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Rechercher par ICE, Raison sociale, Téléphone ou Adresse..." 
+                [(ngModel)]="searchTerm"
+                (input)="searchFournisseurs()">
+              <button 
+                *ngIf="searchTerm" 
+                class="btn btn-outline-secondary" 
+                type="button" 
+                (click)="resetSearch()">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+            <small class="text-muted mt-1 d-block">
+              <i class="bi bi-info-circle"></i> 
+              {{ filteredFournisseurs.length }} résultat(s) sur {{ fournisseurs.length }} fournisseur(s)
+            </small>
+          </div>
+          <div class="col-md-6 text-end">
+            <a routerLink="/add-fournisseur" class="btn btn-primary">
+              <i class="bi bi-plus-lg me-2"></i> Ajouter un fournisseur
+            </a>
+          </div>
+        </div>
+
+        <!-- Loading -->
+        <div *ngIf="loading" class="text-center py-4">
+          <div class="spinner-border" style="color: #ce1212;"></div>
+          <p class="mt-2">Chargement des fournisseurs...</p>
+        </div>
+
+        <!-- Tableau -->
+        <div *ngIf="!loading" class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Raison Sociale</th>
+                <th>Téléphone</th>
+                <th>ICE</th>
+                <th>Adresse</th>
+                <th>Date Création</th>
+                <th class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Pendant le chargement -->
+              <tr *ngIf="loading">
+                <td colspan="6" class="text-center">
+                  <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Chargement...</span>
+                  </div>
+                </td>
+              </tr>
+              
+              <!-- Aucun résultat pour la recherche -->
+              <tr *ngIf="!loading && filteredFournisseurs.length === 0 && searchTerm">
+                <td colspan="6" class="text-center">
+                  <div class="alert alert-warning mb-0">
+                    <i class="bi bi-exclamation-triangle me-2"></i> 
+                    Aucun fournisseur ne correspond à "{{ searchTerm }}"
+                  </div>
+                </td>
+              </tr>
+              
+              <!-- Liste vide -->
+              <tr *ngIf="!loading && filteredFournisseurs.length === 0 && !searchTerm && fournisseurs.length === 0">
+                <td colspan="6" class="text-center">
+                  <div class="alert alert-info mb-0">
+                    <i class="bi bi-info-circle me-2"></i> 
+                    Aucun fournisseur trouvé.
+                    <a routerLink="/add-fournisseur" class="alert-link">Ajoutez votre premier fournisseur</a>
+                  </div>
+                </td>
+              </tr>
+              
+              <!-- Liste des fournisseurs -->
+              <tr *ngFor="let fr of filteredFournisseurs">
+                <td><strong>{{ fr.raisonSocial }}</strong></td>
+                <td>{{ fr.telephone }}</td>
+                <td><span class="badge bg-secondary">{{ fr.ice }}</span></td>
+                <td>{{ fr.adresse }}</td>
+                <td>{{ fr.dateCreation | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td class="text-center">
+                  <a [routerLink]="['/edit-fournisseur', fr.id]" class="btn btn-sm btn-warning me-2" title="Modifier">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <button class="btn btn-sm btn-danger" (click)="delete(fr.id)" title="Supprimer">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

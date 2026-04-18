@@ -114,4 +114,5 @@ reset(token: string, password: string, password_confirmation: string): Observabl
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
+  
 }

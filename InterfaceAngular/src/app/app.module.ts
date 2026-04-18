@@ -28,6 +28,9 @@ import { AddCategorieComponent } from './menu/components/categories/add-categori
 import { ListCategorieComponent } from './menu/components/categories/list-categorie/list-categorie.component';
 
 
+import { AddFournisseurComponent } from './menu/components/fournisseurs/add-fournisseur/add-fournisseur.component';
+import { ListFournisseursComponent } from './menu/components/fournisseurs/list-fournisseurs/list-fournisseurs.component';
+import { EditFournisseurComponent } from './menu/components/fournisseurs/edit-fournisseur/edit-fournisseur.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +52,10 @@ UpdateArticleComponent,
     NavbarComponent,
     AddCategorieComponent,
     ListCategorieComponent,
+
+      AddFournisseurComponent,
+    ListFournisseursComponent,
+    EditFournisseurComponent,
   ],
   imports: [
     BrowserModule,
