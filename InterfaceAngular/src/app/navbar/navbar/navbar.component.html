@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 <!-- navbar.component.html -->
 <div class="container-fluid p-0" style="display: flex; min-height: 100vh;" *ngIf="isAdmin">
   <!-- Sidebar -->
+=======
+<div class="container-fluid p-0" style="display: flex; min-height: 100vh;">
+>>>>>>> c1cd204fd141dd996a4bd020f3dd530c3e6b6c5a
   <div class="sidebar">
     <div class="sidebar-header">
       <h3 class="text-center mb-0">
@@ -10,7 +14,6 @@
     </div>
 
     <div class="sidebar-menu">
-      <!-- Dashboard -->
       <div class="menu-item">
         <a routerLink="/admin-dashboard" routerLinkActive="active">
           <i class="fas fa-tachometer-alt"></i>
@@ -18,7 +21,11 @@
         </a>
       </div>
 
+<<<<<<< HEAD
       <!-- Roles (Admin only) -->
+=======
+
+>>>>>>> c1cd204fd141dd996a4bd020f3dd530c3e6b6c5a
       <div class="menu-item">
         <a routerLink="/role" routerLinkActive="active">
           <i class="fas fa-user-tag"></i>
@@ -26,7 +33,10 @@
         </a>
       </div>
 
+<<<<<<< HEAD
       <!-- Achats -->
+=======
+>>>>>>> c1cd204fd141dd996a4bd020f3dd530c3e6b6c5a
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('achats')" class="dropdown-toggle">
           <i class="fas fa-shopping-cart"></i>
@@ -43,7 +53,10 @@
         </div>
       </div>
 
+<<<<<<< HEAD
       <!-- Articles -->
+=======
+>>>>>>> c1cd204fd141dd996a4bd020f3dd530c3e6b6c5a
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('articles')" class="dropdown-toggle">
           <i class="fas fa-box"></i>
@@ -60,7 +73,10 @@
         </div>
       </div>
 
+<<<<<<< HEAD
       <!-- Fournisseurs -->
+=======
+>>>>>>> c1cd204fd141dd996a4bd020f3dd530c3e6b6c5a
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('fournisseurs')" class="dropdown-toggle">
           <i class="fas fa-truck"></i>
@@ -69,15 +85,18 @@
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'fournisseurs'">
           <a routerLink="/add-fournisseur" routerLinkActive="active">
-            <i class="fas fa-plus-circle"></i> Ajouter un fournisseur
+            <i class="fas fa-plus-circle"></i> Ajouter
           </a>
           <a routerLink="/list-fournisseurs" routerLinkActive="active">
-            <i class="fas fa-list"></i> Voir la liste
+            <i class="fas fa-list"></i> Liste
           </a>
         </div>
       </div>
 
+<<<<<<< HEAD
       <!-- Produits -->
+=======
+>>>>>>> c1cd204fd141dd996a4bd020f3dd530c3e6b6c5a
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('produits')" class="dropdown-toggle">
           <i class="fas fa-hamburger"></i>
@@ -94,7 +113,10 @@
         </div>
       </div>
 
+<<<<<<< HEAD
       <!-- Catégories -->
+=======
+>>>>>>> c1cd204fd141dd996a4bd020f3dd530c3e6b6c5a
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('categories')" class="dropdown-toggle">
           <i class="fas fa-tags"></i>
@@ -103,15 +125,14 @@
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'categories'">
           <a routerLink="/add-categorie" routerLinkActive="active">
-            <i class="fas fa-plus-circle"></i> Ajouter une catégorie
+            <i class="fas fa-plus-circle"></i> Ajouter
           </a>
           <a routerLink="/list-categories" routerLinkActive="active">
-            <i class="fas fa-list"></i> Voir la liste
+            <i class="fas fa-list"></i> Liste
           </a>
         </div>
       </div>
 
-      <!-- Rapports -->
       <div class="menu-item">
         <a routerLink="/rapports" routerLinkActive="active">
           <i class="fas fa-chart-line"></i>
@@ -119,7 +140,10 @@
         </a>
       </div>
 
+<<<<<<< HEAD
       <!-- Profil -->
+=======
+>>>>>>> c1cd204fd141dd996a4bd020f3dd530c3e6b6c5a
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('profil')" class="dropdown-toggle">
           <i class="fas fa-user-circle"></i>
@@ -130,21 +154,10 @@
           <a routerLink="/profile" routerLinkActive="active">
             <i class="fas fa-id-card"></i> Mon profil
           </a>
-          <a routerLink="/change-password" routerLinkActive="active">
-            <i class="fas fa-key"></i> Changer mot de passe
-          </a>
           <a routerLink="/notifications" routerLinkActive="active">
             <i class="fas fa-bell"></i> Notifications
           </a>
         </div>
-      </div>
-
-      <!-- Paramètres -->
-      <div class="menu-item">
-        <a routerLink="/parametres" routerLinkActive="active">
-          <i class="fas fa-cog"></i>
-          <span>Paramètres</span>
-        </a>
       </div>
     </div>
 
@@ -162,9 +175,27 @@
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <router-outlet></router-outlet>
+  <div class="main-content w-100">
+    <nav class="navbar navbar-expand navbar-light bg-white shadow-sm mb-4 px-4 py-2 d-flex justify-content-between">
+      <span class="navbar-brand mb-0 h1 text-muted" style="font-size: 1.1rem;">Système de Gestion</span>
+      
+      <div class="d-flex align-items-center gap-3">
+        <div class="position-relative" style="cursor: pointer;" routerLink="/notifications">
+          <i class="fas fa-bell fs-5 text-secondary"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+            3
+          </span>
+        </div>
+        
+        <div class="border-start ps-3">
+          <span class="fw-bold small">Bienvenue, Admin</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid px-4">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
 

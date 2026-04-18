@@ -4,20 +4,20 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { ProfileComponent } from './auth/components/profile/profile.component';
 import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
-import { HomeComponent } from './auth/components/home/home.component';
 import { ResetPasswordComponent } from './auth/components/reset-password/reset-password.component';
 import { AdminDashboardComponent } from './auth/components/admin-dashboard/admin-dashboard.component';
+import { RolesComponent } from './auth/components/roles/roles.component';
 import { AddAchatsComponent } from './menu/components/achats/add-achats/add-achats.component';
 import { ListAchatsComponent } from './menu/components/achats/list-achats/list-achats.component';
 import { UpdateAchatsComponent } from './menu/components/achats/update-achats/update-achats.component';
-import { RolesComponent } from './auth/components/roles/roles.component';
 import { CreateArticleComponent } from './menu/components/articles/create-article/create-article.component';
 import { ArticleListComponent } from './menu/components/articles/article-list/article-list.component';
 import { UpdateArticleComponent } from './menu/components/articles/update-article/update-article.component';
-
-// ✅ Catégorie imports
 import { AddCategorieComponent } from './menu/components/categories/add-categorie/add-categorie.component';
 import { ListCategorieComponent } from './menu/components/categories/list-categorie/list-categorie.component';
+import { AddProduitComponent } from './menu/components/produits/add-produit/add-produit.component';
+import { ProductListComponent } from './menu/components/produits/product-list/product-list.component';
+import { ProductEditComponent } from './menu/components/produits/product-edit/product-edit.component';
 
 import { AddFournisseurComponent } from './menu/components/fournisseurs/add-fournisseur/add-fournisseur.component';
 import { ListFournisseursComponent } from './menu/components/fournisseurs/list-fournisseurs/list-fournisseurs.component';
@@ -28,29 +28,36 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'password/reset', redirectTo: '/reset-password' },
   { path: 'profile', component: ProfileComponent },
   { path: 'role', component: RolesComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
 
-  // Achats routes
+  // Achats
   { path: 'add-achats', component: AddAchatsComponent },
   { path: 'list-achats', component: ListAchatsComponent },
   { path: 'achats/update-achats/:id', component: UpdateAchatsComponent },
 
-  // Articles routes
+  // Articles
   { path: 'articles', component: ArticleListComponent },
   { path: 'articles/create', component: CreateArticleComponent },
   { path: 'articles/update/:id', component: UpdateArticleComponent },
 
-  // ✅ Catégories routes
+  // Catégories
   { path: 'add-categorie', component: AddCategorieComponent },
   { path: 'list-categories', component: ListCategorieComponent },
+
 
 
   { path: 'add-fournisseur', component: AddFournisseurComponent },
   { path: 'list-fournisseurs', component: ListFournisseursComponent },
   { path: 'edit-fournisseur/:id', component: EditFournisseurComponent },
+
+ // Produits
+  { path: 'add-produit', component: AddProduitComponent },
+  { path: 'menu/produits/add', component: AddProduitComponent }, // AJOUT DE CETTE LIGNE
+  { path: 'list-produits', component: ProductListComponent },
+  { path: 'menu/produits/edit/:id', component: ProductEditComponent },
+
 ];
 
 @NgModule({
