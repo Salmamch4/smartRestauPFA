@@ -1,0 +1,92 @@
+<section class="section">
+  <div class="container">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-body p-5">
+
+        <!-- Header -->
+        <div class="section-header text-center mb-4">
+          <h2 class="text-uppercase small text-muted">Interface Chef Cuisinier</h2>
+          <p class="h1" style="font-family: 'Amatic SC', cursive;">
+            Liste des <span style="color: #ce1212;">Commandes</span>
+          </p>
+        </div>
+
+        <!-- Messages -->
+        <div *ngIf="successMessage" class="alert alert-success">
+          <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+        </div>
+
+        <!-- Loading -->
+        <div *ngIf="loading" class="text-center py-4">
+          <div class="spinner-border" style="color: #ce1212;"></div>
+        </div>
+
+        <!-- Aucune commande -->
+        <div *ngIf="!loading && orders.length === 0" class="alert alert-info text-center">
+          <i class="bi bi-info-circle me-2"></i> Aucune commande en attente
+        </div>
+
+        <!-- Liste des commandes -->
+        <div *ngIf="!loading" class="row">
+          <div *ngFor="let order of orders" class="col-md-6 mb-4">
+            <div class="order-card">
+
+              <!-- Header commande -->
+              <div class="order-header">
+                <div>
+                  <h5 class="mb-0">Table {{ order.tableNumber }}</h5>
+                  <small class="text-muted">
+                    <i class="bi bi-person"></i> {{ order.clientName }}
+                    - <i class="bi bi-person-badge"></i> {{ order.serverName }}
+                  </small>
+                </div>
+                <span class="badge bg-warning">{{ order.status }}</span>
+              </div>
+
+              <!-- Produits -->
+              <div class="order-items">
+                <div *ngFor="let item of order.items"
+                     class="item-row"
+                     [class.item-valide]="item.itemStatus === 'VALIDE'"
+                     [class.item-invalide]="item.itemStatus === 'INVALIDE'">
+                  <div class="item-info">
+                    <strong>{{ item.productName }}</strong>
+                    <small>x{{ item.quantity }}</small>
+                  </div>
+                  <div class="item-price">{{ item.price }} DH</div>
+                  <button *ngIf="item.itemStatus === 'VALIDE'"
+                          class="btn btn-sm btn-outline-danger"
+                          (click)="invalidateItem(order.id, item.id)"
+                          title="Produit indisponible">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                  <span *ngIf="item.itemStatus === 'INVALIDE'" class="badge bg-danger">
+                    Indisponible
+                  </span>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="order-actions">
+                <button class="btn btn-success btn-sm" (click)="startOrder(order.id)">
+                  <i class="bi bi-play-fill"></i> Commencer
+                </button>
+                <button class="btn btn-primary btn-sm" (click)="completeOrder(order.id)">
+                  <i class="bi bi-check-lg"></i> Prête
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="cancelOrder(order.id)">
+                  <i class="bi bi-trash"></i> Annuler
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
