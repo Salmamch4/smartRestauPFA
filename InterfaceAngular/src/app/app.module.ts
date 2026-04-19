@@ -26,7 +26,11 @@ import { UpdateAchatsComponent } from './menu/components/achats/update-achats/up
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { AddCategorieComponent } from './menu/components/categories/add-categorie/add-categorie.component';
 import { ListCategorieComponent } from './menu/components/categories/list-categorie/list-categorie.component';
-
+import { ClientComponent } from './order/components/client/client.component';
+import { AdminTicketComponent } from './order/components/admin/admin.component';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ServeurTicketComponent } from './order/components/serveur/serveur-ticket.component';
 
 @NgModule({
   declarations: [
@@ -49,17 +53,19 @@ UpdateArticleComponent,
     NavbarComponent,
     AddCategorieComponent,
     ListCategorieComponent,
+    ServeurTicketComponent,
+    ClientComponent,
+    AdminTicketComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
-    HttpClientModule,
-    FormsModule,         
-    ReactiveFormsModule  
-
-  
-  ],
+FormsModule,
+    ReactiveFormsModule,
+  RouterModule,
+  HttpClientModule,
+  CommonModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })

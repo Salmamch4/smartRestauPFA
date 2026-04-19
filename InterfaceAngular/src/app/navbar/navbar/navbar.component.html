@@ -140,8 +140,15 @@
           </a>
         </div>
       </div>
+<li>
+  <a (click)="toggleTicket()">🎟️ Tickets</a>
 
-      <!-- Paramètres -->
+  <ul *ngIf="openTicket">
+    <li><a routerLink="/client-ticket">Client Ticket</a></li>
+    <li><a routerLink="/serveur-ticket">Serveur Ticket</a></li>
+    <li><a routerLink="/admin-ticket">Admin Ticket</a></li>
+  </ul>
+</li>      <!-- Paramètres -->
       <div class="menu-item">
         <a routerLink="/parametres" routerLinkActive="active">
           <i class="fas fa-cog"></i>

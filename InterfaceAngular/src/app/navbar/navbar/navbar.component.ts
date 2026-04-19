@@ -43,4 +43,9 @@ export class NavbarComponent implements OnInit {
       });
     }
   }
+  openTicket = false;
+
+toggleTicket() {
+  this.openTicket = !this.openTicket;
+}
 }

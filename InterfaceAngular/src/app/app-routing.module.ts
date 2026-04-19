@@ -19,6 +19,9 @@ import { UpdateArticleComponent } from './menu/components/articles/update-articl
 import { AddCategorieComponent } from './menu/components/categories/add-categorie/add-categorie.component';
 import { ListCategorieComponent } from './menu/components/categories/list-categorie/list-categorie.component';
 
+ import { ServeurTicketComponent } from './order/components/serveur/serveur-ticket.component';
+ import { ClientComponent } from './order/components/client/client.component';
+import { AdminTicketComponent } from './order/components/admin/admin.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -43,6 +46,10 @@ const routes: Routes = [
   // ✅ Catégories routes
   { path: 'add-categorie', component: AddCategorieComponent },
   { path: 'list-categories', component: ListCategorieComponent },
+  // 🎟️ Ticket routes
+{ path: 'client-ticket', component: ClientComponent },
+{ path: 'serveur-ticket', component: ServeurTicketComponent },
+{ path: 'admin-ticket', component: AdminTicketComponent },
 ];
 
 @NgModule({

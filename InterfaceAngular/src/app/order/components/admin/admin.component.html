@@ -1,0 +1,19 @@
+<div id="ticket">
+
+  <h2 style="text-align:center">ADMIN</h2>
+  <p>Date: {{ today | date:'dd/MM/yyyy HH:mm' }}</p>
+
+  <hr>
+
+  <div *ngFor="let t of tickets">
+    <p>{{ t.produit }} - {{ t.serveur }}</p>
+    <p>{{ t.quantite }} x {{ t.prix }} DH</p>
+    <p><b>{{ t.total }} DH</b></p>
+    <hr>
+  </div>
+
+  <h3>Total Global: {{ totalGlobal }} DH</h3>
+
+</div>
+
+<button (click)="print()">🖨️ Print</button>
