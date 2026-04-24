@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CategorieService } from '../../../services/categorie/categorie.service';
 
 @Component({
@@ -7,17 +7,41 @@ import { CategorieService } from '../../../services/categorie/categorie.service'
   templateUrl: './add-categorie.component.html',
   styleUrls: ['./add-categorie.component.css']
 })
-export class AddCategorieComponent {
+export class AddCategorieComponent implements OnInit {
   libelle: string = '';
   description: string = '';
   loading = false;
   errorMessage = '';
   successMessage = '';
+  isEditMode = false;
+  categorieId: string = '';
 
   constructor(
     private categorieService: CategorieService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isEditMode = true;
+      this.categorieId = id;
+      this.loadCategorie(id);
+    }
+  }
+
+  loadCategorie(id: string): void {
+    this.categorieService.getById(id).subscribe({
+      next: (cat) => {
+        this.libelle = cat.libelle;
+        this.description = cat.description || '';
+      },
+      error: () => {
+        this.errorMessage = 'Erreur lors du chargement';
+      }
+    });
+  }
 
   onSubmit(): void {
     if (!this.libelle.trim()) {
@@ -34,20 +58,36 @@ export class AddCategorieComponent {
       description: this.description
     };
 
-    this.categorieService.add(data).subscribe({
-      next: () => {
-        this.loading = false;
-        this.successMessage = '✅ Catégorie ajoutée avec succès!';
-        this.resetForm();
-        setTimeout(() => {
-          this.router.navigate(['/list-categories']);
-        }, 2000);
-      },
-      error: (err) => {
-        this.loading = false;
-        this.errorMessage = err.error?.message || '❌ Erreur lors de l\'ajout';
-      }
-    });
+    if (this.isEditMode) {
+      this.categorieService.update(this.categorieId, data).subscribe({
+        next: () => {
+          this.loading = false;
+          this.successMessage = '✅ Catégorie modifiée avec succès!';
+          setTimeout(() => {
+            this.router.navigate(['/list-categories']);
+          }, 2000);
+        },
+        error: (err) => {
+          this.loading = false;
+          this.errorMessage = err.error?.message || '❌ Erreur lors de la modification';
+        }
+      });
+    } else {
+      this.categorieService.add(data).subscribe({
+        next: () => {
+          this.loading = false;
+          this.successMessage = '✅ Catégorie ajoutée avec succès!';
+          this.resetForm();
+          setTimeout(() => {
+            this.router.navigate(['/list-categories']);
+          }, 2000);
+        },
+        error: (err) => {
+          this.loading = false;
+          this.errorMessage = err.error?.message || '❌ Erreur lors de l\'ajout';
+        }
+      });
+    }
   }
 
   resetForm(): void {

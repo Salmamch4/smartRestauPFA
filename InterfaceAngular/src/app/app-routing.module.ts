@@ -18,10 +18,11 @@ import { ListCategorieComponent } from './menu/components/categories/list-catego
 import { AddProduitComponent } from './menu/components/produits/add-produit/add-produit.component';
 import { ProductListComponent } from './menu/components/produits/product-list/product-list.component';
 import { ProductEditComponent } from './menu/components/produits/product-edit/product-edit.component';
-
 import { AddFournisseurComponent } from './menu/components/fournisseurs/add-fournisseur/add-fournisseur.component';
 import { ListFournisseursComponent } from './menu/components/fournisseurs/list-fournisseurs/list-fournisseurs.component';
 import { EditFournisseurComponent } from './menu/components/fournisseurs/edit-fournisseur/edit-fournisseur.component';
+import { ListOrdersComponent } from './order/components/chef-cuisinier/list-orders/list-orders.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -45,19 +46,23 @@ const routes: Routes = [
   // Catégories
   { path: 'add-categorie', component: AddCategorieComponent },
   { path: 'list-categories', component: ListCategorieComponent },
+  { path: 'edit-categorie/:id', component: AddCategorieComponent },
 
-
-
+  // Fournisseurs
   { path: 'add-fournisseur', component: AddFournisseurComponent },
   { path: 'list-fournisseurs', component: ListFournisseursComponent },
   { path: 'edit-fournisseur/:id', component: EditFournisseurComponent },
 
- // Produits
-  { path: 'add-produit', component: AddProduitComponent },
-  { path: 'menu/produits/add', component: AddProduitComponent }, // AJOUT DE CETTE LIGNE
-  { path: 'list-produits', component: ProductListComponent },
-  { path: 'menu/produits/edit/:id', component: ProductEditComponent },
+  // Produits
+{ path: 'add-produit', component: AddProduitComponent },
+{ path: 'menu/produits/add', component: AddProduitComponent },
+{ path: 'list-produits', component: ProductListComponent },
+{ path: 'menu/produits/list', component: ProductListComponent }, // ← AJOUTE
+{ path: 'menu/produits/edit/:id', component: ProductEditComponent },
+  
 
+  // Chef Cuisinier
+  { path: 'chef-cuisinier', component: ListOrdersComponent },
 ];
 
 @NgModule({

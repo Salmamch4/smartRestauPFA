@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,11 +32,16 @@ import { ListCategorieComponent } from './menu/components/categories/list-catego
 // Produits
 import { AddProduitComponent } from './menu/components/produits/add-produit/add-produit.component';
 import { ProductListComponent } from './menu/components/produits/product-list/product-list.component';
-import { ProductEditComponent } from './menu/components/produits/product-edit/product-edit.component'; // AJOUTÉ ICI
+import { ProductEditComponent } from './menu/components/produits/product-edit/product-edit.component';
 
+// Fournisseurs
 import { AddFournisseurComponent } from './menu/components/fournisseurs/add-fournisseur/add-fournisseur.component';
 import { ListFournisseursComponent } from './menu/components/fournisseurs/list-fournisseurs/list-fournisseurs.component';
 import { EditFournisseurComponent } from './menu/components/fournisseurs/edit-fournisseur/edit-fournisseur.component';
+
+// Order
+import { ListOrdersComponent } from './order/components/chef-cuisinier/list-orders/list-orders.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,19 +62,17 @@ import { EditFournisseurComponent } from './menu/components/fournisseurs/edit-fo
     UpdateAchatsComponent,
     AddCategorieComponent,
     ListCategorieComponent,
-
-
-      AddFournisseurComponent,
+    AddFournisseurComponent,
     ListFournisseursComponent,
     EditFournisseurComponent,
-
     AddProduitComponent,
     ProductListComponent,
-    ProductEditComponent // AJOUTÉ ICI
-
+    ProductEditComponent,
+    ListOrdersComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

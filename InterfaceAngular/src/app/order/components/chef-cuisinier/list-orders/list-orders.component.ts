@@ -21,6 +21,8 @@ export class ListOrdersComponent implements OnInit {
 
   loadOrders(): void {
     this.loading = true;
+    this.successMessage = '';
+    this.errorMessage = '';
     this.orderService.getPending().subscribe({
       next: (data) => {
         this.orders = data;
@@ -41,6 +43,19 @@ export class ListOrdersComponent implements OnInit {
       },
       error: () => {
         this.errorMessage = 'Erreur lors de la modification';
+      }
+    });
+  }
+
+  // ✅ NOUVEAU - Revalider un item (Indisponible → Disponible)
+  revalidateItem(orderId: number, itemId: number): void {
+    this.orderService.revalidateItem(orderId, itemId).subscribe({
+      next: () => {
+        this.successMessage = 'Produit marqué comme disponible ✅';
+        this.loadOrders();
+      },
+      error: () => {
+        this.errorMessage = 'Erreur lors de la revalidation';
       }
     });
   }

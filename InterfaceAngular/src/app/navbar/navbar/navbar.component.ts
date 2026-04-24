@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   @Input() showSidebar: boolean = true;
   openSubmenu: string | null = null;
   user: User | null = null;
-  isAdmin: boolean = false;
+  isAdmin: boolean = true;
 
   constructor(
     private authService: AuthServiceService,
