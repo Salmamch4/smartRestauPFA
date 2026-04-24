@@ -3,6 +3,8 @@ package com.smartpfa.orderservice.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -14,8 +16,13 @@ public class Order {
     private Long id;
 
     private String clientName;
-    private String status; // EN_ATTENTE, EN_COURS, TERMINEE
+    private String serverName;
+    private Integer tableNumber;
+    private String status;
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<OrderItem> items = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
