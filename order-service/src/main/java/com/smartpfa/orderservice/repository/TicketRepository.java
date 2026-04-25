@@ -2,17 +2,17 @@ package com.smartpfa.orderservice.repository;
 
 import com.smartpfa.orderservice.entity.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-    // ✅ tickets dyal nhar (admin)
-    List<Ticket> findByDate(LocalDate date);
+    // 🔥 filtre اليوم
+    List<Ticket> findByDateBetween(LocalDateTime start, LocalDateTime end);
 
-    // ✅ tickets dyal serveur f nhar
-    List<Ticket> findByServeurAndDate(String serveur, LocalDate date);
+    // 🔥 filtre serveur + اليوم
+    List<Ticket> findByServeurAndDateBetween(String serveur, LocalDateTime start, LocalDateTime end);
+
+	List<Ticket> findByDateAfter(LocalDateTime lastClearTime);
 }

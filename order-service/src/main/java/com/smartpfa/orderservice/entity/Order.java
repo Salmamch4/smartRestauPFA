@@ -2,6 +2,8 @@ package com.smartpfa.orderservice.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -13,6 +15,7 @@ public class Order {
 
     @Column(name = "client_name")
     private String clientName;
+<<<<<<< HEAD
 
     private String status;
 
@@ -49,5 +52,19 @@ public class Order {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+=======
+    private String serverName;
+    private Integer tableNumber;
+    private String status;
+    private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<OrderItem> items = new ArrayList<>();
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+        this.status = "EN_ATTENTE";
+>>>>>>> 1dc615ab860c098c0c2e41e33129f822323f5571
     }
 }

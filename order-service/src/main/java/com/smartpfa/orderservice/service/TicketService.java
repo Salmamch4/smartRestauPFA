@@ -1,8 +1,4 @@
-package com.smartpfa.orderservice.service;
-
-import com.smartpfa.orderservice.dto.ticket.ClientTicketDTO;
 import com.smartpfa.orderservice.entity.Ticket;
-
 import java.util.List;
 
 public interface TicketService {
@@ -11,12 +7,12 @@ public interface TicketService {
 
     List<Ticket> getAll();
 
-    ClientTicketDTO getClientTicket(Long id, boolean copie);
-
+    // 🔥 serveur (اليوم)
     List<Ticket> getServeurTickets(String serveur);
 
     double getServeurTotal(String serveur);
 
+    // 🔥 admin (اليوم)
     List<Ticket> getAdminTickets();
 
     double getAdminTotal();
@@ -24,4 +20,6 @@ public interface TicketService {
     Ticket update(Long id, Ticket newTicket);
 
     void delete(Long id);
+
+	void clearSession() ;
 }
