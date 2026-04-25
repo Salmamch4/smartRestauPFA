@@ -1,0 +1,74 @@
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+
+            <div class="section-header text-center mb-4">
+              <h2 class="text-uppercase small text-muted">Gestion des Fournisseurs</h2>
+              <p class="h1" style="font-family: 'Amatic SC', cursive;">
+                Nouveau <span style="color: #ce1212;">Fournisseur</span>
+              </p>
+            </div>
+
+            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+              <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+              <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+              <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+              <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">
+                <i class="bi bi-building me-2" style="color: #ce1212;"></i> ICE *
+              </label>
+              <input type="text" class="form-control" [(ngModel)]="ice" 
+                placeholder="ICE du fournisseur">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">
+                <i class="bi bi-shop me-2" style="color: #ce1212;"></i> Raison Sociale *
+              </label>
+              <input type="text" class="form-control" [(ngModel)]="raisonSocial" 
+                placeholder="Raison sociale">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">
+                <i class="bi bi-telephone me-2" style="color: #ce1212;"></i> Téléphone *
+              </label>
+              <input type="tel" class="form-control" [(ngModel)]="telephone" 
+                placeholder="Téléphone">
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-bold">
+                <i class="bi bi-house-door me-2" style="color: #ce1212;"></i> Adresse *
+              </label>
+              <textarea class="form-control" [(ngModel)]="adresse" 
+                placeholder="Adresse complète" rows="2"></textarea>
+            </div>
+
+            <div class="d-flex gap-3 justify-content-center">
+              <button class="btn btn-primary px-4" [disabled]="loading" (click)="onSubmit()">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                <i class="bi bi-check-lg me-2"></i> Enregistrer
+              </button>
+              <button class="btn btn-secondary px-4" (click)="resetForm()">
+                <i class="bi bi-arrow-repeat me-2"></i> Réinitialiser
+              </button>
+              <a routerLink="/list-fournisseurs" class="btn btn-link">
+                <i class="bi bi-list me-2"></i> Voir la liste
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

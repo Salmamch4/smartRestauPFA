@@ -1,0 +1,51 @@
+<h2>Créer Ticket</h2>
+
+<input [(ngModel)]="newTicket.produit" placeholder="Produit">
+<input [(ngModel)]="newTicket.prix" type="number" placeholder="Prix">
+<input [(ngModel)]="newTicket.quantite" type="number" placeholder="Quantité">
+<input [(ngModel)]="newTicket.serveur" placeholder="Serveur">
+
+<button (click)="create()">Ajouter Ticket</button>
+
+<hr>
+
+<h3>Liste Tickets</h3>
+
+<div *ngFor="let t of tickets">
+  <span>{{ t.produit }} - {{ t.total }} DH</span>
+  <button (click)="select(t)">Voir</button>
+</div>
+
+<hr>
+
+<!-- PRINT -->
+<div *ngIf="selectedTicket" id="ticket">
+
+  <h2 style="text-align:center">SMART RESTO</h2>
+
+  <p>Ticket N°: {{ selectedTicket.id }}</p>
+  <p>Serveur: {{ selectedTicket.serveur }}</p>
+  <p>Date: {{ today | date:'dd/MM/yyyy HH:mm' }}</p>
+
+  <hr style="border-top:1px dashed black;">
+
+  <div style="display:flex; justify-content:space-between;">
+    <span>{{ selectedTicket.produit }}</span>
+    <span>{{ selectedTicket.total }} DH</span>
+  </div>
+
+  <p>{{ selectedTicket.quantite }} x {{ selectedTicket.prix }} DH</p>
+
+  <hr style="border-top:1px dashed black;">
+
+  <p><b>Total: {{ selectedTicket.total }} DH</b></p>
+
+  <p>*** COPIE CLIENT ***</p>
+
+  <hr>
+
+  <p style="text-align:center">Merci pour votre visite 🙏</p>
+
+</div>
+
+<button *ngIf="selectedTicket" (click)="print()">Print</button>

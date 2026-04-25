@@ -39,7 +39,7 @@ export class AchatService {
         return result.achats.map(achat => ({
           ...achat,
           articleLibelle: result.articles.find(a => a.id === achat.idArticle)?.libelle || 'Article inconnu',
-          fournisseurRaisonSocial: result.fournisseurs.find(f => f.id === achat.idFournisseur)?.raison_social || 'Fournisseur inconnu'
+          fournisseurRaisonSocial: result.fournisseurs.find(f => f.id === achat.idFournisseur)?.raisonSociale || 'Fournisseur inconnu'
         }));
       })
     );
@@ -55,7 +55,7 @@ export class AchatService {
       map(result => ({
         ...result.achat,
         articleLibelle: result.articles.find(a => a.id === result.achat.idArticle)?.libelle || 'Article inconnu',
-        fournisseurRaisonSocial: result.fournisseurs.find(f => f.id === result.achat.idFournisseur)?.raison_social || 'Fournisseur inconnu'
+        fournisseurRaisonSocial: result.fournisseurs.find(f => f.id === result.achat.idFournisseur)?.raisonSociale || 'Fournisseur inconnu'
       }))
     );
   }

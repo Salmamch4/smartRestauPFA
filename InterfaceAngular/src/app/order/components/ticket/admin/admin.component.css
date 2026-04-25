@@ -1,0 +1,61 @@
+.admin-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#ticket {
+  width: 300px;
+  margin: auto;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px dashed black;
+  padding: 10px;
+}
+
+h2 {
+  text-align: center;
+}
+
+p {
+  margin: 2px 0;
+}
+
+hr {
+  border-top: 1px dashed black;
+}
+
+.total {
+  font-weight: bold;
+  text-align: right;
+}
+
+button {
+  margin: 5px;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #ticket, #ticket * {
+    visibility: visible;
+  }
+
+  #ticket {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

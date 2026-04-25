@@ -1,45 +1,44 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Fournisseur } from '../../models/achat.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FournisseurService {
-  
-  // ✅ URL de ton backend Fournisseur
-  private apiUrl = 'https://localhost:7277/api/fournisseur';
+  private apiUrl = 'http://localhost:5160/api/fournisseur';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  // ✅ Récupérer tous les fournisseurs
-  getAll(): Observable<Fournisseur[]> {
-    return this.http.get<Fournisseur[]>(this.apiUrl);
+  // Ajouter les headers HTTP
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
   }
 
-  // ✅ Récupérer un fournisseur par ID
-  getById(id: string): Observable<Fournisseur> {
-    return this.http.get<Fournisseur>(`${this.apiUrl}/${id}`);
+  getAll(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
-  // ✅ Récupérer un fournisseur par ICE
-  getByICE(ice: string): Observable<Fournisseur> {
-    return this.http.get<Fournisseur>(`${this.apiUrl}/${ice}`);
+  getById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 
-  // ✅ Ajouter un fournisseur (si besoin)
+  getByICE(ice: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/by-ice/${ice}`, { headers: this.getHeaders() });
+  }
+
   add(fournisseur: any): Observable<any> {
-    return this.http.post(this.apiUrl, fournisseur);
+    return this.http.post<any>(this.apiUrl, fournisseur, { headers: this.getHeaders() });
   }
 
-  // ✅ Modifier un fournisseur
   update(id: string, fournisseur: any): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/${id}`, fournisseur);
+    return this.http.patch<any>(`${this.apiUrl}/${id}`, fournisseur, { headers: this.getHeaders() });
   }
 
-  // ✅ Supprimer un fournisseur
-  delete(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  delete(id: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 }

@@ -1,0 +1,66 @@
+<div class="container py-4">
+  <div class="card shadow border-0 rounded-4">
+    <div class="card-header bg-white py-3">
+      <h4 class="fw-bold mb-0">Modifier le <span class="text-danger">Produit</span></h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="produitForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label fw-bold">Nom du produit</label>
+              <input type="text" class="form-control" formControlName="nom">
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Prix (DH)</label>
+                <input type="number" class="form-control" formControlName="prix">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Catégorie</label>
+                <select class="form-select" formControlName="idCategorie">
+                  <option *ngFor="let cat of categories" [value]="cat.id">{{cat.libelle}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">Image du produit</label>
+              <input type="file" class="form-control" (change)="onFileSelected($event)">
+              <div class="mt-2 text-center" *ngIf="imagePreview">
+                <img [src]="imagePreview" class="rounded shadow-sm" style="max-height: 150px;">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 bg-light p-3 rounded-3">
+            <h5 class="fw-bold">Composition</h5>
+            <div class="row g-2 mb-3">
+              <div class="col-7">
+                <select class="form-select" formControlName="articleId">
+                  <option value="">Choisir un article...</option>
+                  <option *ngFor="let art of articles" [value]="art.id">{{art.designation}}</option>
+                </select>
+              </div>
+              <div class="col-3">
+                <input type="number" class="form-control" formControlName="quantite">
+              </div>
+              <div class="col-2">
+                <button type="button" class="btn btn-danger w-100" (click)="addIngredient()">+</button>
+              </div>
+            </div>
+            <ul class="list-group">
+              <li *ngFor="let item of compositionList; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+                {{item.libelle || 'Article'}} 
+                <span class="badge bg-danger rounded-pill">{{item.quantite}}</span>
+                <button type="button" class="btn btn-sm btn-link text-danger" (click)="removeIngredient(i)">Supprimer</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="text-end mt-4">
+          <button type="button" class="btn btn-light me-2" (click)="router.navigate(['/list-produits'])">Annuler</button>
+          <button type="submit" class="btn btn-danger px-4" [disabled]="produitForm.invalid">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
