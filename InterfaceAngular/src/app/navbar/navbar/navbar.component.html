@@ -141,14 +141,28 @@
         </div>
       </div>
 <li>
-  <a (click)="toggleTicket()">🎟️ Tickets</a>
+ <!-- Tickets -->
+<div class="menu-item has-submenu">
+  <a (click)="toggleSubmenu('tickets')" class="dropdown-toggle">
+    <i class="fas fa-ticket-alt"></i>
+    <span>Tickets</span>
+    <i class="fas fa-chevron-down arrow"></i>
+  </a>
 
-  <ul *ngIf="openTicket">
-    <li><a routerLink="/client-ticket">Client Ticket</a></li>
-    <li><a routerLink="/serveur-ticket">Serveur Ticket</a></li>
-    <li><a routerLink="/admin-ticket">Admin Ticket</a></li>
-  </ul>
-</li>      <!-- Paramètres -->
+  <div class="submenu" [class.open]="openSubmenu === 'tickets'">
+    <a routerLink="/client-ticket" routerLinkActive="active">
+      <i class="fas fa-receipt"></i> Ticket Client
+    </a>
+
+    <a routerLink="/serveur-ticket" routerLinkActive="active">
+      <i class="fas fa-user-tie"></i> Ticket Serveur
+    </a>
+
+    <a routerLink="/admin-ticket" routerLinkActive="active">
+      <i class="fas fa-user-shield"></i> Ticket Admin
+    </a>
+  </div>
+</div>      <!-- Paramètres -->
       <div class="menu-item">
         <a routerLink="/parametres" routerLinkActive="active">
           <i class="fas fa-cog"></i>
