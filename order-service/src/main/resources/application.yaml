@@ -48,3 +48,5 @@ logging:
     com.smartpfa: DEBUG
     org.springframework.kafka: DEBUG
 
+  profiles:
+    active: local
