@@ -1,44 +1,47 @@
+// controller/OrderController.java
 package com.smartpfa.orderservice.controller;
 
-import com.smartpfa.orderservice.entity.Order;
-import com.smartpfa.orderservice.service.OrderService;
-import lombok.RequiredArgsConstructor;
+import com.smartpfa.orderservice.dto.order.OrderRequestDTO;
+import com.smartpfa.orderservice.dto.order.OrderResponseDTO;
+import com.smartpfa.orderservice.service.IOrderService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/orders")
-@RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@RequestMapping("/api/commandes")
+@CrossOrigin(origins = "http://localhost:4200")
 public class OrderController {
 
-    private final OrderService orderService;
+    @Autowired
+    private IOrderService orderService;
+
+    @PostMapping
+    public ResponseEntity<OrderResponseDTO> createOrder(@Valid @RequestBody OrderRequestDTO request) {
+        OrderResponseDTO response = orderService.createOrder(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
 
     @GetMapping
-    public List<Order> getAllOrders() {
-        return orderService.getAllOrders();
+    public ResponseEntity<List<OrderResponseDTO>> getAllOrders() {
+        return ResponseEntity.ok(orderService.getAllOrders());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
-        return ResponseEntity.ok(orderService.getOrderById(id));
+    public ResponseEntity<OrderResponseDTO> getOrderById(@PathVariable UUID id) {
+        OrderResponseDTO order = orderService.getOrderById(id);
+        if (order == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(order);
     }
 
-    @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        return ResponseEntity.ok(orderService.createOrder(order));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order order) {
-        return ResponseEntity.ok(orderService.updateOrder(id, order));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
-        orderService.deleteOrder(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/telephone/{telephone}")
+    public ResponseEntity<List<OrderResponseDTO>> getOrdersByTelephone(@PathVariable String telephone) {
+        return ResponseEntity.ok(orderService.getOrdersByTelephone(telephone));
     }
 }
