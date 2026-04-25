@@ -1,0 +1,45 @@
+<div>
+
+  <input [(ngModel)]="serveurName" placeholder="Nom serveur">
+  <button (click)="loadTickets()">Load</button>
+
+  <div id="ticket">
+
+    <!-- 🔥 TITLE -->
+    <h2 style="text-align:center">SMART RESTO</h2>
+    <h3 *ngIf="isDuplicate" style="text-align:center">DUPLIQUER</h3>
+
+    <p style="text-align:center">
+      {{ today | date:'dd/MM/yyyy HH:mm' }}
+    </p>
+
+    <hr>
+
+    <!-- 🔥 TICKETS -->
+    <div *ngFor="let t of tickets">
+
+      <div *ngFor="let l of t.lignes">
+
+        <p>🍽️ {{ l.produitNom }}</p>
+
+        <div style="display:flex; justify-content:space-between;">
+          <span>{{ l.quantite }} x {{ l.prix }} DH</span>
+          <span>{{ l.total }} DH</span>
+        </div>
+
+      </div>
+
+      <p style="text-align:right"><b>{{ t.total }} DH</b></p>
+
+      <hr>
+
+    </div>
+
+    <!-- 🔥 TOTAL -->
+    <h3 style="text-align:right">Total: {{ totalJour }} DH</h3>
+
+  </div>
+
+  <button (click)="print()">🖨️ Print</button>
+
+</div>

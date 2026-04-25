@@ -1,0 +1,19 @@
+/* Ajoutez vos styles personnalisés ici si nécessaire */
+.section {
+  padding: 2rem 0;
+}
+
+.alert {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

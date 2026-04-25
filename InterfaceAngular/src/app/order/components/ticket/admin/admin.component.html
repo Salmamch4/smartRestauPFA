@@ -1,0 +1,62 @@
+<div>
+
+  <!-- 🔥 HEADER -->
+  <h2 style="text-align:center">SMART RESTO</h2>
+
+  <p style="text-align:center">
+    {{ today | date:'dd/MM/yyyy HH:mm' }}
+  </p>
+
+  <!-- 🔥 TOTAL GLOBAL فالفوق -->
+  <h3 style="text-align:right">
+    Total Global: {{ totalGlobal }} DH
+  </h3>
+
+  <hr>
+
+  <!-- 🔥 ACTIONS -->
+  <div style="margin-bottom:15px;">
+   <button (click)="clearTodayView()">🧹 Clear Today</button>
+<button (click)="loadTickets()">🔄 Refresh</button>
+<button (click)="print()">🖨️ Print</button>
+  </div>
+
+  <!-- 🔥 TICKET -->
+  <div id="ticket">
+
+    <!-- 🔥 DUPLICATA -->
+    <h3 *ngIf="isDuplicate" style="text-align:center">
+      DUPLICATA
+    </h3>
+
+    <hr>
+
+    <!-- 🔥 LISTE DES TICKETS -->
+    <div *ngFor="let t of tickets">
+
+      <p><b>Serveur:</b> {{ t.serveur }}</p>
+
+      <!-- 🔥 LIGNES -->
+      <div *ngFor="let l of t.lignes">
+
+        <p>🍽️ {{ l.produitNom }}</p>
+
+        <div style="display:flex; justify-content:space-between;">
+          <span>{{ l.quantite }} x {{ l.prix }} DH</span>
+          <span>{{ l.total }} DH</span>
+        </div>
+
+      </div>
+
+      <!-- 🔥 TOTAL TICKET -->
+      <p style="text-align:right">
+        <b>{{ t.total }} DH</b>
+      </p>
+
+      <hr>
+
+    </div>
+
+  </div>
+
+</div>

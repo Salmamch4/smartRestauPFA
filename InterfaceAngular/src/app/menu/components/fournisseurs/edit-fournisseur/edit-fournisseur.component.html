@@ -1,0 +1,122 @@
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+
+            <!-- Header -->
+            <div class="section-header text-center mb-4">
+              <h2 class="text-uppercase small text-muted">Gestion des Fournisseurs</h2>
+              <p class="h1" style="font-family: 'Amatic SC', cursive;">
+                Modifier <span style="color: #ce1212;">Fournisseur</span>
+              </p>
+            </div>
+
+            <!-- Messages -->
+            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+              <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+              <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+              <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+              <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+            </div>
+
+            <!-- Loading -->
+            <div *ngIf="loading" class="text-center py-4">
+              <div class="spinner-border" style="color: #ce1212;"></div>
+              <p class="mt-2">Chargement du fournisseur...</p>
+            </div>
+
+            <!-- Formulaire -->
+            <form *ngIf="!loading" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-building me-2" style="color: #ce1212;"></i> ICE *
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="ice"
+                  name="ice" 
+                  placeholder="ICE du fournisseur" 
+                  required>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-shop me-2" style="color: #ce1212;"></i> Raison Sociale *
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="raisonSocial"
+                  name="raisonSocial" 
+                  placeholder="Raison sociale" 
+                  required>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-telephone me-2" style="color: #ce1212;"></i> Téléphone *
+                </label>
+                <input 
+                  type="tel" 
+                  class="form-control" 
+                  [(ngModel)]="telephone"
+                  name="telephone" 
+                  placeholder="Téléphone" 
+                  required>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-house-door me-2" style="color: #ce1212;"></i> Adresse *
+                </label>
+                <textarea 
+                  class="form-control" 
+                  [(ngModel)]="adresse"
+                  name="adresse" 
+                  placeholder="Adresse complète" 
+                  rows="2" 
+                  required></textarea>
+              </div>
+
+              <!-- Boutons -->
+              <div class="d-flex gap-3 justify-content-center">
+                <button type="submit" class="btn btn-primary px-4" [disabled]="loading">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                  <i class="bi bi-check-lg me-2"></i> Mettre à jour
+                </button>
+                <button type="button" class="btn btn-secondary px-4" (click)="resetForm()">
+                  <i class="bi bi-arrow-repeat me-2"></i> Réinitialiser
+                </button>
+                <button type="button" class="btn btn-outline-secondary px-4" (click)="goBack()">
+                  <i class="bi bi-x-lg me-2"></i> Annuler
+                </button>
+              </div>
+            </form>
+
+            <!-- Debug: Afficher les données -->
+           <!-- <div *ngIf="!loading" class="mt-4 p-2 bg-light rounded" style="font-size: 12px;">
+              <strong>Debug:</strong><br>
+              ICE: {{ ice }}<br>
+              Raison Sociale: {{ raisonSocial }}<br>
+              Téléphone: {{ telephone }}<br>
+              Adresse: {{ adresse }}
+            </div>-->
+
+            <!-- Lien retour -->
+            <div class="text-center mt-4">
+              <a routerLink="/list-fournisseurs" class="text-decoration-none">
+                <i class="bi bi-arrow-left me-1"></i> Retour à la liste
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

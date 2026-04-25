@@ -13,6 +13,9 @@ export class ServeurTicketComponent {
   totalJour: number = 0;
   today: Date = new Date();
 
+  // 🔥 duplicata
+  isDuplicate: boolean = false;
+
   constructor(private http: HttpClient) {}
 
   loadTickets() {
@@ -43,8 +46,14 @@ export class ServeurTicketComponent {
       });
   }
 
-  // ✅ print بسيط وخدام
+  // 🔥 PRINT + DUPLICATA
   print() {
-    window.print();
+
+    // أول مرة → ماشي duplicata
+    // من بعد → duplicata
+    setTimeout(() => {
+      window.print();
+      this.isDuplicate = true;
+    }, 200);
   }
 }

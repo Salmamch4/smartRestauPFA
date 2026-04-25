@@ -1,0 +1,56 @@
+.section {
+  padding: 2rem 0;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(206, 18, 18, 0.05);
+  cursor: pointer;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.alert {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.input-group .btn-outline-secondary {
+  border-left: none;
+}
+
+.input-group .form-control:focus {
+  border-color: #ce1212;
+  box-shadow: 0 0 0 0.2rem rgba(206, 18, 18, 0.25);
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.65rem;
+}
+
+/* Animation pour la recherche */
+.table tbody tr {
+  transition: all 0.2s ease-in-out;
+}
+
+.table tbody tr:hover {
+  transform: scale(1.01);
+}

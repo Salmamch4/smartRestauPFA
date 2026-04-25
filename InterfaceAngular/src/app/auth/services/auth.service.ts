@@ -1,30 +1,80 @@
+// src/app/auth/core/services/auth-service.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-// ✅ عدّلي هاد السطر حسب المسار عندك
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+
+// ✅ Assurez-vous que User est bien exportée
+export interface User {
+  id: string;
+  telephone: string;
+  email: string;
+  role_id: string;
+  role: string;
+  is_active: boolean | string;
+  nom?: string;
+  prenom?: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthServiceService {
+  private API = environment.apiUrl;
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
-  private API = environment.apiUrl; //  http://127.0.0.1:8000/api
+  constructor(private http: HttpClient) {
+    this.loadUserFromStorage();
+  }
 
-  constructor(private http: HttpClient) {}
+  private loadUserFromStorage(): void {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+        this.currentUserSubject.next(user);
+        console.log('User loaded from storage:', user);
+      } catch (e) {
+        console.error('Error loading user:', e);
+      }
+    }
+  }
 
-  //  Register
   registerClient(data: any): Observable<any> {
     return this.http.post(`${this.API}/auth/register-client`, data);
   }
 
-  // Login
   login(data: any): Observable<any> {
-    return this.http.post(`${this.API}/auth/login`, data);
+    return this.http.post(`${this.API}/auth/login`, data).pipe(
+      tap((response: any) => {
+        console.log('Login response:', response);
+        if (response && response.user) {
+          localStorage.setItem('currentUser', JSON.stringify(response.user));
+          localStorage.setItem('access_token', response.access_token);
+          localStorage.setItem('refresh_token', response.refresh_token);
+          this.currentUserSubject.next(response.user);
+        }
+      })
+    );
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(`${this.API}/auth/logout`, {});
+  }
+
+  getCurrentUser(): User | null {
+    return this.currentUserSubject.value;
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('access_token');
+  }
+
+  isLoggedIn(): boolean {
+    const token = this.getToken();
+    const user = this.getCurrentUser();
+    return token !== null && user !== null;
   }
 }
-
-
-
-

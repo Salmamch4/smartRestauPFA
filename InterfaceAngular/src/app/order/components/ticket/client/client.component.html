@@ -1,0 +1,56 @@
+<h2>Client Ticket</h2>
+
+<!-- 🔥 LISTE -->
+<div *ngFor="let t of tickets">
+  <button (click)="chooseTicket(t)">
+    Ticket #{{ t.id }}
+  </button>
+</div>
+
+<hr>
+
+<!-- 🔥 TICKET -->
+<div id="ticket" *ngIf="selectedTicket">
+
+  <h2 style="text-align:center">SMART RESTO</h2>
+
+  <!-- 🔥 DUPLICATA -->
+  <h3 *ngIf="copie" style="text-align:center">
+    DUPLIQUER
+  </h3>
+
+  <p><strong>Ticket N°:</strong> {{ selectedTicket.id }}</p>
+  <p><strong>Serveur:</strong> {{ selectedTicket.serveur }}</p>
+  <p><strong>Date:</strong> {{ today | date:'dd/MM/yyyy HH:mm' }}</p>
+
+  <hr>
+
+  <!-- 🔥 LIGNES -->
+  <div *ngFor="let l of selectedTicket.lignes">
+
+    <p>🍽️ {{ l.produitNom }}</p>
+
+    <div style="display:flex; justify-content:space-between;">
+      <span>{{ l.quantite }} x {{ l.prix }} DH</span>
+      <span>{{ l.total }} DH</span>
+    </div>
+
+    <hr>
+
+  </div>
+
+  <!-- 🔥 TOTAL -->
+  <p style="text-align:right">
+    <strong>Total: {{ selectedTicket.total }} DH</strong>
+  </p>
+
+  <hr>
+
+  <p style="text-align:center">Merci pour votre visite</p>
+
+</div>
+
+<!-- 🔥 PRINT -->
+<button *ngIf="selectedTicket" (click)="printClient()">
+  🖨️ Print
+</button>

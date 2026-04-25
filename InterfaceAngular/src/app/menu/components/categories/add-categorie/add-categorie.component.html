@@ -9,7 +9,8 @@
             <div class="section-header text-center mb-4">
               <h2 class="text-uppercase small text-muted">Gestion des Catégories</h2>
               <p class="h1" style="font-family: 'Amatic SC', cursive;">
-                Nouvelle <span style="color: #ce1212;">Catégorie</span>
+                {{ isEditMode ? 'Modifier' : 'Nouvelle' }}
+                <span style="color: #ce1212;">Catégorie</span>
               </p>
             </div>
 
@@ -54,7 +55,8 @@
             <div class="d-flex gap-3 justify-content-center">
               <button class="btn btn-primary px-4" [disabled]="loading" (click)="onSubmit()">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
-                <i class="bi bi-check-lg me-2"></i> Enregistrer
+                <i class="bi bi-check-lg me-2"></i>
+                {{ isEditMode ? 'Modifier' : 'Enregistrer' }}
               </button>
               <button class="btn btn-secondary px-4" (click)="resetForm()">
                 <i class="bi bi-arrow-repeat me-2"></i> Réinitialiser
