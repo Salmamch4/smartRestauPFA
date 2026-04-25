@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +28,9 @@ import { UpdateAchatsComponent } from './menu/components/achats/update-achats/up
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { AddCategorieComponent } from './menu/components/categories/add-categorie/add-categorie.component';
 import { ListCategorieComponent } from './menu/components/categories/list-categorie/list-categorie.component';
+import { CatalogueComponent } from './catalogue/catalogue/catalogue.component';
+import { CommandeComponent } from './catalogue/commande/commande.component';
+import { MesCommandesComponent } from './catalogue/mes-commandes/mes-commandes.component';
 
 
 @NgModule({
@@ -49,14 +54,20 @@ UpdateArticleComponent,
     NavbarComponent,
     AddCategorieComponent,
     ListCategorieComponent,
+    CatalogueComponent,
+    CommandeComponent,
+    MesCommandesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
 
     HttpClientModule,
-    FormsModule,         
+    FormsModule,   
+       CommonModule,   
+      RouterModule,    
     ReactiveFormsModule  
+
 
   
   ],

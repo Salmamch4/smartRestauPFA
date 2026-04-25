@@ -1,0 +1,163 @@
+<!-- src/app/catalogue/catalogue/catalogue.component.html -->
+<div class="catalogue-page">
+  <!-- Header avec authentification -->
+  <div class="top-header">
+    <div class="logo">
+      <i class="bi bi-shop"></i>
+      <span>Food<span class="text-primary">Menu</span></span>
+    </div>
+    
+    <!-- ✅ Non connecté: afficher boutons login/register -->
+    <div class="auth-buttons" *ngIf="!isLoggedIn">
+      <a routerLink="/register" class="btn-register">
+        <i class="bi bi-person-plus"></i> S'inscrire
+      </a>
+      <a routerLink="/login" class="btn-login">
+        <i class="bi bi-box-arrow-in-right"></i> Connexion
+      </a>
+    </div>
+    
+    <!-- ✅ Connecté: afficher menu utilisateur -->
+    <div class="user-menu" *ngIf="isLoggedIn">
+      <div class="dropdown">
+        <button class="btn-user dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle"></i>
+          <span>{{ currentUser?.name || currentUser?.telephone }}</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" (click)="goToProfile()">
+            <i class="bi bi-person"></i> Mon profil
+          </a></li>
+          <li><a class="dropdown-item" (click)="goToMesCommandes()">
+            <i class="bi bi-clock-history"></i> Mes commandes
+          </a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i> Déconnexion
+          </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reste du catalogue inchangé -->
+  <div class="container-fluid">
+    <div class="row g-3">
+      
+      <!-- Sidebar Catégories -->
+      <div class="col-lg-2">
+        <div class="categories-card">
+          <div class="card-header-custom">
+            <i class="bi bi-grid-3x3-gap-fill"></i>
+            <span>Nos Catégories</span>
+          </div>
+          <div class="categories-list">
+            <button *ngFor="let cat of categories; let i = index" 
+                    class="category-btn"
+                    [style.--i]="i"
+                    [class.active]="selectedCategory?.id === cat.id"
+                    (click)="selectCategory(cat)">
+              <img [src]="getCategoryImage(cat)" class="category-icon" [alt]="cat.libelle">
+              <span>{{ cat.libelle }}</span>
+              <span class="category-count">{{ getProductCountByCategory(cat.id) }}</span>
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grille Produits -->
+      <div class="col-lg-7">
+        <!-- Contenu identique -->
+        <div *ngIf="!selectedCategory" class="welcome-card">
+          <i class="bi bi-emoji-smile"></i>
+          <h3>Bienvenue chez FoodMenu</h3>
+          <p>Sélectionnez une catégorie pour découvrir nos plats</p>
+        </div>
+
+        <div *ngIf="selectedCategory">
+          <div class="category-header">
+            <h2>{{ selectedCategory.libelle }}</h2>
+            <span class="badge-count">{{ produits.length }} plats</span>
+          </div>
+          
+          <div *ngIf="loadingProduits" class="loader">
+            <div class="spinner"></div>
+          </div>
+
+          <div *ngIf="!loadingProduits && produits.length === 0" class="empty-state">
+            <i class="bi bi-emoji-frown"></i>
+            <p>Aucun produit</p>
+          </div>
+
+          <div class="products-grid">
+            <div *ngFor="let produit of produits" class="product-item">
+              <div class="product-img-wrapper">
+                <img [src]="getProductImage(produit)" (error)="handleImageError($event)">
+                <button class="quick-add-btn" (click)="ajouterAuPanier(produit)">
+                  <i class="bi bi-cart-plus"></i>
+                </button>
+              </div>
+              <div class="product-info">
+                <h5>{{ produit.libelle }}</h5>
+                <p>{{ (produit.description || '') | slice:0:45 }}</p>
+                <div class="product-bottom">
+                  <span class="price">{{ produit.prix_unitaire | currency:'DH' }}</span>
+                  <button class="add-btn" (click)="ajouterAuPanier(produit)">
+                    <i class="bi bi-cart-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panier -->
+      <div class="col-lg-3">
+        <div class="cart-card">
+          <div class="cart-header">
+            <i class="bi bi-cart"></i>
+            <span>Panier</span>
+            <span class="cart-badge">{{ panier.nombreArticles }}</span>
+          </div>
+          
+          <div class="cart-items">
+            <div *ngIf="panier.items.length === 0" class="cart-empty">
+              <i class="bi bi-cart-x"></i>
+              <p>Vide</p>
+            </div>
+            
+            <div *ngFor="let item of panier.items" class="cart-item">
+              <img [src]="item.photo || defaultImage" class="cart-item-img">
+              <div class="cart-item-details">
+                <div class="cart-item-name">{{ item.libelle | slice:0:15 }}</div>
+                <div class="cart-item-price">{{ item.prix_unitaire | currency:'DH' }}</div>
+                <div class="cart-qty">
+                  <button (click)="retirerDuPanier(item.produitId)">-</button>
+                  <span>{{ item.quantite }}</span>
+                  <button (click)="ajouterAuPanier({ id: item.produitId, libelle: item.libelle, prix_unitaire: item.prix_unitaire, photo: item.photo, description: '', id_categorie: '', dateCreation: '' })">+</button>
+                </div>
+              </div>
+              <div class="cart-item-total">
+                {{ item.total | currency:'DH' }}
+                <button class="remove-item" (click)="supprimerDuPanier(item.produitId)">×</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="cart-footer" *ngIf="panier.items.length > 0">
+            <div class="cart-total">
+              <span>Total</span>
+              <strong>{{ panier.total | currency:'DH' }}</strong>
+            </div>
+            <div class="cart-buttons">
+              <button class="btn-clear" (click)="viderPanier()">Vider</button>
+              <button class="btn-checkout" (click)="validerCommande()">Commander</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,9 @@
+// src/app/auth/components/login/login.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../core/services/auth-service.service';
+import { AuthStateService } from '../../core/services/auth-state.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +19,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthServiceService,
+    private authStateService: AuthStateService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Redirect if already logged in
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/admin-dashboard']);
+      this.redirectByRole();
     }
 
     this.loginForm = this.fb.group({
@@ -31,11 +33,37 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    // Clear field errors when user types
     this.loginForm.valueChanges.subscribe(() => {
       this.fieldErrors = {};
       this.errorMessage = '';
     });
+  }
+
+  redirectByRole(): void {
+    const user = this.authService.getCurrentUser();
+    const role = user?.role?.toLowerCase();
+    this.navigateByRole(role);
+  }
+
+  navigateByRole(role: string): void {
+    switch(role) {
+      case 'client':
+        this.router.navigate(['/catalogue']);
+        break;
+      case 'admin':
+      case 'administrateur':
+        this.router.navigate(['/admin-dashboard']);
+        break;
+      case 'server':
+        this.router.navigate(['/server-dashboard']);
+        break;
+      case 'chef_cuisine':
+      case 'chef cuisine':
+        this.router.navigate(['/chef-dashboard']);
+        break;
+      default:
+        this.router.navigate(['/catalogue']);
+    }
   }
 
   onSubmit(): void {
@@ -53,17 +81,17 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         console.log('Login successful!', response);
         
-        // Show success message
-        this.showMessage('Connexion réussie!', 'success');
+        // ✅ Mettre à jour l'état d'authentification
+        this.authStateService.updateAuthState();
         
-        // Redirect to dashboard
-        this.router.navigate(['/admin-dashboard']);
+        const user = response.user;
+        const role = user?.role?.toLowerCase();
+        this.navigateByRole(role);
       },
       error: (error) => {
         this.loading = false;
         console.error('Login error:', error);
 
-        // Handle different error types
         if (error.status === 401) {
           if (error.error?.errors) {
             if (error.error.errors.telephone) {
@@ -91,11 +119,6 @@ export class LoginComponent implements OnInit {
         }
       }
     });
-  }
-
-  showMessage(message: string, type: string): void {
-    // You can implement a toast/notification service here
-    alert(message);
   }
 
   get telephone() { return this.loginForm.get('telephone'); }

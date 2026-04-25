@@ -1,8 +1,10 @@
+// src/app/core/services/auth-service.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { HttpHeaders } from '@angular/common/http';  // Ajoute cette ligne en haut de ton fichier
+import { HttpHeaders } from '@angular/common/http';
+
 export interface LoginRequest {
   telephone: string;
   password: string;
@@ -17,9 +19,10 @@ export interface LoginResponse {
     id: number;
     telephone: string;
     role: string;
+    name?: string;
+    email?: string;
   };
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -45,16 +48,13 @@ export class AuthServiceService {
     let errorMessage = 'An error occurred';
 
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
       errorMessage = error.error.message;
     } else {
-      // Server-side error
       console.error('Server Error:', error);
 
       if (error.status === 401) {
         errorMessage = error.error?.error || 'Invalid phone number or password';
       } else if (error.status === 422) {
-        // Validation errors
         return throwError(() => error);
       } else if (error.status === 0) {
         errorMessage = 'Cannot connect to server. Make sure Laravel is running.';
@@ -63,7 +63,6 @@ export class AuthServiceService {
 
     return throwError(() => new Error(errorMessage));
   }
-
 
   getToken(): string | null {
     return localStorage.getItem('access_token');
@@ -78,6 +77,39 @@ export class AuthServiceService {
     return !!this.getToken();
   }
 
+ 
+
+  getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('access_token');  // ✅ Correction: 'access_token'
+    return new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : ''
+    });
+  }
+
+  logout(): Observable<any> {
+    const token = this.getToken();
+    const headers = token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : {};
+    
+    return this.http.post(`${this.apiUrl}/logout`, {}, { headers, withCredentials: true })
+      .pipe(
+        tap(() => {
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('user');
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  isLoggedIn(): boolean {
+    return this.getToken() !== null;
+  }
+
+  getCurrentUser(): any {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+
 forgot(email: string): Observable<any> {
   return this.http.post(`${this.apiUrl}/password/forgot`, { email });
 }
@@ -88,30 +120,5 @@ reset(token: string, password: string, password_confirmation: string): Observabl
     password_confirmation
   });
 }
- getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token');  // Récupère le token depuis le localStorage
-    return new HttpHeaders({
-      Authorization: token ? `Bearer ${token}` : ''
-    });
-  }
-
-  logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true })
-      .pipe(
-        tap(() => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
-        }),
-        catchError(this.handleError)
-      );
-  }
-
-    isLoggedIn(): boolean {
-    return localStorage.getItem('token') !== null;
-  }
-
-   getCurrentUser(): any {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
-  }
+ 
 }

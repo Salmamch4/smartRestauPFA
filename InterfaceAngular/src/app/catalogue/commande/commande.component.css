@@ -1,0 +1,252 @@
+/* src/app/catalogue/commande/commande.component.css */
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  padding: 40px 0;
+}
+
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+  padding: 35px;
+  background: white;
+}
+
+.section-header h2 {
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #ce1212;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.section-header .h1 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* Résumé du panier */
+.cart-summary {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.cart-summary h5 {
+  color: #2c3e50;
+  border-bottom: 2px solid #ce1212;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.cart-items-list {
+  margin: 15px 0;
+}
+
+.cart-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed #dee2e6;
+}
+
+.item-name {
+  flex: 2;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.item-qty {
+  flex: 0.5;
+  text-align: center;
+  color: #6c757d;
+}
+
+.item-price {
+  flex: 1;
+  text-align: right;
+  font-weight: 600;
+  color: #ce1212;
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 2px solid #dee2e6;
+  font-size: 1.1rem;
+}
+
+.cart-total-row strong {
+  color: #ce1212;
+  font-size: 1.3rem;
+}
+
+/* Formulaires */
+.form-label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.input-group {
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.input-group:focus-within {
+  box-shadow: 0 0 0 3px rgba(206, 18, 18, 0.2);
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-right: none;
+  padding: 10px 15px;
+}
+
+.input-group-text i {
+  color: #ce1212;
+  font-size: 1rem;
+}
+
+.form-control {
+  border: 1px solid #e0e0e0;
+  border-left: none;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #ce1212;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Boutons */
+.btn {
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: #ce1212;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #a00e0e;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(206, 18, 18, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+/* Alertes */
+.alert {
+  border-radius: 12px;
+  border: none;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-left: 4px solid #28a745;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-left: 4px solid #dc3545;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 20px;
+  }
+  
+  .section-header .h1 {
+    font-size: 1.8rem;
+  }
+  
+  .btn {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+  
+  .cart-item-row {
+    font-size: 0.85rem;
+  }
+  
+  .cart-total-row strong {
+    font-size: 1.1rem;
+  }
+  
+  .d-flex.gap-3 {
+    flex-direction: column;
+  }
+}

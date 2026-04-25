@@ -1,0 +1,146 @@
+<!-- src/app/commande/mes-commandes/mes-commandes.component.html -->
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+            
+            <!-- Header -->
+            <div class="section-header text-center mb-4">
+              <h2 class="text-uppercase small text-muted">Suivi des commandes</h2>
+              <p class="h1" style="font-family: 'Amatic SC', cursive;">
+                <i class="bi bi-clock-history me-2" style="color: #ce1212;"></i>
+                Mes <span style="color: #ce1212;">Commandes</span>
+              </p>
+            </div>
+
+            <!-- Message d'erreur -->
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+              <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+              <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+            </div>
+
+            <!-- Message de succès -->
+            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+              <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+              <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+            </div>
+
+            <!-- Recherche par téléphone -->
+            <div class="search-section mb-4">
+              <div class="row g-3">
+                <div class="col-md-8">
+                  <label class="form-label fw-bold">
+                    <i class="bi bi-telephone me-2" style="color: #ce1212;"></i> Votre numéro de téléphone
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light">
+                      <i class="bi bi-telephone" style="color: #ce1212;"></i>
+                    </span>
+                    <input 
+                      type="tel" 
+                      class="form-control" 
+                      [(ngModel)]="telephone"
+                      placeholder="0612345678"
+                      maxlength="10"
+                      (keyup.enter)="rechercher()">
+                    <button class="btn btn-primary" (click)="rechercher()" [disabled]="telephone.length !== 10">
+                      <i class="bi bi-search me-2"></i> Rechercher
+                    </button>
+                  </div>
+                  <div class="text-muted small mt-1">
+                    <i class="bi bi-info-circle"></i> Entrez votre numéro de téléphone pour voir vos commandes
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Loading -->
+            <div *ngIf="loading" class="text-center py-5">
+              <div class="spinner-border text-danger" role="status">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
+              <p class="mt-2 text-muted">Chargement de vos commandes...</p>
+            </div>
+
+            <!-- Aucune commande -->
+            <div *ngIf="!loading && commandes.length === 0 && telephone" class="alert alert-info text-center">
+              <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+              <p class="mb-2">Aucune commande trouvée pour le numéro <strong>{{ telephone }}</strong></p>
+              <a routerLink="/catalogue" class="btn btn-primary btn-sm mt-2">
+                <i class="bi bi-cart-plus me-2"></i> Passer une commande
+              </a>
+            </div>
+
+            <!-- Aucun téléphone saisi -->
+            <div *ngIf="!loading && commandes.length === 0 && !telephone" class="alert alert-info text-center">
+              <i class="bi bi-search fs-1 d-block mb-3"></i>
+              <p>Entrez votre numéro de téléphone pour voir vos commandes</p>
+            </div>
+
+            <!-- Liste des commandes -->
+            <div *ngIf="!loading && commandes.length > 0" class="commandes-list">
+              <div class="row">
+                <div class="col-md-6 col-lg-6 mb-4" *ngFor="let commande of commandes">
+                  <div class="commande-card">
+                    <div class="commande-header">
+                      <div class="commande-numero">
+                        <i class="bi bi-receipt"></i>
+                        <span>{{ commande.numeroCommande }}</span>
+                      </div>
+                      <div class="commande-status">
+                        <span class="badge" [ngClass]="getStatusClass(commande.statut)">
+                          {{ getStatusText(commande.statut) }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="commande-body">
+                      <div class="commande-date">
+                        <i class="bi bi-calendar"></i>
+                        {{ commande.dateCommande | date:'dd/MM/yyyy HH:mm' }}
+                      </div>
+                      <div class="commande-table">
+                        <i class="bi bi-grid"></i>
+                        Table: {{ commande.numeroTable || 'N/A' }}
+                      </div>
+                      <div class="commande-items mt-3">
+                        <div class="items-title">
+                          <i class="bi bi-box"></i> Articles commandés:
+                        </div>
+                        <div class="items-list">
+                          <div *ngFor="let item of commande.items" class="item-row">
+                            <span class="item-name">{{ item.produitLibelle }}</span>
+                            <span class="item-qty">x{{ item.quantite }}</span>
+                            <span class="item-price">{{ item.totalLigne | currency:'DH' }}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="commande-total mt-3">
+                        <span>Total</span>
+                        <strong>{{ commande.total | currency:'DH' }}</strong>
+                      </div>
+                    </div>
+                    <div class="commande-footer">
+                      <a [routerLink]="['/commande-details', commande.id]" class="btn-details">
+                        <i class="bi bi-eye"></i> Détails
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bouton retour catalogue -->
+            <div class="text-center mt-4">
+              <a routerLink="/catalogue" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left me-2"></i> Retour au catalogue
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

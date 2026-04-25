@@ -1,0 +1,334 @@
+/* src/app/commande/mes-commandes/mes-commandes.component.css */
+
+.section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  padding: 40px 0;
+}
+
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 35px;
+  background: white;
+}
+
+.section-header h2 {
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #ce1212;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.section-header .h1 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* Search section */
+.search-section {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.input-group {
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-right: none;
+  padding: 10px 15px;
+}
+
+.input-group-text i {
+  color: #ce1212;
+}
+
+.form-control {
+  border: 1px solid #e0e0e0;
+  border-left: none;
+  padding: 10px 15px;
+}
+
+.form-control:focus {
+  border-color: #ce1212;
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-primary {
+  background: #ce1212;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 25px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background: #a00e0e;
+  transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  transform: none;
+}
+
+/* Commande card */
+.commande-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.commande-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(206, 18, 18, 0.15);
+}
+
+.commande-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.commande-numero {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.commande-status .badge {
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.badge.bg-warning {
+  background: #ffc107;
+  color: #2c3e50;
+}
+
+.badge.bg-success {
+  background: #28a745;
+  color: white;
+}
+
+.badge.bg-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.badge.bg-info {
+  background: #17a2b8;
+  color: white;
+}
+
+.commande-body {
+  padding: 15px;
+}
+
+.commande-date, .commande-table {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-bottom: 8px;
+}
+
+.commande-date i, .commande-table i {
+  color: #ce1212;
+  width: 20px;
+}
+
+.items-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.items-list {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  padding: 4px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+
+.item-row:last-child {
+  border-bottom: none;
+}
+
+.item-name {
+  flex: 2;
+  font-weight: 500;
+}
+
+.item-qty {
+  width: 40px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.item-price {
+  width: 70px;
+  text-align: right;
+  font-weight: 600;
+  color: #ce1212;
+}
+
+.commande-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 2px solid #e0e0e0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.commande-total strong {
+  color: #ce1212;
+  font-size: 1rem;
+}
+
+.commande-footer {
+  padding: 12px 15px;
+  border-top: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.btn-details {
+  background: transparent;
+  border: 1px solid #ce1212;
+  color: #ce1212;
+  padding: 6px 15px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-details:hover {
+  background: #ce1212;
+  color: white;
+}
+
+.btn-outline-primary {
+  border: 1px solid #ce1212;
+  color: #ce1212;
+  border-radius: 50px;
+  padding: 8px 25px;
+  transition: all 0.3s;
+}
+
+.btn-outline-primary:hover {
+  background: #ce1212;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Alertes */
+.alert {
+  border-radius: 12px;
+  border: none;
+  padding: 12px 20px;
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.commande-card {
+  animation: fadeIn 0.4s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 20px;
+  }
+  
+  .section-header .h1 {
+    font-size: 1.8rem;
+  }
+  
+  .search-section {
+    padding: 15px;
+  }
+  
+  .commande-header {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .btn-primary {
+    width: 100%;
+  }
+}

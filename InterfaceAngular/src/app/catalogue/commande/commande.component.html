@@ -1,0 +1,139 @@
+<!-- src/app/catalogue/commande/commande.component.html -->
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+            
+            <!-- Header -->
+            <div class="section-header text-center mb-4">
+              <h2 class="text-uppercase small text-muted">Finaliser votre commande</h2>
+              <p class="h1" style="font-family: 'Amatic SC', cursive;">
+                <i class="bi bi-cart-check me-2" style="color: #ce1212;"></i>
+                Votre <span style="color: #ce1212;">Commande</span>
+              </p>
+            </div>
+
+            <!-- Messages -->
+            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+              <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+              <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+              <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+              <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+            </div>
+
+            <!-- Résumé du panier -->
+            <div class="cart-summary mb-4">
+              <h5 class="mb-3">
+                <i class="bi bi-bag me-2" style="color: #ce1212;"></i>
+                Résumé de votre commande
+              </h5>
+              <div class="cart-items-list">
+                <div *ngFor="let item of panier.items" class="cart-item-row">
+                  <div class="item-name">{{ item.libelle }}</div>
+                  <div class="item-qty">x{{ item.quantite }}</div>
+                  <div class="item-price">{{ item.total | currency:'DH' }}</div>
+                </div>
+              </div>
+              <div class="cart-total-row">
+                <span>Total</span>
+                <strong>{{ panier.total | currency:'DH' }}</strong>
+              </div>
+            </div>
+
+            <!-- Formulaire -->
+            <form [formGroup]="commandeForm" (ngSubmit)="onSubmit()">
+              
+              <!-- Nom complet -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-person me-2" style="color: #ce1212;"></i> Nom complet
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-person" style="color: #ce1212;"></i>
+                  </span>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="nomClient"
+                    placeholder="Votre nom et prénom"
+                    [class.is-invalid]="commandeForm.get('nomClient')?.invalid && commandeForm.get('nomClient')?.touched">
+                </div>
+                <div class="text-danger small mt-1" *ngIf="commandeForm.get('nomClient')?.invalid && commandeForm.get('nomClient')?.touched">
+                  <i class="bi bi-exclamation-circle me-1"></i> Nom requis (minimum 2 caractères)
+                </div>
+              </div>
+
+              <!-- Téléphone -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-telephone me-2" style="color: #ce1212;"></i> Téléphone
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-telephone" style="color: #ce1212;"></i>
+                  </span>
+                  <input 
+                    type="tel" 
+                    class="form-control" 
+                    formControlName="telephone"
+                    placeholder="0612345678"
+                    [class.is-invalid]="commandeForm.get('telephone')?.invalid && commandeForm.get('telephone')?.touched">
+                </div>
+                <div class="text-danger small mt-1" *ngIf="commandeForm.get('telephone')?.invalid && commandeForm.get('telephone')?.touched">
+                  <i class="bi bi-exclamation-circle me-1"></i> Numéro de téléphone valide requis (10 chiffres)
+                </div>
+              </div>
+
+              <!-- Numéro de table -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-grid me-2" style="color: #ce1212;"></i> Numéro de table
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-grid" style="color: #ce1212;"></i>
+                  </span>
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    formControlName="numeroTable"
+                    placeholder="1"
+                    min="1"
+                    [class.is-invalid]="commandeForm.get('numeroTable')?.invalid && commandeForm.get('numeroTable')?.touched">
+                </div>
+                <div class="text-danger small mt-1" *ngIf="commandeForm.get('numeroTable')?.invalid && commandeForm.get('numeroTable')?.touched">
+                  <i class="bi bi-exclamation-circle me-1"></i> Numéro de table requis
+                </div>
+              </div>
+
+              <!-- Boutons -->
+              <div class="d-flex gap-3 mt-4">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary px-4 flex-grow-1" 
+                  [disabled]="loading">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                  <i class="bi bi-check-lg me-2"></i> Confirmer la commande
+                </button>
+                
+                <button 
+                  type="button" 
+                  class="btn btn-secondary px-4" 
+                  (click)="retourCatalogue()">
+                  <i class="bi bi-arrow-left me-2"></i> Retour
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>  

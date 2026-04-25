@@ -19,6 +19,12 @@ import { UpdateArticleComponent } from './menu/components/articles/update-articl
 import { AddCategorieComponent } from './menu/components/categories/add-categorie/add-categorie.component';
 import { ListCategorieComponent } from './menu/components/categories/list-categorie/list-categorie.component';
 
+
+import { CatalogueComponent } from './catalogue/catalogue/catalogue.component';
+import { CommandeComponent } from './catalogue/commande/commande.component';
+import { MesCommandesComponent } from './catalogue/mes-commandes/mes-commandes.component';
+
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -43,6 +49,11 @@ const routes: Routes = [
   // ✅ Catégories routes
   { path: 'add-categorie', component: AddCategorieComponent },
   { path: 'list-categories', component: ListCategorieComponent },
+
+// Catalogue routes
+  { path: 'catalogue', component: CatalogueComponent },
+  { path: 'commande', component: CommandeComponent },
+  { path: 'mes-commandes', component: MesCommandesComponent },
 ];
 
 @NgModule({
