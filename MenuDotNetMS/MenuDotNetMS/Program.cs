@@ -2,12 +2,14 @@
 using MenuDotNetMS.Repositories.article;
 using MenuDotNetMS.Repositories.categorie;
 using MenuDotNetMS.Repositories.fournisseur;
+using MenuDotNetMS.Services;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // 🔹 Controllers
 builder.Services.AddControllers();
+//builder.Services.AddHostedService<KafkaConsumerService>();
 
 // 🔹 Repositories
 builder.Services.AddScoped<IFournisseurRepository, fournisseurRepository>();
