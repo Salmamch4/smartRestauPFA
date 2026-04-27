@@ -1,4 +1,6 @@
-import com.smartpfa.orderservice.entity.Ticket;
+package com.smartpfa.orderservice.service.ticket;
+
+import com.smartpfa.orderservice.entity.ticket.Ticket;
 import java.util.List;
 
 public interface TicketService {
@@ -7,12 +9,12 @@ public interface TicketService {
 
     List<Ticket> getAll();
 
-    // 🔥 serveur (اليوم)
+
     List<Ticket> getServeurTickets(String serveur);
 
     double getServeurTotal(String serveur);
 
-    // 🔥 admin (اليوم)
+
     List<Ticket> getAdminTickets();
 
     double getAdminTotal();

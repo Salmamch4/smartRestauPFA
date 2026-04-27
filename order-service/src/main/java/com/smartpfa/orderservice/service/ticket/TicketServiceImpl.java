@@ -1,8 +1,8 @@
-package com.smartpfa.orderservice.service;
+package com.smartpfa.orderservice.service.ticket;
 
-import com.smartpfa.orderservice.entity.LigneTicket;
-import com.smartpfa.orderservice.entity.Ticket;
-import com.smartpfa.orderservice.repository.TicketRepository;
+import com.smartpfa.orderservice.entity.ticket.LigneTicket;
+import com.smartpfa.orderservice.entity.ticket.Ticket;
+import com.smartpfa.orderservice.repository.ticket.TicketRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

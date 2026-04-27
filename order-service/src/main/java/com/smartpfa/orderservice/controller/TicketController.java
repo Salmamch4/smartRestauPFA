@@ -1,8 +1,8 @@
 package com.smartpfa.orderservice.controller;
 
-import com.smartpfa.orderservice.entity.Ticket;
+import com.smartpfa.orderservice.entity.ticket.Ticket;
 
-import com.smartpfa.orderservice.service.TicketService;
+import com.smartpfa.orderservice.service.ticket.TicketService;
 
 import org.springframework.web.bind.annotation.*;
 

@@ -29,7 +29,7 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
-    private OrderStatus statut = OrderStatus.EN_ATTENTE;
+    private OrderStatus statut = OrderStatus.EN_CONFIRMATION;
 
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double total;
@@ -48,7 +48,7 @@ public class Order {
         this.telephone = telephone;
         this.numeroTable = numeroTable;
         this.total = total;
-        this.statut = OrderStatus.EN_ATTENTE;
+        this.statut = OrderStatus.EN_CONFIRMATION;
         this.numeroCommande = "CMD-" + System.currentTimeMillis();
         this.dateCommande = LocalDateTime.now();
     }
@@ -95,7 +95,7 @@ public class Order {
             numeroCommande = "CMD-" + System.currentTimeMillis();
         }
         if (statut == null) {
-            statut = OrderStatus.EN_ATTENTE;
+            statut = OrderStatus.EN_CONFIRMATION;
         }
     }
 }

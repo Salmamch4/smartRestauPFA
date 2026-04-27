@@ -12,7 +12,6 @@ public class OrderValidationEvent {
     private Double total;
     private List<OrderItemEvent> items;
 
-    // ✅ Constructeurs
     public OrderValidationEvent() {}
 
     public OrderValidationEvent(String orderId, String orderNumber, String nomClient,
@@ -27,7 +26,7 @@ public class OrderValidationEvent {
         this.items = items;
     }
 
-    // ✅ Getters
+
     public String getOrderId() { return orderId; }
     public String getOrderNumber() { return orderNumber; }
     public String getNomClient() { return nomClient; }
@@ -36,7 +35,7 @@ public class OrderValidationEvent {
     public Double getTotal() { return total; }
     public List<OrderItemEvent> getItems() { return items; }
 
-    // ✅ Setters
+
     public void setOrderId(String orderId) { this.orderId = orderId; }
     public void setOrderNumber(String orderNumber) { this.orderNumber = orderNumber; }
     public void setNomClient(String nomClient) { this.nomClient = nomClient; }
@@ -45,7 +44,7 @@ public class OrderValidationEvent {
     public void setTotal(Double total) { this.total = total; }
     public void setItems(List<OrderItemEvent> items) { this.items = items; }
 
-    // ✅ Inner class
+
     public static class OrderItemEvent {
         private String produitId;
         private String produitLibelle;

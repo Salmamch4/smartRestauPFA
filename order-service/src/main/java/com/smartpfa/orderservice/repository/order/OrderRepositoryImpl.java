@@ -1,9 +1,10 @@
 package com.smartpfa.orderservice.repository.order;
 
 import com.smartpfa.orderservice.entity.order.Order;
+import com.smartpfa.orderservice.enums.OrderStatus;
 import com.smartpfa.orderservice.repository.order.jpa.OrderJpaRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,7 +12,7 @@ import java.util.UUID;
 public class OrderRepositoryImpl implements IOrderRepository {
 
     @Autowired
-    private OrderJpaRepository jpaRepository;  // Spring Data JPA
+    private OrderJpaRepository jpaRepository;
 
     @Override
     public Order save(Order order) {
@@ -35,7 +36,14 @@ public class OrderRepositoryImpl implements IOrderRepository {
 
     @Override
     public List<Order> findByStatut(String statut) {
-        return jpaRepository.findByStatut(statut);
+        // Convertir String en OrderStatus
+        try {
+            OrderStatus status = OrderStatus.valueOf(statut);
+            return jpaRepository.findByStatut(status);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid status: " + statut);
+            return List.of();
+        }
     }
 
     @Override
@@ -48,4 +56,3 @@ public class OrderRepositoryImpl implements IOrderRepository {
         return jpaRepository.existsById(id);
     }
 }
-

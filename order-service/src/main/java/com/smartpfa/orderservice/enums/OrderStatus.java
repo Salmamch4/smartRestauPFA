@@ -1,10 +1,12 @@
 package com.smartpfa.orderservice.enums;
 
 public enum OrderStatus {
-    EN_ATTENTE("En attente de validation"),
+    EN_CONFIRMATION("En cours de confirmation"),  // ✅ Changé de EN_ATTENTE à EN_CONFIRMATION
     CONFIRMEE("Commande confirmée"),
-    REJETEE("Commande rejetée"),
-    LIVREE("Commande livrée");
+    EN_PREPARATION("En préparation"),
+    PRETE("Prête à être servie"),
+    LIVREE("Commande livrée"),
+    REJETEE("Commande rejetée");
 
     private final String description;
 
@@ -22,6 +24,6 @@ public enum OrderStatus {
                 return s;
             }
         }
-        return EN_ATTENTE;
+        return EN_CONFIRMATION;  // ✅ Changé ici aussi
     }
 }

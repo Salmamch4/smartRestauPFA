@@ -1,4 +1,4 @@
-package com.smartpfa.orderservice.service;
+package com.smartpfa.orderservice.service.kafka;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import java.util.*;
 @Service
 public class MenuServiceClient {
 
-    private final RestTemplate restTemplate;
+    /*private final RestTemplate restTemplate;
 
     @Value("${menu.service.url:http://localhost:5160}")
     private String menuServiceUrl;
@@ -96,5 +96,5 @@ public class MenuServiceClient {
         } catch (Exception e) {
             System.err.println("❌ Erreur décrémentation: " + e.getMessage());
         }
-    }
+    }*/
 }

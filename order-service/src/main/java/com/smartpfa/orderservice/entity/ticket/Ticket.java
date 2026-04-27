@@ -1,4 +1,4 @@
-package com.smartpfa.orderservice.entity;
+package com.smartpfa.orderservice.entity.ticket;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -23,10 +23,10 @@ public class Ticket {
     @JsonManagedReference
     private List<LigneTicket> lignes = new ArrayList<>();
 
-    // ✅ constructor ضروري
+
     public Ticket() {}
 
-    // getters setters
+
 
     public Long getId() { return id; }
 

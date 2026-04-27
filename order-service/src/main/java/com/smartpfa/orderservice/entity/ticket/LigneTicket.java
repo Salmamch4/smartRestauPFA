@@ -1,4 +1,4 @@
-package com.smartpfa.orderservice.entity;
+package com.smartpfa.orderservice.entity.ticket;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -27,10 +27,10 @@ public class LigneTicket {
 
     private String produitNom;
 
-    // ✅ constructor ضروري
+
     public LigneTicket() {}
 
-    // getters setters
+
 
     public Long getId() { return id; }
 
