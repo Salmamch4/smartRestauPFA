@@ -35,7 +35,7 @@ namespace MenuDotNetMS.Repositories.article
                         Libelle = reader["Libelle"].ToString(),
                         QuantiteEnStock = Convert.ToInt32(reader["Quantite_EnStock"]),
                         SeuilAlerte = Convert.ToInt32(reader["SeuilAlerte"]),
-                        Unite = reader["Unite"].ToString(), 
+                        Unite = reader["Unite"].ToString(),
                         DateCreation = Convert.ToDateTime(reader["DateCreation"])
                     });
                 }
@@ -72,7 +72,7 @@ namespace MenuDotNetMS.Repositories.article
                         Libelle = reader["Libelle"].ToString(),
                         QuantiteEnStock = Convert.ToInt32(reader["Quantite_EnStock"]),
                         SeuilAlerte = Convert.ToInt32(reader["SeuilAlerte"]),
-                        Unite = reader["Unite"].ToString(), 
+                        Unite = reader["Unite"].ToString(),
                         DateCreation = Convert.ToDateTime(reader["DateCreation"])
                     };
                 }
@@ -99,7 +99,7 @@ namespace MenuDotNetMS.Repositories.article
                 command.Parameters.AddWithValue("@Libelle", article.Libelle);
                 command.Parameters.AddWithValue("@QuantiteEnStock", article.QuantiteEnStock);
                 command.Parameters.AddWithValue("@SeuilAlerte", article.SeuilAlerte);
-                command.Parameters.AddWithValue("@Unite", article.Unite); 
+                command.Parameters.AddWithValue("@Unite", article.Unite);
 
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -125,7 +125,7 @@ namespace MenuDotNetMS.Repositories.article
                 command.Parameters.AddWithValue("@Libelle", article.Libelle);
                 command.Parameters.AddWithValue("@QuantiteEnStock", article.QuantiteEnStock);
                 command.Parameters.AddWithValue("@SeuilAlerte", article.SeuilAlerte);
-                command.Parameters.AddWithValue("@Unite", article.Unite); 
+                command.Parameters.AddWithValue("@Unite", article.Unite);
                 connection.Open();
                 command.ExecuteNonQuery();
             }

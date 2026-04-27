@@ -24,11 +24,12 @@ namespace MenuDotNetMS.Controllers
             using (SqlConnection cn = new SqlConnection(connectionString))
             {
                 await cn.OpenAsync();
+                // ✅ CORRECTION : Utiliser les bons noms de colonnes
                 string query = @"
-                    SELECT id, libelle, description, prix_unitaire, photo, id_categorie, DateCreation
+                    SELECT Id, Nom, Description, Prix, ImagePath, IdCategorie, DateCreation
                     FROM Produits 
-                    WHERE id_categorie = @CategorieId
-                    ORDER BY libelle";
+                    WHERE IdCategorie = @CategorieId
+                    ORDER BY Nom";
 
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
@@ -40,12 +41,12 @@ namespace MenuDotNetMS.Controllers
                         {
                             var produit = new Dictionary<string, object>
                             {
-                                ["id"] = reader["id"].ToString(),
-                                ["libelle"] = reader["libelle"].ToString(),
-                                ["description"] = reader["description"]?.ToString() ?? "",
-                                ["prix_unitaire"] = Convert.ToDecimal(reader["prix_unitaire"]),
-                                ["photo"] = reader["photo"]?.ToString() ?? "",
-                                ["id_categorie"] = reader["id_categorie"].ToString(),
+                                ["id"] = reader["Id"].ToString(),
+                                ["libelle"] = reader["Nom"].ToString(),
+                                ["description"] = reader["Description"]?.ToString() ?? "",
+                                ["prix_unitaire"] = Convert.ToDecimal(reader["Prix"]),
+                                ["photo"] = reader["ImagePath"]?.ToString() ?? "",
+                                ["id_categorie"] = reader["IdCategorie"].ToString(),
                                 ["dateCreation"] = reader["DateCreation"].ToString()
                             };
                             produits.Add(produit);

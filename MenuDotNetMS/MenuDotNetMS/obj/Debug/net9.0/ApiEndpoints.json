@@ -211,6 +211,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "MenuDotNetMS.Controllers.ArticleController",
+    "Method": "GetStock",
+    "RelativePath": "api/articles/{id}/stock",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MenuDotNetMS.Controllers.CategorieController",
     "Method": "GetAll",
     "RelativePath": "api/categories",
@@ -363,6 +379,119 @@
       {
         "Name": "request",
         "Type": "MenuDotNetMS.DTOs.fournisseur.fournissuerUpdateDtoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.ProduitController",
+    "Method": "GetAll",
+    "RelativePath": "api/produits",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.ProduitController",
+    "Method": "Create",
+    "RelativePath": "api/produits",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Nom",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Prix",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IdCategorie",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ingr\u00E9dients",
+        "Type": "System.Collections.Generic.List\u00601[[MenuDotNetMS.DTOs.Produit.ComposantCreateDTO, MenuDotNetMS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.ProduitController",
+    "Method": "Update",
+    "RelativePath": "api/produits/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "Nom",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Prix",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IdCategorie",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ingr\u00E9dients",
+        "Type": "System.Collections.Generic.List\u00601[[MenuDotNetMS.DTOs.Produit.ComposantCreateDTO, MenuDotNetMS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.ProduitController",
+    "Method": "Delete",
+    "RelativePath": "api/produits/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],

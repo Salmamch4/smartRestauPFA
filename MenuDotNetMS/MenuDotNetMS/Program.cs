@@ -2,54 +2,60 @@
 using MenuDotNetMS.Repositories.article;
 using MenuDotNetMS.Repositories.categorie;
 using MenuDotNetMS.Repositories.fournisseur;
+
 using MenuDotNetMS.Services;
+
+using MenuDotNetMS.Repositories.produit;
+
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔹 Controllers
+// Configuration des Services
 builder.Services.AddControllers();
 //builder.Services.AddHostedService<KafkaConsumerService>();
 
-// 🔹 Repositories
+// Injection des Repositories
 builder.Services.AddScoped<IFournisseurRepository, fournisseurRepository>();
 builder.Services.AddScoped<IAchatsRepository, AchatsRepository>();
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 builder.Services.AddScoped<ICategorieRepository, CategorieRepository>();
+builder.Services.AddScoped<IProduitRepository, ProduitRepository>();
 
-// 🔹 Scalar (بدل Swagger)
 builder.Services.AddOpenApi();
 
-// 🔥 CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
         policy =>
         {
-            policy
-                .AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
         });
 });
 
 var app = builder.Build();
 
-// 🔹 Scalar UI
-if (app.Environment.IsDevelopment())
+// Création du dossier images s'il n'existe pas
+var webRootPath = app.Environment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+if (!Directory.Exists(Path.Combine(webRootPath, "images")))
 {
-    app.MapOpenApi();             // ✔ API docs
-    app.MapScalarApiReference();  // ✔ Scalar UI
+    Directory.CreateDirectory(Path.Combine(webRootPath, "images"));
 }
 
-// 🔹 HTTPS
+app.UseCors("AllowAngular");
 
-// 🔥 CORS (مهم بزاف)
-app.UseCors("AllowAngular"); // ✔ نفس الاسم
+// IMPORTANT : Pour afficher les photos dans Angular
+app.UseStaticFiles();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.MapScalarApiReference();
+}
 
 app.UseAuthorization();
-
-// 🔹 Controllers
 app.MapControllers();
 
 app.Run();

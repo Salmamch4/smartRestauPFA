@@ -24,7 +24,7 @@ namespace MenuDotNetMS.Controllers
             return Ok(articles);
         }
 
-        // ✅ 🔥 GET BY ID (هذا كان ناقص وهو سبب المشكل)
+        // 🔹 GET BY ID
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
@@ -36,6 +36,25 @@ namespace MenuDotNetMS.Controllers
             return Ok(article);
         }
 
+        // Ajoutez cette méthode dans ArticleController.cs
+        [HttpGet("{id}/stock")]
+        public IActionResult GetStock(Guid id)
+        {
+            var article = _repository.GetById(id);
+
+            if (article == null)
+                return NotFound(new { message = "Article non trouvé" });
+
+            return Ok(new
+            {
+                Id = article.Id,
+                Libelle = article.Libelle,
+                QuantiteEnStock = article.QuantiteEnStock,
+                Disponible = article.QuantiteEnStock > 0,
+                Message = article.QuantiteEnStock > 0 ? "Disponible" : "Rupture de stock"
+            });
+        }
+
         // 🔹 CREATE
         [HttpPost]
         public IActionResult Create([FromBody] ArticleCreateDTO dto)
@@ -44,9 +63,7 @@ namespace MenuDotNetMS.Controllers
                 return BadRequest("DTO is null");
 
             var article = ArticleMapper.ToArticle(dto);
-
             _repository.Add(article);
-
             return Ok(article);
         }
 
@@ -68,7 +85,6 @@ namespace MenuDotNetMS.Controllers
             existing.Unite = dto.Unite;
 
             _repository.Update(existing);
-
             return Ok(existing);
         }
 
@@ -82,7 +98,6 @@ namespace MenuDotNetMS.Controllers
                 return NotFound();
 
             _repository.Delete(id);
-
             return Ok();
         }
     }
