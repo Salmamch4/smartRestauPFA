@@ -23,10 +23,11 @@ export class CommandeService {
 
   constructor(private http: HttpClient) {}
 
-  createOrder(commandeData: any): Observable<CommandeResponse> {
+   createOrder(commandeData: any): Observable<CommandeResponse> {
     return this.http.post<CommandeResponse>(this.apiUrl, commandeData);
   }
 
+  // Récupérer les commandes par téléphone
   getOrdersByTelephone(telephone: string): Observable<CommandeResponse[]> {
     return this.http.get<CommandeResponse[]>(`${this.apiUrl}/telephone/${telephone}`);
   }

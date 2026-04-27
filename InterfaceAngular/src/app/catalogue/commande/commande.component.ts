@@ -100,4 +100,5 @@ export class CommandeComponent implements OnInit {
   retourCatalogue(): void {
     this.router.navigate(['/catalogue']);
   }
+  
 }

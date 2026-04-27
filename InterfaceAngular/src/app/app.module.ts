@@ -91,7 +91,7 @@ import { ListOrdersComponent } from './order/components/chef-cuisinier/list-orde
     ClientComponent,
     AdminTicketComponent,
     ServeurTicketComponent,
-    ListOrdersComponent
+    ListOrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,7 +99,8 @@ import { ListOrdersComponent } from './order/components/chef-cuisinier/list-orde
     HttpClientModule,
     FormsModule,   
        CommonModule,   
-      RouterModule,    
+      RouterModule,   
+     
     ReactiveFormsModule  
 
 
