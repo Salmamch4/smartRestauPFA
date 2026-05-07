@@ -1,4 +1,4 @@
-/* ==================== STYLE IDENTIQUE AU LOGIN ==================== */
+/* ==================== STYLE IDENTIQUE À LA MODIFICATION D'ACHAT ==================== */
 
 .section {
   min-height: 100vh;
@@ -37,7 +37,6 @@
 }
 
 .section-header .h1 {
-  font-family: 'Amatic SC', cursive;
   font-size: 2.2rem;
   font-weight: bold;
   color: #2c3e50;
@@ -102,25 +101,6 @@
   cursor: pointer;
 }
 
-/* Champs invalides */
-.is-invalid {
-  border-color: #dc3545 !important;
-}
-
-.is-invalid:focus {
-  border-color: #dc3545 !important;
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
-}
-
-.invalid-feedback {
-  font-size: 0.75rem;
-  margin-top: 5px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #dc3545;
-}
-
 /* Boutons */
 .btn {
   font-weight: 600;
@@ -161,6 +141,18 @@
   transform: translateY(-2px);
 }
 
+.btn-outline-danger {
+  background: transparent;
+  border: 2px solid #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background: #dc3545;
+  color: white;
+  transform: translateY(-2px);
+}
+
 /* Alertes */
 .alert {
   border-radius: 12px;
@@ -193,6 +185,29 @@
 .alert .btn-close {
   font-size: 0.8rem;
   padding: 0.5rem;
+}
+
+/* Badges */
+.badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+  color: white;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+  color: #2c3e50;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+  color: white;
 }
 
 /* Spinner */

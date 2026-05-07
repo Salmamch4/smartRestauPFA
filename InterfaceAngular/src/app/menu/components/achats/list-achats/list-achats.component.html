@@ -1,134 +1,152 @@
-<section class="section">
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-lg-12">
-        <div class="card shadow-lg border-0 rounded-4">
-          <div class="card-body p-3 p-md-4">
-            
-            <!-- Header -->
-            <div class="text-center mb-3">
-              <h2 class="text-uppercase small text-muted mb-1">Gestion des Achats</h2>
-              <h3 class="mb-0" style="font-family: 'Amatic SC', cursive; color: #2c3e50;">
-                <i class="bi bi-list-check me-2" style="color: #ce1212;"></i> 
-                Liste des <span style="color: #ce1212;">Achats</span>
-              </h3>
-            </div>
-
-            <!-- Messages -->
-            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show py-2 mb-3">
-              <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
-              <button type="button" class="btn-close btn-sm" (click)="successMessage = ''"></button>
-            </div>
-            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show py-2 mb-3">
-              <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
-              <button type="button" class="btn-close btn-sm" (click)="errorMessage = ''"></button>
-            </div>
-
-            <!-- Barre d'actions -->
-            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-              <div class="input-group" style="max-width: 300px;">
-                <span class="input-group-text bg-light">
-                  <i class="bi bi-search" style="color: #ce1212;"></i>
-                </span>
-                <input 
-                  type="text" 
-                  class="form-control form-control-sm" 
-                  placeholder="Filtrer..." 
-                  [(ngModel)]="filterText">
-                <button *ngIf="filterText" class="btn btn-outline-secondary btn-sm" (click)="filterText = ''">
-                  <i class="bi bi-x"></i>
-                </button>
-              </div>
-              <div>
-                <button class="btn btn-outline-secondary btn-sm me-2" (click)="refresh()">
-                  <i class="bi bi-arrow-repeat"></i> Rafraîchir
-                </button>
-                <a routerLink="/add-achats" class="btn btn-primary btn-sm rounded-pill px-3">
-                  <i class="bi bi-plus-circle me-1"></i> Nouvel Achat
-                </a>
-              </div>
-            </div>
-
-            <!-- Loading -->
-            <div *ngIf="loading" class="text-center py-4">
-              <div class="spinner-border text-danger" role="status">
-                <span class="visually-hidden">Chargement...</span>
-              </div>
-              <p class="mt-2 text-muted small">Chargement des achats...</p>
-            </div>
-
-            <!-- Aucun résultat -->
-            <div *ngIf="!loading && filteredAchats.length === 0" class="alert alert-info text-center py-3">
-              <i class="bi bi-info-circle me-2"></i>
-              Aucun achat trouvé.
-              <a routerLink="/add-achats" class="btn btn-primary btn-sm ms-2">
-                <i class="bi bi-plus-circle me-1"></i> Ajouter
-              </a>
-            </div>
-
-            <!-- Tableau -->
-            <div *ngIf="!loading && filteredAchats.length > 0" class="table-responsive">
-              <table class="table table-sm table-bordered table-hover align-middle">
-                <thead class="table-dark">
-                  <tr class="text-center">
-                    <th style="width: 80px;">Date</th>
-                    <th>Article</th>
-                    <th>Fournisseur</th>
-                    <th style="width: 70px;">Qté A</th>
-                    <th style="width: 70px;">Qté R</th>
-                    <th style="width: 90px;">Prix U</th>
-                    <th style="width: 100px;">Total</th>
-                    <th style="width: 90px;">Statut</th>
-                    <th style="width: 110px;">Actions</th>
-                   </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let achat of filteredAchats">
-                    <td class="text-center text-nowrap">{{ formatDate(achat.dateAchat) }}</td>
-                    <td><strong>{{ achat.articleLibelle || 'Inconnu' }}</strong></td>
-                    <td>{{ achat.fournisseurRaisonSocial || 'Inconnu' }}</td>
-                    <td class="text-end">{{ achat.quantiteAchat }}</td>
-                    <td class="text-end">{{ achat.quantiteRestante }}</td>
-                    <td class="text-end">{{ achat.prixAchatUnitaire | currency:'DH' }}</td>
-                    <td class="text-end fw-bold">{{ (achat.quantiteAchat * (achat.prixAchatUnitaire || 0)) | currency:'DH' }}</td>
-                    <td class="text-center">
-                      <span class="badge" [ngClass]="{
-                        'bg-success': getStatutText(achat.quantiteRestante, achat.quantiteAchat) === 'Disponible',
-                        'bg-warning': getStatutText(achat.quantiteRestante, achat.quantiteAchat) === 'Stock faible',
-                        'bg-danger': getStatutText(achat.quantiteRestante, achat.quantiteAchat) === 'Épuisé'
-                      }">
-                        {{ getStatutText(achat.quantiteRestante, achat.quantiteAchat) }}
-                      </span>
-                    </td>
-                    <td class="text-center">
-                      <!-- ✅ Actions -->
-                      <a [routerLink]="['/achats/update-achats', achat.id]" class="btn btn-primary btn-sm me-1" title="Modifier">
-                        <i class="bi bi-pencil"></i>
-                      </a>
-                      <button class="btn btn-warning btn-sm me-1" (click)="updateQuantiteRestante(achat.id, achat.quantiteRestante)" title="Modifier quantité">
-                        <i class="bi bi-pencil-square"></i>
-                      </button>
-                      <button class="btn btn-danger btn-sm" (click)="deleteAchat(achat.id)" title="Supprimer">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot class="table-secondary">
-                  <tr>
-                    <td colspan="2" class="fw-bold">Total: {{ filteredAchats.length }} achat(s)</td>
-                    <td class="text-end fw-bold">{{ getTotalArticles() }} articles</td>
-                    <td colspan="3"></td>
-                    <td class="text-end fw-bold">{{ getTotalGeneral() | currency:'DH' }}</td>
-                    <td colspan="2"></td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-
+<div class="container-fluid py-4">
+  <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+    
+    <!-- Header -->
+    <div class="card-header bg-white py-4 border-0">
+      <div class="row align-items-center g-3">
+        <div class="col-md-4">
+          <h3 class="fw-bold mb-0">Gestion des <span class="text-danger">Achats</span></h3>
+          
+        </div>
+        
+        <div class="col-md-5">
+          <div class="input-group bg-light rounded-pill px-3 border shadow-sm">
+            <span class="input-group-text bg-transparent border-0">
+              <i class="bi bi-search text-danger fs-5"></i>
+            </span>
+            <input 
+              type="text" 
+              class="form-control bg-transparent border-0" 
+              placeholder="Rechercher par article ou fournisseur..."
+              [(ngModel)]="filterText">
+            <button *ngIf="filterText" class="btn btn-link text-danger" (click)="filterText = ''">
+              <i class="bi bi-x-lg"></i>
+            </button>
           </div>
+        </div>
+
+        <div class="col-md-3 text-end">
+          <button class="btn btn-danger rounded-pill px-4 py-2 shadow-sm" routerLink="/add-achats">
+            <i class="bi bi-plus-lg me-2"></i>Nouvel Achat
+          </button>
         </div>
       </div>
     </div>
+
+    <!-- Messages -->
+    <div *ngIf="successMessage" class="alert alert-success m-3 border-0 rounded-3 shadow-sm">
+      <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger m-3 border-0 rounded-3 shadow-sm">
+      <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+      <p class="text-muted mt-2">Chargement des achats...</p>
+    </div>
+
+    <!-- Tableau -->
+    <div *ngIf="!loading && filteredAchats.length > 0" class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr class="text-uppercase small fw-bold text-muted">
+            <th class="ps-4 py-3">Date</th>
+            <th>Article</th>
+            <th>Fournisseur</th>
+            <th class="text-center">Qté A</th>
+            <th class="text-center">Qté R</th>
+            <th class="text-end">Prix U</th>
+            <th class="text-end">Total</th>
+            <th class="text-center">Statut</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let achat of filteredAchats">
+            <td class="ps-4 text-nowrap">
+              <span class="fw-medium">{{ formatDate(achat.dateAchat) }}</span>
+            </td>
+            <td>
+              <div class="fw-bold text-dark">{{ achat.articleLibelle || 'Inconnu' }}</div>
+            </td>
+            <td>
+              <span class="badge bg-light text-secondary border px-3 rounded-pill fw-medium">
+                {{ achat.fournisseurRaisonSocial || 'Inconnu' }}
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="fw-semibold">{{ achat.quantiteAchat }}</span>
+            </td>
+            <td class="text-center">
+              <span class="fw-semibold" [class.text-danger]="achat.quantiteRestante === 0">
+                {{ achat.quantiteRestante }}
+              </span>
+            </td>
+            <td class="text-end">{{ achat.prixAchatUnitaire | currency:'DH' }}</td>
+            <td class="text-end fw-bold text-danger">{{ (achat.quantiteAchat * (achat.prixAchatUnitaire || 0)) | currency:'DH' }}</td>
+            <td class="text-center">
+              <span class="badge rounded-pill px-3 py-1" [ngClass]="{
+                'bg-success-subtle text-success border border-success': getStatutText(achat.quantiteRestante, achat.quantiteAchat) === 'Disponible',
+                'bg-warning-subtle text-warning border border-warning': getStatutText(achat.quantiteRestante, achat.quantiteAchat) === 'Stock faible',
+                'bg-danger-subtle text-danger border border-danger': getStatutText(achat.quantiteRestante, achat.quantiteAchat) === 'Épuisé'
+              }">
+                {{ getStatutText(achat.quantiteRestante, achat.quantiteAchat) }}
+              </span>
+            </td>
+            <td class="text-center">
+              <div class="d-flex gap-2 justify-content-center">
+                <button class="btn btn-outline-primary btn-sm rounded-circle shadow-sm" style="width: 32px; height: 32px;" 
+                        (click)="updateQuantiteRestante(achat.id, achat.quantiteRestante)" title="Modifier quantité">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm rounded-circle shadow-sm" style="width: 32px; height: 32px;" 
+                        [routerLink]="['/achats/update-achats', achat.id]" title="Modifier achat">
+                  <i class="bi bi-box-arrow-in-right"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-sm rounded-circle shadow-sm" style="width: 32px; height: 32px;" 
+                        (click)="deleteAchat(achat.id)" title="Supprimer">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot class="bg-light">
+          <tr>
+            <td colspan="2" class="ps-4 py-3 fw-bold">
+              Total: {{ filteredAchats.length }} achat(s)
+            </td>
+            <td class="fw-bold">{{ getTotalArticles() }} articles</td>
+            <td colspan="2"></td>
+            <td colspan="1"></td>
+            <td class="text-end fw-bold text-danger fs-6">{{ getTotalGeneral() | currency:'DH' }}</td>
+            <td colspan="2"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Empty state -->
+    <div *ngIf="!loading && filteredAchats.length === 0" class="text-center py-5">
+      <i class="bi bi-inbox display-2 text-muted"></i>
+      <p class="text-muted mt-3 mb-0">Aucun achat trouvé.</p>
+      <button class="btn btn-danger rounded-pill px-4 py-2 mt-3" routerLink="/add-achats">
+        <i class="bi bi-plus-lg me-2"></i>Effectuer un achat
+      </button>
+    </div>
+
+    <!-- Refresh button flottant -->
+    <div class="p-3 border-top bg-white">
+      <div class="d-flex justify-content-between align-items-center">
+       <button class="btn btn-outline-danger btn-sm rounded-pill px-3" (click)="refresh()">
+          <i class="bi bi-arrow-repeat me-1"></i> Rafraîchir
+        </button>
+      </div>
+    </div>
+
   </div>
-</section>
+</div>

@@ -45,26 +45,30 @@ export class LoginComponent implements OnInit {
     this.navigateByRole(role);
   }
 
-  navigateByRole(role: string): void {
-    switch(role) {
-      case 'client':
-        this.router.navigate(['/catalogue']);
-        break;
-      case 'admin':
-      case 'administrateur':
-        this.router.navigate(['/admin-dashboard']);
-        break;
-      case 'server':
-        this.router.navigate(['/server-dashboard']);
-        break;
-      case 'chef_cuisine':
-      case 'chef cuisine':
-        this.router.navigate(['/chef-dashboard']);
-        break;
-      default:
-        this.router.navigate(['/catalogue']);
-    }
+ navigateByRole(role: string): void {
+  console.log('🔄 Redirection pour rôle:', role);
+  
+  switch(role) {
+    case 'client':
+      this.router.navigate(['/catalogue']);
+      break;
+    case 'admin':
+    case 'administrateur':
+      this.router.navigate(['/admin-dashboard']);
+      break;
+    case 'server':
+    case 'serveur':
+      this.router.navigate(['/server-dashboard']);
+      break;
+    case 'chef_cuisine':
+    case 'chef cuisine':
+    case 'chef':
+      this.router.navigate(['/chef-dashboard']);
+      break;
+    default:
+      this.router.navigate(['/catalogue']);
   }
+}
 
   onSubmit(): void {
     if (this.loginForm.invalid) {

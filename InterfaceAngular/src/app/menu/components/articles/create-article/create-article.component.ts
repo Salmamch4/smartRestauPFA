@@ -12,6 +12,7 @@ export class CreateArticleComponent {
 
   successMessage = '';
   errorMessage = '';
+  loading = false;  // ✅ AJOUTER CETTE PROPRIÉTÉ
 
   article: Article = {
     libelle: '',
@@ -26,13 +27,21 @@ export class CreateArticleComponent {
   ) {}
 
   createArticle(): void {
+    if (!this.article.libelle) {
+      this.errorMessage = 'Veuillez saisir le libellé de l\'article';
+      return;
+    }
 
-    console.log("DATA SENT 👉", this.article); // مهم debug
+    console.log("DATA SENT 👉", this.article);
+    
+    this.loading = true;
+    this.successMessage = '';
+    this.errorMessage = '';
 
     this.articleService.create(this.article).subscribe({
       next: (res) => {
         console.log("SUCCESS ✅", res);
-
+        this.loading = false;
         this.successMessage = 'Article créé avec succès ✅';
         this.errorMessage = '';
 
@@ -40,14 +49,18 @@ export class CreateArticleComponent {
 
         setTimeout(() => {
           this.router.navigate(['/articles']);
-        }, 1000);
+        }, 2000);
       },
 
       error: (err) => {
         console.error("ERROR ❌", err);
-
-        this.errorMessage = 'Erreur création ❌';
+        this.loading = false;
+        this.errorMessage = err.error?.message || 'Erreur lors de la création ❌';
         this.successMessage = '';
+
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 3000);
       }
     });
   }
@@ -59,5 +72,6 @@ export class CreateArticleComponent {
       seuilAlerte: 0,
       unite: ''
     };
+    this.errorMessage = '';
   }
 }

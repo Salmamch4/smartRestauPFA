@@ -9,7 +9,7 @@
             <!-- Header -->
             <div class="section-header text-center mb-4">
               <h2 class="text-uppercase small text-muted">Suivi des commandes</h2>
-              <p class="h1" style="font-family: 'Amatic SC', cursive;">
+              <p class="h1" style="">
                 <i class="bi bi-clock-history me-2" style="color: #ce1212;"></i>
                 Mes <span style="color: #ce1212;">Commandes</span>
               </p>
@@ -121,11 +121,7 @@
                         <strong>{{ commande.total | currency:'DH' }}</strong>
                       </div>
                     </div>
-                    <div class="commande-footer">
-                      <a [routerLink]="['/commande-details', commande.id]" class="btn-details">
-                        <i class="bi bi-eye"></i> Détails
-                      </a>
-                    </div>
+                    
                   </div>
                 </div>
               </div>

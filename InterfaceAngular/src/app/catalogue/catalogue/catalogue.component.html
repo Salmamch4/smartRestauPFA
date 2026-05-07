@@ -7,7 +7,6 @@
       <span>Food<span class="text-primary">Menu</span></span>
     </div>
     
-    <!-- ✅ Non connecté: afficher boutons login/register -->
     <div class="auth-buttons" *ngIf="!isLoggedIn">
       <a routerLink="/register" class="btn-register">
         <i class="bi bi-person-plus"></i> S'inscrire
@@ -17,7 +16,6 @@
       </a>
     </div>
     
-    <!-- ✅ Connecté: afficher menu utilisateur -->
     <div class="user-menu" *ngIf="isLoggedIn">
       <div class="dropdown">
         <button class="btn-user dropdown-toggle" data-bs-toggle="dropdown">
@@ -40,7 +38,6 @@
     </div>
   </div>
 
-  <!-- Reste du catalogue inchangé -->
   <div class="container-fluid">
     <div class="row g-3">
       
@@ -68,7 +65,6 @@
 
       <!-- Grille Produits -->
       <div class="col-lg-7">
-        <!-- Contenu identique -->
         <div *ngIf="!selectedCategory" class="welcome-card">
           <i class="bi bi-emoji-smile"></i>
           <h3>Bienvenue chez FoodMenu</h3>
@@ -87,7 +83,7 @@
 
           <div *ngIf="!loadingProduits && produits.length === 0" class="empty-state">
             <i class="bi bi-emoji-frown"></i>
-            <p>Aucun produit</p>
+            <p>Aucun produit dans cette catégorie</p>
           </div>
 
           <div class="products-grid">
@@ -99,10 +95,10 @@
                 </button>
               </div>
               <div class="product-info">
-                <h5>{{ produit.libelle }}</h5>
+                <h5>{{ produit.libelle || produit.nom }}</h5>
                 <p>{{ (produit.description || '') | slice:0:45 }}</p>
                 <div class="product-bottom">
-                  <span class="price">{{ produit.prix_unitaire | currency:'DH' }}</span>
+                  <span class="price">{{ (produit.prix_unitaire || produit.prix) | currency:'DH' }}</span>
                   <button class="add-btn" (click)="ajouterAuPanier(produit)">
                     <i class="bi bi-cart-plus"></i>
                   </button>
@@ -125,7 +121,7 @@
           <div class="cart-items">
             <div *ngIf="panier.items.length === 0" class="cart-empty">
               <i class="bi bi-cart-x"></i>
-              <p>Vide</p>
+              <p>Votre panier est vide</p>
             </div>
             
             <div *ngFor="let item of panier.items" class="cart-item">
@@ -136,7 +132,7 @@
                 <div class="cart-qty">
                   <button (click)="retirerDuPanier(item.produitId)">-</button>
                   <span>{{ item.quantite }}</span>
-                  <button (click)="ajouterAuPanier({ id: item.produitId, libelle: item.libelle, prix_unitaire: item.prix_unitaire, photo: item.photo, description: '', id_categorie: '', dateCreation: '' })">+</button>
+                  <button (click)="ajouterAuPanier({ id: item.produitId, libelle: item.libelle, prix_unitaire: item.prix_unitaire, photo: item.photo, description: '' })">+</button>
                 </div>
               </div>
               <div class="cart-item-total">

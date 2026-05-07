@@ -1,73 +1,113 @@
-<section class="section">
-  <div class="container">
-    <div class="card shadow-lg border-0 rounded-4">
-      <div class="card-body p-5">
-
-        <!-- Header -->
-        <div class="section-header text-center mb-4">
-          <h2 class="text-uppercase small text-muted">Gestion des Catégories</h2>
-          <p class="h1" style="font-family: 'Amatic SC', cursive;">
-            Liste des <span style="color: #ce1212;">Catégories</span>
-          </p>
+<div class="container-fluid py-4">
+  <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+    
+    <!-- Header -->
+    <div class="card-header bg-white py-4 border-0">
+      <div class="row align-items-center g-3">
+        <div class="col-md-6">
+          <h3 class="fw-bold mb-0">Gestion des <span class="text-danger">Catégories</span></h3>
+          <p class="text-muted small mt-1 mb-0">Gérez les catégories de produits</p>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="input-group bg-light rounded-pill px-3 border shadow-sm">
+            <span class="input-group-text bg-transparent border-0">
+              <i class="bi bi-search text-danger fs-5"></i>
+            </span>
+            <input 
+              type="text" 
+              class="form-control bg-transparent border-0" 
+              placeholder="Rechercher une catégorie..."
+              [(ngModel)]="filterText">
+            <button *ngIf="filterText" class="btn btn-link text-danger" (click)="filterText = ''">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
         </div>
 
-        <!-- Messages -->
-        <div *ngIf="successMessage" class="alert alert-success">
-          <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+        <div class="col-md-2 text-end">
+          <button class="btn btn-danger rounded-pill px-4 py-2 shadow-sm" routerLink="/add-categorie">
+            <i class="bi bi-plus-lg me-2"></i>Nouvelle Catégorie
+          </button>
         </div>
-        <div *ngIf="errorMessage" class="alert alert-danger">
-          <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
-        </div>
-
-        <!-- Bouton Ajouter -->
-        <div class="d-flex justify-content-end mb-3">
-          <a routerLink="/add-categorie" class="btn btn-primary">
-            <i class="bi bi-plus-lg me-2"></i> Ajouter une catégorie
-          </a>
-        </div>
-
-        <!-- Loading -->
-        <div *ngIf="loading" class="text-center py-4">
-          <div class="spinner-border" style="color: #ce1212;"></div>
-        </div>
-
-        <!-- Tableau -->
-        <div *ngIf="!loading" class="table-responsive">
-          <table class="table table-hover align-middle">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Libellé</th>
-                <th>Description</th>
-                <th class="text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngIf="categories.length === 0">
-                <td colspan="4" class="text-center">
-                  <div class="alert alert-info mb-0">
-                    <i class="bi bi-info-circle me-2"></i> Aucune catégorie trouvée.
-                  </div>
-                </td>
-              </tr>
-              <tr *ngFor="let cat of categories; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td><strong>{{ cat.libelle }}</strong></td>
-                <td>{{ cat.description || '-' }}</td>
-                <td class="text-center">
-                  <a [routerLink]="['/edit-categorie', cat.id]" class="btn btn-sm btn-warning me-2">
-                    <i class="bi bi-pencil"></i>
-                  </a>
-                  <button class="btn btn-sm btn-danger" (click)="delete(cat.id)">
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
       </div>
     </div>
+
+    <!-- Messages -->
+    <div *ngIf="successMessage" class="alert alert-success m-3 border-0 rounded-3 shadow-sm">
+      <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger m-3 border-0 rounded-3 shadow-sm">
+      <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+      <p class="text-muted mt-2">Chargement des catégories...</p>
+    </div>
+
+    <!-- Tableau -->
+    <div *ngIf="!loading && filteredCategories.length > 0" class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr class="text-uppercase small fw-bold text-muted">
+            <th class="ps-4 py-3" style="width: 80px;">#</th>
+            <th>Libellé</th>
+            <th>Description</th>
+            <th class="text-center" style="width: 150px;">Actions</th>
+           </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of filteredCategories; let i = index">
+            <td class="ps-4 fw-semibold">{{ i + 1 }}</td>
+            <td>
+              <div class="fw-bold text-dark">{{ cat.libelle }}</div>
+             </td>
+            <td>
+              <span class="text-muted">{{ cat.description || 'Aucune description' }}</span>
+             </td>
+            <td class="text-center">
+              <div class="d-flex gap-2 justify-content-center">
+                <a [routerLink]="['/edit-categorie', cat.id]" class="btn btn-outline-warning btn-sm rounded-circle shadow-sm" title="Modifier" style="width: 32px; height: 32px;">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                <button class="btn btn-outline-danger btn-sm rounded-circle shadow-sm" (click)="delete(cat.id)" title="Supprimer" style="width: 32px; height: 32px;">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+             </td>
+           </tr>
+        </tbody>
+        <tfoot class="bg-light">
+          <tr>
+            <td colspan="4" class="ps-4 py-3 fw-bold">
+              Total: {{ filteredCategories.length }} catégorie(s)
+             </td>
+           </tr>
+        </tfoot>
+       </table>
+    </div>
+
+    <!-- Empty state -->
+    <div *ngIf="!loading && filteredCategories.length === 0" class="text-center py-5">
+      <i class="bi bi-tags display-2 text-muted"></i>
+      <p class="text-muted mt-3 mb-0">Aucune catégorie trouvée.</p>
+      <button class="btn btn-danger rounded-pill px-4 py-2 mt-3" routerLink="/add-categorie">
+        <i class="bi bi-plus-lg me-2"></i>Ajouter une catégorie
+      </button>
+    </div>
+
+    <!-- Refresh button -->
+    <div class="p-3 border-top bg-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-outline-danger btn-sm rounded-pill px-3" (click)="refresh()">
+          <i class="bi bi-arrow-repeat me-1"></i> Rafraîchir
+        </button>
+      </div>
+    </div>
+
   </div>
-</section>
+</div>

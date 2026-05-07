@@ -92,7 +92,7 @@ const routes: Routes = [
   { path: 'admin-ticket', component: AdminTicketComponent },
 
   // Chef
-  { path: 'chef-cuisinier', component: ListOrdersComponent }
+    { path: 'chef-dashboard', component: ListOrdersComponent },
 
 ];
 

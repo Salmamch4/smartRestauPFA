@@ -1,7 +1,7 @@
+<!-- src/app/order/components/chef-cuisinier/list-orders/list-orders.component.html -->
 <section class="chef-section">
   <div class="chef-container">
 
-    <!-- PAGE HEADER -->
     <div class="page-header">
       <div>
         <div class="page-eyebrow">Interface Chef Cuisinier</div>
@@ -11,12 +11,45 @@
         <div class="stat-pill">
           <span class="stat-dot orange"></span>
           <span class="stat-label">En attente</span>
-          <span class="stat-val">{{ orders.length }}</span>
+          <span class="stat-val">{{ pendingOrders.length }}</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-dot blue"></span>
+          <span class="stat-label">Confirmées</span>
+          <span class="stat-val">{{ confirmedOrders.length }}</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-dot green"></span>
+          <span class="stat-label">En préparation</span>
+          <span class="stat-val">{{ inProgressOrders.length }}</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-dot purple"></span>
+          <span class="stat-label">Prêtes</span>
+          <span class="stat-val">{{ readyOrders.length }}</span>
         </div>
       </div>
     </div>
 
-    <!-- MESSAGES -->
+    <div class="tabs-modern">
+      <button class="tab-btn" [class.active]="activeTab === 'pending'" (click)="setActiveTab('pending')">
+        <i class="bi bi-clock-history"></i> En confirmation
+        <span class="tab-count">{{ pendingOrders.length }}</span>
+      </button>
+      <button class="tab-btn" [class.active]="activeTab === 'confirmed'" (click)="setActiveTab('confirmed')">
+        <i class="bi bi-check-lg"></i> Confirmées
+        <span class="tab-count">{{ confirmedOrders.length }}</span>
+      </button>
+      <button class="tab-btn" [class.active]="activeTab === 'inprogress'" (click)="setActiveTab('inprogress')">
+        <i class="bi bi-egg-fried"></i> En préparation
+        <span class="tab-count">{{ inProgressOrders.length }}</span>
+      </button>
+      <button class="tab-btn" [class.active]="activeTab === 'ready'" (click)="setActiveTab('ready')">
+        <i class="bi bi-check2-circle"></i> Prêtes
+        <span class="tab-count">{{ readyOrders.length }}</span>
+      </button>
+    </div>
+
     <div *ngIf="successMessage" class="alert-modern alert-success-modern">
       <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
     </div>
@@ -24,95 +57,110 @@
       <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
     </div>
 
-    <!-- LOADING -->
     <div *ngIf="loading" class="loading-wrap">
       <div class="spinner-modern"></div>
     </div>
 
-    <!-- AUCUNE COMMANDE -->
-    <div *ngIf="!loading && orders.length === 0" class="empty-state">
-      <div class="empty-icon">🍽️</div>
-      <div class="empty-title">Aucune commande en attente</div>
-      <div class="empty-sub">Les nouvelles commandes apparaîtront ici</div>
-    </div>
-
-    <!-- ORDERS GRID -->
     <div *ngIf="!loading" class="orders-grid">
-      <div *ngFor="let order of orders" class="order-card"
-           [class.status-cours]="order.status === 'EN_COURS'"
-           [class.status-attente]="order.status === 'EN_ATTENTE'">
-
-        <!-- Card Header -->
+      <div *ngFor="let order of getCurrentOrders()" class="order-card">
+        
         <div class="card-header-modern">
           <div>
-            <div class="card-table-num">Table {{ order.tableNumber }}</div>
+            <div class="card-table-num">
+              <i class="bi bi-table"></i> Table {{ order.numeroTable }}
+            </div>
             <div class="card-staff">
-              <i class="bi bi-person"></i> {{ order.clientName }}
+              <i class="bi bi-person-circle"></i> {{ order.nomClient }}
               <span class="staff-sep"></span>
-              <i class="bi bi-person-badge"></i> {{ order.serverName }}
+              <i class="bi bi-telephone"></i> {{ order.telephone }}
+            </div>
+            <div class="card-date">
+              <i class="bi bi-calendar3"></i> {{ order.dateCommande | date:'dd/MM/yyyy HH:mm' }}
             </div>
           </div>
-          <span class="status-badge"
-                [class.badge-attente]="order.status === 'EN_ATTENTE'"
-                [class.badge-cours]="order.status === 'EN_COURS'">
-            {{ order.status }}
+          <span class="status-badge" [class]="getStatusClass(order.statut)">
+            {{ getStatusText(order.statut) }}
           </span>
         </div>
 
         <div class="card-divider"></div>
 
-        <!-- Items -->
         <div class="card-items">
-          <div *ngFor="let item of order.items"
-               class="order-item"
-               [class.item-valid]="item.itemStatus !== 'INVALIDE'"
-               [class.item-invalid]="item.itemStatus === 'INVALIDE'">
-
+          <div *ngFor="let item of order.items" class="order-item" [class]="getStockStatus(item).class">
             <div class="item-left">
-              <span class="item-dot"></span>
-              <div>
-                <div class="item-name">{{ item.productName }}</div>
-                <div class="item-qty">×{{ item.quantity }}</div>
+              <span class="item-dot" [class.dot-rupture]="isRuptureStock(item)"></span>
+              <div class="item-info">
+                <div class="item-name">{{ item.produitLibelle }}</div>
+                <div class="item-qty">
+                  <i class="bi bi-cart"></i> ×{{ item.quantite }}
+                </div>
               </div>
             </div>
-
             <div class="item-right">
-              <span class="item-price">{{ item.price }} DH</span>
-              <span class="item-tag tag-ok"
-                    *ngIf="item.itemStatus !== 'INVALIDE'">Dispo</span>
-              <span class="item-tag tag-invalid"
-                    *ngIf="item.itemStatus === 'INVALIDE'">Indispo</span>
-
-              <!-- Invalider -->
-              <button *ngIf="item.itemStatus !== 'INVALIDE'"
-                      class="item-action-btn"
-                      (click)="invalidateItem(order.id, item.id)"
-                      title="Marquer indisponible">✕</button>
-
-              <!-- Revalider -->
-              <button *ngIf="item.itemStatus === 'INVALIDE'"
-                      class="item-action-btn revalidate"
-                      (click)="revalidateItem(order.id, item.id)"
-                      title="Rendre disponible">↺</button>
+              <!-- ✅ PRIX UNIQUE - seulement le prix unitaire -->
+              <div class="item-price">
+                {{ item.prixUnitaire }} DH
+              </div>
+              <div class="item-stock-status">
+                <span class="stock-badge" [class]="getStockStatus(item).class">
+                  <i class="bi" [ngClass]="{
+                    'bi-check-circle': getStockStatus(item).status === 'dispo',
+                    'bi-x-circle': getStockStatus(item).status === 'rupture'
+                  }"></i>
+                  {{ getStockStatus(item).message }}
+                </span>
+                <span class="stock-quantity" *ngIf="item.stockDisponible">
+                  ({{ item.stockDisponible }} unités)
+                </span>
+              </div>
             </div>
-
           </div>
         </div>
 
-        <!-- Actions -->
+        <div *ngIf="hasRuptureStock(order)" class="warning-banner stock-rupture">
+          <i class="bi bi-x-octagon-fill"></i>
+          <strong>Attention :</strong> Rupture de stock pour: {{ getRuptureItemsNames(order) }}
+        </div>
+
         <div class="card-footer-modern">
-          <button class="btn-modern btn-start" (click)="startOrder(order.id)">
-            <i class="bi bi-play-fill"></i> Commencer
-          </button>
-          <button class="btn-modern btn-ready" (click)="completeOrder(order.id)">
-            <i class="bi bi-check-lg"></i> Prête
-          </button>
-          <button class="btn-modern btn-cancel" (click)="cancelOrder(order.id)">
-            <i class="bi bi-trash"></i>
-          </button>
+          <ng-container *ngIf="order.statut === 'EN_CONFIRMATION'">
+            <button class="btn-modern btn-confirm" (click)="confirmOrder(order.id)">
+              <i class="bi bi-check-lg"></i> Confirmer
+            </button>
+            <button class="btn-modern btn-cancel" (click)="cancelOrder(order.id)">
+              <i class="bi bi-trash"></i> Annuler
+            </button>
+          </ng-container>
+          
+          <ng-container *ngIf="order.statut === 'CONFIRMEE'">
+            <button class="btn-modern btn-start" (click)="startOrder(order.id)">
+              <i class="bi bi-play-fill"></i> Démarrer
+            </button>
+            <button class="btn-modern btn-cancel" (click)="cancelOrder(order.id)">
+              <i class="bi bi-trash"></i> Annuler
+            </button>
+          </ng-container>
+          
+          <ng-container *ngIf="order.statut === 'EN_PREPARATION'">
+            <button class="btn-modern btn-ready" (click)="completeOrder(order.id)">
+              <i class="bi bi-check-lg"></i> Prête
+            </button>
+          </ng-container>
+          
+          <ng-container *ngIf="order.statut === 'PRETE'">
+            <button class="btn-modern btn-deliver" (click)="deliverOrder(order.id)">
+              <i class="bi bi-truck"></i> Servir
+            </button>
+          </ng-container>
         </div>
 
       </div>
+    </div>
+
+    <div *ngIf="!loading && getCurrentOrders().length === 0" class="empty-state">
+      <div class="empty-icon">🍽️</div>
+      <div class="empty-title">Aucune commande</div>
+      <div class="empty-sub">Aucune commande dans cette catégorie</div>
     </div>
 
   </div>

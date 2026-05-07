@@ -1,62 +1,125 @@
+// src/app/order/services/order.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Order, OrderCreate } from '../models/order.model';
+import { Observable, forkJoin, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { Order } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
- private apiUrl = 'http://localhost:8082/api/commandes';
+  private apiUrl = 'http://localhost:8082/api/commandes';
+  private menuApiUrl = 'http://localhost:5160/api';
 
   constructor(private http: HttpClient) {}
 
-  // ==================== CRUD ====================
-
-  getAll(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.apiUrl);
-  }
-
-  create(order: OrderCreate): Observable<Order> {
-    return this.http.post<Order>(this.apiUrl, order);
-  }
-
-  delete(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
-  }
-
-  // ==================== CHEF CUISINIER ====================
-
   getPending(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.apiUrl}/pending`);
+  }
+
+  getConfirmed(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}/confirmed`);
   }
 
   getInProgress(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.apiUrl}/inprogress`);
   }
 
-  invalidateItem(orderId: number, itemId: number): Observable<Order> {
+  getReady(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}/ready`);
+  }
+
+  getProductStock(productId: string): Observable<any> {
+    return this.http.get<any>(`${this.menuApiUrl}/articles/${productId}/stock`).pipe(
+      map(response => {
+        return {
+          quantiteEnStock: response.quantiteEnStock ?? 0,
+          disponible: response.disponible ?? false,
+          seuilAlerte: response.seuilAlerte ?? 10,
+          message: response.message ?? 'Inconnu'
+        };
+      }),
+      catchError(() => {
+        return of({ quantiteEnStock: 0, disponible: false, seuilAlerte: 10, message: 'Erreur' });
+      })
+    );
+  }
+
+  getMultipleStocks(productIds: string[]): Observable<Map<string, any>> {
+    const requests = productIds.map(id => this.getProductStock(id));
+    return forkJoin(requests).pipe(
+      map(results => {
+        const stockMap = new Map<string, any>();
+        results.forEach((result, index) => {
+          stockMap.set(productIds[index], result);
+        });
+        return stockMap;
+      })
+    );
+  }
+
+  getOrdersWithStock(orders: Order[]): Observable<Order[]> {
+    if (!orders || orders.length === 0) {
+      return of([]);
+    }
+    
+    const allProductIds: string[] = [];
+    orders.forEach(order => {
+      order.items.forEach(item => {
+        if (!allProductIds.includes(item.produitId)) {
+          allProductIds.push(item.produitId);
+        }
+      });
+    });
+    
+    if (allProductIds.length === 0) {
+      return of(orders);
+    }
+    
+    return this.getMultipleStocks(allProductIds).pipe(
+      map(stockMap => {
+        return orders.map(order => ({
+          ...order,
+          items: order.items.map(item => {
+            const stockInfo = stockMap.get(item.produitId);
+            return {
+              ...item,
+              disponible: stockInfo?.disponible ?? false,
+              stockDisponible: stockInfo?.quantiteEnStock ?? 0,
+              seuilAlerte: stockInfo?.seuilAlerte ?? 10
+            };
+          })
+        }));
+      })
+    );
+  }
+
+  confirm(orderId: string): Observable<Order> {
+    return this.http.put<Order>(`${this.apiUrl}/${orderId}/confirm`, {});
+  }
+
+  start(orderId: string): Observable<Order> {
+    return this.http.put<Order>(`${this.apiUrl}/${orderId}/start`, {});
+  }
+
+  complete(orderId: string): Observable<Order> {
+    return this.http.put<Order>(`${this.apiUrl}/${orderId}/complete`, {});
+  }
+
+  deliver(orderId: string): Observable<Order> {
+    return this.http.put<Order>(`${this.apiUrl}/${orderId}/deliver`, {});
+  }
+
+  cancel(orderId: string): Observable<Order> {
+    return this.http.put<Order>(`${this.apiUrl}/${orderId}/cancel`, {});
+  }
+
+  invalidateItem(orderId: string, itemId: string): Observable<Order> {
     return this.http.put<Order>(`${this.apiUrl}/${orderId}/items/${itemId}/invalidate`, {});
   }
 
-  // ✅ NOUVEAU - Revalider un item
-  revalidateItem(orderId: number, itemId: number): Observable<Order> {
+  revalidateItem(orderId: string, itemId: string): Observable<Order> {
     return this.http.put<Order>(`${this.apiUrl}/${orderId}/items/${itemId}/revalidate`, {});
-  }
-
-  clientAccepts(id: number): Observable<Order> {
-    return this.http.put<Order>(`${this.apiUrl}/${id}/accept`, {});
-  }
-
-  cancel(id: number): Observable<Order> {
-    return this.http.put<Order>(`${this.apiUrl}/${id}/cancel`, {});
-  }
-
-  start(id: number): Observable<Order> {
-    return this.http.put<Order>(`${this.apiUrl}/${id}/start`, {});
-  }
-
-  complete(id: number): Observable<Order> {
-    return this.http.put<Order>(`${this.apiUrl}/${id}/complete`, {});
   }
 }

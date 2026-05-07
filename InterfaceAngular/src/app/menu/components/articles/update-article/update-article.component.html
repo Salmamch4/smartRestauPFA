@@ -1,78 +1,172 @@
-<div class="container mt-4">
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+            
+            <!-- Header -->
+            <div class="section-header text-center mb-4">
+              <h2 class="text-uppercase small text-muted">Modification</h2>
+              <p class="h1">
+                <i class="bi bi-pencil-square me-2" style="color: #ce1212;"></i> 
+                Modifier <span style="color: #ce1212;">l'Article</span>
+              </p>
+            </div>
 
-  <h3 class="mb-3">Modifier Article</h3>
+            <!-- Messages -->
+            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+              <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+              <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+              <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+              <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+            </div>
 
-  <!-- SUCCESS -->
-  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
-    {{ successMessage }}
-    <button type="button" class="btn-close" (click)="successMessage = ''"></button>
-  </div>
+            <!-- Loading -->
+            <div *ngIf="loading" class="text-center py-5">
+              <div class="spinner-border text-danger" role="status">
+                <span class="visually-hidden">Chargement...</span>
+              </div>
+              <p class="mt-2 text-muted">Chargement de l'article...</p>
+            </div>
 
-  <!-- ERROR -->
-  <div *ngIf="errorMessage" class="alert alert-danger">
-    {{ errorMessage }}
-  </div>
+            <!-- Formulaire -->
+            <form *ngIf="!loading" #articleForm="ngForm" (ngSubmit)="updateArticle()">
+              
+              <!-- Libellé -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-box me-2" style="color: #ce1212;"></i> Libellé
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light"><i class="bi bi-box" style="color: #ce1212;"></i></span>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="article.libelle"
+                    name="libelle"
+                    required
+                    placeholder="Ex: Farine, Sucre, Huile...">
+                </div>
+              </div>
 
-  <!-- LOADING -->
-  <div *ngIf="loading">
-    Chargement...
-  </div>
-
-  <!-- FORM -->
-  <form *ngIf="!loading" #form="ngForm" (ngSubmit)="updateArticle()">
-
-    <div class="mb-3">
-      <label>Libelle</label>
-      <input type="text" class="form-control"
-        [(ngModel)]="article.libelle"
-        name="libelle"
-        required>
-    </div>
-
-    <div class="mb-3">
-      <label>Quantité</label>
-      <input type="number" class="form-control"
-        [(ngModel)]="article.quantiteEnStock"
-        name="quantiteEnStock"
-        required>
-    </div>
-
-    <div class="mb-3">
-      <label>Seuil</label>
-      <input type="number" class="form-control"
-        [(ngModel)]="article.seuilAlerte"
-        name="seuilAlerte"
-        required>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Unité</label>
-                  <select 
-                    class="form-select" 
-                    [(ngModel)]="article.unite" 
-                    name="unite">
-
-                    <option value="">-- Choisir --</option>
-                    <option value="kg">Kg</option>
-                    <option value="g">Grammes</option>
-                    <option value="L">Litre</option>
-                    <option value="ml">ml</option>
-                    <option value="piece">Pièce</option>
-
-                  </select>
+              <div class="row g-4">
+                <!-- Quantité en stock -->
+                <div class="col-md-6">
+                  <div class="mb-4">
+                    <label class="form-label fw-bold">
+                      <i class="bi bi-database me-2" style="color: #ce1212;"></i> Quantité en stock
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-light"><i class="bi bi-database" style="color: #ce1212;"></i></span>
+                      <input 
+                        type="number" 
+                        class="form-control" 
+                        [(ngModel)]="article.quantiteEnStock"
+                        name="quantiteEnStock"
+                        required
+                        min="0"
+                        placeholder="Quantité">
+                    </div>
+                  </div>
                 </div>
 
-    <button type="submit" class="btn btn-primary me-2" [disabled]="form.invalid">
-      Modifier
-    </button>
+                <!-- Seuil d'alerte -->
+                <div class="col-md-6">
+                  <div class="mb-4">
+                    <label class="form-label fw-bold">
+                      <i class="bi bi-exclamation-triangle me-2" style="color: #ce1212;"></i> Seuil d'alerte
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-light"><i class="bi bi-exclamation-triangle" style="color: #ce1212;"></i></span>
+                      <input 
+                        type="number" 
+                        class="form-control" 
+                        [(ngModel)]="article.seuilAlerte"
+                        name="seuilAlerte"
+                        required
+                        min="0"
+                        placeholder="Seuil">
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-    <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">
-      Reset
-    </button>
+              <!-- Unité -->
+              <div class="mb-4">
+                <label class="form-label fw-bold">
+                  <i class="bi bi-rulers me-2" style="color: #ce1212;"></i> Unité
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light"><i class="bi bi-rulers" style="color: #ce1212;"></i></span>
+                  <select class="form-select" [(ngModel)]="article.unite" name="unite" required>
+                    <option value="">-- Choisir --</option>
+                    <option value="kg">Kg (Kilogramme)</option>
+                    <option value="g">g (Grammes)</option>
+                    <option value="L">L (Litre)</option>
+                    <option value="ml">ml (Millilitre)</option>
+                    <option value="piece">Pièce</option>
+                    <option value="sac">Sac</option>
+                    <option value="carton">Carton</option>
+                  </select>
+                </div>
+              </div>
 
-    <button type="button" class="btn btn-outline-danger" (click)="goBack()">
-      Annuler
-    </button>
+              <!-- Informations supplémentaires -->
+              <div class="alert alert-info mt-3">
+                <div class="row">
+                  <div class="col-md-6">
+                    <strong><i class="bi bi-graph-up me-2"></i>Statut:</strong>
+                    <span class="badge ms-2" [ngClass]="{
+                      'bg-success': article.quantiteEnStock > article.seuilAlerte,
+                      'bg-warning': article.quantiteEnStock <= article.seuilAlerte && article.quantiteEnStock > 0,
+                      'bg-danger': article.quantiteEnStock === 0
+                    }">
+                      {{
+                        article.quantiteEnStock === 0
+                          ? 'Rupture'
+                          : article.quantiteEnStock <= article.seuilAlerte
+                          ? 'Stock faible'
+                          : 'Disponible'
+                      }}
+                    </span>
+                  </div>
+                  <div class="col-md-6">
+                    <strong><i class="bi bi-calculator me-2"></i>Consommation:</strong>
+                    {{ article.quantiteEnStock - article.seuilAlerte > 0 ? 'Normal' : 'Vérifier stock' }}
+                  </div>
+                </div>
+              </div>
 
-  </form>
-</div>
+              <!-- Boutons d'action -->
+              <div class="d-flex gap-3 justify-content-center mt-4">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary px-4" 
+                  [disabled]="loading || !articleForm.valid">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                  <i class="bi bi-save me-2"></i> Mettre à jour
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-secondary px-4" 
+                  (click)="resetForm()">
+                  <i class="bi bi-arrow-repeat me-2"></i> Réinitialiser
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-outline-danger px-4" 
+                  (click)="goBack()">
+                  <i class="bi bi-arrow-left me-2"></i> Annuler
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

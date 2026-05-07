@@ -1,30 +1,25 @@
+// src/app/order/models/order.model.ts
 export interface OrderItem {
-  id: number;
-  productName: string;
-  price: number;
-  quantity: number;
-  itemStatus: string;
+    id: string;
+    produitId: string;
+    produitLibelle: string;
+    quantite: number;
+    prixUnitaire: number;
+    totalLigne: number;
+    disponible?: boolean;
+    stockDisponible?: number;
+    seuilAlerte?: number;
+    stockMessage?: string;
 }
 
 export interface Order {
-  id: number;
-  clientName: string;
-  serverName: string;
-  tableNumber: number;
-  status: string;
-  createdAt: string;
-  items: OrderItem[];
-}
-
-export interface OrderItemCreate {
-  productName: string;
-  price: number;
-  quantity: number;
-}
-
-export interface OrderCreate {
-  clientName: string;
-  serverName: string;
-  tableNumber: number;
-  items: OrderItemCreate[];
+    id: string;
+    numeroCommande: string;
+    nomClient: string;
+    telephone: string;
+    numeroTable: number;
+    statut: string;
+    total: number;
+    dateCommande: string;
+    items: OrderItem[];
 }

@@ -85,7 +85,7 @@ export class CommandeComponent implements OnInit {
         this.loading = false;
         console.error('❌ Erreur complète:', err);
         
-        // ✅ Afficher l'erreur détaillée
+       
         if (err.error) {
           this.errorMessage = err.error.message || JSON.stringify(err.error);
         } else if (err.message) {

@@ -30,12 +30,19 @@ export class CatalogueComponent implements OnInit, OnDestroy {
 
   defaultImage = 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=300&h=200&fit=crop';
 
-  private categoryImages: { [key: string]: string } = {
+  // src/app/catalogue/catalogue/catalogue.component.ts
+
+// ✅ Supprimer Fast Food et Sandwich de la liste des catégories
+private categoryOrder: string[] = ['Entrée', 'Plat principal', 'Salade', 'Dessert', 'boison'];
+
+// ✅ Supprimer les images de Fast Food et Sandwich
+private categoryImages: { [key: string]: string } = {
     'Entrée': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=400&h=300&fit=crop',
     'Plat principal': 'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?w=400&h=300&fit=crop',
     'Dessert': 'https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg?w=400&h=300&fit=crop',
-    'boison': 'https://images.pexels.com/photos/2109099/pexels-photo-2109099.jpeg?w=400&h=300&fit=crop'
-  };
+    'boison': 'https://images.pexels.com/photos/2109099/pexels-photo-2109099.jpeg?w=400&h=300&fit=crop',
+    'Salade': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=400&h=300&fit=crop'
+};
 
   constructor(
     private categorieService: CategorieService,
@@ -52,14 +59,12 @@ export class CatalogueComponent implements OnInit, OnDestroy {
       this.panier = panier;
     });
     
-    // ✅ S'abonner aux changements d'authentification
     this.subscriptions.add(
       this.authStateService.isLoggedIn$.subscribe(loggedIn => {
         this.isLoggedIn = loggedIn;
       })
     );
     
-    // ✅ S'abonner aux changements de l'utilisateur
     this.subscriptions.add(
       this.authStateService.currentUser$.subscribe(user => {
         this.currentUser = user;
@@ -75,7 +80,10 @@ export class CatalogueComponent implements OnInit, OnDestroy {
     this.loadingCategories = true;
     this.categorieService.getAll().subscribe({
       next: (data) => {
-        this.categories = data;
+        // ✅ Tri des catégories selon l'ordre défini
+        this.categories = data.sort((a, b) => {
+          return this.categoryOrder.indexOf(a.libelle) - this.categoryOrder.indexOf(b.libelle);
+        });
         this.loadingCategories = false;
       },
       error: (err) => {
@@ -141,7 +149,10 @@ export class CatalogueComponent implements OnInit, OnDestroy {
   }
 
   getProductCountByCategory(categoryId: string): number {
-    return this.produits.length;
+    if (this.selectedCategory?.id === categoryId) {
+      return this.produits.length;
+    }
+    return 0;
   }
 
   validerCommande(): void {

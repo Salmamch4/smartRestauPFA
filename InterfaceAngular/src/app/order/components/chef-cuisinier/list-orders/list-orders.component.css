@@ -380,3 +380,472 @@
   .page-header { flex-direction: column; align-items: flex-start; }
   .card-footer-modern { flex-wrap: wrap; }
 }
+
+/* ==================== BOUTONS DE STATUT ==================== */
+
+/* Badges de statut */
+.status-badge {
+  padding: 0.35rem 0.85rem;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+/* EN_CONFIRMATION - Jaune/Orange */
+.badge-attente {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  color: #e67e22;
+  border: 1px solid rgba(230, 126, 34, 0.3);
+  box-shadow: 0 1px 3px rgba(230, 126, 34, 0.1);
+}
+
+/* CONFIRMEE - Bleu */
+.badge-confirmee {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #1976d2;
+  border: 1px solid rgba(25, 118, 210, 0.3);
+  box-shadow: 0 1px 3px rgba(25, 118, 210, 0.1);
+}
+
+/* EN_PREPARATION - Violet */
+.badge-cours {
+  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+  color: #7b1fa2;
+  border: 1px solid rgba(123, 31, 162, 0.3);
+  box-shadow: 0 1px 3px rgba(123, 31, 162, 0.1);
+}
+
+/* PRETE - Vert */
+.badge-prete {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #388e3c;
+  border: 1px solid rgba(56, 142, 60, 0.3);
+  box-shadow: 0 1px 3px rgba(56, 142, 60, 0.1);
+}
+
+/* LIVREE - Vert foncé */
+.badge-livree {
+  background: linear-gradient(135deg, #e8f5e9, #a5d6a7);
+  color: #2e7d32;
+  border: 1px solid rgba(46, 125, 50, 0.3);
+  box-shadow: 0 1px 3px rgba(46, 125, 50, 0.1);
+}
+
+/* REJETEE - Rouge */
+.badge-annulee {
+  background: linear-gradient(135deg, #ffebee, #ffcdd2);
+  color: #c62828;
+  border: 1px solid rgba(198, 40, 40, 0.3);
+  box-shadow: 0 1px 3px rgba(198, 40, 40, 0.1);
+}
+
+/* ==================== BOUTONS D'ACTION PAR STATUT ==================== */
+
+/* Bouton Confirmer (EN_CONFIRMATION) */
+.btn-confirm {
+  background: linear-gradient(135deg, #e67e22, #f39c12);
+  border: none;
+  color: white;
+  box-shadow: 0 3px 10px rgba(230, 126, 34, 0.3);
+}
+
+.btn-confirm:hover {
+  background: linear-gradient(135deg, #d35400, #e67e22);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(230, 126, 34, 0.4);
+}
+
+/* Bouton Démarrer (CONFIRMEE) */
+.btn-start {
+  background: linear-gradient(135deg, #1976d2, #2196f3);
+  border: none;
+  color: white;
+  box-shadow: 0 3px 10px rgba(25, 118, 210, 0.3);
+}
+
+.btn-start:hover {
+  background: linear-gradient(135deg, #0d47a1, #1976d2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(25, 118, 210, 0.4);
+}
+
+/* Bouton Prête (EN_PREPARATION) */
+.btn-ready {
+  background: linear-gradient(135deg, #388e3c, #4caf50);
+  border: none;
+  color: white;
+  box-shadow: 0 3px 10px rgba(56, 142, 60, 0.3);
+}
+
+.btn-ready:hover {
+  background: linear-gradient(135deg, #1b5e20, #388e3c);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(56, 142, 60, 0.4);
+}
+
+/* Bouton Servir (PRETE) */
+.btn-deliver {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  border: none;
+  color: white;
+  box-shadow: 0 3px 10px rgba(46, 125, 50, 0.3);
+}
+
+.btn-deliver:hover {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(46, 125, 50, 0.4);
+}
+
+/* Bouton Annuler */
+.btn-cancel {
+  background: linear-gradient(135deg, #c62828, #ef5350);
+  border: none;
+  color: white;
+  flex: 0.5;
+  box-shadow: 0 3px 10px rgba(198, 40, 40, 0.3);
+}
+
+.btn-cancel:hover {
+  background: linear-gradient(135deg, #b71c1c, #c62828);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(198, 40, 40, 0.4);
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+.btn-confirm, .btn-start, .btn-ready, .btn-deliver, .btn-cancel {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50px;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-confirm:active, .btn-start:active, .btn-ready:active, .btn-deliver:active, .btn-cancel:active {
+  transform: scale(0.96);
+}
+
+/* ==================== ICONES DANS LES BOUTONS ==================== */
+
+.btn-confirm i, .btn-start i, .btn-ready i, .btn-deliver i, .btn-cancel i {
+  font-size: 0.85rem;
+}
+
+/* ==================== STATS PILLS ==================== */
+
+.stat-pill {
+  background: white;
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.stat-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.stat-dot.orange { background: #e67e22; box-shadow: 0 0 5px rgba(230,126,34,0.5); }
+.stat-dot.blue { background: #1976d2; box-shadow: 0 0 5px rgba(25,118,210,0.5); }
+.stat-dot.green { background: #388e3c; box-shadow: 0 0 5px rgba(56,142,60,0.5); }
+.stat-dot.purple { background: #7b1fa2; box-shadow: 0 0 5px rgba(123,31,162,0.5); }
+
+.stat-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-val {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+/* ==================== TABS MODERNES ==================== */
+
+.tabs-modern {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background: #f8f9fa;
+  padding: 0.5rem;
+  border-radius: 50px;
+  width: fit-content;
+}
+
+.tab-btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 40px;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-btn i {
+  font-size: 0.9rem;
+}
+
+.tab-btn:hover {
+  background: rgba(0,0,0,0.05);
+  color: #2c3e50;
+}
+
+.tab-btn.active {
+  background: white;
+  color: #e67e22;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tab-count {
+  background: #e9ecef;
+  padding: 2px 8px;
+  border-radius: 30px;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.tab-btn.active .tab-count {
+  background: #e67e22;
+  color: white;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 768px) {
+  .tabs-modern {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 20px;
+  }
+  
+  .tab-btn {
+    white-space: nowrap;
+  }
+  
+  .stat-pill {
+    padding: 0.3rem 0.7rem;
+  }
+  
+  .stat-label {
+    font-size: 0.6rem;
+  }
+  
+  .stat-val {
+    font-size: 0.9rem;
+  }
+}
+
+/* ==================== STYLES POUR LE STATUT DU STOCK ==================== */
+
+/* Item en rupture de stock */
+.order-item.status-rupture {
+  background: rgba(220, 53, 69, 0.08);
+  border-left: 3px solid #dc3545;
+  border-radius: 8px;
+  margin: 4px 0;
+  padding: 0.6rem;
+}
+
+/* Item stock faible */
+.order-item.status-faible {
+  background: rgba(255, 193, 7, 0.08);
+  border-left: 3px solid #ffc107;
+  border-radius: 8px;
+  margin: 4px 0;
+  padding: 0.6rem;
+}
+
+/* Item disponible */
+.order-item.status-dispo {
+  background: transparent;
+  border-left: 3px solid transparent;
+}
+
+/* Points de statut */
+.item-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.item-dot.dot-rupture {
+  background: #dc3545;
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+.item-dot.dot-faible {
+  background: #ffc107;
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+/* Badges de stock */
+.stock-badge {
+  font-size: 0.65rem;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stock-badge.status-rupture {
+  background: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.stock-badge.status-faible {
+  background: rgba(255, 193, 7, 0.15);
+  color: #d39e00;
+  border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.stock-badge.status-dispo {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+.stock-quantity {
+  font-size: 0.65rem;
+  color: #6c757d;
+  margin-left: 5px;
+}
+
+/* Bannières d'avertissement */
+.warning-banner {
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.warning-banner.stock-faible {
+  background: rgba(255, 193, 7, 0.1);
+  color: #d39e00;
+  border-left: 3px solid #ffc107;
+}
+
+.warning-banner.stock-rupture {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border-left: 3px solid #dc3545;
+}
+
+.warning-banner i {
+  font-size: 0.9rem;
+}
+
+/* Date dans le header */
+.card-date {
+  font-size: 0.7rem;
+  color: #6c757d;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Section des prix */
+.item-prices {
+  display: flex;
+  gap: 12px;
+}
+
+.item-stock-status {
+  min-width: 120px;
+  text-align: right;
+}
+
+/* Bouton désactivé */
+.btn-confirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+/* Styles pour le statut du stock */
+.status-rupture {
+  background: rgba(220, 53, 69, 0.08);
+  border-left: 3px solid #dc3545;
+  border-radius: 8px;
+  margin: 4px 0;
+}
+
+.status-dispo {
+  background: transparent;
+  border-left: 3px solid transparent;
+}
+
+.dot-rupture {
+  background: #dc3545;
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+.stock-badge.status-rupture {
+  background: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.stock-badge.status-dispo {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+.stock-quantity {
+  font-size: 0.65rem;
+  color: #6c757d;
+  margin-left: 5px;
+}
+
+.warning-banner.stock-rupture {
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border-left: 3px solid #dc3545;
+  border-radius: 8px;
+  font-size: 0.7rem;
+}
+
+.warning-banner i {
+  margin-right: 8px;
+}

@@ -1,149 +1,148 @@
-<section class="section">
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-lg-12">
-        <div class="card shadow-lg border-0 rounded-4">
-          <div class="card-body p-3 p-md-4">
-
-            <!-- Header -->
-            <div class="text-center mb-3">
-              <h2 class="text-uppercase small text-muted mb-1">Gestion des Articles</h2>
-              <h3 class="mb-0" style="font-family: 'Amatic SC', cursive; color: #2c3e50;">
-                <i class="bi bi-box-seam me-2" style="color: #ce1212;"></i> 
-                Liste des <span style="color: #ce1212;">Articles</span>
-              </h3>
-            </div>
-
-            <!-- Messages -->
-            <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show py-2 mb-3">
-              {{ successMessage }}
-              <button type="button" class="btn-close btn-sm" (click)="successMessage=''"></button>
-            </div>
-
-            <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show py-2 mb-3">
-              {{ errorMessage }}
-              <button type="button" class="btn-close btn-sm" (click)="errorMessage=''"></button>
-            </div>
-
-            <!-- Actions -->
-            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-
-              <!-- Search -->
-              <div class="input-group" style="max-width: 300px;">
-                <span class="input-group-text bg-light">
-                  <i class="bi bi-search" style="color: #ce1212;"></i>
-                </span>
-                <input 
-                  type="text" 
-                  class="form-control form-control-sm" 
-                  placeholder="Filtrer..." 
-                  [(ngModel)]="filterText">
-              </div>
-
-              <!-- Buttons -->
-              <div>
-                <button class="btn btn-outline-secondary btn-sm me-2" (click)="loadArticles()">
-                  <i class="bi bi-arrow-repeat"></i> Rafraîchir
-                </button>
-
-                <a routerLink="/articles/create" class="btn btn-primary btn-sm rounded-pill px-3">
-                  <i class="bi bi-plus-circle me-1"></i> Nouvel Article
-                </a>
-              </div>
-
-            </div>
-
-            <!-- Loading -->
-            <div *ngIf="loading" class="text-center py-4">
-              <div class="spinner-border text-danger"></div>
-              <p class="mt-2 text-muted small">Chargement...</p>
-            </div>
-
-            <!-- Empty -->
-            <div *ngIf="!loading && filteredArticles.length === 0" class="alert alert-info text-center">
-              Aucun article trouvé
-            </div>
-
-            <!-- Table -->
-            <div *ngIf="!loading && filteredArticles.length > 0" class="table-responsive">
-              <table class="table table-sm table-bordered table-hover align-middle">
-
-                <thead class="table-dark">
-                  <tr class="text-center">
-                    <th>Libelle</th>
-                    <th>Stock</th>
-                    <th>Seuil</th>
-                    <th>Unité</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr *ngFor="let article of filteredArticles">
-
-                    <td><strong>{{ article.libelle }}</strong></td>
-
-                    <td class="text-end">{{ article.quantiteEnStock }}</td>
-
-                    <td class="text-end">{{ article.seuilAlerte }}</td>
-
-                    <td class="text-center">{{ article.unite }}</td>
-
-                    <!-- Statut -->
-                    <td class="text-center">
-                      <span class="badge"
-                        [ngClass]="{
-                          'bg-success': article.quantiteEnStock > article.seuilAlerte,
-                          'bg-warning': article.quantiteEnStock <= article.seuilAlerte && article.quantiteEnStock > 0,
-                          'bg-danger': article.quantiteEnStock === 0
-                        }">
-
-                        {{
-                          article.quantiteEnStock === 0
-                            ? 'Rupture'
-                            : article.quantiteEnStock <= article.seuilAlerte
-                            ? 'Stock faible'
-                            : 'Disponible'
-                        }}
-                      </span>
-                    </td>
-
-                    <!-- Actions -->
-                    <td class="text-center">
-
-                      <a 
-                        [routerLink]="['/articles/update', article.id]" 
-                        class="btn btn-primary btn-sm me-1">
-                        <i class="bi bi-pencil"></i>
-                      </a>
-
-                      <button 
-                        class="btn btn-danger btn-sm"
-                        (click)="deleteArticle(article.id!)">
-                        <i class="bi bi-trash"></i>
-                      </button>
-
-                    </td>
-
-                  </tr>
-                </tbody>
-
-                <!-- Footer -->
-                <tfoot class="table-secondary">
-                  <tr>
-                    <td colspan="6" class="fw-bold">
-                      Total: {{ filteredArticles.length }} article(s)
-                    </td>
-                  </tr>
-                </tfoot>
-
-              </table>
-            </div>
-
+<div class="container-fluid py-4">
+  <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+    
+    <!-- Header -->
+    <div class="card-header bg-white py-4 border-0">
+      <div class="row align-items-center g-3">
+        <div class="col-md-4">
+          <h3 class="fw-bold mb-0">Gestion des <span class="text-danger">Articles</span></h3>
+          <p class="text-muted small mt-1 mb-0">Suivi des stocks et approvisionnements</p>
+        </div>
+        
+        <div class="col-md-5">
+          <div class="input-group bg-light rounded-pill px-3 border shadow-sm">
+            <span class="input-group-text bg-transparent border-0">
+              <i class="bi bi-search text-danger fs-5"></i>
+            </span>
+            <input 
+              type="text" 
+              class="form-control bg-transparent border-0" 
+              placeholder="Rechercher un article..."
+              [(ngModel)]="filterText">
+            <button *ngIf="filterText" class="btn btn-link text-danger" (click)="filterText = ''">
+              <i class="bi bi-x-lg"></i>
+            </button>
           </div>
+        </div>
+
+        <div class="col-md-3 text-end">
+          <button class="btn btn-danger rounded-pill px-4 py-2 shadow-sm" routerLink="/articles/create">
+            <i class="bi bi-plus-lg me-2"></i>Nouvel Article
+          </button>
         </div>
       </div>
     </div>
+
+    <!-- Messages -->
+    <div *ngIf="successMessage" class="alert alert-success m-3 border-0 rounded-3 shadow-sm">
+      <i class="bi bi-check-circle me-2"></i> {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger m-3 border-0 rounded-3 shadow-sm">
+      <i class="bi bi-exclamation-triangle me-2"></i> {{ errorMessage }}
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+      <p class="text-muted mt-2">Chargement des articles...</p>
+    </div>
+
+    <!-- Tableau -->
+    <div *ngIf="!loading && filteredArticles.length > 0" class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr class="text-uppercase small fw-bold text-muted">
+            <th class="ps-4 py-3">Libellé</th>
+            <th class="text-center">Stock</th>
+            <th class="text-center">Seuil</th>
+            <th class="text-center">Unité</th>
+            <th class="text-center">Statut</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let article of filteredArticles">
+            <td class="ps-4">
+              <div class="fw-bold text-dark">{{ article.libelle }}</div>
+            </td>
+            <td class="text-center">
+              <span class="fw-semibold" [class.text-danger]="article.quantiteEnStock === 0">
+                {{ article.quantiteEnStock }}
+              </span>
+            </td>
+            <td class="text-center">{{ article.seuilAlerte }}</td>
+            <td class="text-center">
+              <span class="badge bg-light text-secondary border px-3 rounded-pill fw-medium">
+                {{ article.unite }}
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="badge rounded-pill px-3 py-1" [ngClass]="{
+                'bg-success-subtle text-success border border-success': article.quantiteEnStock > article.seuilAlerte,
+                'bg-warning-subtle text-warning border border-warning': article.quantiteEnStock <= article.seuilAlerte && article.quantiteEnStock > 0,
+                'bg-danger-subtle text-danger border border-danger': article.quantiteEnStock === 0
+              }">
+                <i class="bi me-1" [ngClass]="{
+                  'bi-check-circle': article.quantiteEnStock > article.seuilAlerte,
+                  'bi-exclamation-triangle': article.quantiteEnStock <= article.seuilAlerte && article.quantiteEnStock > 0,
+                  'bi-x-circle': article.quantiteEnStock === 0
+                }"></i>
+                {{
+                  article.quantiteEnStock === 0
+                    ? 'Rupture'
+                    : article.quantiteEnStock <= article.seuilAlerte
+                    ? 'Stock faible'
+                    : 'Disponible'
+                }}
+              </span>
+            </td>
+            <td class="text-center">
+              <div class="d-flex gap-2 justify-content-center">
+                <button class="btn btn-outline-primary btn-sm rounded-circle shadow-sm" 
+                        [routerLink]="['/articles/update', article.id]" 
+                        title="Modifier"
+                        style="width: 32px; height: 32px;">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-sm rounded-circle shadow-sm" 
+                        (click)="deleteArticle(article.id)" 
+                        title="Supprimer"
+                        style="width: 32px; height: 32px;">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot class="bg-light">
+          <tr>
+            <td colspan="6" class="ps-4 py-3 fw-bold">
+              Total: {{ filteredArticles.length }} article(s)
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Empty state -->
+    <div *ngIf="!loading && filteredArticles.length === 0" class="text-center py-5">
+      <i class="bi bi-box-seam display-2 text-muted"></i>
+      <p class="text-muted mt-3 mb-0">Aucun article trouvé.</p>
+      <button class="btn btn-danger rounded-pill px-4 py-2 mt-3" routerLink="/articles/create">
+        <i class="bi bi-plus-lg me-2"></i>Ajouter un article
+      </button>
+    </div>
+
+    <!-- Refresh button -->
+    <div class="p-3 border-top bg-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-outline-danger btn-sm rounded-pill px-3" (click)="refresh()">
+          <i class="bi bi-arrow-repeat me-1"></i> Rafraîchir
+        </button>
+      </div>
+    </div>
+
   </div>
-</section>
+</div>
