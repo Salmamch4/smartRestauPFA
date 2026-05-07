@@ -1,8 +1,4 @@
 <div class="container-fluid p-0" style="display: flex; min-height: 100vh;">
-<<<<<<< Updated upstream
-=======
-  <!-- Sidebar -->
->>>>>>> Stashed changes
   <div class="sidebar">
     <div class="sidebar-header">
       <h3 class="text-center mb-0">
@@ -19,10 +15,7 @@
         </a>
       </div>
 
-<<<<<<< Updated upstream
       <!-- Roles -->
-=======
->>>>>>> Stashed changes
       <div class="menu-item">
         <a routerLink="/role" routerLinkActive="active">
           <i class="fas fa-user-tag"></i>
@@ -30,17 +23,8 @@
         </a>
       </div>
 
-<<<<<<< Updated upstream
-      <!-- Chef Cuisinier -->
-      <div class="menu-item">
-        <a routerLink="/chef-cuisinier" routerLinkActive="active">
-          <i class="fas fa-fire"></i>
-          <span>Chef Cuisinier</span>
-        </a>
-      </div>
+    
 
-=======
->>>>>>> Stashed changes
       <!-- Achats -->
       <div class="menu-item has-submenu">
         <a (click)="toggleSubmenu('achats')" class="dropdown-toggle">
@@ -49,8 +33,12 @@
           <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'achats'">
-          <a routerLink="/add-achats">Ajouter un achat</a>
-          <a routerLink="/list-achats">Voir la liste</a>
+          <a routerLink="/add-achats" routerLinkActive="active">
+            <i class="fas fa-plus-circle"></i> Ajouter un achat
+          </a>
+          <a routerLink="/list-achats" routerLinkActive="active">
+            <i class="fas fa-list"></i> Voir la liste
+          </a>
         </div>
       </div>
 
@@ -62,8 +50,12 @@
           <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'articles'">
-          <a routerLink="/articles/create">Ajouter un article</a>
-          <a routerLink="/articles">Voir la liste</a>
+          <a routerLink="/articles/create">
+            <i class="bi bi-plus-circle"></i> Ajouter un article
+          </a>
+          <a routerLink="/articles">
+            <i class="bi bi-list"></i> Voir la liste
+          </a>
         </div>
       </div>
 
@@ -75,8 +67,12 @@
           <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'fournisseurs'">
-          <a routerLink="/add-fournisseur">Ajouter</a>
-          <a routerLink="/list-fournisseurs">Liste</a>
+          <a routerLink="/add-fournisseur" routerLinkActive="active">
+            <i class="fas fa-plus-circle"></i> Ajouter
+          </a>
+          <a routerLink="/list-fournisseurs" routerLinkActive="active">
+            <i class="fas fa-list"></i> Liste
+          </a>
         </div>
       </div>
 
@@ -88,8 +84,12 @@
           <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'produits'">
-          <a routerLink="/add-produit">Ajouter un produit</a>
-          <a routerLink="/list-produits">Voir la liste</a>
+          <a routerLink="/add-produit" routerLinkActive="active">
+            <i class="fas fa-plus-circle"></i> Ajouter un produit
+          </a>
+          <a routerLink="/list-produits" routerLinkActive="active">
+            <i class="fas fa-list"></i> Voir la liste
+          </a>
         </div>
       </div>
 
@@ -101,8 +101,12 @@
           <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'categories'">
-          <a routerLink="/add-categorie">Ajouter</a>
-          <a routerLink="/list-categories">Liste</a>
+          <a routerLink="/add-categorie" routerLinkActive="active">
+            <i class="fas fa-plus-circle"></i> Ajouter
+          </a>
+          <a routerLink="/list-categories" routerLinkActive="active">
+            <i class="fas fa-list"></i> Liste
+          </a>
         </div>
       </div>
 
@@ -115,13 +119,7 @@
   </a>
 </div>-->
 
-      <!-- Rapports -->
-      <div class="menu-item">
-        <a routerLink="/rapports" routerLinkActive="active">
-          <i class="fas fa-chart-line"></i>
-          <span>Rapports</span>
-        </a>
-      </div>
+     
 
       <!-- Profil -->
       <div class="menu-item has-submenu">
@@ -131,8 +129,12 @@
           <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="submenu" [class.open]="openSubmenu === 'profil'">
-          <a routerLink="/profile">Mon profil</a>
-          <a routerLink="/notifications">Notifications</a>
+          <a routerLink="/profile" routerLinkActive="active">
+            <i class="fas fa-id-card"></i> Mon profil
+          </a>
+          <a routerLink="/notifications" routerLinkActive="active">
+            <i class="fas fa-bell"></i> Notifications
+          </a>
         </div>
       </div>
 <li>
@@ -183,28 +185,23 @@
 
   <div class="main-content w-100">
     <nav class="navbar navbar-expand navbar-light bg-white shadow-sm mb-4 px-4 py-2 d-flex justify-content-between">
-<<<<<<< Updated upstream
       <span class="navbar-brand mb-0 h1 text-muted" style="font-size: 1.1rem;">Système de Gestion</span>
-=======
-      <span class="navbar-brand mb-0 h1 text-muted">Système de Gestion</span>
->>>>>>> Stashed changes
       <div class="d-flex align-items-center gap-3">
         <div class="position-relative" style="cursor: pointer;" routerLink="/notifications">
           <i class="fas fa-bell fs-5 text-secondary"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">3</span>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+            3
+          </span>
         </div>
         <div class="border-start ps-3">
-          <span class="fw-bold small">Bienvenue, {{ user?.role || 'Admin' }}</span>
+          <span class="fw-bold small">Bienvenue, Admin</span>
         </div>
       </div>
     </nav>
+
     <div class="container-fluid px-4">
       <router-outlet></router-outlet>
     </div>
   </div>
-<<<<<<< Updated upstream
 
 </div>
-=======
-</div>
->>>>>>> Stashed changes

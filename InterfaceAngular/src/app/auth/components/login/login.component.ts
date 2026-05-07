@@ -45,30 +45,30 @@ export class LoginComponent implements OnInit {
     this.navigateByRole(role);
   }
 
- navigateByRole(role: string): void {
-  console.log('🔄 Redirection pour rôle:', role);
-  
-  switch(role) {
-    case 'client':
-      this.router.navigate(['/catalogue']);
-      break;
-    case 'admin':
-    case 'administrateur':
-      this.router.navigate(['/admin-dashboard']);
-      break;
-    case 'server':
-    case 'serveur':
-      this.router.navigate(['/server-dashboard']);
-      break;
-    case 'chef_cuisine':
-    case 'chef cuisine':
-    case 'chef':
-      this.router.navigate(['/chef-dashboard']);
-      break;
-    default:
-      this.router.navigate(['/catalogue']);
+  navigateByRole(role: string): void {
+    console.log('🔄 Redirection pour rôle:', role);
+    
+    switch(role) {
+      case 'client':
+        this.router.navigate(['/catalogue']);
+        break;
+      case 'admin':
+      case 'administrateur':
+        this.router.navigate(['/admin-dashboard']);
+        break;
+      case 'server':
+      case 'serveur':
+        this.router.navigate(['/server-dashboard']);
+        break;
+      case 'chef_cuisine':
+      case 'chef cuisine':
+      case 'chef':
+        this.router.navigate(['/chef-dashboard']);
+        break;
+      default:
+        this.router.navigate(['/catalogue']);
+    }
   }
-}
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
@@ -88,15 +88,10 @@ export class LoginComponent implements OnInit {
         // ✅ Mettre à jour l'état d'authentification
         this.authStateService.updateAuthState();
         
-<<<<<<< Updated upstream
+        // ✅ Redirection selon le rôle
         const user = response.user;
         const role = user?.role?.toLowerCase();
         this.navigateByRole(role);
-=======
-        // Redirect to dashboard
-        this.router.navigate(['/admin-dashboard']);
-      
->>>>>>> Stashed changes
       },
       error: (error) => {
         this.loading = false;
