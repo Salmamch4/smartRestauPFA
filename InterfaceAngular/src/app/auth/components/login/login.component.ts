@@ -88,9 +88,15 @@ export class LoginComponent implements OnInit {
         // ✅ Mettre à jour l'état d'authentification
         this.authStateService.updateAuthState();
         
+<<<<<<< Updated upstream
         const user = response.user;
         const role = user?.role?.toLowerCase();
         this.navigateByRole(role);
+=======
+        // Redirect to dashboard
+        this.router.navigate(['/admin-dashboard']);
+      
+>>>>>>> Stashed changes
       },
       error: (error) => {
         this.loading = false;

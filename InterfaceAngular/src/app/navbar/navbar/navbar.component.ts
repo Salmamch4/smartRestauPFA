@@ -70,16 +70,11 @@ export class NavbarComponent implements OnInit {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
       
-      // Appeler le logout du service
-      this.authService.logout().subscribe({
-        next: () => {
-          this.router.navigate(['/login']);
-        },
-        error: (err: any) => {
-          console.error('Logout error:', err);
-          this.router.navigate(['/login']);
-        }
-      });
+      // Appeler la méthode logout du service (qui est synchrone)
+      this.authService.logout();
+      
+      // Rediriger vers la page de login
+      this.router.navigate(['/login']);
     }
   }
   openTicket = false;

@@ -1,11 +1,9 @@
-// src/app/auth/core/services/auth-service.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
-// ✅ Assurez-vous que User est bien exportée
 export interface User {
   id: string;
   telephone: string;
@@ -40,6 +38,11 @@ export class AuthServiceService {
         console.error('Error loading user:', e);
       }
     }
+  }
+
+  // Méthode publique pour rafraîchir l’utilisateur courant (après mise à jour)
+  refreshUser(): void {
+    this.loadUserFromStorage();
   }
 
   registerClient(data: any): Observable<any> {
@@ -77,4 +80,14 @@ export class AuthServiceService {
     const user = this.getCurrentUser();
     return token !== null && user !== null;
   }
+
+  updateProfile(data: any): Observable<any> {
+  return this.http.put(`${this.API}/user/profile`, data);
+}
+
+updatePassword(data: any): Observable<any> {
+  return this.http.put(`${this.API}/user/password`, data);
+}
+
+
 }

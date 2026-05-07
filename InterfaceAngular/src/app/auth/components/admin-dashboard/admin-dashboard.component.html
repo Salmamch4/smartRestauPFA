@@ -1,182 +1,162 @@
-<!-- src/app/admin-dashboard/admin-dashboard.component.html -->
+<div *ngIf="loading" class="text-center mt-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Chargement...</span>
+  </div>
+</div>
 
-<div class="container-fluid py-5" style="background-color: #f4f7f6; min-height: 100vh;">
-  <div class="container">
-    
-    <div class="text-center mb-5">
-      <h1 style="font-family: 'Amatic SC', cursive; font-size: 4rem; font-weight: bold;">
-        Espace <span style="color:#ce1212;">Administrateur</span>
-      </h1>
-      <p class="text-muted text-uppercase fw-bold" style="letter-spacing: 2px;">Tableau de Bord & Gestion</p>
-    </div>
-
-    <!-- Buttons to navigate between tabs -->
-    <div class="row g-4 mb-5 text-center">
-      <div class="col-md-3">
-        <div class="card shadow-sm border-0 p-4 h-100 btn-action" 
-             [class.active-card]="viewTab === 'manage_clients'"
-             (click)="changeTab('manage_clients')">
-          <i class="fa fa-users fa-3x mb-3 text-danger"></i>
-          <h4 class="fw-bold">Gestion Clients</h4>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card shadow-sm border-0 p-4 h-100 btn-action" 
-             [class.active-card]="viewTab === 'employee'"
-             (click)="changeTab('employee')">
-          <i class="fa fa-user-plus fa-3x mb-3 text-dark"></i>
-          <h4 class="fw-bold">Nouvel Employé</h4>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card shadow-sm border-0 p-4 h-100 btn-action" 
-             [class.active-card]="viewTab === 'manage_employees'"
-             (click)="changeTab('manage_employees')">
-          <i class="fa fa-users-cog fa-3x mb-3 text-success"></i>
-          <h4 class="fw-bold">Gestion Employés</h4>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card shadow-sm border-0 p-4 h-100 btn-action" 
-             [class.active-card]="viewTab === 'stats'"
-             (click)="changeTab('stats')">
-          <i class="fa fa-chart-line fa-3x mb-3 text-primary"></i>
-          <h4 class="fw-bold">Statistiques</h4>
-        </div>
-      </div>
-    </div>
-
-    <hr class="my-5" style="border-top: 2px dashed #ccc;">
-
-    <!-- Clients Management -->
-    <div *ngIf="viewTab === 'manage_clients'" class="card shadow border-0 rounded-4 overflow-hidden">
-      <div class="card-header bg-dark text-white py-3 font-monospace text-uppercase">Liste des Clients Enregistrés</div>
-      <div class="table-responsive">
-        <table class="table align-middle text-center mb-0">
-          <thead class="table-dark">
-            <tr>
-              <th>Nom</th>
-              <th>Email</th>
-              <th>Téléphone</th>
-              <th>Points</th>
-              <th>Statut</th>
-              <th>Actions Admin</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let client of allClients">
-              <td><strong>{{ client.nom }} {{ client.prenom }}</strong></td>
-              <td>{{ client.email }}</td>
-              <td>{{ client.telephone }}</td>
-              <td><span class="badge bg-info text-dark">{{ client.points_fidelite }} pts</span></td>
-              <td>
-                <span [class]="client.is_active ? 'badge bg-success' : 'badge bg-secondary'">
-                  {{ client.is_active ? 'Actif' : 'Inactif' }}
-                </span>
-              </td>
-              <td>
-                <button class="btn btn-sm btn-warning me-2" (click)="toggleClientStatus(client)">
-                  {{ client.is_active ? 'Désactiver' : 'Activer' }}
-                </button>
-                <button class="btn btn-sm btn-danger" (click)="deleteClient(client.id)">
-                  <i class="fa fa-trash"></i> Supprimer
-                </button>
-              </td>
-            </tr>
-            <tr *ngIf="allClients.length === 0">
-              <td colspan="6" class="py-5 text-muted">Aucun client trouvé dans la base de données.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Add Employee -->
-    <div *ngIf="viewTab === 'employee'" class="card shadow border-0 mx-auto rounded-4" style="max-width: 750px;">
-      <div class="card-body p-5">
-        <h3 class="text-center mb-4 fw-bold">Enregistrer un nouvel employé</h3>
-        <div class="row g-3">
-          <div class="col-md-6"><label class="fw-bold small">Nom</label><input type="text" class="form-control" [(ngModel)]="newEmployee.nom"></div>
-          <div class="col-md-6"><label class="fw-bold small">Prénom</label><input type="text" class="form-control" [(ngModel)]="newEmployee.prenom"></div>
-          <div class="col-md-6"><label class="fw-bold small">Email</label><input type="email" class="form-control" [(ngModel)]="newEmployee.email"></div>
-          <div class="col-md-6"><label class="fw-bold small">Téléphone</label><input type="text" class="form-control" [(ngModel)]="newEmployee.telephone"></div>
-          <div class="col-12"><label class="fw-bold small">Adresse</label><input type="text" class="form-control" [(ngModel)]="newEmployee.adresse"></div>
-          <div class="col-md-6">
-            <label class="fw-bold small">Poste</label>
-            <select class="form-select" [(ngModel)]="newEmployee.poste">
-              <option value="serveur">Serveur</option>
-              <option value="cuisinier">Cuisinier</option>
-              <option value="caissier">Caissier</option>
-            </select>
+<div *ngIf="!loading">
+  <!-- Ligne des KPI -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-3">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                Clients
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ stats.total_clients }}</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-users fa-2x text-gray-300"></i>
+            </div>
           </div>
-          <div class="col-md-6"><label class="fw-bold small">Salaire (DH)</label><input type="number" class="form-control" [(ngModel)]="newEmployee.salaire"></div>
-        </div>
-        <button class="btn btn-lg w-100 text-white mt-4 shadow-sm" style="background:#ce1212; border-radius:50px;" (click)="onAddEmployee()">Enregistrer l'employé</button>
-      </div>
-    </div>
-
-    <!-- Manage Employees -->
-    <div *ngIf="viewTab === 'manage_employees'" class="card shadow border-0 rounded-4 overflow-hidden">
-      <div class="card-header bg-dark text-white py-3 font-monospace text-uppercase">Liste des Employés</div>
-      <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0 text-center">
-          <thead class="table-light">
-            <tr><th>Employé</th><th>Poste</th><th>Salaire</th><th>Actions</th></tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let emp of allEmployees">
-              <td *ngIf="!emp.isEditing"><strong>{{ emp.nom }} {{ emp.prenom }}</strong><br><small>{{ emp.email }}</small></td>
-              <td *ngIf="emp.isEditing">
-                  <input type="text" class="form-control form-control-sm mb-1" [(ngModel)]="emp.nom" placeholder="Nom">
-                  <input type="text" class="form-control form-control-sm" [(ngModel)]="emp.prenom" placeholder="Prénom">
-              </td>
-              
-              <td *ngIf="!emp.isEditing">{{ emp.poste }}</td>
-              <td *ngIf="emp.isEditing">
-                  <select class="form-select form-select-sm" [(ngModel)]="emp.poste">
-                      <option value="serveur">Serveur</option>
-                      <option value="cuisinier">Cuisinier</option>
-                      <option value="caissier">Caissier</option>
-                  </select>
-              </td>
-
-              <td *ngIf="!emp.isEditing">{{ emp.salaire }} DH</td>
-              <td *ngIf="emp.isEditing"><input type="number" class="form-control form-control-sm" [(ngModel)]="emp.salaire"></td>
-
-              <td>
-                  <button *ngIf="!emp.isEditing" class="btn btn-sm btn-outline-warning me-2" (click)="emp.isEditing = true">Modifier</button>
-                  <button *ngIf="emp.isEditing" class="btn btn-sm btn-success me-2" (click)="updateEmployee(emp)">Sauvegarder</button>
-                  <button class="btn btn-sm btn-outline-danger" (click)="deleteEmployee(emp.user_id)">
-                    Supprimer
-                  </button>
-              </td>
-            </tr>
-            <tr *ngIf="allEmployees.length === 0"><td colspan="4" class="py-5 text-muted">Aucun employé enregistré.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Stats -->
-    <div *ngIf="viewTab === 'stats'" class="row g-4 justify-content-center">
-      <div class="col-md-3">
-        <div class="card border-0 shadow-sm p-4 text-center bg-white rounded-4 h-100">
-          <i class="fa fa-user-check fa-2x text-danger mb-2"></i>
-          <h2 class="text-danger fw-bold">{{ stats.total_clients }}</h2>
-          <p class="text-muted small mb-0 text-uppercase fw-bold">Clients Actifs</p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card border-0 shadow-sm p-4 text-center bg-white rounded-4 h-100">
-          <i class="fa fa-briefcase fa-2x text-dark mb-2"></i>
-          <h2 class="text-dark fw-bold">{{ stats.total_employees }}</h2>
-          <p class="text-muted small mb-0 text-uppercase fw-bold">Employés</p>
         </div>
       </div>
     </div>
 
+    <div class="col-md-3">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                Employés
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ stats.total_employees }}</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-user-tie fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                Commandes
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ stats.total_orders }}</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                Chiffre d'affaires
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ stats.total_revenue | number }} DH</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graphiques -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Répartition des commandes</h6>
+        </div>
+        <div class="card-body">
+          <canvas id="statusChart" width="400" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Évolution du CA (mensuel)</h6>
+        </div>
+        <div class="card-body">
+          <canvas id="revenueChart" width="400" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tableaux récents -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Dernières commandes</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+              <thead>
+                <tr><th>#Commande</th><th>Client</th><th>Montant</th><th>Statut</th></tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of recentOrders">
+                  <td>{{ order.numeroCommande }}</td>
+                  <td>{{ order.nomClient }}</td>
+                  <td>{{ order.total }} DH</td>
+                  <td><span class="badge" [ngClass]="{
+  'bg-warning': order.statut === 'EN_COURS', 
+  'bg-success': order.statut === 'LIVREE',
+  'bg-primary': order.statut === 'CONFIRMEE',
+  'bg-secondary': order.statut === 'REJETEE'
+}">{{ order.statut }}</span> </tr>
+                <tr *ngIf="recentOrders.length === 0"><td colspan="4" class="text-center">Aucune commande récente</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Articles en stock faible</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+              <thead><tr><th>Article</th><th>Stock actuel</th><th>Seuil alerte</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let item of lowStockItems">
+                  <td>{{ item.libelle }}</td>
+                  <td class="text-danger fw-bold">{{ item.quantiteStock }}</td>
+                  <td>{{ item.seuilAlerte }}</td>
+                </tr>
+                <tr *ngIf="lowStockItems.length === 0"><td colspan="3" class="text-center">Tous les stocks sont suffisants</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

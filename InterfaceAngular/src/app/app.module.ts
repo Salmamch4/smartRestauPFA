@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';               // ← AJOUTÉ pour ngClass et number pipe
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 
@@ -41,15 +41,21 @@ import { AddProduitComponent } from './menu/components/produits/add-produit/add-
 import { ProductListComponent } from './menu/components/produits/product-list/product-list.component';
 import { ProductEditComponent } from './menu/components/produits/product-edit/product-edit.component';
 
+// Fournisseurs
 import { AddFournisseurComponent } from './menu/components/fournisseurs/add-fournisseur/add-fournisseur.component';
 import { ListFournisseursComponent } from './menu/components/fournisseurs/list-fournisseurs/list-fournisseurs.component';
 import { EditFournisseurComponent } from './menu/components/fournisseurs/edit-fournisseur/edit-fournisseur.component';
+
 
 // Order (✔️ مهم)
 import { ClientComponent } from './order/components/ticket/client/client.component';
 import { AdminTicketComponent } from './order/components/ticket/admin/admin.component';
 import { ServeurTicketComponent } from './order/components/ticket/serveur/serveur-ticket.component';
 import { ListOrdersComponent } from './order/components/chef-cuisinier/list-orders/list-orders.component';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './auth/components/interceptors/jwt.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -75,6 +81,7 @@ import { ListOrdersComponent } from './order/components/chef-cuisinier/list-orde
     AddCategorieComponent,
     ListCategorieComponent,
 
+
     //catalogue
     CatalogueComponent,
     CommandeComponent,
@@ -92,9 +99,11 @@ import { ListOrdersComponent } from './order/components/chef-cuisinier/list-orde
     AdminTicketComponent,
     ServeurTicketComponent,
     ListOrdersComponent,
+
   ],
   imports: [
     BrowserModule,
+    CommonModule,            // ← essentiel pour ngClass et le pipe number
     AppRoutingModule,
     HttpClientModule,
     FormsModule,   
@@ -107,7 +116,9 @@ import { ListOrdersComponent } from './order/components/chef-cuisinier/list-orde
   
                
   ],
-  providers: [],
+providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
