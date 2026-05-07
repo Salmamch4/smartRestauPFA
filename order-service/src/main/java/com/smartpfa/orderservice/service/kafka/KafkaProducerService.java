@@ -1,6 +1,6 @@
 package com.smartpfa.orderservice.service.kafka;
 
-import com.smartpfa.orderservice.dto.kafka.OrderValidationEvent;
+import com.smartpfa.orderservice.dto.kafka.StockUpdateEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -8,14 +8,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaProducerService {
 
-   /* private static final String TOPIC = "order-validation";
-
     @Autowired
     private KafkaTemplate<String, Object> kafkaTemplate;
 
-    public void sendOrderForValidation(OrderValidationEvent event) {
-        System.out.println(" Envoi de la commande à Kafka: " + event.getOrderNumber());
-        kafkaTemplate.send(TOPIC, event);
-        System.out.println(" Commande envoyée à Kafka");
-    }*/
+    private static final String STOCK_UPDATE_TOPIC = "stock-updates";
+
+    public void sendStockUpdate(StockUpdateEvent event) {
+        try {
+            kafkaTemplate.send(STOCK_UPDATE_TOPIC, event.getOrderId(), event);
+            System.out.println("Message Kafka envoye - Commande: " + event.getOrderNumber());
+        } catch (Exception e) {
+            System.err.println("Erreur envoi Kafka: " + e.getMessage());
+        }
+    }
 }

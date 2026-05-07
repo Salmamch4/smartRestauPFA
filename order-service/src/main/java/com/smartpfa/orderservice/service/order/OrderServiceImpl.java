@@ -7,8 +7,11 @@ import com.smartpfa.orderservice.entity.order.OrderItem;
 import com.smartpfa.orderservice.enums.OrderStatus;
 import com.smartpfa.orderservice.mappers.order.OrderMapper;
 import com.smartpfa.orderservice.repository.order.IOrderRepository;
+import com.smartpfa.orderservice.service.stock.StockUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +27,13 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private OrderMapper orderMapper;
 
+    @Autowired
+    private StockUpdateService stockUpdateService;  // ✅ Service pour déduire le stock
+
     @Override
     public List<OrderResponseDTO> getPendingOrders() {
         System.out.println("=== getPendingOrders START ===");
         try {
-            // ✅ Utiliser .name() pour convertir l'enum en String
             List<Order> orders = orderRepository.findByStatut(OrderStatus.EN_CONFIRMATION.name());
             System.out.println("Found " + orders.size() + " orders");
             return orders.stream()
@@ -57,13 +62,35 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    @Transactional
     public OrderResponseDTO confirmOrder(UUID id) {
+        System.out.println("=== confirmOrder: " + id);
+
         Order order = orderRepository.findById(id);
-        if (order != null) {
-            order.setStatut(OrderStatus.CONFIRMEE);
-            return orderMapper.toResponseDTO(orderRepository.save(order));
+        if (order == null) return null;
+
+        // ✅ Vérifier s'il y a des articles indisponibles
+        boolean hasInvalidItems = order.getItems().stream()
+                .anyMatch(item -> item.getQuantite() == 0);
+
+        if (hasInvalidItems) {
+            throw new RuntimeException("❌ Impossible de confirmer. Articles indisponibles");
         }
-        return null;
+
+        // ✅ DÉDUIRE LA QUANTITÉ DU STOCK (via le service Menu)
+        boolean stockUpdated = stockUpdateService.deductStock(order.getItems());
+
+        if (!stockUpdated) {
+            throw new RuntimeException("❌ Erreur lors de la mise à jour du stock. Stock insuffisant.");
+        }
+
+        // Changer le statut
+        order.setStatut(OrderStatus.CONFIRMEE);
+        Order updated = orderRepository.save(order);
+
+        System.out.println("✅ Commande confirmée et stock mis à jour: " + updated.getNumeroCommande());
+
+        return orderMapper.toResponseDTO(updated);
     }
 
     @Override
@@ -98,14 +125,56 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public OrderResponseDTO invalidateItem(UUID id, Long itemId) {
+        System.out.println("=== invalidateItem: orderId=" + id + ", itemId=" + itemId);
+
         Order order = orderRepository.findById(id);
-        return order != null ? orderMapper.toResponseDTO(order) : null;
+        if (order == null) return null;
+
+        for (OrderItem item : order.getItems()) {
+            if (item.getId().toString().equals(String.valueOf(itemId))) {
+                int ancienneQuantite = item.getQuantite();
+                item.setQuantite(0);
+                item.setTotalLigne(0.0);
+                System.out.println("Item invalidé: " + item.getProduitLibelle() +
+                        " (quantité: " + ancienneQuantite + " → 0)");
+                break;
+            }
+        }
+
+        double nouveauTotal = order.getItems().stream()
+                .mapToDouble(OrderItem::getTotalLigne)
+                .sum();
+        order.setTotal(nouveauTotal);
+
+        Order updatedOrder = orderRepository.save(order);
+        return orderMapper.toResponseDTO(updatedOrder);
     }
 
     @Override
     public OrderResponseDTO revalidateItem(UUID id, Long itemId) {
+        System.out.println("=== revalidateItem: orderId=" + id + ", itemId=" + itemId);
+
         Order order = orderRepository.findById(id);
-        return order != null ? orderMapper.toResponseDTO(order) : null;
+        if (order == null) return null;
+
+        for (OrderItem item : order.getItems()) {
+            if (item.getId().toString().equals(String.valueOf(itemId))) {
+                if (item.getQuantite() == 0) {
+                    item.setQuantite(1);
+                    item.setTotalLigne(item.getPrixUnitaire() * 1);
+                    System.out.println("Item réactivé: " + item.getProduitLibelle() + " → quantité: 1");
+                }
+                break;
+            }
+        }
+
+        double nouveauTotal = order.getItems().stream()
+                .mapToDouble(OrderItem::getTotalLigne)
+                .sum();
+        order.setTotal(nouveauTotal);
+
+        Order updatedOrder = orderRepository.save(order);
+        return orderMapper.toResponseDTO(updatedOrder);
     }
 
     @Override
@@ -120,7 +189,6 @@ public class OrderServiceImpl implements IOrderService {
         System.out.println("=== createOrder START ===");
         System.out.println("Nombre d'items reçus: " + (request.getItems() != null ? request.getItems().size() : 0));
 
-        // 1. Créer la commande
         Order order = new Order();
         order.setNomClient(request.getNomClient());
         order.setTelephone(request.getTelephone());
@@ -129,30 +197,27 @@ public class OrderServiceImpl implements IOrderService {
         order.setStatut(OrderStatus.EN_CONFIRMATION);
         order.setNumeroCommande("CMD-" + System.currentTimeMillis());
         order.setDateCommande(LocalDateTime.now());
-        order.setItems(new ArrayList<>()); // Initialiser la liste des items
+        order.setItems(new ArrayList<>());
 
-        // 2. Sauvegarder d'abord la commande pour avoir un ID
         Order savedOrder = orderRepository.save(order);
         System.out.println("Commande sauvegardée avec ID: " + savedOrder.getId());
 
-        // 3. Ajouter les items s'ils existent
         if (request.getItems() != null && !request.getItems().isEmpty()) {
             System.out.println("Ajout des items...");
 
             for (OrderRequestDTO.OrderItemRequestDTO itemDTO : request.getItems()) {
                 OrderItem item = new OrderItem();
-                item.setCommande(savedOrder); // Lier l'item à la commande
+                item.setCommande(savedOrder);
                 item.setProduitId(itemDTO.getProduitId());
                 item.setProduitLibelle(itemDTO.getProduitLibelle());
                 item.setQuantite(itemDTO.getQuantite());
                 item.setPrixUnitaire(itemDTO.getPrixUnitaire());
-                item.calculateTotal(); // Calculer le total de la ligne
+                item.calculateTotal();
 
                 savedOrder.getItems().add(item);
                 System.out.println("Item ajouté: " + item.getProduitLibelle() + " x " + item.getQuantite() + " = " + item.getTotalLigne());
             }
 
-            // 4. Sauvegarder à nouveau la commande avec les items
             savedOrder = orderRepository.save(savedOrder);
             System.out.println("Commande sauvegardée avec " + savedOrder.getItems().size() + " items");
         } else {
@@ -179,7 +244,6 @@ public class OrderServiceImpl implements IOrderService {
     public String generateOrderNumber() {
         return "CMD-" + System.currentTimeMillis();
     }
-
 
     @Override
     public List<OrderResponseDTO> getConfirmedOrders() {
@@ -244,7 +308,4 @@ public class OrderServiceImpl implements IOrderService {
             return null;
         }
     }
-
-
-
 }
