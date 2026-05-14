@@ -1,5 +1,4 @@
-﻿using Confluent.Kafka;
-using MenuDotNetMS.DTOs.kafka;
+﻿using MenuDotNetMS.DTOs.kafka;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

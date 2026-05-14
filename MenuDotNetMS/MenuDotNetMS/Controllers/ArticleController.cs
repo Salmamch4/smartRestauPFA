@@ -35,21 +35,22 @@ namespace MenuDotNetMS.Controllers
 
             return Ok(article);
         }
-
-        // Ajoutez cette méthode dans ArticleController.cs
+        // ArticleController.cs (Menu Service .NET)
         [HttpGet("{id}/stock")]
         public IActionResult GetStock(Guid id)
         {
             var article = _repository.GetById(id);
 
             if (article == null)
-                return NotFound(new { message = "Article non trouvé" });
+                return NotFound();
 
+            // ✅ استخدم القيم الحقيقية من قاعدة البيانات
             return Ok(new
             {
                 Id = article.Id,
                 Libelle = article.Libelle,
                 QuantiteEnStock = article.QuantiteEnStock,
+                SeuilAlerte = article.SeuilAlerte,
                 Disponible = article.QuantiteEnStock > 0,
                 Message = article.QuantiteEnStock > 0 ? "Disponible" : "Rupture de stock"
             });

@@ -2,12 +2,10 @@
 using MenuDotNetMS.Repositories.article;
 using MenuDotNetMS.Repositories.categorie;
 using MenuDotNetMS.Repositories.fournisseur;
-
-using MenuDotNetMS.Services;
-
 using MenuDotNetMS.Repositories.produit;
-
+using MenuDotNetMS.Services;
 using Scalar.AspNetCore;
+using MenuDotNetMS.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +19,9 @@ builder.Services.AddScoped<IAchatsRepository, AchatsRepository>();
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 builder.Services.AddScoped<ICategorieRepository, CategorieRepository>();
 builder.Services.AddScoped<IProduitRepository, ProduitRepository>();
+
+//kafka
+
 
 builder.Services.AddOpenApi();
 

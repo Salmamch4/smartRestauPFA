@@ -37,12 +37,27 @@ namespace MenuDotNetMS.Repositories.categorie
             using (SqlConnection cn = new SqlConnection(_config.GetConnectionString("menu")))
             {
                 cn.Open();
-                string query = "SELECT id, libelle, Description FROM Categories";
+                // ✅ ترتيب الكاتيغوريات حسب الترتيب المطلوب
+                string query = @"SELECT id, libelle, Description FROM Categories 
+                         ORDER BY CASE libelle
+                             WHEN 'Entrée' THEN 1
+                             WHEN 'Plat principal' THEN 2
+                             WHEN 'Salade' THEN 3
+                             WHEN 'Sandwich' THEN 4
+                             WHEN 'Fast Food' THEN 5
+                             WHEN 'Dessert' THEN 6
+                             WHEN 'boison' THEN 7
+                             ELSE 8
+                         END";
+
                 using (SqlCommand cmd = new SqlCommand(query, cn))
-                using (SqlDataReader rd = cmd.ExecuteReader())
                 {
-                    while (rd.Read())
-                        list.Add(MapToCategorie(rd));
+                    cmd.CommandTimeout = 60;
+                    using (SqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        while (rd.Read())
+                            list.Add(MapToCategorie(rd));
+                    }
                 }
             }
             return list;

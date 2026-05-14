@@ -512,5 +512,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuDotNetMS.Controllers.StockController",
+    "Method": "DeductStock",
+    "RelativePath": "api/Stock/deduct",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requests",
+        "Type": "System.Collections.Generic.List\u00601[[MenuDotNetMS.DTOs.stock.StockDeductionRequest, MenuDotNetMS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

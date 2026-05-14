@@ -3,20 +3,123 @@
   "WorkspaceRootPath": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\articlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\articlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\models\\produit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\models\\produit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\stockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\stockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\produitscategoriecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\produitscategoriecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\articlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\articlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\achats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\achats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\models\\kafka\\stockupdateconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\models\\kafka\\stockupdateconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\produit\\produitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\produit\\produitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\produit\\iproduitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\produit\\iproduitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\categorie\\categorierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\categorie\\categorierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\stock\\stockdeductionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\dtos\\stock\\stockdeductionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\models\\kafka\\stockupdateevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\models\\kafka\\stockupdateevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\categoriecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\categoriecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\article\\articlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\article\\articlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\services\\kafkaconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\services\\kafkaconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\produit\\composantcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\dtos\\produit\\composantcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\models\\produit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\models\\produit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\achat\\iachatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\achat\\iachatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\mappers\\produitmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\mappers\\produitmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\produit\\produitresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\dtos\\produit\\produitresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\produit\\produitcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\dtos\\produit\\produitcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\produitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\produitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\achat\\achatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\achat\\achatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\achat\\quantiterestanteupdatedtorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\dtos\\achat\\quantiterestanteupdatedtorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\menudotnetms.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\menudotnetms.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\kafka\\ordervalidationevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\dtos\\kafka\\ordervalidationevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\achat\\achatadddtorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\dtos\\achat\\achatadddtorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\categorie\\icategorierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\categorie\\icategorierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\article\\iarticlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\article\\iarticlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\models\\achat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +128,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\models\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\models\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\produit\\produitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\produit\\produitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\fournisseur\\fournissueradddtoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -55,68 +154,16 @@
       "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\fournisseur\\fournisseurrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\categorie\\icategorierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\categorie\\icategorierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\categorie\\categorierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\categorie\\categorierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\article\\iarticlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\article\\iarticlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\article\\articlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\article\\articlerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\services\\kafkaconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\services\\kafkaconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\produitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\produitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\categoriecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\categoriecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\achats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\achats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\controllers\\fournisseurcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\controllers\\fournisseurcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\achat\\quantiterestanteupdatedtorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\dtos\\achat\\quantiterestanteupdatedtorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\models\\fournisseurmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\models\\fournisseurmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\achat\\achatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\achat\\achatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\repositories\\achat\\iachatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\repositories\\achat\\iachatsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|c:\\users\\dell\\menudotnet\\smartrestaupfa\\menudotnetms\\menudotnetms\\dtos\\kafka\\ordervalidationevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB24FD84-5C36-4BFD-BC91-C885EFABBEE3}|MenuDotNetMS\\MenuDotNetMS.csproj|solutionrelative:menudotnetms\\dtos\\kafka\\ordervalidationevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -126,7 +173,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -142,33 +189,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "fournissuerAddDtoResponse.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\fournisseur\\fournissuerAddDtoResponse.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\fournisseur\\fournissuerAddDtoResponse.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\fournisseur\\fournissuerAddDtoResponse.cs",
-              "RelativeToolTip": "MenuDotNetMS\\DTOs\\fournisseur\\fournissuerAddDtoResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Program.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Program.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Program.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T23:47:29.42Z",
+              "WhenOpened": "2026-04-20T10:26:29.388Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Produit.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Produit.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\Produit.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Produit.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Models\\Produit.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAxAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "StockUpdateConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\kafka\\StockUpdateConsumer.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\kafka\\StockUpdateConsumer.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\kafka\\StockUpdateConsumer.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Models\\kafka\\StockUpdateConsumer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T23:00:24.867Z",
+              "WhenOpened": "2026-05-06T00:29:11.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Achats.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\Achats.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\Achats.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\Achats.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Controllers\\Achats.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAK0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T14:39:39.427Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ArticleController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\ArticleController.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\ArticleController.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\ArticleController.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Controllers\\ArticleController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T12:26:45.798Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ProduitsCategorieController.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\ProduitsCategorieController.cs",
               "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\ProduitsCategorieController.cs",
@@ -181,28 +254,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\appsettings.json",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\appsettings.json",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\appsettings.json",
-              "RelativeToolTip": "MenuDotNetMS\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-11T20:51:05.163Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ArticleController.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\ArticleController.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\ArticleController.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\ArticleController.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Controllers\\ArticleController.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAcwDsAAABEAAAAAAAAAA==",
+              "Title": "StockController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\StockController.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\StockController.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\StockController.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Controllers\\StockController.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAkwE8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T12:26:45.798Z",
+              "WhenOpened": "2026-05-06T00:44:35.787Z",
               "EditorCaption": ""
             },
             {
@@ -213,252 +273,217 @@
               "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\produit\\ProduitRepository.cs",
               "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\produit\\ProduitRepository.cs",
               "RelativeToolTip": "MenuDotNetMS\\Repositories\\produit\\ProduitRepository.cs",
-              "ViewState": "AgIAAMAAAAAAAAAAAAAAAEYAAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAqwLMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-26T23:53:31.859Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Achat.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Achat.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\Achat.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Achat.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Models\\Achat.cs",
+              "DocumentIndex": 7,
+              "Title": "IProduitRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\produit\\IProduitRepository.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\produit\\IProduitRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\produit\\IProduitRepository.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Repositories\\produit\\IProduitRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T23:55:31.106Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ArticleCreateDTO.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\article\\ArticleCreateDTO.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\article\\ArticleCreateDTO.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\article\\ArticleCreateDTO.cs",
-              "RelativeToolTip": "MenuDotNetMS\\DTOs\\article\\ArticleCreateDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T23:37:24.803Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "IFournisseurRepository.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\fournisseur\\IFournisseurRepository.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\fournisseur\\IFournisseurRepository.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\fournisseur\\IFournisseurRepository.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Repositories\\fournisseur\\IFournisseurRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T11:30:40.559Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "fournisseurRepository.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\fournisseur\\fournisseurRepository.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\fournisseur\\fournisseurRepository.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\fournisseur\\fournisseurRepository.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Repositories\\fournisseur\\fournisseurRepository.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAgwJkAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T11:31:04.454Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ICategorieRepository.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\Categorie\\ICategorieRepository.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\Categorie\\ICategorieRepository.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\Categorie\\ICategorieRepository.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Repositories\\Categorie\\ICategorieRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T11:30:11.504Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Article.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Article.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\Article.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Article.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Models\\Article.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T23:20:14.69Z",
+              "WhenOpened": "2026-05-06T00:55:44.485Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "fournisseurIndexDtoResponse.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\fournisseur\\fournisseurIndexDtoResponse.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\fournisseur\\fournisseurIndexDtoResponse.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\fournisseur\\fournisseurIndexDtoResponse.cs",
-              "RelativeToolTip": "MenuDotNetMS\\DTOs\\fournisseur\\fournisseurIndexDtoResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T23:47:26.262Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ArticleResponseDTO.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\article\\ArticleResponseDTO.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\article\\ArticleResponseDTO.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\article\\ArticleResponseDTO.cs",
-              "RelativeToolTip": "MenuDotNetMS\\DTOs\\article\\ArticleResponseDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T23:37:32.363Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
               "Title": "CategorieRepository.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\Categorie\\CategorieRepository.cs",
               "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\Categorie\\CategorieRepository.cs",
               "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\Categorie\\CategorieRepository.cs",
               "RelativeToolTip": "MenuDotNetMS\\Repositories\\Categorie\\CategorieRepository.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAA1wFgAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAuwD8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-24T11:30:08.576Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "IArticleRepository.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\article\\IArticleRepository.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\article\\IArticleRepository.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\article\\IArticleRepository.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Repositories\\article\\IArticleRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "StockDeductionRequest.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\stock\\StockDeductionRequest.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\stock\\StockDeductionRequest.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\stock\\StockDeductionRequest.cs",
+              "RelativeToolTip": "MenuDotNetMS\\DTOs\\stock\\StockDeductionRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T11:29:45.815Z",
+              "WhenOpened": "2026-05-06T00:43:28.969Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ArticleRepository.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\article\\ArticleRepository.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\article\\ArticleRepository.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\article\\ArticleRepository.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Repositories\\article\\ArticleRepository.cs",
-              "ViewState": "AgIAAIIAAAAAAAAAAAAuwH0AAABdAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "StockUpdateEvent.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\kafka\\StockUpdateEvent.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\kafka\\StockUpdateEvent.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\kafka\\StockUpdateEvent.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Models\\kafka\\StockUpdateEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T11:29:42.689Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-06T00:28:48.334Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "KafkaConsumerService.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Services\\KafkaConsumerService.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Services\\KafkaConsumerService.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Services\\KafkaConsumerService.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Services\\KafkaConsumerService.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAYwFUAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T10:25:00.047Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "WeatherForecast.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\WeatherForecast.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\WeatherForecast.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\WeatherForecast.cs",
-              "RelativeToolTip": "MenuDotNetMS\\WeatherForecast.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T23:47:02.482Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Program.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Program.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Program.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T10:26:29.388Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "ProduitController.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\ProduitController.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\ProduitController.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\ProduitController.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Controllers\\ProduitController.cs",
-              "ViewState": "AgIAAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T23:38:03.306Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "Achats.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\Achats.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\Achats.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\Achats.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Controllers\\Achats.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAgwLMAAABdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-19T14:39:39.427Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 11,
               "Title": "CategorieController.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\CategorieController.cs",
               "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\CategorieController.cs",
               "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\CategorieController.cs",
               "RelativeToolTip": "MenuDotNetMS\\Controllers\\CategorieController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwB0AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-24T12:27:13.289Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "fournisseurController.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\fournisseurController.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\fournisseurController.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\fournisseurController.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Controllers\\fournisseurController.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAQwDAAAAAuAAAAAAAAAA==",
+              "DocumentIndex": 12,
+              "Title": "ArticleRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\article\\ArticleRepository.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\article\\ArticleRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\article\\ArticleRepository.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Repositories\\article\\ArticleRepository.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAwwJAAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T12:27:33.682Z"
+              "WhenOpened": "2026-04-24T11:29:42.689Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "fournisseurModel.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\fournisseurModel.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\fournisseurModel.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\fournisseurModel.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Models\\fournisseurModel.cs",
+              "DocumentIndex": 15,
+              "Title": "ComposantCreateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\produit\\ComposantCreateDTO.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\produit\\ComposantCreateDTO.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\produit\\ComposantCreateDTO.cs",
+              "RelativeToolTip": "MenuDotNetMS\\DTOs\\produit\\ComposantCreateDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T11:31:30.501Z"
+              "WhenOpened": "2026-05-06T02:15:07.041Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "KafkaConsumerService.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Services\\KafkaConsumerService.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Services\\KafkaConsumerService.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Services\\KafkaConsumerService.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Services\\KafkaConsumerService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-20T10:25:00.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAAPoUAAAAAAAAAAAiwBEVAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-05-06T22:25:42.691Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IAchatsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\IAchatsRepository.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\achat\\IAchatsRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\IAchatsRepository.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Repositories\\achat\\IAchatsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T11:29:15.156Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\appsettings.json",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\appsettings.json",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\appsettings.json",
+              "RelativeToolTip": "MenuDotNetMS\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-11T20:51:05.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ProduitMapper.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Mappers\\ProduitMapper.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Mappers\\ProduitMapper.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Mappers\\ProduitMapper.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Mappers\\ProduitMapper.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAiwB4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T02:15:43.094Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Produit.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Produit.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\Produit.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Produit.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Models\\Produit.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T23:00:24.867Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ProduitCreateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\produit\\ProduitCreateDTO.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\produit\\ProduitCreateDTO.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\produit\\ProduitCreateDTO.cs",
+              "RelativeToolTip": "MenuDotNetMS\\DTOs\\produit\\ProduitCreateDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T02:15:10.648Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ProduitResponseDTO.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\produit\\ProduitResponseDTO.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\produit\\ProduitResponseDTO.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\produit\\ProduitResponseDTO.cs",
+              "RelativeToolTip": "MenuDotNetMS\\DTOs\\produit\\ProduitResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T02:15:16.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AchatsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
+              "ViewState": "AgIAABYBAAAAAAAAAAAmwCwBAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T11:29:13.614Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ProduitController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\ProduitController.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\ProduitController.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\ProduitController.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Controllers\\ProduitController.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAqwFwAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T23:38:03.306Z"
             },
             {
               "$type": "Document",
@@ -474,31 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "IAchatsRepository.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\IAchatsRepository.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\achat\\IAchatsRepository.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\IAchatsRepository.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Repositories\\achat\\IAchatsRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T11:29:15.156Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 26,
-              "Title": "AchatsRepository.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
-              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
-              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
-              "RelativeToolTip": "MenuDotNetMS\\Repositories\\achat\\AchatsRepository.cs",
-              "ViewState": "AgIAABQBAAAAAAAAAAAgwCYBAABMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T11:29:13.614Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
               "Title": "OrderValidationEvent.cs",
               "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\kafka\\OrderValidationEvent.cs",
               "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\kafka\\OrderValidationEvent.cs",
@@ -507,6 +508,186 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-20T10:23:04.434Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AchatAddDTORequest.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\achat\\AchatAddDTORequest.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\achat\\AchatAddDTORequest.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\achat\\AchatAddDTORequest.cs",
+              "RelativeToolTip": "MenuDotNetMS\\DTOs\\achat\\AchatAddDTORequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T00:31:51.289Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "MenuDotNetMS.http",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.http",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\MenuDotNetMS.http",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\MenuDotNetMS.http",
+              "RelativeToolTip": "MenuDotNetMS\\MenuDotNetMS.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-05-06T00:57:14.864Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ICategorieRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\Categorie\\ICategorieRepository.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\Categorie\\ICategorieRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\Categorie\\ICategorieRepository.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Repositories\\Categorie\\ICategorieRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T11:30:11.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "IArticleRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\article\\IArticleRepository.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\article\\IArticleRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\article\\IArticleRepository.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Repositories\\article\\IArticleRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T11:29:45.815Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Achat.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Achat.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\Achat.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Achat.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Models\\Achat.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T23:55:31.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "fournissuerAddDtoResponse.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\fournisseur\\fournissuerAddDtoResponse.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\fournisseur\\fournissuerAddDtoResponse.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\fournisseur\\fournissuerAddDtoResponse.cs",
+              "RelativeToolTip": "MenuDotNetMS\\DTOs\\fournisseur\\fournissuerAddDtoResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T23:47:29.42Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ArticleCreateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\article\\ArticleCreateDTO.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\article\\ArticleCreateDTO.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\article\\ArticleCreateDTO.cs",
+              "RelativeToolTip": "MenuDotNetMS\\DTOs\\article\\ArticleCreateDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T23:37:24.803Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "IFournisseurRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\fournisseur\\IFournisseurRepository.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\fournisseur\\IFournisseurRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\fournisseur\\IFournisseurRepository.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Repositories\\fournisseur\\IFournisseurRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T11:30:40.559Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "fournisseurRepository.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\fournisseur\\fournisseurRepository.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Repositories\\fournisseur\\fournisseurRepository.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Repositories\\fournisseur\\fournisseurRepository.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Repositories\\fournisseur\\fournisseurRepository.cs",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAgwJkAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T11:31:04.454Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Article.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Article.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\Article.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\Article.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Models\\Article.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T23:20:14.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "fournisseurIndexDtoResponse.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\fournisseur\\fournisseurIndexDtoResponse.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\fournisseur\\fournisseurIndexDtoResponse.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\fournisseur\\fournisseurIndexDtoResponse.cs",
+              "RelativeToolTip": "MenuDotNetMS\\DTOs\\fournisseur\\fournisseurIndexDtoResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T23:47:26.262Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ArticleResponseDTO.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\article\\ArticleResponseDTO.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\DTOs\\article\\ArticleResponseDTO.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\DTOs\\article\\ArticleResponseDTO.cs",
+              "RelativeToolTip": "MenuDotNetMS\\DTOs\\article\\ArticleResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T23:37:32.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\WeatherForecast.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\WeatherForecast.cs",
+              "RelativeToolTip": "MenuDotNetMS\\WeatherForecast.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T23:47:02.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "fournisseurController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\fournisseurController.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Controllers\\fournisseurController.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Controllers\\fournisseurController.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Controllers\\fournisseurController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAQwDAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T12:27:33.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "fournisseurModel.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\fournisseurModel.cs",
+              "RelativeDocumentMoniker": "MenuDotNetMS\\Models\\fournisseurModel.cs",
+              "ToolTip": "C:\\Users\\DELL\\MenuDotNet\\smartRestauPFA\\MenuDotNetMS\\MenuDotNetMS\\Models\\fournisseurModel.cs",
+              "RelativeToolTip": "MenuDotNetMS\\Models\\fournisseurModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T11:31:30.501Z"
             }
           ]
         }
