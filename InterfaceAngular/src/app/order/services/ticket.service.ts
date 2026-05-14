@@ -1,3 +1,4 @@
+// src/app/services/ticket.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class TicketService {
 
-  private api = 'http://localhost:8083/api/tickets';
+  private api = 'http://localhost:5000/api/tickets';
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +31,13 @@ export class TicketService {
   getAdminTotal(): Observable<number> {
     return this.http.get<number>(`${this.api}/admin/total`);
   }
-  create(ticket: any) {
-  return this.http.post('http://localhost:8083/api/tickets', ticket);
-}
+  
+  create(ticket: any): Observable<any> {
+    return this.http.post('http://localhost:5000/api/tickets', ticket);
+  }
+  
+  // ✅ إضافة هذه الدالة (مهمة)
+  getTicketByOrderId(orderId: string): Observable<any> {
+    return this.http.get<any>(`${this.api}/order/${orderId}`);
+  }
 }

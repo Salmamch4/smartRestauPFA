@@ -10,7 +10,7 @@ import { Article } from '../../models/article.model';
 })
 export class ArticleService {
 
-  private apiUrl = 'http://localhost:5160/api/articles';
+  private apiUrl = 'http://localhost:5000/api/articles';
 
   constructor(private http: HttpClient) {}
 

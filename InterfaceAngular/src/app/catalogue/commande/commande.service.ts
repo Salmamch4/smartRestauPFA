@@ -19,7 +19,7 @@ export interface CommandeResponse {
   providedIn: 'root'
 })
 export class CommandeService {
-  private apiUrl = 'http://localhost:8082/api/commandes';
+  private apiUrl = 'http://localhost:5000/api/commandes';
 
   constructor(private http: HttpClient) {}
 

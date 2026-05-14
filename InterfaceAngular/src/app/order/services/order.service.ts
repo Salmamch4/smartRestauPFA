@@ -9,8 +9,8 @@ import { Order } from '../models/order.model';
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = 'http://localhost:8082/api/commandes';
-  private menuApiUrl = 'http://localhost:5160/api';
+  private apiUrl = 'http://localhost:5000/api/commandes';
+  private menuApiUrl = 'http://localhost:5000/api';
 
   constructor(private http: HttpClient) {}
 

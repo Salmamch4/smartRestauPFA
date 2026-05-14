@@ -16,7 +16,7 @@ import { FournisseurService } from '../fournisseur/fournisseur.service';
   providedIn: 'root'
 })
 export class AchatService {
-  private apiUrl = 'https://localhost:7277/api/Achats';
+  private apiUrl = 'http://localhost:5000/api/Achats';
 
   constructor(
     private http: HttpClient,
