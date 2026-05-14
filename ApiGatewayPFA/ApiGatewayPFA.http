@@ -1,0 +1,6 @@
+@ApiGatewayPFA_HostAddress = http://localhost:5093
+
+GET {{ApiGatewayPFA_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
