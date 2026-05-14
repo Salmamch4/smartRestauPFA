@@ -17,8 +17,8 @@ public class StockUpdateService {
 
     public boolean deductStock(List<OrderItem> items) {
         try {
-            System.out.println("📤 APPEL API: " + MENU_SERVICE_URL);
-            System.out.println("📦 Articles à déduire: " + items.size());
+            System.out.println(" APPEL API: " + MENU_SERVICE_URL);
+            System.out.println(" Articles à déduire: " + items.size());
 
             List<StockDeductionRequest> requests = new ArrayList<>();
 
@@ -47,7 +47,7 @@ public class StockUpdateService {
             return response.getBody() != null && response.getBody();
 
         } catch (Exception e) {
-            System.err.println("❌ Erreur déduction stock: " + e.getMessage());
+            System.err.println("Erreur déduction stock: " + e.getMessage());
             e.printStackTrace();
             return false;
         }

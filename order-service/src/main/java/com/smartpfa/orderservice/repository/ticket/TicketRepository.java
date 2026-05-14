@@ -5,14 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-
     List<Ticket> findByDateBetween(LocalDateTime start, LocalDateTime end);
-
-
     List<Ticket> findByServeurAndDateBetween(String serveur, LocalDateTime start, LocalDateTime end);
+    List<Ticket> findByDateAfter(LocalDateTime lastClearTime);
 
-	List<Ticket> findByDateAfter(LocalDateTime lastClearTime);
+    // ✅ إضافة طريقة البحث بالـ orderId
+    Optional<Ticket> findByOrderId(String orderId);
 }

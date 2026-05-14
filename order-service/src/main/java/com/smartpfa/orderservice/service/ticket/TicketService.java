@@ -24,4 +24,5 @@ public interface TicketService {
     void delete(Long id);
 
 	void clearSession() ;
+    Ticket getTicketByOrderId(String orderId);
 }

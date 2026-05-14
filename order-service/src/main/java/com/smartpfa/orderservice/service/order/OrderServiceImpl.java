@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import com.smartpfa.orderservice.entity.ticket.Ticket;
+import com.smartpfa.orderservice.entity.ticket.LigneTicket;
+import com.smartpfa.orderservice.service.ticket.TicketService;
 
 @Service
 public class OrderServiceImpl implements IOrderService {
@@ -28,7 +31,10 @@ public class OrderServiceImpl implements IOrderService {
     private OrderMapper orderMapper;
 
     @Autowired
-    private StockUpdateService stockUpdateService;  // ✅ Service pour déduire le stock
+    private StockUpdateService stockUpdateService;
+
+    @Autowired
+    private TicketService ticketService;  // ✅ Déclaré une seule fois
 
     @Override
     public List<OrderResponseDTO> getPendingOrders() {
@@ -69,26 +75,23 @@ public class OrderServiceImpl implements IOrderService {
         Order order = orderRepository.findById(id);
         if (order == null) return null;
 
-        // ✅ Vérifier s'il y a des articles indisponibles
         boolean hasInvalidItems = order.getItems().stream()
                 .anyMatch(item -> item.getQuantite() == 0);
 
         if (hasInvalidItems) {
-            throw new RuntimeException("❌ Impossible de confirmer. Articles indisponibles");
+            throw new RuntimeException("Impossible de confirmer. Articles indisponibles");
         }
 
-        // ✅ DÉDUIRE LA QUANTITÉ DU STOCK (via le service Menu)
         boolean stockUpdated = stockUpdateService.deductStock(order.getItems());
 
         if (!stockUpdated) {
-            throw new RuntimeException("❌ Erreur lors de la mise à jour du stock. Stock insuffisant.");
+            throw new RuntimeException("Erreur lors de la mise à jour du stock. Stock insuffisant.");
         }
 
-        // Changer le statut
         order.setStatut(OrderStatus.CONFIRMEE);
         Order updated = orderRepository.save(order);
 
-        System.out.println("✅ Commande confirmée et stock mis à jour: " + updated.getNumeroCommande());
+        System.out.println("Commande confirmée: " + updated.getNumeroCommande());
 
         return orderMapper.toResponseDTO(updated);
     }
@@ -103,14 +106,61 @@ public class OrderServiceImpl implements IOrderService {
         return null;
     }
 
+    // ✅ Une seule méthode completeOrder
     @Override
+    @Transactional
     public OrderResponseDTO completeOrder(UUID id) {
+        System.out.println("=== completeOrder: " + id);
+
         Order order = orderRepository.findById(id);
-        if (order != null) {
-            order.setStatut(OrderStatus.PRETE);
-            return orderMapper.toResponseDTO(orderRepository.save(order));
+        if (order == null) return null;
+
+        order.setStatut(OrderStatus.PRETE);
+        Order updated = orderRepository.save(order);
+
+        // ✅ Créer le ticket uniquement quand la commande est PRETE
+        createTicketFromOrder(updated);
+
+        return orderMapper.toResponseDTO(updated);
+    }
+
+    private void createTicketFromOrder(Order order) {
+        try {
+            Ticket existingTicket = ticketService.getTicketByOrderId(order.getId().toString());
+            if (existingTicket != null) {
+                System.out.println("Ticket déjà existant pour la commande: " + order.getNumeroCommande());
+                return;
+            }
+
+            Ticket ticket = new Ticket();
+            ticket.setServeur(order.getNomClient());
+            ticket.setDate(LocalDateTime.now());
+
+            double total = 0;
+            List<LigneTicket> lignes = new ArrayList<>();
+
+            for (OrderItem item : order.getItems()) {
+                LigneTicket ligne = new LigneTicket();
+                ligne.setProduitId(item.getProduitId());
+                ligne.setProduitNom(item.getProduitLibelle());
+                ligne.setPrix(item.getPrixUnitaire());
+                ligne.setQuantite(item.getQuantite());
+                ligne.setTotal(item.getTotalLigne());
+                ligne.setTicket(ticket);
+                lignes.add(ligne);
+                total += item.getTotalLigne();
+            }
+
+            ticket.setTotal(total);
+            ticket.setLignes(lignes);
+            ticket.setOrderId(order.getId().toString());  // ✅ Lier le ticket à la commande
+
+            ticketService.createTicket(ticket);
+            System.out.println("Ticket créé pour la commande PRETE: " + order.getNumeroCommande());
+
+        } catch (Exception e) {
+            System.err.println("Erreur création ticket: " + e.getMessage());
         }
-        return null;
     }
 
     @Override

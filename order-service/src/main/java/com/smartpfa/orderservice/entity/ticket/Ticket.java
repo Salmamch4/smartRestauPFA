@@ -19,14 +19,15 @@ public class Ticket {
     private double total;
     private LocalDateTime date;
 
+
+    @Column(name = "order_id", nullable = true)
+    private String orderId;
+
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<LigneTicket> lignes = new ArrayList<>();
 
-
     public Ticket() {}
-
-
 
     public Long getId() { return id; }
 
@@ -41,4 +42,8 @@ public class Ticket {
 
     public List<LigneTicket> getLignes() { return lignes; }
     public void setLignes(List<LigneTicket> lignes) { this.lignes = lignes; }
+
+    // ✅ Getters et Setters pour orderId
+    public String getOrderId() { return orderId; }
+    public void setOrderId(String orderId) { this.orderId = orderId; }
 }

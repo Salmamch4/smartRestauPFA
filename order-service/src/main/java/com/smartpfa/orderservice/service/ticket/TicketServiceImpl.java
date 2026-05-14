@@ -216,5 +216,12 @@ public class TicketServiceImpl implements TicketService {
                 }
             }
         }
+
+
+    }
+    // TicketServiceImpl.java
+    @Override
+    public Ticket getTicketByOrderId(String orderId) {
+        return repo.findByOrderId(orderId).orElse(null);
     }
 }
