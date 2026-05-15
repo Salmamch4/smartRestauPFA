@@ -28,21 +28,27 @@ export class CatalogueComponent implements OnInit, OnDestroy {
   currentUser: any = null;
   private subscriptions: Subscription = new Subscription();
 
-  defaultImage = 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=300&h=200&fit=crop';
+  // ✅ Image par défaut
+  defaultImage = 'assets/img/default-product.png';
+  
+  // URLs des images par défaut par catégorie
+  private defaultCategoryImages: { [key: string]: string } = {
+    'Entrée': 'assets/img/entree-default.jpg',
+    'Plat principal': 'assets/img/plat-default.jpg',
+    'Salade': 'assets/img/salade-default.jpg',
+    'Dessert': 'assets/img/dessert-default.jpg',
+    'boison': 'assets/img/boisson-default.jpg'
+  };
 
-  // src/app/catalogue/catalogue/catalogue.component.ts
+  private categoryOrder: string[] = ['Entrée', 'Plat principal', 'Salade', 'Dessert', 'boison'];
 
-// ✅ Supprimer Fast Food et Sandwich de la liste des catégories
-private categoryOrder: string[] = ['Entrée', 'Plat principal', 'Salade', 'Dessert', 'boison'];
-
-// ✅ Supprimer les images de Fast Food et Sandwich
-private categoryImages: { [key: string]: string } = {
+  private categoryImages: { [key: string]: string } = {
     'Entrée': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=400&h=300&fit=crop',
     'Plat principal': 'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?w=400&h=300&fit=crop',
     'Dessert': 'https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg?w=400&h=300&fit=crop',
     'boison': 'https://images.pexels.com/photos/2109099/pexels-photo-2109099.jpeg?w=400&h=300&fit=crop',
     'Salade': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=400&h=300&fit=crop'
-};
+  };
 
   constructor(
     private categorieService: CategorieService,
@@ -80,7 +86,6 @@ private categoryImages: { [key: string]: string } = {
     this.loadingCategories = true;
     this.categorieService.getAll().subscribe({
       next: (data) => {
-        // ✅ Tri des catégories selon l'ordre défini
         this.categories = data.sort((a, b) => {
           return this.categoryOrder.indexOf(a.libelle) - this.categoryOrder.indexOf(b.libelle);
         });
@@ -99,36 +104,86 @@ private categoryImages: { [key: string]: string } = {
     this.loadProduits(category.id);
   }
 
-  loadProduits(categorieId: string): void {
-    this.loadingProduits = true;
-    this.produitService.getByCategorie(categorieId).subscribe({
-      next: (data) => {
-        this.produits = data;
-        this.loadingProduits = false;
-      },
-      error: (err) => {
-        console.error('Erreur:', err);
-        this.errorMessage = 'Erreur lors du chargement des produits';
-        this.loadingProduits = false;
-      }
-    });
-  }
+ // Dans loadProduits, ajouter un log
+// catalogue.component.ts - Modifier loadProduits
+loadProduits(categorieId: string): void {
+  this.loadingProduits = true;
+  this.produitService.getByCategorie(categorieId).subscribe({
+    next: (data) => {
+      console.log('Produits bruts:', data);
+      
+      // ✅ S'assurer que chaque produit a un prix
+      this.produits = data.map(produit => ({
+        ...produit,
+        // Si prix_unitaire est undefined, utiliser prix
+        prix_unitaire: produit.prix_unitaire || produit.prix || 0,
+        libelle: produit.libelle || produit.nom
+      }));
+      
+      console.log('Produits après correction:', this.produits);
+      this.loadingProduits = false;
+    },
+    error: (err) => {
+      console.error('Erreur:', err);
+      this.errorMessage = 'Erreur lors du chargement des produits';
+      this.loadingProduits = false;
+    }
+  });
+}
 
   getCategoryImage(category: any): string {
     return this.categoryImages[category.libelle] || this.defaultImage;
   }
 
+  // ✅ Fonction améliorée pour récupérer l'image du produit
   getProductImage(produit: any): string {
-    return produit.photo || this.defaultImage;
+    // 1. Vérifier si le produit a une image
+    if (produit.photo && produit.photo !== '' && produit.photo !== 'null') {
+      // Si l'image est un chemin relatif (commence par /images/)
+      if (produit.photo.startsWith('/images/')) {
+        return `https://localhost:7277${produit.photo}`;
+      }
+      // Si l'image est une URL complète
+      if (produit.photo.startsWith('http')) {
+        return produit.photo;
+      }
+      return produit.photo;
+    }
+    
+    // 2. Vérifier imagePath
+    if (produit.imagePath && produit.imagePath !== '' && produit.imagePath !== 'null') {
+      if (produit.imagePath.startsWith('/images/')) {
+        return `https://localhost:7277${produit.imagePath}`;
+      }
+      return produit.imagePath;
+    }
+    
+    // 3. Image par défaut selon la catégorie
+    if (this.selectedCategory) {
+      const defaultCatImage = this.defaultCategoryImages[this.selectedCategory.libelle];
+      if (defaultCatImage) {
+        return defaultCatImage;
+      }
+    }
+    
+    // 4. Image par défaut absolue
+    return this.defaultImage;
   }
 
   handleImageError(event: any): void {
     event.target.src = this.defaultImage;
   }
 
-  ajouterAuPanier(produit: any): void {
-    this.panierService.ajouterProduit(produit, 1);
-  }
+  // Dans catalogue.component.ts - Modifier la méthode ajouterAuPanier
+
+ajouterAuPanier(produit: any): void {
+  // ✅ S'assurer que l'image est bien transmise
+  const produitAvecImage = {
+    ...produit,
+    photo: this.getProductImage(produit)
+  };
+  this.panierService.ajouterProduit(produitAvecImage, 1);
+}
 
   retirerDuPanier(produitId: string): void {
     this.panierService.retirerProduit(produitId);
@@ -181,7 +236,8 @@ private categoryImages: { [key: string]: string } = {
     this.router.navigate(['/profile']);
   }
 
-  goToMesCommandes(): void {
-    this.router.navigate(['/mes-commandes']);
-  }
+  // catalogue.component.ts
+goToMesCommandes(): void {
+  this.router.navigate(['/mes-commandes']);
+}
 }

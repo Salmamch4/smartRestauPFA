@@ -1,7 +1,8 @@
-// src/app/services/ticket.service.ts
+// src/app/order/services/ticket.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,17 @@ export class TicketService {
   }
   
   create(ticket: any): Observable<any> {
-    return this.http.post('http://localhost:5000/api/tickets', ticket);
+    return this.http.post(this.api, ticket);
   }
   
-  // ✅ إضافة هذه الدالة (مهمة)
   getTicketByOrderId(orderId: string): Observable<any> {
-    return this.http.get<any>(`${this.api}/order/${orderId}`);
+    return this.http.get<any>(`${this.api}/order/${orderId}`).pipe(
+      map((response: any) => {
+        if (Array.isArray(response) && response.length > 0) {
+          return response[0];
+        }
+        return response;
+      })
+    );
   }
 }

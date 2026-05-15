@@ -16,24 +16,32 @@
       </a>
     </div>
     
-    <div class="user-menu" *ngIf="isLoggedIn">
-      <div class="dropdown">
-        <button class="btn-user dropdown-toggle" data-bs-toggle="dropdown">
-          <i class="bi bi-person-circle"></i>
-          <span>{{ currentUser?.name || currentUser?.telephone }}</span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" (click)="goToProfile()">
-            <i class="bi bi-person"></i> Mon profil
-          </a></li>
-          <li><a class="dropdown-item" (click)="goToMesCommandes()">
-            <i class="bi bi-clock-history"></i> Mes commandes
-          </a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-danger" (click)="logout()">
-            <i class="bi bi-box-arrow-right"></i> Déconnexion
-          </a></li>
-        </ul>
+    <div class="user-menu">
+  <div class="d-flex align-items-center gap-2">
+    <!-- ✅ Bouton visible tout le temps -->
+    <button class="btn-mes-commandes" (click)="goToMesCommandes()" title="Mes commandes">
+      <i class="bi bi-clock-history"></i>
+      <span>Mes commandes</span>
+    </button>
+        
+        <div class="dropdown">
+          <button class="btn-user dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle"></i>
+            <span>{{ currentUser?.name || currentUser?.telephone }}</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" (click)="goToProfile()">
+              <i class="bi bi-person"></i> Mon profil
+            </a></li>
+            <li><a class="dropdown-item" (click)="goToMesCommandes()">
+              <i class="bi bi-clock-history"></i> Mes commandes
+            </a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" (click)="logout()">
+              <i class="bi bi-box-arrow-right"></i> Déconnexion
+            </a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -89,7 +97,7 @@
           <div class="products-grid">
             <div *ngFor="let produit of produits" class="product-item">
               <div class="product-img-wrapper">
-                <img [src]="getProductImage(produit)" (error)="handleImageError($event)">
+                <img [src]="getProductImage(produit)" (error)="handleImageError($event)" class="product-img">
                 <button class="quick-add-btn" (click)="ajouterAuPanier(produit)">
                   <i class="bi bi-cart-plus"></i>
                 </button>
@@ -109,7 +117,7 @@
         </div>
       </div>
 
-      <!-- Panier -->
+      <!-- Panier avec images -->
       <div class="col-lg-3">
         <div class="cart-card">
           <div class="cart-header">
@@ -125,14 +133,16 @@
             </div>
             
             <div *ngFor="let item of panier.items" class="cart-item">
-              <img [src]="item.photo || defaultImage" class="cart-item-img">
+              <div class="cart-item-img-wrapper">
+                <img [src]="item.photo || defaultImage" class="cart-item-img" (error)="handleImageError($event)">
+              </div>
               <div class="cart-item-details">
-                <div class="cart-item-name">{{ item.libelle | slice:0:15 }}</div>
+                <div class="cart-item-name">{{ item.libelle | slice:0:20 }}</div>
                 <div class="cart-item-price">{{ item.prix_unitaire | currency:'DH' }}</div>
                 <div class="cart-qty">
                   <button (click)="retirerDuPanier(item.produitId)">-</button>
                   <span>{{ item.quantite }}</span>
-                  <button (click)="ajouterAuPanier({ id: item.produitId, libelle: item.libelle, prix_unitaire: item.prix_unitaire, photo: item.photo, description: '' })">+</button>
+                  <button (click)="ajouterAuPanier({ id: item.produitId, libelle: item.libelle, prix_unitaire: item.prix_unitaire, photo: item.photo })">+</button>
                 </div>
               </div>
               <div class="cart-item-total">
@@ -157,3 +167,7 @@
     </div>
   </div>
 </div>
+<!-- Dans le menu utilisateur -->
+<li><a class="dropdown-item" routerLink="/client-ticket">
+  <i class="bi bi-receipt"></i> Mes tickets
+</a></li>

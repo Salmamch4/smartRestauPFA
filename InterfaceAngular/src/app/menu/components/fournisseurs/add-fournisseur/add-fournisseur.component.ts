@@ -9,7 +9,7 @@ import { FournisseurService } from '../../../services/fournisseur/fournisseur.se
 })
 export class AddFournisseurComponent {
   ice = '';
-  raisonSocial = '';  // Changé de raison_social à raisonSocial
+  raisonSocial = '';  
   telephone = '';
   adresse = '';
   

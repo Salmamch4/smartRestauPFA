@@ -36,9 +36,16 @@ export class PanierService {
     return this.panierSubject.value;
   }
 
+  // ✅ Ajouter un produit avec son image
   ajouterProduit(produit: Produit, quantite: number = 1): void {
     const panier = this.getCurrentPanier();
     const existingItem = panier.items.find(item => item.produitId === produit.id);
+
+    // ✅ Récupérer l'image du produit
+    let imageUrl = produit.photo || '';
+    if (imageUrl && imageUrl.startsWith('/images/')) {
+      imageUrl = `https://localhost:7277${imageUrl}`;
+    }
 
     if (existingItem) {
       existingItem.quantite += quantite;
@@ -46,11 +53,11 @@ export class PanierService {
     } else {
       panier.items.push({
         produitId: produit.id,
-        libelle: produit.libelle,
-        prix_unitaire: produit.prix_unitaire,
+        libelle: produit.libelle || produit.nom || '',
+        prix_unitaire: produit.prix_unitaire || produit.prix || 0,
         quantite: quantite,
-        photo: produit.photo,
-        total: quantite * produit.prix_unitaire
+        photo: imageUrl,
+        total: quantite * (produit.prix_unitaire || produit.prix || 0)
       });
     }
 

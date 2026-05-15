@@ -16,7 +16,7 @@ import { FournisseurService } from '../fournisseur/fournisseur.service';
   providedIn: 'root'
 })
 export class AchatService {
-  private apiUrl = 'http://localhost:5000/api/Achats';
+ private apiUrl = 'http://localhost:5000/api/achats';
 
   constructor(
     private http: HttpClient,
@@ -30,20 +30,31 @@ export class AchatService {
 
   // Récupérer tous les achats avec les noms des articles et fournisseurs
   getAll(): Observable<AchatResponse[]> {
-    return forkJoin({
-      achats: this.http.get<AchatResponse[]>(this.apiUrl),
-      articles: this.articleService.getAll(),
-      fournisseurs: this.fournisseurService.getAll()
-    }).pipe(
-      map(result => {
-        return result.achats.map(achat => ({
+  return forkJoin({
+    achats: this.http.get<AchatResponse[]>(this.apiUrl),
+    articles: this.articleService.getAll(),
+    fournisseurs: this.fournisseurService.getAll()
+  }).pipe(
+    map(result => {
+      console.log('Fournisseurs reçus:', result.fournisseurs); // 🔍 Debug
+      
+      return result.achats.map(achat => {
+        const fournisseur = result.fournisseurs.find(f => f.id === achat.idFournisseur);
+        console.log('Recherche fournisseur:', achat.idFournisseur, fournisseur); // 🔍 Debug
+        
+        return {
           ...achat,
           articleLibelle: result.articles.find(a => a.id === achat.idArticle)?.libelle || 'Article inconnu',
-          fournisseurRaisonSocial: result.fournisseurs.find(f => f.id === achat.idFournisseur)?.raisonSociale || 'Fournisseur inconnu'
-        }));
-      })
-    );
-  }
+          
+          fournisseurRaisonSocial: fournisseur?.raison_social || 
+                                   fournisseur?.raisonSocial || 
+                                   fournisseur?.raisonSociale || 
+                                   'Fournisseur inconnu'
+        };
+      });
+    })
+  );
+}
 
   // ✅ Récupérer un achat par ID avec les noms
   getById(id: string): Observable<AchatResponse> {

@@ -722,3 +722,45 @@
     height: 35px;
   }
 }
+/* Bouton Mes Commandes */
+.btn-mes-commandes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid #ce1212;
+  color: #ce1212;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+.btn-mes-commandes:hover {
+  background: #ce1212;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(206, 18, 18, 0.3);
+}
+
+.btn-mes-commandes i {
+  font-size: 1rem;
+}
+
+/* Ajustement du header pour mobile */
+@media (max-width: 768px) {
+  .btn-mes-commandes span {
+    display: none;
+  }
+  
+  .btn-mes-commandes {
+    padding: 6px 10px;
+  }
+  
+  .user-menu .d-flex {
+    gap: 5px !important;
+  }
+}

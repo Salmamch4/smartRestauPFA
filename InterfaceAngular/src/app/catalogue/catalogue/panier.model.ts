@@ -1,9 +1,11 @@
+// src/app/catalogue/panier.model.ts
 export interface PanierItem {
   produitId: string;
   libelle: string;
   prix_unitaire: number;
   quantite: number;
-  photo: string;
+  photo?: string;      // ✅ Ajout de l'image
+  imagePath?: string;  // ✅ Alternative
   total: number;
 }
 

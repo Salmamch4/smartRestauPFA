@@ -122,6 +122,12 @@
                       </div>
                     </div>
                     
+                    <!-- ✅ Bouton Ticket -->
+                    <div class="commande-footer mt-3" *ngIf="commande.statut === 'PRETE' || commande.statut === 'LIVREE'">
+                      <button class="btn btn-sm btn-info w-100" (click)="viewTicket(commande.id, commande.statut)">
+                        <i class="bi bi-receipt me-2"></i> Voir le ticket
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -140,3 +146,114 @@
     </div>
   </div>
 </section>
+
+<!-- ✅ Modal Ticket -->
+<div class="modal" [class.show]="showTicketModal" [style.display]="showTicketModal ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="bi bi-receipt"></i> Ticket de commande
+        </h5>
+        <button type="button" class="btn-close" (click)="closeTicket()"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div id="ticket" class="ticket-card p-3">
+          <div class="text-center">
+            <h3 class="mb-0">SMART RESTO</h3>
+            <small>Restaurant</small>
+          </div>
+
+          <div class="text-center mt-2" *ngIf="copie">
+            <span class="badge bg-danger">DUPLICATA</span>
+          </div>
+
+          <hr class="dashed">
+
+          <div class="row">
+            <div class="col-6"><strong>Ticket N°:</strong> {{ selectedTicket?.id }}</div>
+            <div class="col-6 text-end"><strong>Date:</strong> {{ selectedTicket?.date | date:'dd/MM/yyyy HH:mm' }}</div>
+          </div>
+
+          <div class="row mt-1">
+            <div class="col-12"><strong>Serveur:</strong> {{ selectedTicket?.serveur }}</div>
+          </div>
+
+          <hr class="dashed">
+
+          <div *ngFor="let ligne of selectedTicket?.lignes">
+            <div class="fw-bold">{{ ligne.produitNom }}</div>
+            <div class="d-flex justify-content-between">
+              <span>{{ ligne.quantite }} x {{ ligne.prix }} DH</span>
+              <span>{{ ligne.total }} DH</span>
+            </div>
+          </div>
+
+          <hr class="dashed">
+
+          <div class="d-flex justify-content-between fw-bold">
+            <span>TOTAL</span>
+            <span>{{ selectedTicket?.total }} DH</span>
+          </div>
+
+          <hr>
+
+          <div class="text-center mt-3">
+            <small>Merci pour votre visite</small><br>
+            <small>À bientôt chez SMART RESTO</small>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeTicket()">Fermer</button>
+        <button class="btn btn-primary" (click)="printTicket()">
+          <i class="bi bi-printer"></i> Imprimer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ticket-card {
+    background: white;
+    font-family: monospace;
+  }
+  .dashed {
+    border-top: 1px dashed #ccc;
+    margin: 10px 0;
+  }
+  .modal.show {
+    background-color: rgba(0,0,0,0.5);
+    display: block !important;
+  }
+  @media print {
+    .modal-header, .modal-footer, .btn-close {
+      display: none !important;
+    }
+    .modal {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: white;
+    }
+    .ticket-card {
+      box-shadow: none;
+    }
+  }
+  .commande-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #e0e0e0;
+    background: #fafafa;
+    border-radius: 0 0 12px 12px;
+  }
+  .btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+  }
+  .btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+  }
+</style>

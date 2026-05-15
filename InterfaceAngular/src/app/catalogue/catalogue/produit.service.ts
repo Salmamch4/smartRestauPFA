@@ -1,7 +1,7 @@
+// src/app/catalogue/catalogue/produit.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Produit } from '../catalogue/produit.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ProduitService {
 
   constructor(private http: HttpClient) {}
 
-  getByCategorie(categorieId: string): Observable<Produit[]> {
-    return this.http.get<Produit[]>(`${this.apiUrl}/categorie/${categorieId}`);
+  getByCategorie(categorieId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/categorie/${categorieId}`);
   }
 }
