@@ -2,10 +2,8 @@ package com.smartpfa.orderservice.repository.ticket;
 
 import com.smartpfa.orderservice.entity.ticket.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
@@ -13,6 +11,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findByServeurAndDateBetween(String serveur, LocalDateTime start, LocalDateTime end);
     List<Ticket> findByDateAfter(LocalDateTime lastClearTime);
 
-    // ✅ إضافة طريقة البحث بالـ orderId
-    Optional<Ticket> findByOrderId(String orderId);
+    // ✅ Recherche par orderId
+    List<Ticket> findByOrderId(String orderId);
 }

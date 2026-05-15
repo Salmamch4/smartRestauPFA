@@ -6,23 +6,15 @@ import java.util.List;
 public interface TicketService {
 
     Ticket createTicket(Ticket ticket);
-
     List<Ticket> getAll();
-
-
     List<Ticket> getServeurTickets(String serveur);
-
     double getServeurTotal(String serveur);
-
-
     List<Ticket> getAdminTickets();
-
     double getAdminTotal();
-
     Ticket update(Long id, Ticket newTicket);
-
     void delete(Long id);
+    void clearSession();
 
-	void clearSession() ;
-    Ticket getTicketByOrderId(String orderId);
+    // ✅ Modifier le type de retour: List<Ticket>
+    List<Ticket> getTicketByOrderId(String orderId);
 }

@@ -126,15 +126,17 @@ public class OrderServiceImpl implements IOrderService {
 
     private void createTicketFromOrder(Order order) {
         try {
-            Ticket existingTicket = ticketService.getTicketByOrderId(order.getId().toString());
-            if (existingTicket != null) {
-                System.out.println("Ticket déjà existant pour la commande: " + order.getNumeroCommande());
+            // ✅ Correction: getTicketByOrderId retourne List<Ticket>
+            List<Ticket> existingTickets = ticketService.getTicketByOrderId(order.getId().toString());
+            if (existingTickets != null && !existingTickets.isEmpty()) {
+                System.out.println("⚠️ Ticket déjà existant pour la commande: " + order.getNumeroCommande());
                 return;
             }
 
             Ticket ticket = new Ticket();
             ticket.setServeur(order.getNomClient());
             ticket.setDate(LocalDateTime.now());
+            ticket.setOrderId(order.getId().toString());
 
             double total = 0;
             List<LigneTicket> lignes = new ArrayList<>();
@@ -153,13 +155,13 @@ public class OrderServiceImpl implements IOrderService {
 
             ticket.setTotal(total);
             ticket.setLignes(lignes);
-            ticket.setOrderId(order.getId().toString());  // ✅ Lier le ticket à la commande
 
             ticketService.createTicket(ticket);
-            System.out.println("Ticket créé pour la commande PRETE: " + order.getNumeroCommande());
+            System.out.println("✅ Ticket créé pour la commande: " + order.getNumeroCommande());
 
         } catch (Exception e) {
-            System.err.println("Erreur création ticket: " + e.getMessage());
+            System.err.println("❌ Erreur création ticket: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -351,8 +353,13 @@ public class OrderServiceImpl implements IOrderService {
             }
             order.setStatut(OrderStatus.LIVREE);
             Order updated = orderRepository.save(order);
-            System.out.println("Order delivered: " + updated.getId());
+
+
+            createTicketFromOrder(updated);
+
+            System.out.println("Order delivered and ticket created: " + updated.getId());
             return orderMapper.toResponseDTO(updated);
+
         } catch (Exception e) {
             System.err.println("Error deliverOrder: " + e.getMessage());
             return null;

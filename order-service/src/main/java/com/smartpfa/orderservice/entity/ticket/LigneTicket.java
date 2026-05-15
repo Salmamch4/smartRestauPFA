@@ -24,15 +24,12 @@ public class LigneTicket {
     private Ticket ticket;
 
     @Column(name = "ProduitNom")
-
     private String produitNom;
-
 
     public LigneTicket() {}
 
-
-
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getProduitId() { return produitId; }
     public void setProduitId(String produitId) { this.produitId = produitId; }

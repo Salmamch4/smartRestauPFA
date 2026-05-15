@@ -2,7 +2,6 @@ package com.smartpfa.orderservice.entity.ticket;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,6 @@ public class Ticket {
     private double total;
     private LocalDateTime date;
 
-
     @Column(name = "order_id", nullable = true)
     private String orderId;
 
@@ -30,6 +28,7 @@ public class Ticket {
     public Ticket() {}
 
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getServeur() { return serveur; }
     public void setServeur(String serveur) { this.serveur = serveur; }
@@ -43,7 +42,6 @@ public class Ticket {
     public List<LigneTicket> getLignes() { return lignes; }
     public void setLignes(List<LigneTicket> lignes) { this.lignes = lignes; }
 
-    // ✅ Getters et Setters pour orderId
     public String getOrderId() { return orderId; }
     public void setOrderId(String orderId) { this.orderId = orderId; }
 }

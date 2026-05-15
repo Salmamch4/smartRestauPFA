@@ -1,4 +1,3 @@
-// TicketController.java
 package com.smartpfa.orderservice.controller;
 
 import com.smartpfa.orderservice.entity.ticket.Ticket;
@@ -64,13 +63,12 @@ public class TicketController {
         service.clearSession();
     }
 
-
     @GetMapping("/order/{orderId}")
-    public ResponseEntity<Ticket> getTicketByOrderId(@PathVariable String orderId) {
-        Ticket ticket = service.getTicketByOrderId(orderId);
-        if (ticket == null) {
+    public ResponseEntity<List<Ticket>> getTicketByOrderId(@PathVariable String orderId) {
+        List<Ticket> tickets = service.getTicketByOrderId(orderId);
+        if (tickets == null || tickets.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(ticket);
+        return ResponseEntity.ok(tickets);
     }
 }
